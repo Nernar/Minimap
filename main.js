@@ -552,7 +552,7 @@ function drawBtnBack(width, height) {
 		canvas = new android.graphics.Canvas(bmp),
 		paint = new android.graphics.Paint(),
 		drawable;
-	paint.setColor(parseInt(android.graphics.Color.GRAY));
+	paint.setColor(new java.lang.Integer(android.graphics.Color.GRAY));
 	paint.setMaskFilter(new android.graphics.EmbossMaskFilter([1, 1, 0.3], 0.7, 8, 4 * density));
 	canvas.drawRect(0, 0, width, height, paint);
 	drawable = new android.graphics.drawable.BitmapDrawable(bmp);
@@ -626,7 +626,7 @@ var pointer = [
 			var paint = new android.graphics.Paint(),
 				bmp = android.graphics.Bitmap.createBitmap(displayHeight * 0.1, displayHeight * 0.1, android.graphics.Bitmap.Config.ARGB_8888),
 				canvas = new android.graphics.Canvas(bmp);
-			paint.setColor(parseInt(android.graphics.Color.BLACK));
+			paint.setColor(new java.lang.Integer(android.graphics.Color.BLACK));
 			canvas.drawLines([0, displayHeight * 0.05, displayHeight * 0.1, displayHeight * 0.05, displayHeight * 0.05, 0, displayHeight * 0.05, displayHeight * 0.1], paint);
 			return bmp;
 		})(),
@@ -648,9 +648,9 @@ var pointer = [
 			path.lineTo(displayHeight * 0.0125, displayHeight * 0.015);
 			path.lineTo(displayHeight * 0.025, displayHeight * 0.025);
 			path.close();
-			paint.setColor(parseInt(android.graphics.Color.WHITE));
+			paint.setColor(new java.lang.Integer(android.graphics.Color.WHITE));
 			canvas.drawPath(path, paint);
-			paint.setColor(parseInt(android.graphics.Color.BLACK));
+			paint.setColor(new java.lang.Integer(android.graphics.Color.BLACK));
 			paint.setStyle(android.graphics.Paint.Style.STROKE);
 			canvas.drawPath(path, paint);
 			return bmp;
