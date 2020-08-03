@@ -4,6 +4,7 @@ var X,
 	Z,
 	YAW,
 	DIMENSION,
+	curVersion = parseFloat(__mod__.getInfoProperty("version")),
 	redraw = false,
 	startMapControl = true,
 	settings = {},
@@ -33,13 +34,13 @@ var X,
 	setWindow,
 	density = context.getResources().getDisplayMetrics().density,
 	displayHeight = (context.getResources().getDisplayMetrics().widthPixels < context.getResources().getDisplayMetrics().heightPixels) ? context.getResources().getDisplayMetrics().widthPixels : context.getResources().getDisplayMetrics().heightPixels;
-(function () {
+(function() {
 	var i, settingsString, d = Math.floor(new Date().getTime() / 1000);
 	settingsString = load(__dir__, "minimap.txt").split("\n");
 	for (i = 0; i < settingsString.length; i += 1) {settings[settingsString[i].split(":")[0]] = parseFloat(settingsString[i].split(":")[1]); }
 	if (!settings.s) {
-		settings = {radius: 4,
-					map_type: 1,
+		settings = {radius: 6,
+					map_type: 0,
 					map_zoom: 80,
 					map_alpha: 100,
 					show_passive: 1,
@@ -52,8 +53,8 @@ var X,
 					window_rawSize: 35,
 					window_size: displayHeight * 0.35,
 					window_rawPosition: 0,
-					window_gravity: 51,
-					window_y: 0,
+					window_gravity: 53,
+					window_y: 40 * density,
 					style_border: 0,
 					style_pointer: 3,
 					style_shape: 0,
@@ -61,9 +62,9 @@ var X,
 					show_zoomBtn: 1,
 					delay: 10,
 					threadCount: 1, 
-					s:1}
+					s:1};
 		}
-//(function () {
+//(function() {
 	bmpBorder = drawBorderBmp();
 	pathBorder = createPath(false, true);
 	bmpSrc = android.graphics.Bitmap.createBitmap(((settings.radius + 1) * 2 + 1) * 16, ((settings.radius + 1) * 2 + 1) * 16, android.graphics.Bitmap.Config.ARGB_8888);
@@ -73,7 +74,7 @@ var X,
 	minZoom = settings.window_size / (settings.radius * 2 * 16);
 	absZoom = (100 / settings.map_zoom) * minZoom;
 	poolTick = java.util.concurrent.Executors.newSingleThreadScheduledExecutor();
-	runnableUpdateMap = new java.lang.Runnable(function () {
+	runnableUpdateMap = new java.lang.Runnable(function() {
 		try {
 			android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
 			var xNew = Player.getPosition().x,
@@ -200,7 +201,7 @@ var X,
 									matrixPointer.postTranslate((z0 - Entity.getPosition(entities[i]).z) * zoom, (Entity.getPosition(entities[i]).x - x0) * zoom);
 									matrixPointer.preConcat(pointer[style_pointer].matrix);
 									canvas.drawBitmap(pointer[style_pointer].bmp, matrixPointer, pointerPaint.GREEN);
-								} else if (id < 63 && id >= 32 && settings.show_hostile) {
+								} else if (id != 63 && id >= 32 && settings.show_hostile) {
 									matrixPointer.reset();
 									if (pointer[style_pointer].rotate) {matrixPointer.postRotate(yaw); }
 									matrixPointer.postTranslate((z0 - Entity.getPosition(entities[i]).z) * zoom, (Entity.getPosition(entities[i]).x - x0) * zoom);
@@ -213,7 +214,7 @@ var X,
 									matrixPointer.preConcat(pointer[style_pointer].matrix);
 									canvas.drawBitmap(pointer[style_pointer].bmp, matrixPointer, null);
 								}
-							} else if ((id < 32 && settings.show_passive) || (id < 63 && id >= 32 && settings.show_hostile) || (id === 63 && settings.show_otherPlayer)) {
+							} else if ((id < 32 && settings.show_passive) || (id != 63 && id >= 32 && settings.show_hostile) || (id === 63 && settings.show_otherPlayer)) {
 								matrixPointer.reset();
 								matrixPointer.postRotate(yaw);
 								matrixPointer.postTranslate((z0 - Entity.getPosition(entities[i]).z) * zoom, (Entity.getPosition(entities[i]).x - x0) * zoom);
@@ -245,13 +246,14 @@ var X,
 				mapView.unlockCanvasAndPost(canvas);
 			}
 		} catch(e) {
-		    //alert("UpdateMap, " + e + " (" + e.fileName + " #" + e.lineNumber + ")");
+		    Logger.LogError(e);
 		}
 	});
 }());
 var bmpPaint = new android.graphics.Paint(),
 	mapView = new android.view.TextureView(context),
-	mapWindow = function () {
+	mapBackground,
+	mapWindow = function() {
 	var btnSet = new android.widget.Button(context),
 		btnZoomIn,
 		btnZoomOut,
@@ -263,7 +265,7 @@ var bmpPaint = new android.graphics.Paint(),
 		layout = new android.widget.RelativeLayout(context),
 		mapWin = new android.widget.PopupWindow(layout, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT),
 		btnActions = {
-			set : function () {
+			set: function() {
 				if (!setWindow) {
 					setWindow = settingsUI(
 						["MiniMap Mod Options", "Ok",
@@ -276,7 +278,7 @@ var bmpPaint = new android.graphics.Paint(),
 							 ["keyValue", "multipleChoice", "pointer style", "style_pointer", ["crosshairs", "arrow", "minecraft", "head"]],
 							 ["checkBox", "hide_underground_mob", "hide entities below sea level"],
 							 ["checkBox", "show_player", "you"],
-							 //["checkBox", "show_otherPlayer", "other players"],
+							 ["checkBox", "show_otherPlayer", "other players"],
 							 ["checkBox", "show_passive", "passive mobs"],
 							 ["checkBox", "show_hostile", "hostile mobs"],
 							["sectionDivider", "Icon"],
@@ -289,19 +291,20 @@ var bmpPaint = new android.graphics.Paint(),
 						 ["checkBox", "show_info", "Coordinates visible"],
 						 ["checkBox", "show_zoomBtn", "Zoom Buttons visible"],
 						 ["sectionDivider", "Style"],
-						 //["keyValue", "multipleChoice", "border style", "style_border", ["none", "simple", "colourful"]],
+						 // ["keyValue", "multipleChoice", "border style", "style_border", ["none", "simple", "colourful"]],
 						 ["keyValue", "multipleChoice", "window shape", "style_shape", ["square", "circle"]],
 						["sectionDivider", "Other"],
-						 //["checkBox", "updateCheck", "Check for updates " + (settings.updateVersion > curVersion ? "(update available)" : "")],
+						 ["checkBox", "updateCheck", "Check for updates " + (settings.updateVersion > curVersion ? "(update available)" : "")],
 						 ["subScreen", "Advanced ", ["Advanced", "Ok",
 							["keyValue", "slider", "Minimap max frequency", "delay", 1, 40, 1, " fps"],
-							//["keyValue", "slider", "Threads count", "threadCount", 1, 12, 1, ""]
+							["keyValue", "slider", "Threads count", "threadCount", 1, 12, 1, ""]
                             ]],
 						 ["subScreen", "MiniMap Mod info ", ["MiniMap Mod info", "Ok",
-							//["keyValue", "text", "Version ", curVersion.toFixed(1)],
+							["keyValue", "text", "Version ", curVersion.toFixed(1)],
 							["keyValue", "text", "Made by", "MxGoldo"],
 							["keyValue", "text", "Port by", "AlexFack"],
-							["keyValue", "text", "<a href=http://www.minecraftforum.net/forums/minecraft-pocket-edition/mcpe-mods-tools/2336349>minecraftforum.net thread</a>", ""]
+							["keyValue", "text", "Optimized for Horizon by", "Nernar"],
+							["keyValue", "text", "<a href=https://m.vk.com/nernar>vk.com development group</a>", ""]
 						]]]).show();
 				} else {
 					setWindow.show();
@@ -310,11 +313,18 @@ var bmpPaint = new android.graphics.Paint(),
 		};
 	bmpPaint.setXfermode(new android.graphics.PorterDuffXfermode(android.graphics.PorterDuff.Mode.SRC));
 	mapView.setId(1);
-	mapView.setBackgroundColor(settings.style_shape ? 0 : -12303292);
+	if (android.os.Build.VERSION.SDK_INT < 24) {
+        mapView.setBackgroundColor(settings.style_shape ? 0 : -12303292);
+    } else {
+    	mapBackground = new android.view.View(context);
+    	mapBackground.setBackgroundColor(settings.style_shape ? 0 : -12303292);
+    	mapBackground.setVisibility(android.view.View.GONE);
+    	mapBackground.setAlpha(settings.map_alpha / 100);
+    }
 	mapView.setVisibility(android.view.View.GONE);
 	mapView.setAlpha(settings.map_alpha / 100);
 	mapLp.addRule(android.widget.RelativeLayout.ALIGN_PARENT_TOP);
-	mapView.setOnClickListener(function(v){
+	mapView.setOnClickListener(function(v) {
 		changeMapState();
 	});
 	mapView.setOnLongClickListener(function(v) {
@@ -346,7 +356,7 @@ var bmpPaint = new android.graphics.Paint(),
 	btnZoomOutLp.addRule(android.widget.RelativeLayout.BELOW, 2);
 	btnZoomOut.setOnClickListener(function(v) {
 		if (settings.map_zoom * 1.2 >= 100) {
-			android.widget.Toast.makeText(context, "minimum zoom reached", android.widget.Toast.LENGTH_SHORT).show();
+			Game.tipMessage("minimum zoom reached");
 			settings.map_zoom = 100;
 		} else {
 			settings.map_zoom = Math.round(settings.map_zoom * 1.2);
@@ -361,7 +371,7 @@ var bmpPaint = new android.graphics.Paint(),
 	btnZoomInLp.addRule(android.widget.RelativeLayout.RIGHT_OF, 3);
 	btnZoomIn.setOnClickListener(function(v) {
 		if (settings.map_zoom * 0.8 <= 10) {
-			android.widget.Toast.makeText(context, "maximum zoom reached", android.widget.Toast.LENGTH_SHORT).show();
+			Game.tipMessage("maximum zoom reached");
 			settings.map_zoom = 10;
 		} else {
 			settings.map_zoom = Math.round(settings.map_zoom * 0.8);
@@ -370,28 +380,37 @@ var bmpPaint = new android.graphics.Paint(),
 		saveSettings();
 	});
 	layout.addView(btnSet);
+	if (android.os.Build.VERSION.SDK_INT >= 24) {
+		layout.addView(mapBackground, mapLp);
+	}
 	layout.addView(mapView, mapLp);
 	layout.addView(btnZoomIn, btnZoomInLp);
 	layout.addView(btnZoomOut, btnZoomOutLp);
 	layout.addView(textInfo, textInfoLp);
 	mapWin.setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
 	return {
-	setInfo: function () {
+	setInfo: function() {
 		context.runOnUiThread(function() {
-			textInfo.setText("X:" + Math.floor(Player.getPosition().x) + " Y:" + Math.floor(Player.getPosition().y - 2) + " Z:" + Math.floor(Player.getPosition().z));
+			textInfo.setText(Math.floor(Player.getPosition().x) + ", " + Math.floor(Player.getPosition().y - 2) + ", " + Math.floor(Player.getPosition().z));
 		});
 	},
-	resetVisibility: function () {
+	resetVisibility: function() {
 		context.runOnUiThread(function() {
 			var visible = android.view.View.VISIBLE, gone = android.view.View.GONE;
 			if (map_state) {
 				btnSet.setVisibility(gone);
+				if (android.os.Build.VERSION.SDK_INT >= 24) {
+					mapBackground.setVisibility(visible);
+				}
 				mapView.setVisibility(visible);
 				btnZoomIn.setVisibility(settings.show_zoomBtn ? visible : gone);
 				btnZoomOut.setVisibility(settings.show_zoomBtn ? visible : gone);
 				textInfo.setVisibility(settings.show_info ? visible : gone);
 			} else {
 				btnSet.setVisibility(visible);
+				if (android.os.Build.VERSION.SDK_INT >= 24) {
+					mapBackground.setVisibility(gone);
+				}
 				mapView.setVisibility(gone);
 				btnZoomIn.setVisibility(gone);
 				btnZoomOut.setVisibility(gone);
@@ -399,25 +418,25 @@ var bmpPaint = new android.graphics.Paint(),
 			}
 		});
 	},
-	show: function () {
+	show: function() {
 		context.runOnUiThread(function() {
 			mapWin.showAtLocation(context.getWindow().getDecorView(), settings.window_gravity, 0, settings.window_y);
 		});
 	},
-	hide: function () {
+	hide: function() {
 		context.runOnUiThread(function() {
 			mapWin.dismiss();
 		});
 	}};
 }();
-Callback.addCallback("tick", function(){
+Callback.addCallback("tick", function() {
 	if (startMapControl) {
 		startMapControl = false;
 		mapWindow.show();
 		createPool();
 	}
 })
-Callback.addCallback("LevelLeft", function(){
+Callback.addCallback("LevelLeft", function() {
 	try {
 		mapWindow.hide();
 		if (map_state) {
@@ -429,11 +448,11 @@ Callback.addCallback("LevelLeft", function(){
 		entities = [];
 		chests = [];
 	} catch (e) {
-		//alert("leaveGame, " + e + " (" + e.fileName + " #" + e.lineNumber + ")");
+		Logger.LogError(e);
 	}
 })
 Callback.addCallback("EntityRemoved", function(entity){
-	if (Entity.getType(entity) <= 63 && Entity.getType(entity) >= 10 ) {
+	if (Entity.getType(entity) <= 120 && Entity.getType(entity) >= 10 ) {
 		var index = entities.indexOf(entity)
 		if (index > -1) {
 			entities.splice(index, 1);
@@ -441,7 +460,7 @@ Callback.addCallback("EntityRemoved", function(entity){
 	}
 })
 Callback.addCallback("EntityAdded", function(entity){
-	if (Entity.getType(entity) <= 63 && Entity.getType(entity) >= 10 ) {
+	if (Entity.getType(entity) <= 120 && Entity.getType(entity) >= 10 ) {
 		entities[entities.length] = entity;
 	}
 })
@@ -476,7 +495,7 @@ function createPool() {
 	pool.allowCoreThreadTimeOut(true);
 }
 function scheduleChunk(xChunk, zChunk, delay) {
-	pool.schedule(new java.lang.Runnable(function () {
+	pool.schedule(new java.lang.Runnable(function() {
 		try {
 			android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
 			if (Math.abs(Math.floor((Z - zChunk)/ 16)) > settings.radius || Math.abs(Math.floor((X - xChunk) / 16)) > settings.radius) {return; }
@@ -505,7 +524,7 @@ function scheduleChunk(xChunk, zChunk, delay) {
 			} finally {bmpSrcLock.release(); }
 			redraw = true;
 		} catch (e) {
-			//alert("drawChunk, " + e + " (" + e.fileName + " #" + e.lineNumber + ")");
+			Logger.LogError(e);
 		}
 	}), delay, java.util.concurrent.TimeUnit.SECONDS);
 }
@@ -822,12 +841,22 @@ mapDot = [
 	}
 ];
 function checkRenderDistance() {
-	var options = load(android.os.Environment.getExternalStorageDirectory().getPath() + "/games/com.mojang/minecraftpe/", "options.txt").split("\n"), i;
+	if (getCoreAPILevel() > 8) {
+		var options = load(android.os.Environment.getExternalStorageDirectory().getPath() + "/games/horizon/minecraftpe/", "options.txt").split("\n"), i;
+	} else {
+		var options = load(android.os.Environment.getExternalStorageDirectory().getPath() + "/games/com.mojang/minecraftpe/", "options.txt").split("\n"), i;
+	}
 	if (options != "") {
 		for (i = 0; i < options.length; i += 1) {
 			options[i] = options[i].split(":");
-			if (options[i][0] === "gfx_renderdistance_new") {
-				return Math.round(parseInt(options[i][1], 10) / 16);
+			if (getCoreAPILevel() > 8) {
+				if (options[i][0] === "gfx_viewdistance") {
+					return Math.round(parseInt(options[i][1], 10) / 16);
+				}
+			} else {
+				if (options[i][0] === "gfx_renderdistance_new") {
+					return Math.round(parseInt(options[i][1], 10) / 16);
+				}
 			}
 		}
 	}
@@ -918,6 +947,9 @@ function settingsChanged(key) {
 		redraw = true;
 		break;
 	case "map_alpha":
+		if (android.os.Build.VERSION.SDK_INT >= 24) {
+			mapBackground.setAlpha(settings.map_alpha / 100);
+		}
 		mapView.setAlpha(settings.map_alpha / 100);
 		break;
 	case "window_rawSize":
@@ -987,7 +1019,7 @@ function settingsUI() {
 		ruler,
 		rulerLp = new android.view.ViewGroup.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT, 2),
 		addOption = {
-		checkBox : function (args) {
+		checkBox: function (args) {
 			var layoutElement = new android.widget.RelativeLayout(context),
 				checkBtn = new android.widget.CheckBox(context),
 				checkBtnLp = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT),
@@ -1011,7 +1043,7 @@ function settingsUI() {
 			layoutElement.setPadding(padding, padding * 0.5, padding, padding * 0.5);
 			return layoutElement;
 		},
-		subScreen : function (args) {
+		subScreen: function (args) {
 			var text = new android.widget.TextView(context);
 			text.setTextSize(textSize);
 			text.setText(args[1] + " >");
@@ -1021,7 +1053,7 @@ function settingsUI() {
 			});
 			return text;
 		},
-		sectionDivider : function (args) {
+		sectionDivider: function (args) {
 			var text = new android.widget.TextView(context);
 			text.setTextSize(textSize * 0.9);
 			text.setText(args[1]);
@@ -1030,7 +1062,7 @@ function settingsUI() {
 			text.setPadding(padding, 0, padding, 0);
 			return text;
 		},
-		keyValue : function (args) {
+		keyValue: function (args) {
 			var layoutElement = new android.widget.RelativeLayout(context),
 				text = new android.widget.TextView(context),
 				textLp = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT),
@@ -1138,7 +1170,7 @@ function save(path, filename, content) {
 		outWrite.append(content);
 		outWrite.close();
 	} catch (e) {
-		alert("save, " + e + " (" + e.fileName + " #" + e.lineNumber + ")");
+		Logger.LogError(e);
 	}
 }
 function load(path, filename) {
@@ -1164,10 +1196,17 @@ function loadTxtFromUrl(url) {
 		return "";
 	}
 }
-Callback.addCallback("NativeGuiChanged", function(screenName){
-    if(screenName != "hud_screen"){
-    	mapWindow.hide();
-    }else{
-    	mapWindow.show();
-    }
-})
+Callback.addCallback("NativeGuiChanged", function(screenName) {
+	if (getCoreAPILevel() > 8) {
+		if (screenName != "in_game_play_screen") {
+			mapWindow.hide();
+			return;
+		}
+	} else {
+		if (screenName != "hud_screen") {
+			mapWindow.hide();
+			return;
+		}
+	}
+    mapWindow.show();
+});
