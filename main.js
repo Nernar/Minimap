@@ -60,37 +60,71 @@ var X,
 	setWindow,
 	density = context.getResources().getDisplayMetrics().density,
 	displayHeight = (context.getResources().getDisplayMetrics().widthPixels < context.getResources().getDisplayMetrics().heightPixels) ? context.getResources().getDisplayMetrics().widthPixels : context.getResources().getDisplayMetrics().heightPixels;
+if (typeof Object.assign !== 'function') {
+    // Must be writable: true, enumerable: false, configurable: true
+    Object.defineProperty(Object, "assign", {
+        value: function assign(target, varArgs) { // .length of function is 2
+            'use strict';
+            if (target === null || target === undefined) {
+                throw new TypeError('Cannot convert undefined or null to object');
+            }
+
+            var to = Object(target);
+
+            for (var index = 1; index < arguments.length; index++) {
+                var nextSource = arguments[index];
+
+                if (nextSource !== null && nextSource !== undefined) {
+                    for (var nextKey in nextSource) {
+                        // Avoid bugs when hasOwnProperty is shadowed
+                        if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+                            to[nextKey] = nextSource[nextKey];
+                        }
+                    }
+                }
+            }
+            return to;
+        },
+        writable: true,
+        configurable: true
+    });
+}
 (function() {
 	var i, settingsString, d = Math.floor(new Date().getTime() / 1000);
 	settingsString = load(__dir__, "minimap.txt").split("\n");
-	for (i = 0; i < settingsString.length; i += 1) {settings[settingsString[i].split(":")[0]] = parseFloat(settingsString[i].split(":")[1]); }
-	if (!settings.s) {
-		settings = {radius: 6,
-					map_type: 0,
-					map_zoom: 80,
-					map_alpha: 100,
-					show_passive: 1,
-					show_hostile: 1,
-					show_player: 1,
-					show_otherPlayer: 0,
-					show_chest: 0,
-					hide_underground_mob: 1,
-					button_size: 40,
-					window_rawSize: 35,
-					window_size: displayHeight * 0.35,
-					window_rawPosition: 0,
-					window_gravity: 53,
-					window_y: 40 * density,
-					style_border: 0,
-					style_pointer: 3,
-					style_shape: 0,
-					show_info: 1,
-					show_zoomBtn: 1,
-					delay: 10,
-					threadCount: 1, 
-					s:1};
-		}
-//(function() {
+	for (i = 0; i < settingsString.length; i += 1) {
+		settings[settingsString[i].split(":")[0]] = parseFloat(settingsString[i].split(":")[1]);
+	}
+	settings = Object.assign({
+		radius: 4,
+		map_type: 0,
+		map_zoom: 100,
+		map_alpha: 100,
+		show_passive: 1,
+		show_hostile: 1,
+		show_player: 1,
+		show_otherPlayer: 1,
+		show_chest: 0,
+		hide_underground_mob: 1,
+		button_size: 40,
+		window_rawSize: 35,
+		window_size: displayHeight * 0.4,
+		window_rawPosition: 0,
+		window_gravity: 53,
+		window_y: 40 * density,
+		style_border: 0,
+		style_pointer: 3,
+		style_shape: 0,
+		show_info: 1,
+		show_zoomBtn: 1,
+		priority: 1,
+		delay: 10,
+		threadCount: 1,
+		debugProcesses: 0,
+		updateCheck: 0
+	}, settings);
+})();
+(function() {
 	bmpBorder = drawBorderBmp();
 	pathBorder = createPath(false, true);
 	bmpSrc = android.graphics.Bitmap.createBitmap(((settings.radius + 1) * 2 + 1) * 16, ((settings.radius + 1) * 2 + 1) * 16, android.graphics.Bitmap.Config.ARGB_8888);
@@ -102,7 +136,14 @@ var X,
 	poolTick = java.util.concurrent.Executors.newSingleThreadScheduledExecutor();
 	runnableUpdateMap = new java.lang.Runnable(function() {
 		try {
-			android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
+			if (settings.debugProcesses) {
+			    Game.tipMessage("update stacking");
+			}
+			if (settings.priority == 0) {
+			    android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
+			} else if (settings.priority == 1) {
+			    android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_FOREGROUND);
+			}
 			var xNew = Player.getPosition().x,
 				zNew = Player.getPosition().z,
 				yawNew = Entity.getLookAngle(Player.get()).yaw / 3.1415 * 180 - 90,
@@ -198,10 +239,15 @@ var X,
 					z0 = zNew + (settings.window_size * 0.5 / zoom);
 				matrixMap.setTranslate(settings.window_size * 0.5 - (bmpSrc.getWidth() * 0.5) - 8 + zNew - zChunkNew, settings.window_size * 0.5 - (bmpSrc.getHeight() * 0.5) + 8 - xNew + xChunkNew);
 				matrixMap.postScale(zoom, zoom, settings.window_size * 0.5, settings.window_size * 0.5);
-				if (settings.show_info) {mapWindow.setInfo(); }
+				if (settings.show_info) {
+					mapWindow.setInfo();
+				}
 				var canvas = mapView.lockCanvas();
                 canvas.drawColor(0, android.graphics.PorterDuff.Mode.CLEAR);
 				canvas.save(android.graphics.Canvas.CLIP_SAVE_FLAG);
+				if (bmpBorder !== null) {
+				    canvas.drawBitmap(bmpBorder, 0, 0, null);
+				}
 				canvas.clipPath(pathBorder, android.graphics.Region.Op.REPLACE);
 				canvas.drawBitmap(bmpSrc, matrixMap, bmpPaint);
 				if (settings.show_chest) {
@@ -250,7 +296,7 @@ var X,
 						}
 					}
 				}
-				if (settings.show_player && !settings.show_otherPlayer) {
+				if (settings.show_player) {
 					if (style_pointer !== 3) {
 						matrixPointer.reset();
 						if (pointer[style_pointer].rotate) {matrixPointer.postRotate(yawNew); }
@@ -266,8 +312,8 @@ var X,
 					}
 				}
 				canvas.restore();
-				if (bmpBorder !== null) {
-					canvas.drawBitmap(bmpBorder, 0, 0, null);
+				if (settings.priority == 2) {
+					mapView.invalidate();
 				}
 				mapView.unlockCanvasAndPost(canvas);
 			}
@@ -295,21 +341,21 @@ var bmpPaint = new android.graphics.Paint(),
 				if (!setWindow) {
 					setWindow = settingsUI(
 						["MiniMap Mod Options", "Ok",
-						["sectionDivider", "Graphics"],
+						 ["sectionDivider", "Graphics"],
 						 ["keyValue", "multipleChoice", "MiniMap type", "map_type", ["basic surface (fast)", "surface", "cave"]],
 						 ["keyValue", "slider", "Minimap render distance", "radius", 1, checkRenderDistance() + 4, 1, " chunks"],
 						 ["keyValue", "slider", "Zoom", "map_zoom", 10, 100, 1, "%"],
 						 ["subScreen", "Icons and Indicators ", ["Icons and Indicators", "Ok",
-							["sectionDivider", "Entity"],
+							 ["sectionDivider", "Entity"],
 							 ["keyValue", "multipleChoice", "pointer style", "style_pointer", ["crosshairs", "arrow", "minecraft", "head"]],
 							 ["checkBox", "hide_underground_mob", "hide entities below sea level"],
 							 ["checkBox", "show_player", "you"],
 							 ["checkBox", "show_otherPlayer", "other players"],
 							 ["checkBox", "show_passive", "passive mobs"],
 							 ["checkBox", "show_hostile", "hostile mobs"],
-							["sectionDivider", "Icon"],
+							 ["sectionDivider", "Icon"],
 							 ["checkBox", "show_chest", "chests"]]],
-						["sectionDivider", "View"],
+						 ["sectionDivider", "View"],
 						 ["keyValue", "multipleChoice", "Position", "window_rawPosition", ["top left", "top left (offset)", "top right", "bottom left", "bottom right"], "window_gravity", [51, 51, 53, 83, 85], "window_y", [0, 40 * density, 40 * density, 0, 0]],
 						 ["keyValue", "slider", "Size", "window_rawSize", 5, 100, 5, "%"],
 						 ["keyValue", "slider", "Opacity", "map_alpha", 20, 100, 1, "%"],
@@ -317,14 +363,15 @@ var bmpPaint = new android.graphics.Paint(),
 						 ["checkBox", "show_info", "Coordinates visible"],
 						 ["checkBox", "show_zoomBtn", "Zoom Buttons visible"],
 						 ["sectionDivider", "Style"],
-						 // ["keyValue", "multipleChoice", "border style", "style_border", ["none", "simple", "colourful"]],
+						 ["keyValue", "multipleChoice", "border style", "style_border", ["none", "simple", "colourful"]],
 						 ["keyValue", "multipleChoice", "window shape", "style_shape", ["square", "circle"]],
-						["sectionDivider", "Other"],
+						 ["sectionDivider", "Other"],
 						 ["checkBox", "updateCheck", "Check for updates " + (settings.updateVersion > curVersion ? "(update available)" : "")],
 						 ["subScreen", "Advanced ", ["Advanced", "Ok",
+							["keyValue", "multipleChoice", "Thread priority", "priority", ["background", "foreground", "force"]],
 							["keyValue", "slider", "Minimap max frequency", "delay", 1, 40, 1, " fps"],
-							["keyValue", "slider", "Threads count", "threadCount", 1, 12, 1, ""]
-                            ]],
+							["keyValue", "slider", "Threads count", "threadCount", 1, 12, 1, ""],
+							["checkBox", "debugProcesses", "Debug pool processes"]]],
 						 ["subScreen", "MiniMap Mod info ", ["MiniMap Mod info", "Ok",
 							["keyValue", "text", "Version ", curVersion.toFixed(1)],
 							["keyValue", "text", "Made by", "MxGoldo"],
@@ -345,10 +392,10 @@ var bmpPaint = new android.graphics.Paint(),
     	mapBackground = new android.view.View(context);
     	mapBackground.setBackgroundColor(settings.style_shape ? 0 : -12303292);
     	mapBackground.setVisibility(android.view.View.GONE);
-    	mapBackground.setAlpha(settings.map_alpha / 100);
+    	mapBackground.setAlpha((settings.map_alpha / 100).toFixed(2));
     }
 	mapView.setVisibility(android.view.View.GONE);
-	mapView.setAlpha(settings.map_alpha / 100);
+	mapView.setAlpha((settings.map_alpha / 100).toFixed(2));
 	mapLp.addRule(android.widget.RelativeLayout.ALIGN_PARENT_TOP);
 	mapView.setOnClickListener(function(v) {
 		changeMapState();
@@ -505,7 +552,7 @@ function drawBtnBack(width, height) {
 		canvas = new android.graphics.Canvas(bmp),
 		paint = new android.graphics.Paint(),
 		drawable;
-	paint.setColor(android.graphics.Color.GRAY);
+	paint.setColor(parseInt(android.graphics.Color.GRAY));
 	paint.setMaskFilter(new android.graphics.EmbossMaskFilter([1, 1, 0.3], 0.7, 8, 4 * density));
 	canvas.drawRect(0, 0, width, height, paint);
 	drawable = new android.graphics.drawable.BitmapDrawable(bmp);
@@ -523,7 +570,14 @@ function createPool() {
 function scheduleChunk(xChunk, zChunk, delay) {
 	pool.schedule(new java.lang.Runnable(function() {
 		try {
-			android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
+			if (settings.debugProcesses) {
+				Game.tipMessage("processing " + (xChunk / 16) + ", " + (zChunk / 16) + " [" + delay + "]");
+			}
+			if (settings.priority == 0) {
+				android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
+			} else if (settings.priority == 1) {
+				android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_FOREGROUND);
+			}
 			if (Math.abs(Math.floor((Z - zChunk)/ 16)) > settings.radius || Math.abs(Math.floor((X - xChunk) / 16)) > settings.radius) {return; }
 			var ix = 16, iz = 16, x = xChunk + 16, z = zChunk - 1, mapDotArray = [], type = settings.map_type;
 			if (World.getBlockID(x - 16, 0, z + 16) === 95) {return; }
@@ -572,7 +626,7 @@ var pointer = [
 			var paint = new android.graphics.Paint(),
 				bmp = android.graphics.Bitmap.createBitmap(displayHeight * 0.1, displayHeight * 0.1, android.graphics.Bitmap.Config.ARGB_8888),
 				canvas = new android.graphics.Canvas(bmp);
-			paint.setColor(android.graphics.Color.BLACK);
+			paint.setColor(parseInt(android.graphics.Color.BLACK));
 			canvas.drawLines([0, displayHeight * 0.05, displayHeight * 0.1, displayHeight * 0.05, displayHeight * 0.05, 0, displayHeight * 0.05, displayHeight * 0.1], paint);
 			return bmp;
 		})(),
@@ -594,9 +648,9 @@ var pointer = [
 			path.lineTo(displayHeight * 0.0125, displayHeight * 0.015);
 			path.lineTo(displayHeight * 0.025, displayHeight * 0.025);
 			path.close();
-			paint.setColor(android.graphics.Color.WHITE);
+			paint.setColor(parseInt(android.graphics.Color.WHITE));
 			canvas.drawPath(path, paint);
-			paint.setColor(android.graphics.Color.BLACK);
+			paint.setColor(parseInt(android.graphics.Color.BLACK));
 			paint.setStyle(android.graphics.Paint.Style.STROKE);
 			canvas.drawPath(path, paint);
 			return bmp;
@@ -705,7 +759,7 @@ function drawBorderBmp() {
 	paint.setMaskFilter(new android.graphics.EmbossMaskFilter([1, 1, 0.3], 0.7, 8, 3 * density));
 	switch (settings.style_border) {
 	case 1:
-		paint.setColor(android.graphics.Color.rgb(153, 135, 108));
+		paint.setARGB(255, 153, 135, 108);
 		break;
 	case 2:
 		paint.setShader(new android.graphics.LinearGradient(0, 0, settings.window_size * 0.5, settings.window_size, [android.graphics.Color.GREEN, android.graphics.Color.YELLOW, android.graphics.Color.GREEN], null, android.graphics.Shader.TileMode.REPEAT));
@@ -974,9 +1028,9 @@ function settingsChanged(key) {
 		break;
 	case "map_alpha":
 		if (android.os.Build.VERSION.SDK_INT >= 24) {
-			mapBackground.setAlpha(settings.map_alpha / 100);
+			mapBackground.setAlpha((settings.map_alpha / 100).toFixed(2));
 		}
-		mapView.setAlpha(settings.map_alpha / 100);
+		mapView.setAlpha((settings.map_alpha / 100).toFixed(2));
 		break;
 	case "window_rawSize":
 		settings.window_size = (settings.window_rawSize / 100) * displayHeight;
