@@ -552,7 +552,7 @@ function drawBtnBack(width, height) {
 		canvas = new android.graphics.Canvas(bmp),
 		paint = new android.graphics.Paint(),
 		drawable;
-	paint.setColor(0xFF555555);
+	paint.setColor(new java.lang.Integer(android.graphics.Color.GRAY));
 	paint.setMaskFilter(new android.graphics.EmbossMaskFilter([1, 1, 0.3], 0.7, 8, 4 * density));
 	canvas.drawRect(0, 0, width, height, paint);
 	drawable = new android.graphics.drawable.BitmapDrawable(bmp);
@@ -626,7 +626,7 @@ var pointer = [
 			var paint = new android.graphics.Paint(),
 				bmp = android.graphics.Bitmap.createBitmap(displayHeight * 0.1, displayHeight * 0.1, android.graphics.Bitmap.Config.ARGB_8888),
 				canvas = new android.graphics.Canvas(bmp);
-			paint.setColor(0xFF000000);
+			paint.setColor(new java.lang.Integer(android.graphics.Color.BLACK));
 			canvas.drawLines([0, displayHeight * 0.05, displayHeight * 0.1, displayHeight * 0.05, displayHeight * 0.05, 0, displayHeight * 0.05, displayHeight * 0.1], paint);
 			return bmp;
 		})(),
@@ -648,9 +648,9 @@ var pointer = [
 			path.lineTo(displayHeight * 0.0125, displayHeight * 0.015);
 			path.lineTo(displayHeight * 0.025, displayHeight * 0.025);
 			path.close();
-			paint.setColor(0xFFFFFFFF);
+			paint.setColor(new java.lang.Integer(android.graphics.Color.WHITE));
 			canvas.drawPath(path, paint);
-			paint.setColor(0xFF000000);
+			paint.setColor(new java.lang.Integer(android.graphics.Color.BLACK));
 			paint.setStyle(android.graphics.Paint.Style.STROKE);
 			canvas.drawPath(path, paint);
 			return bmp;
@@ -762,7 +762,12 @@ function drawBorderBmp() {
 		paint.setARGB(255, 153, 135, 108);
 		break;
 	case 2:
-		paint.setShader(new android.graphics.LinearGradient(0, 0, settings.window_size * 0.5, settings.window_size, [android.graphics.Color.GREEN, android.graphics.Color.YELLOW, android.graphics.Color.GREEN], null, android.graphics.Shader.TileMode.REPEAT));
+		var colors = java.lang.reflect.Array.newInstance(java.lang.Integer.TYPE, 3);
+		colors[0] = new java.lang.Integer(android.graphics.Color.GREEN);
+		colors[1] = new java.lang.Integer(android.graphics.Color.YELLOW);
+		colors[2] = new java.lang.Integer(android.graphics.Color.GREEN);
+		var pathes = java.lang.reflect.Array.newInstance(java.lang.Float.TYPE, 0);
+		paint.setShader(new android.graphics.LinearGradient(0, 0, settings.window_size * 0.5, settings.window_size, colors, pathes, android.graphics.Shader.TileMode.REPEAT));
 		break;
 	default:
 		return null;
