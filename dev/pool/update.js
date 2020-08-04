@@ -35,9 +35,10 @@ new java.lang.Thread(function() {
 					["sectionDivider", "New version available!"],
 						["keyValue", "text", "Your version", "" + curVersion.toFixed(1)],
 						["keyValue", "text", "Latest version", "" + settings.updateVersion.toFixed(1)],
-						["keyValue", "text", (settings.updateChangelog ? "Changes:<br/>" + settings.updateChangelog : "No changes."), "" + settings.updateVersion.toFixed(1)],
+						["keyValue", "text", (settings.updateChangelog ? settings.updateChangelog : "No changes."), "Changelog"],
+					["sectionDivider", "Download update"],
 						["keyValue", "text", "Install from <a href=https://icmods.mineprogramming.org/mod?id=623>icmods.mineprogramming.org</a>" +
-							"<br/>Clone an <a href=https://github.com/MaXFeeD/Minimap/releases/latest>github.com</a> open source code", ""],
+							"<br/>Clone <a href=https://github.com/MaXFeeD/Minimap/releases/latest>github.com</a> open source code", ""],
 						["checkBox", "updateCheck", "Check for updates"]]).show();
 			});
 		}
