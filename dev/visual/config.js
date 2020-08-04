@@ -41,7 +41,7 @@ function settingsUI() {
 				text.setTextSize(textSize);
 				text.setText("> " + args[1]);
 				text.setPadding(padding, padding, padding, padding);
-				text.setOnClickListener(function(v){
+				text.setOnClickListener(function(v) {
 					settingsUI(args[2]).show();
 				});
 				return text;
@@ -100,7 +100,7 @@ function settingsUI() {
 						break;
 					case "slider":
 						textValue.setText(settings[args[3]] + args[7]);
-						textValue.setOnClickListener(function(v){
+						textValue.setOnClickListener(function(v) {
 							let print = new android.app.AlertDialog.Builder(context),
 								seekBar = new android.widget.SeekBar(context);
 							seekBar.setMax((args[5] - args[4]) / args[6]);

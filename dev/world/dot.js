@@ -2,7 +2,7 @@ function chunkLoaded(ix, iz) {
 	let iy = 130;
 	do {
 		if (World.getBlockID(ix, 130 - iy, iz)) {return true; }
-	} while(iy -= 10);
+	} while (iy -= 10);
 	return false;
 }
 

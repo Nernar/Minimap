@@ -132,7 +132,7 @@ let redraw = false,
 				canvas.drawBitmap(bmpSrc, matrixMap, bmpPaint);
 				if (settings.show_chest) {
 					i = chests.length;
-					while(i--) {
+					while (i--) {
 						matrixPointer.setTranslate((z0 - chests[i][1]) * zoom, (chests[i][0] - x0) * zoom);
 						matrixPointer.preConcat(pointer[3].matrix);
 						canvas.drawBitmap(pointer[3].bmp, matrixPointer, null);
@@ -142,7 +142,7 @@ let redraw = false,
 					redraw = true;
 					i = entities.length;
 					let id;
-					while(i--) {
+					while (i--) {
 						if (!settings.hide_underground_mob || Entity.getPosition(entities[i]).y > 60) {
 							id = Entity.getType(entities[i])
 							let yaw = Entity.getLookAngle(entities[i]).yaw / 3.1415 * 180 - 90

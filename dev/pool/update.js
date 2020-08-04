@@ -7,22 +7,20 @@ new java.lang.Thread(function() {
 	}
 	if (Math.floor(settings.updateCheckTime / 86400) < Math.floor(date / 86400) && settings.updateCheck) {
 		let newVersion = loadTxtFromUrl("https://api.github.com/repos/maxfeed/minimap/releases/latest");
-		alert("newVersion: " + newVersion);
 		try {
 			newVersion = eval(newVersion);
 		} catch(e) {
 			return;
 		} finally {
 			if (!newVersion) {
-				alert("not parsed");
 				return;
 			}
 			settings.updateCheckTime = date;
-			let code = parseFloat(newVersion.name)
+			let code = parseFloat(newVersion.name);
+			alert("version " + newVersion.name + ", code " + code + ": " + curVersion)
 			if (code > curVersion) {
 				settings.updateVersion = code;
 			} else {
-				alert("current version updated");
 				delete settings.updateVersion;
 				return;
 			}
@@ -35,7 +33,7 @@ new java.lang.Thread(function() {
 			saveSettings();
 		}
 	}
-	if (settings.updateVersion > curVersion && settings.updateCheck) {
+	if (settings.updateCheck) {
 		context.runOnUiThread(function() {
 			settingsUI(["Minimap", "Close",
 				["keyValue", "text", "New version available!<br/>Your version: " + curVersion.toFixed(1) + "<br/>Latest version: " + settings.updateVersion.toFixed(1) + "<br/>" +
@@ -44,5 +42,4 @@ new java.lang.Thread(function() {
 				["checkBox", "updateCheck", "Check for updates"]]).show();
 		});
 	}
-	alert("finished");
 }).start();

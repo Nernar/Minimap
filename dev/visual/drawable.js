@@ -23,9 +23,7 @@ function drawBorderBmp() {
 			paint.setARGB(255, 153, 135, 108);
 			break;
 		case 2:
-			"use strict";
-			let colors = [android.graphics.Color.parseColor("#4151b0"), android.graphics.Color.parseColor("#2895f0"), android.graphics.Color.parseColor("#4151b0")];
-			paint.setShader(new android.graphics.LinearGradient(0, 0, settings.window_size * 0.5, settings.window_size, colors, null, android.graphics.Shader.TileMode.REPEAT));
+			paint.setShader(new android.graphics.LinearGradient(0, 0, settings.window_size * 0.5, settings.window_size, android.graphics.Color.parseColor("#4151b0"), android.graphics.Color.parseColor("#2895f0"), android.graphics.Shader.TileMode.REPEAT));
 			break;
 		default:
 			return null;
