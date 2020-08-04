@@ -89,8 +89,8 @@ let mapWindow = (function() {
 	textInfoLp.addRule(android.widget.RelativeLayout.ALIGN_RIGHT, 1);
 	textInfo.setTextSize(15);
 	textInfo.setPadding(3 * density, 0, 0, 0);
-	textInfo.setBackgroundColor(android.graphics.Color.GRAY);
-	textInfo.setTextColor(android.graphics.Color.WHITE);
+	textInfo.setBackgroundColor(colors.gray);
+	textInfo.setTextColor(colors.white);
 	btnZoomOut = minecraftButton("-", settings.button_size, settings.button_size);
 	btnZoomOut.setId(3);
 	btnZoomOut.setVisibility(android.view.View.GONE);

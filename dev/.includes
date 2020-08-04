@@ -3,6 +3,7 @@ polyfill/Object.js
 storage/explorer.js
 storage/config.js
 storage/restore.js
+storage/space.js
 visual/widget.js
 visual/drawable.js
 visual/config.js

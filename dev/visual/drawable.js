@@ -2,7 +2,7 @@ function drawBtnBack(width, height) {
 	let bmp = android.graphics.Bitmap.createBitmap(width, height, android.graphics.Bitmap.Config.ARGB_8888),
 		canvas = new android.graphics.Canvas(bmp),
 		paint = new android.graphics.Paint();
-	paint.setColor(new java.lang.Integer(android.graphics.Color.GRAY));
+	paint.setColor(colors.gray);
 	paint.setMaskFilter(new android.graphics.EmbossMaskFilter([1, 1, 0.3], 0.7, 8, 4 * density));
 	canvas.drawRect(0, 0, width, height, paint);
 	return new android.graphics.drawable.BitmapDrawable(bmp);
@@ -23,7 +23,7 @@ function drawBorderBmp() {
 			paint.setARGB(255, 153, 135, 108);
 			break;
 		case 2:
-			paint.setShader(new android.graphics.LinearGradient(0, 0, settings.window_size * 0.5, settings.window_size, android.graphics.Color.parseColor("#4151b0"), android.graphics.Color.parseColor("#2895f0"), android.graphics.Shader.TileMode.REPEAT));
+			paint.setShader(new android.graphics.LinearGradient(0, 0, settings.window_size * 0.5, settings.window_size, colors.primary, colors.accent, android.graphics.Shader.TileMode.REPEAT));
 			break;
 		default:
 			return null;

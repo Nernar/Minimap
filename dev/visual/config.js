@@ -50,8 +50,8 @@ function settingsUI() {
 				let text = new android.widget.TextView(context);
 				text.setTextSize(textSize * 0.9);
 				text.setText(args[1]);
-				text.setTextColor(android.graphics.Color.WHITE)
-				text.setBackgroundDrawable(new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.LEFT_RIGHT, [android.graphics.Color.parseColor("#4151b0"), android.graphics.Color.parseColor("#2895f0"), android.graphics.Color.parseColor("#4151b0")]));
+				text.setTextColor(colors.white);
+				text.setBackgroundDrawable(new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.LEFT_RIGHT, [colors.primary, colors.accent, colors.primary]));
 				text.setPadding(padding, 0, padding, 0);
 				return text;
 			},
@@ -65,7 +65,7 @@ function settingsUI() {
 				text.setText(android.text.Html.fromHtml(args[2]));
 				text.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
 				textValue.setTextSize(textSize);
-				textValue.setTextColor(android.graphics.Color.parseColor("#4151b0"));
+				textValue.setTextColor(colors.primary);
 				textValue.setId(1);
 				switch (args[1]) {
 					case "multipleChoice":
@@ -78,7 +78,7 @@ function settingsUI() {
 							listView.setAdapter(adapter);
 							listView.setChoiceMode(android.widget.ListView.CHOICE_MODE_SINGLE);
 							listView.setItemChecked(settings[args[3]], true);
-							listView.setDivider(new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.LEFT_RIGHT, [android.graphics.Color.parseColor("#4151b0"), android.graphics.Color.parseColor("#2895f0"), android.graphics.Color.parseColor("#4151b0")]));
+							listView.setDivider(new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.LEFT_RIGHT, [colors.primary, colors.accent, colors.primary]));
 							listView.setDividerHeight(2);
 							listView.setPadding(padding, padding, padding, padding);
 							listView.setOnItemClickListener(function(parent, view, position, id) {
@@ -145,7 +145,7 @@ function settingsUI() {
 		layout.addView(addOption[arguments[0][i][0]](arguments[0][i]));
 		if (i + 1 < len) {
 			let ruler = new android.view.View(context);
-			ruler.setBackgroundDrawable(new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.LEFT_RIGHT, [android.graphics.Color.parseColor("#4151b0"), android.graphics.Color.parseColor("#2895f0"), android.graphics.Color.parseColor("#4151b0")]));
+			ruler.setBackgroundDrawable(new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.LEFT_RIGHT, [colors.primary, colors.accent, colors.primary]));
 			layout.addView(ruler, rulerLp);
 		}
 	}

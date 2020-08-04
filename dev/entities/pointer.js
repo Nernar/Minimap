@@ -17,7 +17,7 @@ let pointer = [
 			let paint = new android.graphics.Paint(),
 				bmp = android.graphics.Bitmap.createBitmap(displayHeight * 0.1, displayHeight * 0.1, android.graphics.Bitmap.Config.ARGB_8888),
 				canvas = new android.graphics.Canvas(bmp);
-			paint.setColor(new java.lang.Integer(android.graphics.Color.BLACK));
+			paint.setColor(colors.black);
 			canvas.drawLines([0, displayHeight * 0.05, displayHeight * 0.1, displayHeight * 0.05, displayHeight * 0.05, 0, displayHeight * 0.05, displayHeight * 0.1], paint);
 			return bmp;
 		})(),
@@ -39,9 +39,9 @@ let pointer = [
 			path.lineTo(displayHeight * 0.0125, displayHeight * 0.015);
 			path.lineTo(displayHeight * 0.025, displayHeight * 0.025);
 			path.close();
-			paint.setColor(new java.lang.Integer(android.graphics.Color.WHITE));
+			paint.setColor(colors.white);
 			canvas.drawPath(path, paint);
-			paint.setColor(new java.lang.Integer(android.graphics.Color.BLACK));
+			paint.setColor(colors.black);
 			paint.setStyle(android.graphics.Paint.Style.STROKE);
 			canvas.drawPath(path, paint);
 			return bmp;

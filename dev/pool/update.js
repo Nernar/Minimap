@@ -10,30 +10,29 @@ new java.lang.Thread(function() {
 		try {
 			newVersion = eval(newVersion);
 		} catch(e) {
-			return;
+			alert(e.message);
 		} finally {
-			if (!newVersion) {
-				return;
+			if (newVersion instanceof Object) {
+				settings.updateCheckTime = date;
+				let code = eval(newVersion.name);
+				if (code > curVersion) {
+					settings.updateVersion = code;
+					if (newVersion.body) {
+					    let hardcoded = newVersion.body.replace("\r\n", "<br/>");
+					    settings.updateChangelog = hardcoded;
+					} else {
+					    delete settings.updateChangelog;
+					}
+					saveSettings();
+				} else {
+					delete settings.updateVersion;
+					saveSettings();
+					return;
+				}
 			}
-			settings.updateCheckTime = date;
-			let code = parseFloat(newVersion.name);
-			alert("version " + newVersion.name + ", code " + code + ": " + curVersion)
-			if (code > curVersion) {
-				settings.updateVersion = code;
-			} else {
-				delete settings.updateVersion;
-				return;
-			}
-			if (newVersion.body) {
-				let hardcoded = newVersion.body.replace("\r\n", "<br/>");
-				settings.updateChangelog = hardcoded;
-			} else {
-				delete settings.updateChangelog;
-			}
-			saveSettings();
 		}
 	}
-	if (settings.updateCheck) {
+	if (settings.updateVersion instanceof Number && settings.updateCheck) {
 		context.runOnUiThread(function() {
 			settingsUI(["Minimap", "Close",
 				["keyValue", "text", "New version available!<br/>Your version: " + curVersion.toFixed(1) + "<br/>Latest version: " + settings.updateVersion.toFixed(1) + "<br/>" +
