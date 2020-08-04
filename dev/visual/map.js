@@ -21,7 +21,7 @@ let mapWindow = (function() {
 					setWindow = settingsUI(["Minimap Options", "OK",
 						["sectionDivider", "Graphics"],
 							["keyValue", "multipleChoice", "Minimap type", "map_type", ["Basic surface (fast)", "Surface", "Cave"]],
-							["keyValue", "slider", "Minimap render distance", "radius", 1, checkRenderDistance() + 4, 1, " chunks"],
+							["keyValue", "slider", "Minimap render distance", "radius", 1, 96, 1, " chunks"],
 							["keyValue", "slider", "Zoom", "map_zoom", 10, 100, 1, "%"],
 						["subScreen", "Icons and Indicators", ["Icons and Indicators", "OK",
 							["sectionDivider", "Entity"],

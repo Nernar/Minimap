@@ -6,17 +6,16 @@ function scheduleChunk(xChunk, zChunk, delay) {
 			} else if (settings.priority == 1) {
 				android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_FOREGROUND);
 			}
-			if (Math.abs(Math.floor((Z - zChunk)/ 16)) > settings.radius || Math.abs(Math.floor((X - xChunk) / 16)) > settings.radius) {return; }
+			if (Math.abs(Math.floor((Z - zChunk) / 16)) > settings.radius || Math.abs(Math.floor((X - xChunk) / 16)) > settings.radius) {
+				return;
+			}
 			let ix = 16,
 				iz = 16,
 				x = xChunk + 16,
 				z = zChunk - 1,
 				mapDotArray = new Array(),
 				type = settings.map_type;
-			if (World.getBlockID(x - 16, 0, z + 16) === 95) {
-				return;
-			}
-			if (!chunkLoaded(x - 16, z + 16)) {
+			if (!World.isChunkLoaded((x - 16) / 16, (z + 16) / 16)) {
 				if (map_state) {
 					scheduleChunk(xChunk, zChunk, 10);
 				} else {

@@ -1,11 +1,3 @@
-function chunkLoaded(ix, iz) {
-	let iy = 130;
-	do {
-		if (World.getBlockID(ix, 130 - iy, iz)) {return true; }
-	} while (iy -= 10);
-	return false;
-}
-
 let chests = new Array()
 
 let mapDot = [
@@ -43,12 +35,13 @@ let mapDot = [
 				243: -10797283
 			};
 		do {
-			if (World.getBlockID(ix, iy - 10, iz)) {
+			let block = World.getBlockID(ix, iy - 10, iz);
+			if (block != 0) {
 				if (deltaY === 10) {
 					deltaY = 1;
 					iy += 10;
 				} else {
-					return colors[World.getBlockID(ix, iy - 10, iz)] || -8540361;
+					return colors[block] || -8540361;
 				}
 			}
 		} while (iy -= deltaY);
@@ -61,21 +54,29 @@ let mapDot = [
 			deltaY = 10,
 			o = android.graphics.Color;
 		do {
-			if (World.getBlockID(ix, iy - 10, iz)) {
+			let block = World.getBlockID(ix, iy, iz);
+			if (block != 0) {
 				if (deltaY === 10) {
 					deltaY = 1;
 					iy += 10;
 				} else {
-					block = World.getBlockID(ix, iy - 10, iz);
 					switch (block) {
 						case 9:
-							if (World.getBlockID(ix, iy - 19, iz) === 9) {return -13882190; }
-							if (World.getBlockID(ix, iy - 16, iz) === 9) {return !(ix % 2) === !((iz + 1) % 2) ? -13882190 : -13224231; }
-							if (World.getBlockID(ix, iy - 14, iz) === 9) {return -13224231; }
-							if (World.getBlockID(ix, iy - 12, iz) === 9) {return !(ix % 2) === !((iz + 1) % 2) ? -13224231 : -12632068; }
+							if (World.getBlockID(ix, iy - 9, iz) === 9) {
+								return -13882190;
+							}
+							if (World.getBlockID(ix, iy - 6, iz) === 9) {
+								return !(ix % 2) === !((iz + 1) % 2) ? -13882190 : -13224231;
+							}
+							if (World.getBlockID(ix, iy - 4, iz) === 9) {
+								return -13224231;
+							}
+							if (World.getBlockID(ix, iy - 2, iz) === 9) {
+								return !(ix % 2) === !((iz + 1) % 2) ? -13224231 : -12632068;
+							}
 							return -12632068;
 						case 12:
-							if (World.getBlockData(ix, iy - 10, iz)) {
+							if (World.getBlockData(ix, iy, iz)) {
 								color = 0xd57d32;
 							} else {
 								color = 0xf4e6a1;
@@ -178,12 +179,12 @@ let mapDot = [
 								243: 0x7e5430,
 								244: 0x007b00
 							};
-							color = color[block] || 0x6f6f6f;
+							color = color[block]/* || 0x6f6f6f*/;
 						}
-						if (World.getBlockID(ix - 1, iy - 9, iz)) {
+						if (World.getBlockID(ix - 1, iy - 2, iz)) {
 							return o.rgb(o.red(color) * (180 / 255), o.green(color) * (180 / 255), o.blue(color) * (180 / 255));
 						}
-						if (World.getBlockID(ix - 1, iy - 10, iz)) {
+						if (World.getBlockID(ix - 1, iy - 1, iz)) {
 							return o.rgb(o.red(color) * (220 / 255), o.green(color) * (220 / 255), o.blue(color) * (220 / 255));
 						}
 						return o.rgb(o.red(color), o.green(color), o.blue(color));
