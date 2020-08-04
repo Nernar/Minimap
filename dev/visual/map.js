@@ -37,9 +37,11 @@ let mapWindow = (function() {
 							["keyValue", "multipleChoice", "Position", "window_rawPosition", ["Top left", "Top left (offset)", "Top right", "Bottom left", "Bottom right"], "window_gravity", [51, 51, 53, 83, 85], "window_y", [0, 40 * density, 40 * density, 0, 0]],
 							["keyValue", "slider", "Size", "window_rawSize", 5, 100, 5, "%"],
 							["keyValue", "slider", "Opacity", "map_alpha", 20, 100, 1, "%"],
-							["keyValue", "slider", "Button size", "button_size", 20, 60, 1, "dp"],
-							["checkBox", "show_info", "Coordinates visible"],
-							["checkBox", "show_zoomBtn", "Zoom Buttons visible"],
+							["subScreen", "Controls", ["Controls", "OK",
+								["keyValue", "slider", "Button size", "button_size", 20, 60, 1, "dp"],
+								["checkBox", "show_info", "Coordinates visible"],
+								["checkBox", "show_zoomBtn", "Zoom Buttons visible"]]],
+							["checkBox", "mapAutorotate", "Spin with player"],
 						["sectionDivider", "Style"],
 							["keyValue", "multipleChoice", "Border style", "style_border", ["None", "Simple", "Colourful"]],
 							["keyValue", "multipleChoice", "Window shape", "style_shape", ["Square", "Circle"]],
@@ -55,7 +57,8 @@ let mapWindow = (function() {
 								["keyValue", "text", "Version ", curVersion.toFixed(1)],
 								["keyValue", "text", "Developed by", "Nernar"],
 								["keyValue", "text", "Inspired by", "MxGoldo"],
-								["keyValue", "text", "<a href=https://m.vk.com/nernar>vk.com</a> development group", ""]]]]).show();
+								["keyValue", "text", "<a href=https://m.vk.com/nernar>vk.com</a> development group", ""]]],
+						["keyValue", "text", "Refresh canvas", "", "forceRefresh"]]).show();
 				} else {
 					setWindow.show();
 				}
@@ -173,6 +176,18 @@ Callback.addCallback("tick", function() {
 		startMapControl = false;
 		mapWindow.show();
 		createPool();
+	}
+	if (map_state && settings.mapAutorotate) {
+		if (settings.style_shape == 1) {
+			context.runOnUiThread(function() {
+				if (YAW != undefined) {
+					mapView.setRotation(YAW);
+				}
+			});
+		} else {
+			settings.style_shape = 1;
+			saveSettings();
+		}
 	}
 });
 

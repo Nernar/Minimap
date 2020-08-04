@@ -1,4 +1,4 @@
-let redraw = false,
+var redraw = false,
 	X,
 	Z,
 	YAW,
@@ -16,9 +16,6 @@ let redraw = false,
 	poolTick = java.util.concurrent.Executors.newSingleThreadScheduledExecutor();
 	runnableUpdateMap = new java.lang.Runnable(function() {
 		try {
-			if (settings.debugProcesses) {
-				Game.tipMessage("update stacking");
-			}
 			if (settings.priority == 0) {
 				android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
 			} else if (settings.priority == 1) {

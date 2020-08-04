@@ -1,5 +1,15 @@
 let settings = new Object();
 
+function headerClicked(key) {
+	switch (key) {
+		case "forceRefresh":
+			mapWindow.hide();
+			refresh = true;
+			mapWindow.show();
+			break;
+	}
+}
+
 function settingsChanged(key) {
 	switch (key) {
 		case "radius":
@@ -111,6 +121,13 @@ function settingsChanged(key) {
 			break;
 		case "threadCount":
 			pool.setCorePoolSize(settings.threadCount);
+			break;
+		case "mapAutorotate":
+			if (!settings.mapAutorotate) {
+				context.runOnUiThread(function() {
+					mapView.setRotation(0);
+				});
+			}
 			break;
 	}
 }

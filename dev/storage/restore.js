@@ -19,7 +19,7 @@
 		show_chest: 0,
 		hide_underground_mob: 1,
 		button_size: 40,
-		mapAutorotate: 1,
+		mapAutorotate: 0,
 		window_rawSize: 40,
 		window_size: displayHeight * 0.4,
 		window_rawPosition: 2,

@@ -6,18 +6,17 @@ new java.lang.Thread(function() {
 		android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_FOREGROUND);
 	}
 	if (settings.updateCheck) {
-		let newVersion = loadTxtFromUrl("https://api.github.com/repos/maxfeed/minimap/releases/latest");
+		var newVersion = loadTxtFromUrl("https://api.github.com/repos/maxfeed/minimap/releases/latest");
 		try {
-			newVersion = eval(newVersion);
+			eval("newVersion = " + newVersion);
 		} catch(e) {} finally {
 			if (newVersion instanceof Object) {
-				for (let i in newVersion) alert(i);
 				settings.updateCheckTime = date;
 				let code = parseFloat(newVersion.name);
 				if (code > curVersion) {
-					settings.updateVersion = code;
+					settings.updateVersion = new Number(code);
 					if (newVersion.body) {
-					    let hardcoded = newVersion.body.replace("\r\n", "<br/>");
+					    let hardcoded = newVersion.body.replace(/\r\n/g, "<br/>");
 					    settings.updateChangelog = hardcoded;
 					} else {
 					    delete settings.updateChangelog;
@@ -29,15 +28,17 @@ new java.lang.Thread(function() {
 					return;
 				}
 			}
-			alert("well done");
 		}
 		if (settings.updateVersion instanceof Number) {
 			context.runOnUiThread(function() {
 				settingsUI(["Minimap", "Close",
-					["keyValue", "text", "New version available!<br/>Your version: " + curVersion.toFixed(1) + "<br/>Latest version: " + settings.updateVersion.toFixed(1) + "<br/>" +
-						(settings.updateChangelog ? "<br/>Changes:<br/>" + settings.updateChangelog : "") + "Install from <a href=https://icmods.mineprogramming.org/mod?id=623>icmods.mineprogramming.org</a>" +
-						"<br/>Clone <a href=https://github.com/MaXFeeD/Minimap/releases/latest>github.com</a> opensource", ""],
-					["checkBox", "updateCheck", "Check for updates"]]).show();
+					["sectionDivider", "New version available!"],
+						["keyValue", "text", "Your version", "" + curVersion.toFixed(1)],
+						["keyValue", "text", "Latest version", "" + settings.updateVersion.toFixed(1)],
+						["keyValue", "text", (settings.updateChangelog ? "Changes:<br/>" + settings.updateChangelog : "No changes."), "" + settings.updateVersion.toFixed(1)],
+						["keyValue", "text", "Install from <a href=https://icmods.mineprogramming.org/mod?id=623>icmods.mineprogramming.org</a>" +
+							"<br/>Clone an <a href=https://github.com/MaXFeeD/Minimap/releases/latest>github.com</a> open source code", ""],
+						["checkBox", "updateCheck", "Check for updates"]]).show();
 			});
 		}
 	}

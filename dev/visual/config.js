@@ -126,6 +126,9 @@ function settingsUI() {
 						break;
 					default:
 						textValue.setText(String(args[3]));
+						textValue.setOnClickListener(function() {
+						    if (args[4]) headerClicked(args[4]);
+						});
 				}
 				textLp.addRule(android.widget.RelativeLayout.ALIGN_PARENT_LEFT);
 				textLp.addRule(android.widget.RelativeLayout.CENTER_VERTICAL);
