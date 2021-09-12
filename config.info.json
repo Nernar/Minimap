@@ -30,7 +30,7 @@
 		"initialization.use_legacy_entities": {
 			"name": {
 				"en": "Use Legacy Entities",
-				"ru": "Использовать устаревших существ"
+				"ru": "Использовать старые отметки"
 			},
 			"description": {
 				"en": "Behold on use default entities icons, deprecated one stay in use. It's may increase performance, but certain entities indicators no longer can be displayed in map.",

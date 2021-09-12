@@ -5,3 +5,7 @@
 [![License](https://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 Find your way around in Minecraft.
+
+## Customization
+
+You can put your own head into `resource/entities/63.png`, it will be used as local player crosshair. Recommended size is 16x16 or 32x32.

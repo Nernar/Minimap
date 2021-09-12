@@ -52,7 +52,9 @@ try {
 	Logger.LogError(e);
 }
 
-// interface consts
+IMPORT("Retention:5");
+
+const context = getContext();
 const buttonSize = (function() {
 	if (__config__.get("initialization.button_size") == null) {
 		__config__.set("initialization.button_size", 40);
@@ -63,12 +65,10 @@ const buttonSize = (function() {
 const legacyEntities = (function() {
 	return __config__.getBool("initialization.use_legacy_entities");
 })();
-const context = UI.getContext();
 const metrics = context.getResources().getDisplayMetrics();
 const density = metrics.density;
 const displayHeight = (metrics.widthPixels < metrics.heightPixels) ? metrics.widthPixels : metrics.heightPixels;
 
-// draw variables
 let bmpSrc,
 	bmpSrcCopy,
 	minZoom,
@@ -80,7 +80,6 @@ let bmpSrc,
 	pathBorder,
 	protoConfig;
 
-// draw fields
 let canvasBmpSrc = new android.graphics.Canvas(),
 	canvasBmpSrcCopy = new android.graphics.Canvas(),
 	matrixMap = new android.graphics.Matrix(),
