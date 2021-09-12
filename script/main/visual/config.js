@@ -2,7 +2,8 @@ function settingsUI() {
 	let textSize = 17,
 		padding = 10,
 		context = UI.getContext();
-	let print = new android.app.AlertDialog.Builder(context);
+	let print = new android.app.AlertDialog.Builder(context,
+			android.R.style.Theme_DeviceDefault_DialogWhenLarge);
 	let scroll = new android.widget.ScrollView(context),
 		layout = new android.widget.LinearLayout(context),
 		len = arguments[0].length,
@@ -72,7 +73,8 @@ function settingsUI() {
 						if (args[4].length <= settings[args[3]]) {settings[args[3]] = 0}
 						textValue.setText(args[4][settings[args[3]]]);
 						textValue.setOnClickListener(function(v) {
-							let print = new android.app.AlertDialog.Builder(context),
+							let print = new android.app.AlertDialog.Builder(context,
+									android.R.style.Theme_DeviceDefault_Dialog),
 								listView = new android.widget.ListView(context),
 								adapter = new android.widget.ArrayAdapter(context, android.R.layout.simple_list_item_single_choice, args[4]);
 							listView.setAdapter(adapter);
@@ -101,7 +103,8 @@ function settingsUI() {
 					case "slider":
 						textValue.setText(settings[args[3]] + args[7]);
 						textValue.setOnClickListener(function(v) {
-							let print = new android.app.AlertDialog.Builder(context),
+							let print = new android.app.AlertDialog.Builder(context,
+									android.R.style.Theme_DeviceDefault_Dialog),
 								seekBar = new android.widget.SeekBar(context);
 							seekBar.setMax((args[5] - args[4]) / args[6]);
 							seekBar.setProgress((settings[args[3]] - args[4]) / args[6]);
@@ -141,7 +144,7 @@ function settingsUI() {
 				return layoutElement;
 			}
 		};
-	padding = padding * context.getResources().getDisplayMetrics().density;
+	padding *= density;
 	layout.setOrientation(android.widget.LinearLayout.VERTICAL);
 	layout.setPadding(padding, 0, padding, 0);
 	for (let i = 2; i < len; i += 1) {
@@ -158,5 +161,9 @@ function settingsUI() {
 	print.setPositiveButton(arguments[0][1], function(dialog,whichButton) {
 		saveSettings();
 	});
-	return print;
+	let dialog = print.create(),
+		popup = dialog.getWindow();
+	popup.setLayout(Interface.Display.WIDTH / 1.4, displayHeight);
+	popup.setGravity(Interface.Gravity.LEFT);
+	return dialog;
 }

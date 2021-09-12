@@ -1,6 +1,6 @@
 function scheduleChunk(xChunk, zChunk, delay) {
 	pool.schedule(new java.lang.Runnable(function() {
-		try {
+		tryout(function() {
 			if (settings.priority == 0) {
 				android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
 			} else if (settings.priority == 1) {
@@ -42,10 +42,6 @@ function scheduleChunk(xChunk, zChunk, delay) {
 				bmpSrcLock.release();
 			}
 			redraw = true;
-		} catch(e) {
-			Logger.LogError(e);
-			Logger.Flush();
-			Game.tipMessage("oh " + e);
-		}
+		});
 	}), delay, java.util.concurrent.TimeUnit.SECONDS);
 }

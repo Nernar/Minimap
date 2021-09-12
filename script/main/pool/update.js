@@ -9,7 +9,9 @@ new java.lang.Thread(function() {
 		var newVersion = loadTxtFromUrl("https://api.github.com/repos/maxfeed/minimap/releases/latest");
 		try {
 			eval("newVersion = " + newVersion);
-		} catch(e) {} finally {
+		} catch(e) {
+			newVersion = Number.MAX_SAFE_INTEGER;
+		} finally {
 			if (newVersion instanceof Object) {
 				let code = parseFloat(newVersion.name);
 				if (code > curVersion) {
@@ -29,8 +31,8 @@ new java.lang.Thread(function() {
 			}
 		}
 		if (settings.updateVersion instanceof Number) {
-			context.runOnUiThread(function() {
-				settingsUI(["Minimap", "Close",
+			handle(function() {
+				settingsUI([NAME, "Maybe later",
 					["sectionDivider", "New version availabled!"],
 						["keyValue", "text", "Your version", "" + curVersion.toFixed(1)],
 						["keyValue", "text", "Latest version", "" + settings.updateVersion.toFixed(1)],

@@ -43,28 +43,25 @@ const isAcceptableEntity = function(ent) {
 	return true;
 };
 
-let curVersion = 1;
+const NAME = String(__mod__.getInfoProperty("name"));
+const AUTHOR = String(__mod__.getInfoProperty("author"));
+const VERSION = String(__mod__.getInfoProperty("version"));
 
-try {
-	curVersion = parseFloat(__mod__.getInfoProperty("version"));
-} catch(e) {
-	Logger.Log("Can't read mod version from mod.info", "Minimap");
-	Logger.LogError(e);
-}
+let curVersion = parseFloat(VERSION);
 
 IMPORT("Retention:5");
 
 const context = getContext();
-const buttonSize = (function() {
+const buttonSize = tryout(function() {
 	if (__config__.get("initialization.button_size") == null) {
 		__config__.set("initialization.button_size", 40);
 		__config__.save();
 	}
 	return __config__.getNumber("initialization.button_size");
-})();
-const legacyEntities = (function() {
+}, undefined, 40);
+const legacyEntities = tryout(function() {
 	return __config__.getBool("initialization.use_legacy_entities");
-})();
+}, undefined, false);
 const metrics = context.getResources().getDisplayMetrics();
 const density = metrics.density;
 const displayHeight = (metrics.widthPixels < metrics.heightPixels) ? metrics.widthPixels : metrics.heightPixels;

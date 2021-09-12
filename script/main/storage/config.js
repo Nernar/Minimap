@@ -119,7 +119,7 @@ function settingsChanged(key) {
 			break;
 		case "mapRotation":
 			if (!settings.mapRotation) {
-				context.runOnUiThread(function() {
+				handle(function() {
 					mapView.setRotation(0);
 				});
 			}

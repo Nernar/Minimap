@@ -18,10 +18,10 @@ let mapWindow = (function() {
 		btnActions = {
 			set: function() {
 				if (!setWindow) {
-					setWindow = settingsUI(["Minimap Options", "Leave",
+					setWindow = settingsUI([NAME, "Leave",
 						["sectionDivider", "Graphics"],
-							["keyValue", "multipleChoice", "Minimap type", "mapType", ["Basic surface (fast)", "Surface", "Cave"]],
-							["keyValue", "slider", "Minimap render distance", "radius", 1, 96, 1, " chunks"],
+							["keyValue", "multipleChoice", "Type", "mapType", ["Basic surface (fast)", "Surface", "Cave"]],
+							["keyValue", "slider", "Render distance", "radius", 1, 96, 1, " chunks"],
 							["keyValue", "slider", "Zoom", "mapZoom", 10, 100, 1, "%"],
 						["subScreen", "Icons and Indicators", ["Icons and Indicators", "Apply",
 							["sectionDivider", "Entity"],
@@ -38,9 +38,9 @@ let mapWindow = (function() {
 							["keyValue", "slider", "Size", "locationRawSize", 5, 100, 5, "%"],
 							["keyValue", "slider", "Opacity", "mapAlpha", 20, 100, 1, "%"],
 							["subScreen", "Controls", ["Controls", "Apply",
-								["keyValue", "text", "Button size", buttonSize + " dp"],
+								["keyValue", "text", "Button size", buttonSize + "dp"],
 								["checkBox", "mapLocation", "Coordinates visible"],
-								["checkBox", "mapZoomButton", "Zoom Buttons visible"]]],
+								["checkBox", "mapZoomButton", "Zoom buttons visible"]]],
 							["checkBox", "mapRotation", "Spin with player"],
 						["sectionDivider", "Style"],
 							["keyValue", "multipleChoice", "Border style", "stylesheetBorder", ["None", "Simple", "Colourful"]],
@@ -49,14 +49,14 @@ let mapWindow = (function() {
 							["checkBox", "checkNewestVersion", "Check for updates " + (settings.updateVersion > curVersion ? "(update available)" : "")],
 						["subScreen", "Advanced ", ["Advanced", "Apply",
 							["keyValue", "multipleChoice", "Thread optimization", "priority", ["Background", "Foreground", "No optimization"]],
-							["keyValue", "slider", "Minimap max frequency", "delay", 1, 40, 1, " fps"],
+							["keyValue", "slider", "Max frequency", "delay", 1, 40, 1, " fps"],
 							["keyValue", "slider", "Threads count", "thread", 1, 12, 1, ""],
 							["checkBox", "developmentVisualize", "Debug pool process"]]],
-						["subScreen", "Minimap Information",
-							["Minimap Support", new java.io.File(__dir__).getName() + "/",
-								["keyValue", "text", "Version ", curVersion.toFixed(1)],
-								["keyValue", "text", "Developed by", "Nernar"],
-								["keyValue", "text", "Inspired by", "MxGoldo"],
+						["subScreen", NAME + " Information",
+							[NAME + " " + VERSION, new java.io.File(__dir__).getName() + "/",
+								["keyValue", "text", "Revision ", curVersion.toFixed(1)],
+								["keyValue", "text", "Developed by ", "Nernar"],
+								["keyValue", "text", "Inspired by ", "MxGoldo"],
 								["keyValue", "text", "<a href=https://m.vk.com/nernar>vk.com</a> development group", ""]]],
 						["keyValue", "text", "Refresh canvas", "", "forceRefresh"]]).show();
 				} else {
@@ -134,12 +134,12 @@ let mapWindow = (function() {
 			return layout;
 		},
 		setInfo: function() {
-			context.runOnUiThread(function() {
+			acquire(function() {
 				textInfo.setText(Math.floor(Player.getPosition().x) + ", " + Math.floor(Player.getPosition().y - 2) + ", " + Math.floor(Player.getPosition().z));
 			});
 		},
 		resetVisibility: function() {
-			context.runOnUiThread(function() {
+			acquire(function() {
 				let visible = android.view.View.VISIBLE, gone = android.view.View.GONE;
 				if (map_state) {
 					btnSet.setVisibility(gone);
@@ -157,12 +157,12 @@ let mapWindow = (function() {
 			});
 		},
 		show: function() {
-			context.runOnUiThread(function() {
+			acquire(function() {
 				mapWin.showAtLocation(context.getWindow().getDecorView(), settings.locationGravity, 0, settings.locationOffset);
 			});
 		},
 		hide: function() {
-			context.runOnUiThread(function() {
+			acquire(function() {
 				mapWin.dismiss();
 			});
 		}
@@ -179,20 +179,21 @@ Callback.addCallback("tick", function() {
 	}
 	if (map_state && settings.mapRotation) {
 		if (settings.stylesheetShape == 1) {
-			context.runOnUiThread(function() {
+			handle(function() {
 				if (YAW != undefined) {
 					mapView.setRotation(YAW);
 				}
 			});
 		} else {
 			settings.stylesheetShape = 1;
+			settingsChanged("stylesheetShape");
 			saveSettings();
 		}
 	}
 });
 
 Callback.addCallback("LevelLeft", function() {
-	try {
+	tryout(function() {
 		mapWindow.hide();
 		if (map_state) {
 			changeMapState();
@@ -202,9 +203,7 @@ Callback.addCallback("LevelLeft", function() {
 		X = undefined;
 		entities = [];
 		chests = [];
-	} catch(e) {
-		Logger.LogError(e);
-	}
+	});
 });
 
 function changeMapState() {
