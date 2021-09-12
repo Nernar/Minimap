@@ -9,51 +9,51 @@ let mapWindow = (function() {
 		btnZoomIn,
 		btnZoomOut,
 		textInfo = new android.widget.TextView(context),
-		mapLp = new android.widget.RelativeLayout.LayoutParams(settings.window_size , settings.window_size ),
-		btnZoomInLp = new android.widget.RelativeLayout.LayoutParams(settings.button_size * density, settings.button_size * density),
-		btnZoomOutLp = new android.widget.RelativeLayout.LayoutParams(settings.button_size * density, settings.button_size * density),
+		mapLp = new android.widget.RelativeLayout.LayoutParams(settings.locationSize, settings.locationSize),
+		btnZoomInLp = new android.widget.RelativeLayout.LayoutParams(buttonSize * density, buttonSize * density),
+		btnZoomOutLp = new android.widget.RelativeLayout.LayoutParams(buttonSize * density, buttonSize * density),
 		textInfoLp = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT),
 		layout = new android.widget.RelativeLayout(context),
 		mapWin = new android.widget.PopupWindow(layout, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT),
 		btnActions = {
 			set: function() {
 				if (!setWindow) {
-					setWindow = settingsUI(["Minimap Options", "OK",
+					setWindow = settingsUI(["Minimap Options", "Leave",
 						["sectionDivider", "Graphics"],
-							["keyValue", "multipleChoice", "Minimap type", "map_type", ["Basic surface (fast)", "Surface", "Cave"]],
+							["keyValue", "multipleChoice", "Minimap type", "mapType", ["Basic surface (fast)", "Surface", "Cave"]],
 							["keyValue", "slider", "Minimap render distance", "radius", 1, 96, 1, " chunks"],
-							["keyValue", "slider", "Zoom", "map_zoom", 10, 100, 1, "%"],
-						["subScreen", "Icons and Indicators", ["Icons and Indicators", "OK",
+							["keyValue", "slider", "Zoom", "mapZoom", 10, 100, 1, "%"],
+						["subScreen", "Icons and Indicators", ["Icons and Indicators", "Apply",
 							["sectionDivider", "Entity"],
-								["keyValue", "multipleChoice", "Pointer style", "style_pointer", ["crosshairs", "arrow", "minecraft", "head"]],
-								["checkBox", "hide_underground_mob", "Hide entities below sea level"],
-								["checkBox", "show_player", "You"],
-								["checkBox", "show_otherPlayer", "Other players"],
-								["checkBox", "show_passive", "Passive mobs"],
-								["checkBox", "show_hostile", "Hostile mobs"],
+								["keyValue", "multipleChoice", "Pointer style", "stylesheetPointer", ["crosshairs", "arrow", "minecraft", "head"]],
+								["checkBox", "indicatorOnlySurface", "Hide entities below sea level"],
+								["checkBox", "indicatorLocal", "You"],
+								["checkBox", "indicatorPlayer", "Other players"],
+								["checkBox", "indicatorPassive", "Passive mobs"],
+								["checkBox", "indicatorHostile", "Hostile mobs"],
 							["sectionDivider", "Icon"],
-								["checkBox", "show_chest", "Chests"]]],
+								["checkBox", "indicatorTile", "Chests"]]],
 						["sectionDivider", "View"],
-							["keyValue", "multipleChoice", "Position", "window_rawPosition", ["Top left", "Top left (offset)", "Top right", "Bottom left", "Bottom right"], "window_gravity", [51, 51, 53, 83, 85], "window_y", [0, 40 * density, 40 * density, 0, 0]],
-							["keyValue", "slider", "Size", "window_rawSize", 5, 100, 5, "%"],
-							["keyValue", "slider", "Opacity", "map_alpha", 20, 100, 1, "%"],
-							["subScreen", "Controls", ["Controls", "OK",
-								["keyValue", "slider", "Button size", "button_size", 20, 60, 1, "dp"],
-								["checkBox", "show_info", "Coordinates visible"],
-								["checkBox", "show_zoomBtn", "Zoom Buttons visible"]]],
-							["checkBox", "mapAutorotate", "Spin with player"],
+							["keyValue", "multipleChoice", "Position", "locationRawPosition", ["Top left", "Top left (offset)", "Top right", "Bottom left", "Bottom right"], "locationGravity", [51, 51, 53, 83, 85], "locationOffset", [0, 40 * density, 40 * density, 0, 0]],
+							["keyValue", "slider", "Size", "locationRawSize", 5, 100, 5, "%"],
+							["keyValue", "slider", "Opacity", "mapAlpha", 20, 100, 1, "%"],
+							["subScreen", "Controls", ["Controls", "Apply",
+								["keyValue", "text", "Button size", buttonSize + " dp"],
+								["checkBox", "mapLocation", "Coordinates visible"],
+								["checkBox", "mapZoomButton", "Zoom Buttons visible"]]],
+							["checkBox", "mapRotation", "Spin with player"],
 						["sectionDivider", "Style"],
-							["keyValue", "multipleChoice", "Border style", "style_border", ["None", "Simple", "Colourful"]],
-							["keyValue", "multipleChoice", "Window shape", "style_shape", ["Square", "Circle"]],
+							["keyValue", "multipleChoice", "Border style", "stylesheetBorder", ["None", "Simple", "Colourful"]],
+							["keyValue", "multipleChoice", "Window shape", "stylesheetShape", ["Square", "Circle"]],
 						["sectionDivider", "Other"],
-							["checkBox", "updateCheck", "Check for updates " + (settings.updateVersion > curVersion ? "(update available)" : "")],
-						["subScreen", "Advanced ", ["Advanced", "Ok",
+							["checkBox", "checkNewestVersion", "Check for updates " + (settings.updateVersion > curVersion ? "(update available)" : "")],
+						["subScreen", "Advanced ", ["Advanced", "Apply",
 							["keyValue", "multipleChoice", "Thread optimization", "priority", ["Background", "Foreground", "No optimization"]],
 							["keyValue", "slider", "Minimap max frequency", "delay", 1, 40, 1, " fps"],
-							["keyValue", "slider", "Threads count", "threadCount", 1, 12, 1, ""],
-							["checkBox", "debugProcesses", "Debug pool process"]]],
+							["keyValue", "slider", "Threads count", "thread", 1, 12, 1, ""],
+							["checkBox", "developmentVisualize", "Debug pool process"]]],
 						["subScreen", "Minimap Information",
-							["Minimap Support", "OK",
+							["Minimap Support", new java.io.File(__dir__).getName() + "/",
 								["keyValue", "text", "Version ", curVersion.toFixed(1)],
 								["keyValue", "text", "Developed by", "Nernar"],
 								["keyValue", "text", "Inspired by", "MxGoldo"],
@@ -77,7 +77,7 @@ let mapWindow = (function() {
 	});
 	btnSet.setBackgroundResource(android.R.drawable.ic_menu_mylocation);
 	btnSet.setVisibility(android.view.View.VISIBLE);
-	btnSet.setLayoutParams(new android.widget.LinearLayout.LayoutParams(settings.button_size * density, settings.button_size * density));
+	btnSet.setLayoutParams(new android.widget.LinearLayout.LayoutParams(buttonSize * density, buttonSize * density));
 	btnSet.setOnClickListener(function(v) {
 		changeMapState();
 	});
@@ -94,36 +94,36 @@ let mapWindow = (function() {
 	textInfo.setPadding(3 * density, 0, 0, 0);
 	textInfo.setBackgroundColor(colors.gray);
 	textInfo.setTextColor(colors.white);
-	btnZoomOut = minecraftButton("-", settings.button_size, settings.button_size);
+	btnZoomOut = minecraftButton("-", buttonSize, buttonSize);
 	btnZoomOut.setId(3);
 	btnZoomOut.setVisibility(android.view.View.GONE);
 	btnZoomOutLp.addRule(android.widget.RelativeLayout.BELOW, 2);
 	btnZoomOut.setOnClickListener(function(v) {
-		if (settings.map_zoom * 1.2 >= 100) {
+		if (settings.mapZoom * 1.2 >= 100) {
 			Game.tipMessage("minimum zoom reached");
-			settings.map_zoom = 100;
+			settings.mapZoom = 100;
 		} else {
-			settings.map_zoom = Math.round(settings.map_zoom * 1.2);
+			settings.mapZoom = Math.round(settings.mapZoom * 1.2);
 		}
-		settingsChanged("map_zoom");
+		settingsChanged("mapZoom");
 		saveSettings();
 	});
-	btnZoomIn = minecraftButton("+", settings.button_size, settings.button_size);
+	btnZoomIn = minecraftButton("+", buttonSize, buttonSize);
 	btnZoomIn.setId(4);
 	btnZoomIn.setVisibility(android.view.View.GONE);
 	btnZoomInLp.addRule(android.widget.RelativeLayout.BELOW, 2);
 	btnZoomInLp.addRule(android.widget.RelativeLayout.RIGHT_OF, 3);
 	btnZoomIn.setOnClickListener(function(v) {
-		if (settings.map_zoom * 0.8 <= 10) {
+		if (settings.mapZoom * 0.8 <= 10) {
 			Game.tipMessage("maximum zoom reached");
-			settings.map_zoom = 10;
+			settings.mapZoom = 10;
 		} else {
-			settings.map_zoom = Math.round(settings.map_zoom * 0.8);
+			settings.mapZoom = Math.round(settings.mapZoom * 0.8);
 		}
-		settingsChanged("map_zoom");
+		settingsChanged("mapZoom");
 		saveSettings();
 	});
-	layout.setAlpha((settings.map_alpha / 100).toFixed(2));
+	layout.setAlpha((settings.mapAlpha / 100).toFixed(2));
 	layout.addView(btnSet);
 	layout.addView(mapView, mapLp);
 	layout.addView(btnZoomIn, btnZoomInLp);
@@ -144,9 +144,9 @@ let mapWindow = (function() {
 				if (map_state) {
 					btnSet.setVisibility(gone);
 					mapView.setVisibility(visible);
-					btnZoomIn.setVisibility(settings.show_zoomBtn ? visible : gone);
-					btnZoomOut.setVisibility(settings.show_zoomBtn ? visible : gone);
-					textInfo.setVisibility(settings.show_info ? visible : gone);
+					btnZoomIn.setVisibility(settings.mapZoomButton ? visible : gone);
+					btnZoomOut.setVisibility(settings.mapZoomButton ? visible : gone);
+					textInfo.setVisibility(settings.mapLocation ? visible : gone);
 				} else {
 					btnSet.setVisibility(visible);
 					mapView.setVisibility(gone);
@@ -158,7 +158,7 @@ let mapWindow = (function() {
 		},
 		show: function() {
 			context.runOnUiThread(function() {
-				mapWin.showAtLocation(context.getWindow().getDecorView(), settings.window_gravity, 0, settings.window_y);
+				mapWin.showAtLocation(context.getWindow().getDecorView(), settings.locationGravity, 0, settings.locationOffset);
 			});
 		},
 		hide: function() {
@@ -177,15 +177,15 @@ Callback.addCallback("tick", function() {
 		mapWindow.show();
 		createPool();
 	}
-	if (map_state && settings.mapAutorotate) {
-		if (settings.style_shape == 1) {
+	if (map_state && settings.mapRotation) {
+		if (settings.stylesheetShape == 1) {
 			context.runOnUiThread(function() {
 				if (YAW != undefined) {
 					mapView.setRotation(YAW);
 				}
 			});
 		} else {
-			settings.style_shape = 1;
+			settings.stylesheetShape = 1;
 			saveSettings();
 		}
 	}

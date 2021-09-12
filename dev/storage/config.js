@@ -28,8 +28,8 @@ function settingsChanged(key) {
 			} finally {
 				bmpSrcLock.release();
 			}
-			minZoom = settings.window_size / (settings.radius * 2 * 16);
-			absZoom = (100 / settings.map_zoom) * minZoom;
+			minZoom = settings.locationSize / (settings.radius * 2 * 16);
+			absZoom = (100 / settings.mapZoom) * minZoom;
 			if (widthNew > widthOld) {
 				for (let i = (widthOld - 16) / 2; i <= settings.radius * 16; i += 16) {
 					for (let j = 0; j < i; j += 16) {
@@ -59,48 +59,43 @@ function settingsChanged(key) {
 			}
 			redraw = true;
 			break;
-		case "map_type":
+		case "mapType":
 			if (pool.getActiveCount() > 0) {
 				createPool();
 			}
 			X = undefined;
 			break;
-		case "map_zoom":
-			absZoom = (100 / settings.map_zoom) * minZoom;
+		case "mapZoom":
+			absZoom = (100 / settings.mapZoom) * minZoom;
 			redraw = true;
 			break;
-		case "map_alpha":
-			mapWindow.getLayout().setAlpha((settings.map_alpha / 100).toFixed(2));
+		case "mapAlpha":
+			mapWindow.getLayout().setAlpha((settings.mapAlpha / 100).toFixed(2));
 			break;
-		case "window_rawSize":
-			settings.window_size = (settings.window_rawSize / 100) * displayHeight;
+		case "locationRawSize":
+			settings.locationSize = settings.locationRawSize / 100 * displayHeight;
 			let lp = mapView.getLayoutParams();
-			lp.height = settings.window_size;
-			lp.width = settings.window_size;
+			lp.height = settings.locationSize;
+			lp.width = settings.locationSize;
 			mapView.setLayoutParams(lp);
 			redraw = true;
 			bmpBorder = drawBorderBmp();
-			if (settings.style_border !== 0) {
+			if (settings.stylesheetBorder != 0) {
 				pathBorder = createPath(false, true);
 			} else {
 				pathBorder = createPath(true, false);
 			}
 			redraw = true;
-			minZoom = settings.window_size / (settings.radius * 2 * 16);
-			absZoom = (100 / settings.map_zoom) * minZoom;
+			minZoom = settings.locationSize / (settings.radius * 2 * 16);
+			absZoom = (100 / settings.mapZoom) * minZoom;
 			break;
-		case "window_rawPosition":
+		case "locationRawPosition":
 			mapWindow.hide();
 			mapWindow.show();
 			break;
-		case "style_shape":
-			if (settings.style_border !== 0) {
-				pathBorder = createPath(false, true);
-			} else {
-				pathBorder = createPath(true, false);
-			}
-		case "style_border":
-			if (settings.style_border !== 0) {
+		case "stylesheetShape":
+		case "stylesheetBorder":
+			if (settings.stylesheetBorder != 0) {
 				pathBorder = createPath(false, true);
 			} else {
 				pathBorder = createPath(true, false);
@@ -108,22 +103,22 @@ function settingsChanged(key) {
 			bmpBorder = drawBorderBmp();
 			redraw = true;
 			break;
-		case "style_pointer":
+		case "stylesheetPointer":
 			redraw = true;
 			break;
-		case "show_info":
-		case "show_zoomBtn":
+		case "mapLocation":
+		case "mapZoomButton":
 			mapWindow.resetVisibility();
 			break;
 		case "delay":
 			scheduledFutureUpdateMap.cancel(false);
 			scheduledFutureUpdateMap = poolTick.scheduleWithFixedDelay(runnableUpdateMap, 1000, Math.round(1000 / settings.delay), java.util.concurrent.TimeUnit.MILLISECONDS);
 			break;
-		case "threadCount":
-			pool.setCorePoolSize(settings.threadCount);
+		case "thread":
+			pool.setCorePoolSize(settings.thread);
 			break;
-		case "mapAutorotate":
-			if (!settings.mapAutorotate) {
+		case "mapRotation":
+			if (!settings.mapRotation) {
 				context.runOnUiThread(function() {
 					mapView.setRotation(0);
 				});
@@ -142,11 +137,11 @@ function checkRenderDistance() {
 		for (let i = 0; i < options.length; i += 1) {
 			options[i] = options[i].split(":");
 			if (getCoreAPILevel() > 8) {
-				if (options[i][0] === "gfx_viewdistance") {
+				if (options[i][0] == "gfx_viewdistance") {
 					return Math.round(parseInt(options[i][1], 10) / 16);
 				}
 			} else {
-				if (options[i][0] === "gfx_renderdistance_new") {
+				if (options[i][0] == "gfx_renderdistance_new") {
 					return Math.round(parseInt(options[i][1], 10) / 16);
 				}
 			}
@@ -159,7 +154,7 @@ function saveSettings() {
 	let settingsString = "";
 	for (let p in settings) {
 		if (settings.hasOwnProperty(p)) {
-			if (settingsString !== "") {
+			if (settingsString != "") {
 				settingsString += "\n";
 			}
 			settingsString += p + ":" + settings[p];

@@ -1,4 +1,4 @@
-let chests = new Array()
+let chests = new Array();
 
 let mapDot = [
 	function basicSurfaceMap(ix, iz) {
@@ -37,7 +37,7 @@ let mapDot = [
 		do {
 			let block = World.getBlockID(ix, iy - 10, iz);
 			if (block != 0) {
-				if (deltaY === 10) {
+				if (deltaY == 10) {
 					deltaY = 1;
 					iy += 10;
 				} else {
@@ -55,23 +55,23 @@ let mapDot = [
 		do {
 			let block = World.getBlockID(ix, iy, iz);
 			if (block != 0) {
-				if (deltaY === 10) {
+				if (deltaY == 10) {
 					deltaY = 1;
 					iy += 10;
 				}
 				switch (block) {
 					case 9:
-						if (World.getBlockID(ix, iy - 9, iz) === 9) {
+						if (World.getBlockID(ix, iy - 9, iz) == 9) {
 							return -13882190;
 						}
-						if (World.getBlockID(ix, iy - 6, iz) === 9) {
-							return !(ix % 2) === !((iz + 1) % 2) ? -13882190 : -13224231;
+						if (World.getBlockID(ix, iy - 6, iz) == 9) {
+							return !(ix % 2) == !((iz + 1) % 2) ? -13882190 : -13224231;
 						}
-						if (World.getBlockID(ix, iy - 4, iz) === 9) {
+						if (World.getBlockID(ix, iy - 4, iz) == 9) {
 							return -13224231;
 						}
-						if (World.getBlockID(ix, iy - 2, iz) === 9) {
-							return !(ix % 2) === !((iz + 1) % 2) ? -13224231 : -12632068;
+						if (World.getBlockID(ix, iy - 2, iz) == 9) {
+							return !(ix % 2) == !((iz + 1) % 2) ? -13224231 : -12632068;
 						}
 						return -12632068;
 					case 12:
@@ -260,16 +260,16 @@ let mapDot = [
 				default:
 					blockNew = 2;
 			}
-			if (blockNew !== block) {
+			if (blockNew != block) {
 				count += blockNew;
 				y = iy;
 			}
-			if (count === 5) {
+			if (count == 5) {
 				iy += 3;
 				increment = 1;
 				count = 6;
 				blockNew = 1;
-			} else if (count === 8) {
+			} else if (count == 8) {
 				r = r || 150;
 				g = g || 255;
 				b = b || 0;

@@ -14,7 +14,7 @@ function scheduleChunk(xChunk, zChunk, delay) {
 				x = xChunk + 16,
 				z = zChunk - 1,
 				mapDotArray = new Array(),
-				type = settings.map_type;
+				type = settings.mapType;
 			if (!World.isChunkLoaded((x - 16) / 16, (z + 16) / 16)) {
 				if (map_state) {
 					scheduleChunk(xChunk, zChunk, 10);
@@ -25,7 +25,7 @@ function scheduleChunk(xChunk, zChunk, delay) {
 				}
 				return;
 			}
-			if (settings.debugProcesses) {
+			if (settings.developmentVisualize) {
 				Game.tipMessage("processing " + (xChunk / 16) + ", " + (zChunk / 16) + " [" + delay + "]");
 			}
 			do {
@@ -34,7 +34,7 @@ function scheduleChunk(xChunk, zChunk, delay) {
 				} while (iz -= 1);
 				iz = 16;
 			} while (ix -= 1);
-			if (java.lang.Thread.interrupted()) {return; }
+			if (java.lang.Thread.interrupted()) { return; }
 			try {
 				bmpSrcLock.acquire();
 				bmpSrc.setPixels(mapDotArray, 0, 16, ((Math.floor(Z / 16) + settings.radius + 1) * 16) - zChunk, xChunk - ((Math.floor(X / 16) - settings.radius - 1) * 16), 16, 16)
@@ -44,6 +44,8 @@ function scheduleChunk(xChunk, zChunk, delay) {
 			redraw = true;
 		} catch(e) {
 			Logger.LogError(e);
+			Logger.Flush();
+			Game.tipMessage("oh " + e);
 		}
 	}), delay, java.util.concurrent.TimeUnit.SECONDS);
 }

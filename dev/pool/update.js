@@ -5,13 +5,12 @@ new java.lang.Thread(function() {
 	} else if (settings.priority == 1) {
 		android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_FOREGROUND);
 	}
-	if (settings.updateCheck) {
+	if (settings.checkNewestVersion) {
 		var newVersion = loadTxtFromUrl("https://api.github.com/repos/maxfeed/minimap/releases/latest");
 		try {
 			eval("newVersion = " + newVersion);
 		} catch(e) {} finally {
 			if (newVersion instanceof Object) {
-				settings.updateCheckTime = date;
 				let code = parseFloat(newVersion.name);
 				if (code > curVersion) {
 					settings.updateVersion = new Number(code);
@@ -32,14 +31,14 @@ new java.lang.Thread(function() {
 		if (settings.updateVersion instanceof Number) {
 			context.runOnUiThread(function() {
 				settingsUI(["Minimap", "Close",
-					["sectionDivider", "New version available!"],
+					["sectionDivider", "New version availabled!"],
 						["keyValue", "text", "Your version", "" + curVersion.toFixed(1)],
 						["keyValue", "text", "Latest version", "" + settings.updateVersion.toFixed(1)],
 						["keyValue", "text", (settings.updateChangelog ? settings.updateChangelog : "No changes."), "Changelog"],
 					["sectionDivider", "Download update"],
 						["keyValue", "text", "Install from <a href=https://icmods.mineprogramming.org/mod?id=623>icmods.mineprogramming.org</a>" +
 							"<br/>Clone <a href=https://github.com/MaXFeeD/Minimap/releases/latest>github.com</a> open source code", ""],
-						["checkBox", "updateCheck", "Check for updates"]]).show();
+						["checkBox", "checkNewestVersion", "Check for updates"]]).show();
 			});
 		}
 	}

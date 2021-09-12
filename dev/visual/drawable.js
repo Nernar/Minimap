@@ -14,16 +14,16 @@ function decodeBmp(string) {
 }
 
 function drawBorderBmp() {
-	let bmp = android.graphics.Bitmap.createBitmap(settings.window_size, settings.window_size, android.graphics.Bitmap.Config.ARGB_8888),
+	let bmp = android.graphics.Bitmap.createBitmap(settings.locationSize, settings.locationSize, android.graphics.Bitmap.Config.ARGB_8888),
 		canvas = new android.graphics.Canvas(bmp),
 		paint = new android.graphics.Paint();
 	paint.setMaskFilter(new android.graphics.EmbossMaskFilter([1, 1, 0.3], 0.7, 8, 3 * density));
-	switch (settings.style_border) {
+	switch (settings.stylesheetBorder) {
 		case 1:
 			paint.setARGB(255, 153, 135, 108);
 			break;
 		case 2:
-			paint.setShader(new android.graphics.LinearGradient(0, 0, settings.window_size * 0.5, settings.window_size, colors.primary, colors.accent, android.graphics.Shader.TileMode.REPEAT));
+			paint.setShader(new android.graphics.LinearGradient(0, 0, settings.locationSize * 0.5, settings.locationSize, colors.primary, colors.accent, android.graphics.Shader.TileMode.REPEAT));
 			break;
 		default:
 			return null;
@@ -34,9 +34,9 @@ function drawBorderBmp() {
 
 function createPath(outer, inner) {
 	let path = new android.graphics.Path(),
-		size = settings.window_size;
+		size = settings.locationSize;
 	path.setFillType(android.graphics.Path.FillType.EVEN_ODD);
-	if (settings.style_shape === 1) {
+	if (settings.stylesheetShape == 1) {
 		if (inner) {
 			path.addCircle(size / 2, size / 2, size / 2 - (7 * density), android.graphics.Path.Direction.CW);
 		}

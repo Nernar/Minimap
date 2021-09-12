@@ -18,7 +18,7 @@ function load(path, filename) {
 			fos = new java.io.FileInputStream(file),
 			str = new java.lang.StringBuilder(),
 			ch;
-		while ((ch = fos.read()) != -1) {str.append(java.lang.Character(ch)); }
+		while ((ch = fos.read()) != -1) { str.append(java.lang.Character(ch)); }
 		content = new String(str.toString());
 		fos.close();
 	}

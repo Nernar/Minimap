@@ -1,20 +1,78 @@
 {
-    "description": {
-        "en": "Here you can find all settings for this modification.",
-        "ru": "Тут можно найти все настройки этой модификации."
-    },
-    
-    "properties": {
-        "enabled": {
-            "name": {
-                "en": "Launch",
-                "ru": "Запуск"
-            },
-            "description": {
-                "en": "Changes launch state of modification; if disabled, mod willn't be launched.",
-                "ru": "Меняет состояния запускаемости мода, если отключено - мод запущен не будет."
-            },
-            "index": 0
-        }
-    }
+	"description": {
+		"en": "Most of settings may referred right in-game menu. Just hold on minimap to manage options.",
+		"ru": "Большинство настроек можно получить, используя меню прямо в игре. Просто удерживайте миникарту для управления."
+	},
+	
+	"properties": {
+		"enabled": {
+			"name": {
+				"en": "Launch",
+				"ru": "Запуск"
+			},
+			"description": {
+				"en": "Changes launch state of modification; if disabled, mod willn't be launched.",
+				"ru": "Меняет состояния запускаемости мода, если отключено - мод запущен не будет."
+			},
+			"index": 0
+		},
+		
+		"initialization": {
+			"name": {
+				"en": "Initialization",
+				"ru": "Инициализация"
+			},
+			
+			"index": 1,
+			"collapsible": false
+		},
+		
+		"initialization.use_legacy_entities": {
+			"name": {
+				"en": "Use Legacy Entities",
+				"ru": "Использовать устаревших существ"
+			},
+			"description": {
+				"en": "Behold on use default entities icons, deprecated one stay in use. It's may increase performance, but certain entities indicators no longer can be displayed in map.",
+				"ru": "Вместо стандартных иконок существ будут использоваться устаревшие. Это может снизить потребление памяти, однако приведет к отсутствию индикаторов некоторых существ."
+			},
+			"index": 2
+		},
+		
+		"initialization.button_size": {
+			"name": {
+				"en": "Button Size",
+				"ru": "Размер кнопок"
+			},
+			"description": {
+				"en": "Setups user interface elements scaling during modification initialization.",
+				"ru": "Используется при инициализации интерфейса для указания размеров элементов."
+			},
+			"index": 3
+		},
+		
+		"runtime": {
+			"displayIf": false
+		},
+		
+		"indicator": {
+			"displayIf": false
+		},
+		
+		"location": {
+			"displayIf": false
+		},
+		
+		"stylesheet": {
+			"displayIf": false
+		},
+		
+		"performance": {
+			"displayIf": false
+		},
+		
+		"development": {
+			"displayIf": false
+		}
+	}
 }

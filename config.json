@@ -1,3 +1,7 @@
 {
-  "enabled":true
+  "enabled":true,
+  "initialization":{
+    "use_legacy_entities":true,
+    "button_size":40
+  }
 }

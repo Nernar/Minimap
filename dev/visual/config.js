@@ -112,7 +112,7 @@ function settingsUI() {
 							}));
 							print.setView(seekBar);
 							print.setTitle(args[2] + "  " + settings[args[3]] + args[7]);
-							print.setPositiveButton("OK", function(dialog, whichButton) {
+							print.setPositiveButton("Apply", function(dialog, whichButton) {
 								settings[args[3]] = seekBar.getProgress() * args[6] + args[4];
 								textValue.setText(settings[args[3]] + args[7]);
 								settingsChanged(args[3]);

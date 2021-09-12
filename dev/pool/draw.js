@@ -11,8 +11,8 @@ var redraw = false,
 	bmpSrcCopy = android.graphics.Bitmap.createBitmap(bmpSrc.getWidth(), bmpSrc.getHeight(), android.graphics.Bitmap.Config.ARGB_8888);
 	canvasBmpSrc.setBitmap(bmpSrc);
 	canvasBmpSrcCopy.setBitmap(bmpSrcCopy);
-	minZoom = settings.window_size / (settings.radius * 2 * 16);
-	absZoom = (100 / settings.map_zoom) * minZoom;
+	minZoom = settings.locationSize / (settings.radius * 2 * 16);
+	absZoom = (100 / settings.mapZoom) * minZoom;
 	poolTick = java.util.concurrent.Executors.newSingleThreadScheduledExecutor();
 	runnableUpdateMap = new java.lang.Runnable(function() {
 		try {
@@ -32,14 +32,14 @@ var redraw = false,
 				i,
 				ix,
 				radius = settings.radius * 16;
-			if (xNew !== X || zNew !== Z || yawNew !== YAW || redraw || dimensionNew !== DIMENSION) {
+			if (xNew != X || zNew != Z || yawNew != YAW || redraw || dimensionNew != DIMENSION) {
 				redraw = false;
 				xChunkNew = Math.floor(xNew / 16) * 16;
 				zChunkNew = Math.floor(zNew / 16) * 16;
 				xChunkOld = Math.floor(X / 16) * 16;
 				zChunkOld = Math.floor(Z / 16) * 16;
-				if (xChunkNew !== xChunkOld || zChunkNew !== zChunkOld || dimensionNew !== DIMENSION) {
-					if (Math.abs(xChunkNew - xChunkOld) <= radius * 2 && Math.abs(zChunkNew - zChunkOld) <= radius * 2 && dimensionNew === DIMENSION) {
+				if (xChunkNew != xChunkOld || zChunkNew != zChunkOld || dimensionNew != DIMENSION) {
+					if (Math.abs(xChunkNew - xChunkOld) <= radius * 2 && Math.abs(zChunkNew - zChunkOld) <= radius * 2 && dimensionNew == DIMENSION) {
 						try {
 							bmpSrcLock.acquire();
 							bmpSrcCopy.eraseColor(0);
@@ -111,23 +111,23 @@ var redraw = false,
 				YAW = yawNew;
 				DIMENSION = dimensionNew;
 				let zoom = absZoom,
-					style_pointer = settings.style_pointer,
-					x0 = xNew - (settings.window_size * 0.5 / zoom),
-					z0 = zNew + (settings.window_size * 0.5 / zoom);
-				matrixMap.setTranslate(settings.window_size * 0.5 - (bmpSrc.getWidth() * 0.5) - 8 + zNew - zChunkNew, settings.window_size * 0.5 - (bmpSrc.getHeight() * 0.5) + 8 - xNew + xChunkNew);
-				matrixMap.postScale(zoom, zoom, settings.window_size * 0.5, settings.window_size * 0.5);
-				if (settings.show_info) {
+					style_pointer = settings.stylesheetPointer,
+					x0 = xNew - (settings.locationSize * 0.5 / zoom),
+					z0 = zNew + (settings.locationSize * 0.5 / zoom);
+				matrixMap.setTranslate(settings.locationSize * 0.5 - (bmpSrc.getWidth() * 0.5) - 8 + zNew - zChunkNew, settings.locationSize * 0.5 - (bmpSrc.getHeight() * 0.5) + 8 - xNew + xChunkNew);
+				matrixMap.postScale(zoom, zoom, settings.locationSize * 0.5, settings.locationSize * 0.5);
+				if (settings.mapLocation) {
 					mapWindow.setInfo();
 				}
 				let canvas = mapView.lockCanvas();
 				canvas.drawColor(0, android.graphics.PorterDuff.Mode.CLEAR);
 				canvas.save(android.graphics.Canvas.CLIP_SAVE_FLAG);
-				if (bmpBorder !== null) {
+				if (bmpBorder != null) {
 					canvas.drawBitmap(bmpBorder, 0, 0, null);
 				}
 				canvas.clipPath(pathBorder, android.graphics.Region.Op.REPLACE);
 				canvas.drawBitmap(bmpSrc, matrixMap, bmpPaint);
-				if (settings.show_chest) {
+				if (settings.indicatorTile) {
 					i = chests.length;
 					while (i--) {
 						matrixPointer.setTranslate((z0 - chests[i][1]) * zoom, (chests[i][0] - x0) * zoom);
@@ -135,35 +135,35 @@ var redraw = false,
 						canvas.drawBitmap(pointer[3].bmp, matrixPointer, null);
 					}
 				}
-				if (settings.show_passive || settings.show_hostile) {
+				if (settings.indicatorPassive || settings.indicatorHostile || settings.indicatorPlayer) {
 					redraw = true;
 					i = entities.length;
 					let id;
 					while (i--) {
-						if (!settings.hide_underground_mob || Entity.getPosition(entities[i]).y > 60) {
+						if (!settings.indicatorOnlySurface || Entity.getPosition(entities[i]).y > 60) {
 							id = Entity.getType(entities[i])
 							let yaw = Entity.getLookAngle(entities[i]).yaw / 3.1415 * 180 - 90
-							if (style_pointer !== 3) {
-								if (id < 32 && settings.show_passive) {
+							if (style_pointer != 3) {
+								if (ENTITY_PASSIVE.indexOf(id) >= 0 && settings.indicatorPassive) {
 									matrixPointer.reset();
-									if (pointer[style_pointer].rotate) {matrixPointer.postRotate(yaw); }
+									if (pointer[style_pointer].rotate) { matrixPointer.postRotate(yaw); }
 									matrixPointer.postTranslate((z0 - Entity.getPosition(entities[i]).z) * zoom, (Entity.getPosition(entities[i]).x - x0) * zoom);
 									matrixPointer.preConcat(pointer[style_pointer].matrix);
 									canvas.drawBitmap(pointer[style_pointer].bmp, matrixPointer, pointerPaint.GREEN);
-								} else if (id != 63 && id >= 32 && settings.show_hostile) {
+								} else if (ENTITY_HOSTILE.indexOf(id) >= 0 && settings.indicatorHostile) {
 									matrixPointer.reset();
-									if (pointer[style_pointer].rotate) {matrixPointer.postRotate(yaw); }
+									if (pointer[style_pointer].rotate) { matrixPointer.postRotate(yaw); }
 									matrixPointer.postTranslate((z0 - Entity.getPosition(entities[i]).z) * zoom, (Entity.getPosition(entities[i]).x - x0) * zoom);
 									matrixPointer.preConcat(pointer[style_pointer].matrix);
 									canvas.drawBitmap(pointer[style_pointer].bmp, matrixPointer, pointerPaint.RED);
-								} else if (id === 63 && settings.show_otherPlayer) {
+								} else if (id == 1 && settings.indicatorPlayer) {
 									matrixPointer.reset();
-									if (pointer[style_pointer].rotate) {matrixPointer.postRotate(yaw); }
+									if (pointer[style_pointer].rotate) { matrixPointer.postRotate(yaw); }
 									matrixPointer.postTranslate((z0 - Entity.getPosition(entities[i]).z) * zoom, (Entity.getPosition(entities[i]).x - x0) * zoom);
 									matrixPointer.preConcat(pointer[style_pointer].matrix);
 									canvas.drawBitmap(pointer[style_pointer].bmp, matrixPointer, null);
 								}
-							} else if ((id < 32 && settings.show_passive) || (id != 63 && id >= 32 && settings.show_hostile) || (id === 63 && settings.show_otherPlayer)) {
+							} else if ((ENTITY_PASSIVE.indexOf(id) >= 0 && settings.indicatorPassive) || (ENTITY_HOSTILE.indexOf(id) >= 0 && settings.indicatorHostile) || (id == 1 && settings.indicatorPlayer)) {
 								matrixPointer.reset();
 								matrixPointer.postRotate(yaw);
 								matrixPointer.postTranslate((z0 - Entity.getPosition(entities[i]).z) * zoom, (Entity.getPosition(entities[i]).x - x0) * zoom);
@@ -173,25 +173,22 @@ var redraw = false,
 						}
 					}
 				}
-				if (settings.show_player) {
-					if (style_pointer !== 3) {
+				if (settings.indicatorLocal) {
+					if (style_pointer != 3) {
 						matrixPointer.reset();
-						if (pointer[style_pointer].rotate) {matrixPointer.postRotate(yawNew); }
-						matrixPointer.postTranslate(settings.window_size * 0.5, settings.window_size * 0.5);
+						if (pointer[style_pointer].rotate) { matrixPointer.postRotate(yawNew); }
+						matrixPointer.postTranslate(settings.locationSize * 0.5, settings.locationSize * 0.5);
 						matrixPointer.preConcat(pointer[style_pointer].matrix);
 						canvas.drawBitmap(pointer[style_pointer].bmp, matrixPointer, null)
 					} else {
 						matrixPointer.reset();
 						matrixPointer.postRotate(yawNew);
-						matrixPointer.postTranslate(settings.window_size * 0.5, settings.window_size * 0.5);
+						matrixPointer.postTranslate(settings.locationSize * 0.5, settings.locationSize * 0.5);
 						matrixPointer.preConcat(iconMatrix);
-						canvas.drawBitmap(heads[63] || heads[0], matrixPointer, null)
+						canvas.drawBitmap(heads[63] || heads[1] || heads[0], matrixPointer, null)
 					}
 				}
 				canvas.restore();
-				if (settings.priority == 2) {
-					mapView.invalidate();
-				}
 				mapView.unlockCanvasAndPost(canvas);
 			}
 		} catch(e) {
