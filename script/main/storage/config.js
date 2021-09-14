@@ -150,15 +150,44 @@ function checkRenderDistance() {
 	return 6;
 }
 
-function saveSettings() {
-	let settingsString = "";
-	for (let p in settings) {
-		if (settings.hasOwnProperty(p)) {
-			if (settingsString != "") {
-				settingsString += "\n";
-			}
-			settingsString += p + ":" + settings[p];
-		}
+const setConfigOptionIfNeeded = function(proto, name, value) {
+	if (value === undefined || value === null) {
+		return false;
 	}
-	save(__dir__, "minimap.txt", settingsString);
+	let current = __config__.get(name);
+	if (current != null || (current == null && value != proto.get(name))) {
+		return __config__.set(name, value);
+	}
+	return false;
+};
+
+function saveSettings() {
+	setConfigOptionIfNeeded(protoConfig, "runtime.type", settings.mapType);
+	setConfigOptionIfNeeded(protoConfig, "runtime.zoom", settings.mapZoom);
+	setConfigOptionIfNeeded(protoConfig, "runtime.translucent", settings.mapAlpha);
+	setConfigOptionIfNeeded(protoConfig, "runtime.rotation", settings.mapRotation);
+	setConfigOptionIfNeeded(protoConfig, "indicator.passive", settings.indicatorPassive);
+	setConfigOptionIfNeeded(protoConfig, "indicator.hostile", settings.indicatorHostile);
+	setConfigOptionIfNeeded(protoConfig, "indicator.local", settings.indicatorLocal);
+	setConfigOptionIfNeeded(protoConfig, "indicator.player", settings.indicatorPlayer);
+	setConfigOptionIfNeeded(protoConfig, "indicator.tile", settings.indicatorTile);
+	setConfigOptionIfNeeded(protoConfig, "indicator.only_surface", settings.indicatorOnlySurface);
+	setConfigOptionIfNeeded(protoConfig, "location.raw_size", settings.locationRawSize);
+	setConfigOptionIfNeeded(protoConfig, "location.raw_position", settings.locationRawPosition);
+	setConfigOptionIfNeeded(protoConfig, "location.gravity", settings.locationGravity);
+	setConfigOptionIfNeeded(protoConfig, "location.offset", settings.locationOffset);
+	setConfigOptionIfNeeded(protoConfig, "stylesheet.border", settings.stylesheetBorder);
+	setConfigOptionIfNeeded(protoConfig, "stylesheet.pointer", settings.stylesheetPointer);
+	setConfigOptionIfNeeded(protoConfig, "stylesheet.shape", settings.stylesheetShape);
+	setConfigOptionIfNeeded(protoConfig, "development.location", settings.mapLocation);
+	setConfigOptionIfNeeded(protoConfig, "development.zoom_button", settings.mapZoomButton);
+	setConfigOptionIfNeeded(protoConfig, "development.show_process", settings.developmentVisualize);
+	setConfigOptionIfNeeded(protoConfig, "development.check_newest_version", settings.checkNewestVersion);
+	setConfigOptionIfNeeded(protoConfig, "performance.radius", settings.radius);
+	setConfigOptionIfNeeded(protoConfig, "performance.priority", settings.priority);
+	setConfigOptionIfNeeded(protoConfig, "performance.delay", settings.delay);
+	setConfigOptionIfNeeded(protoConfig, "performance.thread", settings.thread);
+	setConfigOptionIfNeeded(protoConfig, "development.update_version", settings.updateVersion);
+	setConfigOptionIfNeeded(protoConfig, "development.update_changelog", settings.updateChangelog);
+	__config__.save();
 }

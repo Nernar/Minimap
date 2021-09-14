@@ -1,6 +1,6 @@
 function settingsUI() {
 	let textSize = 17,
-		padding = 10,
+		padding = 10 * density,
 		context = UI.getContext();
 	let print = new android.app.AlertDialog.Builder(context,
 			android.R.style.Theme_DeviceDefault_DialogWhenLarge);
@@ -15,16 +15,13 @@ function settingsUI() {
 					checkBtnLp = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT),
 					text = new android.widget.TextView(context),
 					textLp = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
+				text.setTextColor(colors.ltgray);
 				text.setTextSize(textSize);
 				text.setText(args[2]);
 				checkBtn.setId(1);
 				checkBtn.setChecked(Boolean(settings[args[1]]));
 				checkBtn.setOnCheckedChangeListener(function(buttonView, isChecked) {
-					if (isChecked) {
-						settings[args[1]] = 1;
-					} else {
-						settings[args[1]] = 0;
-					}
+					settings[args[1]] = Boolean(isChecked);
 					settingsChanged(args[1]);
 				});
 				checkBtnLp.addRule(android.widget.RelativeLayout.ALIGN_PARENT_RIGHT);
@@ -41,6 +38,7 @@ function settingsUI() {
 				let text = new android.widget.TextView(context);
 				text.setTextSize(textSize);
 				text.setText("> " + args[1]);
+				text.setTextColor(colors.ltgray);
 				text.setPadding(padding, padding, padding, padding);
 				text.setOnClickListener(function(v) {
 					settingsUI(args[2]).show();
@@ -63,27 +61,20 @@ function settingsUI() {
 					textValue = new android.widget.TextView(context),
 					textValueLp = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
 				text.setTextSize(textSize);
+				text.setTextColor(colors.ltgray);
 				text.setText(android.text.Html.fromHtml(args[2]));
 				text.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
 				textValue.setTextSize(textSize);
-				textValue.setTextColor(colors.primary);
+				textValue.setTextColor(colors.accent);
 				textValue.setId(1);
 				switch (args[1]) {
 					case "multipleChoice":
-						if (args[4].length <= settings[args[3]]) {settings[args[3]] = 0}
+						if (args[4].length <= settings[args[3]]) { settings[args[3]] = 0; }
 						textValue.setText(args[4][settings[args[3]]]);
 						textValue.setOnClickListener(function(v) {
 							let print = new android.app.AlertDialog.Builder(context,
-									android.R.style.Theme_DeviceDefault_Dialog),
-								listView = new android.widget.ListView(context),
-								adapter = new android.widget.ArrayAdapter(context, android.R.layout.simple_list_item_single_choice, args[4]);
-							listView.setAdapter(adapter);
-							listView.setChoiceMode(android.widget.ListView.CHOICE_MODE_SINGLE);
-							listView.setItemChecked(settings[args[3]], true);
-							listView.setDivider(new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.LEFT_RIGHT, [colors.primary, colors.accent, colors.primary]));
-							listView.setDividerHeight(2);
-							listView.setPadding(padding, padding, padding, padding);
-							listView.setOnItemClickListener(function(parent, view, position, id) {
+									android.R.style.Theme_DeviceDefault_Dialog);
+							print.setSingleChoiceItems(args[4], settings[args[3]], function(parent, position, id) {
 								settings[args[3]] = position;
 								for (let i = 5; i < args.length; i += 2) {
 									settings[args[i]] = args[i + 1][position];
@@ -92,12 +83,17 @@ function settingsUI() {
 								settingsChanged(args[3]);
 								print.dismiss();
 							});
-							print.setView(listView);
 							print.setTitle(args[2]);
 							print.setNegativeButton("Cancel", function(dialog, whichButton) {
 								print.dismiss();
 							});
-							print = print.show();
+							print = print.create();
+							print.getWindow().setLayout(Interface.Display.MATCH, Interface.Display.MATCH);
+							let listView = print.getListView();
+							listView.setDivider(new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.LEFT_RIGHT, [colors.primary, colors.accent, colors.primary]));
+							listView.setDividerHeight(2);
+							listView.setPadding(padding, padding, padding, padding);
+							print.show();
 						});
 						break;
 					case "slider":
@@ -124,7 +120,9 @@ function settingsUI() {
 							print.setNegativeButton("Cancel", function(dialog, whichButton) {
 								print.dismiss();
 							});
-							print = print.show();
+							print = print.create();
+							print.getWindow().setLayout(Interface.Display.MATCH, Interface.Display.MATCH);
+							print.show();
 						});
 						break;
 					default:
@@ -144,7 +142,6 @@ function settingsUI() {
 				return layoutElement;
 			}
 		};
-	padding *= density;
 	layout.setOrientation(android.widget.LinearLayout.VERTICAL);
 	layout.setPadding(padding, 0, padding, 0);
 	for (let i = 2; i < len; i += 1) {
@@ -158,12 +155,12 @@ function settingsUI() {
 	scroll.addView(layout);
 	print.setView(scroll);
 	print.setTitle(arguments[0][0]);
-	print.setPositiveButton(arguments[0][1], function(dialog,whichButton) {
+	print.setPositiveButton(arguments[0][1], function(dialog, whichButton) {
 		saveSettings();
 	});
 	let dialog = print.create(),
 		popup = dialog.getWindow();
-	popup.setLayout(Interface.Display.WIDTH / 1.4, displayHeight);
-	popup.setGravity(Interface.Gravity.LEFT);
+	popup.setLayout(Interface.Display.WIDTH / 1.4, Interface.Display.WRAP);
+	popup.setGravity(Interface.Gravity.LEFT | Interface.Gravity.BOTTOM);
 	return dialog;
 }

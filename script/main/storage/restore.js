@@ -1,38 +1,56 @@
-const restoreSettings = function() {
+const getProtoString = function(proto, source, name) {
+	if (source && source.get(name) != null) {
+		return source.getString(name);
+	}
+	return proto.getString(name);
+};
+
+const getProtoNumber = function(proto, source, name) {
+	if (source && source.get(name) != null) {
+		return source.getNumber(name);
+	}
+	return proto.getNumber(name);
+};
+
+const getProtoBool = function(proto, source, name) {
+	if (source && source.get(name) != null) {
+		return source.getBool(name);
+	}
+	return proto.getBool(name);
+};
+
+const reloadSettings = function(source) {
+	if (source === undefined) {
+		source = __config__;
+	}
 	settings = {
-		mapType: protoConfig.getNumber("runtime.type"),
-		mapZoom: protoConfig.getNumber("runtime.zoom"),
-		mapAlpha: protoConfig.getNumber("runtime.translucent"),
-		mapRotation: protoConfig.getBool("runtime.rotation"),
-		indicatorPassive: protoConfig.getBool("indicator.passive"),
-		indicatorHostile: protoConfig.getBool("indicator.hostile"),
-		indicatorLocal: protoConfig.getBool("indicator.local"),
-		indicatorPlayer: protoConfig.getBool("indicator.player"),
-		indicatorTile: protoConfig.getBool("indicator.tile"),
-		indicatorOnlySurface: protoConfig.getBool("indicator.only_surface"),
-		locationRawSize: protoConfig.getNumber("location.raw_size"),
-		locationRawPosition: protoConfig.getNumber("location.raw_position"),
-		locationGravity: protoConfig.getNumber("location.gravity"),
-		locationOffset: protoConfig.getNumber("location.offset"),
-		stylesheetBorder: protoConfig.getNumber("stylesheet.border"),
-		stylesheetPointer: protoConfig.getNumber("stylesheet.pointer"),
-		stylesheetShape: protoConfig.getNumber("stylesheet.shape"),
-		mapLocation: protoConfig.getBool("development.location"),
-		mapZoomButton: protoConfig.getBool("development.zoom_button"),
-		developmentVisualize: protoConfig.getBool("development.show_process"),
-		checkNewestVersion: protoConfig.getBool("development.check_newest_version"),
-		radius: protoConfig.getNumber("performance.radius"),
-		priority: protoConfig.getNumber("performance.priority"),
-		delay: protoConfig.getNumber("performance.delay"),
-		thread: protoConfig.getNumber("performance.thread")
+		mapType: getProtoNumber(protoConfig, source, "runtime.type"),
+		mapZoom: getProtoNumber(protoConfig, source, "runtime.zoom"),
+		mapAlpha: getProtoNumber(protoConfig, source, "runtime.translucent"),
+		mapRotation: getProtoBool(protoConfig, source, "runtime.rotation"),
+		indicatorPassive: getProtoBool(protoConfig, source, "indicator.passive"),
+		indicatorHostile: getProtoBool(protoConfig, source, "indicator.hostile"),
+		indicatorLocal: getProtoBool(protoConfig, source, "indicator.local"),
+		indicatorPlayer: getProtoBool(protoConfig, source, "indicator.player"),
+		indicatorTile: getProtoBool(protoConfig, source, "indicator.tile"),
+		indicatorOnlySurface: getProtoBool(protoConfig, source, "indicator.only_surface"),
+		locationRawSize: getProtoNumber(protoConfig, source, "location.raw_size"),
+		locationRawPosition: getProtoNumber(protoConfig, source, "location.raw_position"),
+		locationGravity: getProtoNumber(protoConfig, source, "location.gravity"),
+		locationOffset: getProtoNumber(protoConfig, source, "location.offset"),
+		stylesheetBorder: getProtoNumber(protoConfig, source, "stylesheet.border"),
+		stylesheetPointer: getProtoNumber(protoConfig, source, "stylesheet.pointer"),
+		stylesheetShape: getProtoNumber(protoConfig, source, "stylesheet.shape"),
+		mapLocation: getProtoBool(protoConfig, source, "development.location"),
+		mapZoomButton: getProtoBool(protoConfig, source, "development.zoom_button"),
+		developmentVisualize: getProtoBool(protoConfig, source, "development.show_process"),
+		checkNewestVersion: getProtoBool(protoConfig, source, "development.check_newest_version"),
+		radius: getProtoNumber(protoConfig, source, "performance.radius"),
+		priority: getProtoNumber(protoConfig, source, "performance.priority"),
+		delay: getProtoNumber(protoConfig, source, "performance.delay"),
+		thread: getProtoNumber(protoConfig, source, "performance.thread")
 	};
 	settings.locationSize = settings.locationRawSize / 100 * displayHeight;
-	if (protoConfig.get("development.update_version") != null) {
-		settings.updateVersion = protoConfig.getNumber("development.update_version");
-	}
-	if (protoConfig.get("development.update_changelog") != null) {
-		settings.updateChangelog = protoConfig.getString("development.update_changelog");
-	}
 };
 
 (function() {
@@ -84,5 +102,15 @@ const restoreSettings = function() {
 			check_newest_version: true
 		}
 	}));
-	restoreSettings();
+	reloadSettings();
 })();
+
+const restoreSettings = function(notifyEverything) {
+	reloadSettings(protoConfig);
+	if (notifyEverything) {
+		for (let element in settings) {
+			settingsChanged(element);
+		}
+	}
+	saveSettings();
+};

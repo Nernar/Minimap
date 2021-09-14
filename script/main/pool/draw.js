@@ -120,6 +120,10 @@ var redraw = false,
 					mapWindow.setInfo();
 				}
 				let canvas = mapView.lockCanvas();
+				if (canvas == null) {
+					redraw = true;
+					return;
+				}
 				canvas.drawColor(0, android.graphics.PorterDuff.Mode.CLEAR);
 				canvas.save(android.graphics.Canvas.CLIP_SAVE_FLAG);
 				if (bmpBorder != null) {

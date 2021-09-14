@@ -7,5 +7,6 @@ function parseColor(hex) {
 colors.black = parseColor("#000000");
 colors.white = parseColor("#ffffff");
 colors.gray = parseColor("#444444");
+colors.ltgray = parseColor("#cccccc");
 colors.primary = parseColor("#4151b0");
 colors.accent = parseColor("#2895f0");

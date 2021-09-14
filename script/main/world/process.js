@@ -7,6 +7,9 @@ function scheduleChunk(xChunk, zChunk, delay) {
 				android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_FOREGROUND);
 			}
 			if (Math.abs(Math.floor((Z - zChunk) / 16)) > settings.radius || Math.abs(Math.floor((X - xChunk) / 16)) > settings.radius) {
+				if (settings.developmentVisualize) {
+					Game.tipMessage("out of range " + (xChunk / 16) + ", " + (zChunk / 16) + " [" + delay + "]");
+				}
 				return;
 			}
 			let ix = 16,
@@ -22,6 +25,9 @@ function scheduleChunk(xChunk, zChunk, delay) {
 					delayChunksArrLock.acquire();
 					delayChunksArr[delayChunksArr.length] = [xChunk, zChunk];
 					delayChunksArrLock.release();
+				}
+				if (settings.developmentVisualize) {
+					Game.tipMessage("scheduled " + (xChunk / 16) + ", " + (zChunk / 16) + " [" + delay + "]");
 				}
 				return;
 			}
