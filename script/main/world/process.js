@@ -8,7 +8,7 @@ function scheduleChunk(xChunk, zChunk, delay) {
 			}
 			if (Math.abs(Math.floor((Z - zChunk) / 16)) > settings.radius || Math.abs(Math.floor((X - xChunk) / 16)) > settings.radius) {
 				if (settings.developmentVisualize) {
-					Game.tipMessage("out of range " + (xChunk / 16) + ", " + (zChunk / 16) + " [" + delay + "]");
+					Game.tipMessage("out of range " + (xChunk / 16) + ", " + (zChunk / 16) + " [" + delay + "s]");
 				}
 				return;
 			}
@@ -16,7 +16,7 @@ function scheduleChunk(xChunk, zChunk, delay) {
 				iz = 16,
 				x = xChunk + 16,
 				z = zChunk - 1,
-				mapDotArray = new Array(),
+				mapDotArray = [],
 				type = settings.mapType;
 			if (!World.isChunkLoaded((x - 16) / 16, (z + 16) / 16)) {
 				if (map_state) {
@@ -27,12 +27,12 @@ function scheduleChunk(xChunk, zChunk, delay) {
 					delayChunksArrLock.release();
 				}
 				if (settings.developmentVisualize) {
-					Game.tipMessage("scheduled " + (xChunk / 16) + ", " + (zChunk / 16) + " [" + delay + "]");
+					Game.tipMessage("scheduled " + (xChunk / 16) + ", " + (zChunk / 16) + " [" + delay + "s]");
 				}
 				return;
 			}
 			if (settings.developmentVisualize) {
-				Game.tipMessage("processing " + (xChunk / 16) + ", " + (zChunk / 16) + " [" + delay + "]");
+				Game.tipMessage("processing " + (xChunk / 16) + ", " + (zChunk / 16) + " [" + delay + "s]");
 			}
 			do {
 				do {

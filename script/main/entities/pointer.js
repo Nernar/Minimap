@@ -11,6 +11,18 @@ let pointerPaint = {
 	})()
 };
 
+const Pointer = function(bmp, matrix, rotate) {
+	this.bmp = bmp;
+	this.matrix = matrix;
+	this.rotate = rotate;
+};
+
+const MatrixPointer = function(bmp, matrix, rotate) {
+	Pointer.call(this, bmp, matrix(bmp), rotate);
+};
+
+MatrixPointer.prototype = new Pointer;
+
 let pointer = [
 	new Pointer(
 		(function() {
@@ -53,53 +65,46 @@ let pointer = [
 		})(),
 		true
 	),
-	new Pointer(
+	new MatrixPointer(
 		android.graphics.BitmapFactory.decodeFile(__dir__ + "resource/arrow.png"),
-		(function() {
-			let matrix = new android.graphics.Matrix();
-			matrix.setTranslate(-2.5, -4.5);
-			matrix.postScale(displayHeight * 0.005, displayHeight * 0.005);
+		function(bitmap) {
+			let dx = bitmap.getWidth() / 5,
+				dy = bitmap.getHeight() / 7,
+				matrix = new android.graphics.Matrix();
+			matrix.setTranslate(-2.5 * dx, -4.5 * dy);
+			matrix.postScale(displayHeight * 0.005 / dx, displayHeight * 0.005 / dy);
 			return matrix;
-		})(),
+		},
 		true
 	),
-	new Pointer(
+	new MatrixPointer(
 		android.graphics.BitmapFactory.decodeFile(__dir__ + "resource/chest.png"),
-		(function() {
-			let matrix = new android.graphics.Matrix();
-			matrix.setTranslate(-8, -8);
-			matrix.postScale(displayHeight * 0.0012, displayHeight * 0.0012);
+		function(bitmap) {
+			let dx = bitmap.getWidth() / 16,
+				dy = bitmap.getHeight() / 16,
+				matrix = new android.graphics.Matrix();
+			matrix.setTranslate(-8 * dx, -8 * dy);
+			matrix.postScale(displayHeight * 0.0012 / dx, displayHeight * 0.0012 / dy);
 			return matrix;
-		})(),
+		},
 		false
 	)
 ];
 
-function Pointer(bmp, matrix, rotate) {
-	this.bmp = bmp;
-	this.matrix = matrix;
-	this.rotate = rotate;
-}
-
-let iconMatrix = (function() {
-	let matrix = new android.graphics.Matrix();
-	matrix.setTranslate(-9, -14);
-	matrix.postScale(displayHeight * 0.0012, displayHeight * 0.0012);
-	return matrix;
-})();
-
 let arrow = android.graphics.BitmapFactory.decodeFile(__dir__ + "resource/head.png");
 
-function headArrow(string) {
+const headArrow = function(string) {
 	return createHeadInArrow(decodeBmp(string));
-}
+};
 
 const createHeadInArrow = function(bitmap) {
-	let source = android.graphics.Bitmap.createBitmap(bitmap.getWidth() * 1.125, bitmap.getHeight() * 1.4375, android.graphics.Bitmap.Config.ARGB_8888),
-		scaled = android.graphics.Bitmap.createScaledBitmap(arrow, source.getWidth(), source.getHeight(), false),
+	let dx = bitmap.getWidth() * 1.125,
+		dy = bitmap.getHeight() * 1.4375,
+		source = android.graphics.Bitmap.createBitmap(dx, dy, android.graphics.Bitmap.Config.ARGB_8888),
+		scaled = android.graphics.Bitmap.createScaledBitmap(arrow, dx, dy, false),
 		canvas = new android.graphics.Canvas(source);
 	canvas.drawBitmap(scaled, 0, 0, null);
-	canvas.drawBitmap(bitmap, 1 * (source.getWidth() / 18), 6 * (source.getHeight() / 23), null);
+	canvas.drawBitmap(bitmap, 1 * (dx / 18), 6 * (dy / 23), null);
 	return source;
 };
 
@@ -110,11 +115,10 @@ const toSimpleIdentifier = function(name) {
 };
 
 let heads = (function() {
-	let founded = new Object(),
+	let founded = {},
 		directory = new java.io.File(__dir__ + "resource/" + (legacyEntities ? "entities-legacy" : "entities"));
 	if (!directory.exists() || !directory.isDirectory()) {
 		Logger.Log("Couldn't find entities indicators in " + directory.getName() + "/", "Minimap");
-		heads[0] = headArrow("iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4ggLFSgULUPHpQAAARlJREFUKM+dz7FrEwEcxfHP3eVyiVJTQZoOBfsf+A9IRxE6tnuHgA7+CdLORXFxcfEvsJQO7aAOGdz8FyykTRvUDCVQEsO1dxeHg9tzb/nB7/Helxc821xBVkAjCJHmGbIsRxiGiBsRFgsILalG2V0qWxR42Gqi0wyQi3AzTZEv8lqE8rx/s4ckbqLdeoT57BaiEJO/v3F48rUOIfiy/woPkgT/0hRRlGByO8HT7hqGl7+qwPIbyu7ttx+xs/UOva1B1f3prIvjHx9wdPC61obPvRform+gkazitN+v7N2XzzG6OsdgfFNrw/Q+x91ogOH1DCthXNnfvv/E+kYbgbgW4eLPGEVR4MnjTmWk93doJy1M53n1WZrwHwiMVs+tK7U4AAAAAElFTkSuQmCC");
 		return founded;
 	}
 	let entities = directory.listFiles();
@@ -126,3 +130,24 @@ let heads = (function() {
 	}
 	return founded;
 })();
+
+if (heads[0] === undefined || heads[0] === null) {
+	heads[0] = headArrow("iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4ggLFSgULUPHpQAAARlJREFUKM+dz7FrEwEcxfHP3eVyiVJTQZoOBfsf+A9IRxE6tnuHgA7+CdLORXFxcfEvsJQO7aAOGdz8FyykTRvUDCVQEsO1dxeHg9tzb/nB7/Helxc821xBVkAjCJHmGbIsRxiGiBsRFgsILalG2V0qWxR42Gqi0wyQi3AzTZEv8lqE8rx/s4ckbqLdeoT57BaiEJO/v3F48rUOIfiy/woPkgT/0hRRlGByO8HT7hqGl7+qwPIbyu7ttx+xs/UOva1B1f3prIvjHx9wdPC61obPvRform+gkazitN+v7N2XzzG6OsdgfFNrw/Q+x91ogOH1DCthXNnfvv/E+kYbgbgW4eLPGEVR4MnjTmWk93doJy1M53n1WZrwHwiMVs+tK7U4AAAAAElFTkSuQmCC");
+}
+
+const getIconMatrix = function(head) {
+	if (!(head instanceof android.graphics.Bitmap)) {
+		head = heads[head];
+	}
+	if (head === undefined || head === null) {
+		return null;
+	}
+	let dx = head.getWidth() / 16,
+		dy = head.getHeight() / 16,
+		matrix = new android.graphics.Matrix();
+	matrix.setTranslate(-9 * dx, -14 * dy);
+	matrix.postScale(displayHeight * 0.0012 / dx, displayHeight * 0.0012 / dy);
+	return matrix;
+};
+
+let iconMatrix = getIconMatrix(0);

@@ -171,7 +171,7 @@ var redraw = false,
 								matrixPointer.reset();
 								matrixPointer.postRotate(yaw);
 								matrixPointer.postTranslate((z0 - Entity.getPosition(entities[i]).z) * zoom, (Entity.getPosition(entities[i]).x - x0) * zoom);
-								matrixPointer.preConcat(iconMatrix);
+								matrixPointer.preConcat(getIconMatrix(id) || iconMatrix);
 								canvas.drawBitmap(heads[id] || heads[0], matrixPointer, null);
 							}
 						}
@@ -188,7 +188,7 @@ var redraw = false,
 						matrixPointer.reset();
 						matrixPointer.postRotate(yawNew);
 						matrixPointer.postTranslate(settings.locationSize * 0.5, settings.locationSize * 0.5);
-						matrixPointer.preConcat(iconMatrix);
+						matrixPointer.preConcat(getIconMatrix(63) || getIconMatrix(1) || iconMatrix);
 						canvas.drawBitmap(heads[63] || heads[1] || heads[0], matrixPointer, null)
 					}
 				}
