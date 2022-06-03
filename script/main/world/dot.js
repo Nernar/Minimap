@@ -1,4 +1,4 @@
-let chests = new Array();
+let chests = [];
 
 let mapDot = [
 	function basicSurfaceMap(ix, iz) {

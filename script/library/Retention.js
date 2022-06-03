@@ -152,7 +152,7 @@ handleThread.MIN_PRIORITY = java.lang.Thread.MIN_PRIORITY;
 handleThread.NORM_PRIORITY = java.lang.Thread.NORM_PRIORITY;
 handleThread.MAX_PRIORITY = java.lang.Thread.MAX_PRIORITY;
 
-handleThread.stack = new Array();
+handleThread.stack = [];
 
 handleThread.interruptAll = function() {
 	handleThread.stack.forEach(function(thread) {
@@ -160,7 +160,7 @@ handleThread.interruptAll = function() {
 			thread.interrupt();
 		}
 	});
-	handleThread.stack = new Array();
+	handleThread.stack = [];
 };
 
 EXPORT("handleThread", handleThread);
@@ -413,7 +413,7 @@ EXPORT("Interface", Interface);
  * For caching, you must use the check amount
  * files and any other content, the so-called hashes.
  */
-let Hashable = new Object();
+let Hashable = {};
 
 Hashable.toMD5 = function(bytes) {
 	let digest = java.security.MessageDigest.getInstance("md5");
@@ -451,7 +451,7 @@ let reportError = function(err) {
 		
 		reportError.__report && reportError.__report(err);
 		
-		let result = new Array(),
+		let result = [],
 			message = reportError.message;
 		message && result.push(message + "<br/>");
 		result.push("<font color=\"#CCCC33\"><b>" + err.name + "</b>");
@@ -467,7 +467,7 @@ let reportError = function(err) {
 		builder.setMessage(android.text.Html.fromHtml(result.join("<br/>")));
 		builder.setPositiveButton(translate("Understand"), null);
 		builder.setNeutralButton(translate("Leave"), function() {
-			reportError.stack = new Array();
+			reportError.stack = [];
 		});
 		builder.setNegativeButton(reportError.getCode(err), function() {
 			reportError.__stack && reportError.__stack(err);
@@ -485,7 +485,7 @@ let reportError = function(err) {
 	});
 };
 
-reportError.stack = new Array();
+reportError.stack = [];
 
 reportError.setTitle = function(title) {
 	title && (this.title = title);
@@ -511,14 +511,14 @@ reportError.setReportAction = function(action) {
 	};
 };
 
-reportError.values = new Array();
+reportError.values = [];
 
 reportError.addDebugValue = function(name, value) {
 	this.values.push([name, value]);
 };
 
 reportError.formCollectedValues = function() {
-	let collected = new Array();
+	let collected = [];
 	for (let index = 0; index < this.values.length; index++) {
 		let value = this.values[index];
 		result.push(value[0] + " = " + value[1] + ";");
@@ -527,7 +527,7 @@ reportError.formCollectedValues = function() {
 };
 
 reportError.getDebugValues = function() {
-	let result = new Array();
+	let result = [];
 	result.concat(this.formCollectedValues());
 	return result.length > 0 ? "<font face=\"monospace\">" + result.join("<br/>") + "</font>" : null;
 };

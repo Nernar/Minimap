@@ -1,4 +1,4 @@
-let colors = new Object();
+let colors = {};
 
 function parseColor(hex) {
 	return new java.lang.Integer(android.graphics.Color.parseColor(hex)).intValue();

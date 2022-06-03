@@ -1,4 +1,4 @@
-let entities = new Array();
+let entities = [];
 
 Callback.addCallback("EntityRemoved", function(entity) {
 	if (isAcceptableEntity(entity)) {

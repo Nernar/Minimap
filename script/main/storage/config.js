@@ -1,4 +1,4 @@
-let settings = new Object();
+let settings = {};
 
 function headerClicked(key) {
 	switch (key) {

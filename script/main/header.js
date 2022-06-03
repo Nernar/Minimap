@@ -83,4 +83,4 @@ let canvasBmpSrc = new android.graphics.Canvas(),
 	matrixPointer = new android.graphics.Matrix(),
 	bmpSrcLock = new java.util.concurrent.Semaphore(1, true),
 	delayChunksArrLock = new java.util.concurrent.Semaphore(1, true),
-	delayChunksArr = new Array();
+	delayChunksArr = [];
