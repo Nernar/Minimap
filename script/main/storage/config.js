@@ -1,6 +1,6 @@
 let settings = {};
 
-function headerClicked(key) {
+const headerClicked = function(key) {
 	switch (key) {
 		case "forceRefresh":
 			mapWindow.hide();
@@ -8,9 +8,9 @@ function headerClicked(key) {
 			mapWindow.show();
 			break;
 	}
-}
+};
 
-function settingsChanged(key) {
+const settingsChanged = function(key) {
 	switch (key) {
 		case "radius":
 			let widthOld = bmpSrc.getWidth(),
@@ -124,10 +124,17 @@ function settingsChanged(key) {
 				});
 			}
 			break;
+		case "checkNewestVersion":
+			if (settings.checkNewestVersion) {
+				handleThread(function() {
+					checkUpdateNow();
+				});
+			}
+			break;
 	}
-}
+};
 
-function checkRenderDistance() {
+const checkRenderDistance = function() {
 	let options = load(android.os.Environment.getExternalStorageDirectory().getPath() + "/games/" + (getCoreAPILevel() > 8 ? "horizon" : "com.mojang") + "/minecraftpe/", "options.txt");
 	if (options != "") {
 		options = options.split("\n");
@@ -148,7 +155,7 @@ function checkRenderDistance() {
 		}
 	}
 	return 6;
-}
+};
 
 const setConfigOptionIfNeeded = function(proto, name, value) {
 	if (value === undefined || value === null) {
@@ -161,7 +168,7 @@ const setConfigOptionIfNeeded = function(proto, name, value) {
 	return false;
 };
 
-function saveSettings() {
+const saveSettings = function() {
 	setConfigOptionIfNeeded(protoConfig, "runtime.type", settings.mapType);
 	setConfigOptionIfNeeded(protoConfig, "runtime.zoom", settings.mapZoom);
 	setConfigOptionIfNeeded(protoConfig, "runtime.translucent", settings.mapAlpha);
@@ -190,4 +197,4 @@ function saveSettings() {
 	setConfigOptionIfNeeded(protoConfig, "development.update_version", settings.updateVersion);
 	setConfigOptionIfNeeded(protoConfig, "development.update_changelog", settings.updateChangelog);
 	__config__.save();
-}
+};

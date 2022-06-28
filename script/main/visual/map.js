@@ -61,7 +61,7 @@ let mapWindow = (function() {
 								["keyValue", "text", "Revision ", curVersion.toFixed(1)],
 								["keyValue", "text", "Developed by ", "Nernar"],
 								["keyValue", "text", "Inspired by ", "MxGoldo"],
-								["keyValue", "text", "Directory ", new java.io.File(__dir__).getName() + "/"],
+								["keyValue", "text", "Location ", new java.io.File(__dir__).getName() + "/"],
 								["keyValue", "text", "<a href=https://t.me/ntInsideChat>t.me</a> development channel", ""]]],
 						["keyValue", "text", "Refresh canvas", "", "forceRefresh"]]).show();
 				} else {
