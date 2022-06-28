@@ -73,7 +73,7 @@ function settingsChanged(key) {
 			mapWindow.getLayout().setAlpha((settings.mapAlpha / 100).toFixed(2));
 			break;
 		case "locationRawSize":
-			settings.locationSize = settings.locationRawSize / 100 * displayHeight;
+			settings.locationSize = settings.locationRawSize / 100 * getDisplayHeight();
 			let lp = mapView.getLayoutParams();
 			lp.height = settings.locationSize;
 			lp.width = settings.locationSize;

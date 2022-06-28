@@ -1,12 +1,13 @@
-let colors = {};
-
-function parseColor(hex) {
-	return new java.lang.Integer(android.graphics.Color.parseColor(hex)).intValue();
-}
-
-colors.black = parseColor("#000000");
-colors.white = parseColor("#ffffff");
-colors.gray = parseColor("#444444");
-colors.ltgray = parseColor("#cccccc");
-colors.primary = parseColor("#4151b0");
-colors.accent = parseColor("#2895f0");
+const Colors = (function(colors) {
+	for (let element in colors) {
+		colors[element] = java.lang.Integer.valueOf(colors[element]);
+	}
+	return colors;
+})({
+	BLACK: android.graphics.Color.BLACK,
+	WHITE: android.graphics.Color.WHITE,
+	GRAY: android.graphics.Color.GRAY,
+	LTGRAY: android.graphics.Color.LTGRAY,
+	PRIMARY: android.graphics.Color.parseColor("#4151b0"),
+	ACCENT: android.graphics.Color.parseColor("#2895f0")
+});

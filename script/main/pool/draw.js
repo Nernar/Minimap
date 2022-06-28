@@ -129,7 +129,11 @@ var redraw = false,
 				if (bmpBorder != null) {
 					canvas.drawBitmap(bmpBorder, 0, 0, null);
 				}
-				canvas.clipPath(pathBorder, android.graphics.Region.Op.REPLACE);
+				if (android.os.Build.VERSION.SDK_INT >= 28) {
+					canvas.clipPath(pathBorder);
+				} else {
+					canvas.clipPath(pathBorder, android.graphics.Region.Op.REPLACE);
+				}
 				canvas.drawBitmap(bmpSrc, matrixMap, bmpPaint);
 				if (settings.indicatorTile) {
 					i = chests.length;

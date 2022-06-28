@@ -1,19 +1,22 @@
 let bmpPaint = new android.graphics.Paint(),
-	mapView = new android.view.TextureView(context),
+	mapView = new android.view.TextureView(getContext()),
 	setWindow;
+
+bmpPaint.setAntiAlias(false);
+bmpPaint.setFilterBitmap(false);
 
 let map_state = false;
 
 let mapWindow = (function() {
-	let btnSet = new android.widget.Button(context),
+	let btnSet = new android.widget.Button(getContext()),
 		btnZoomIn,
 		btnZoomOut,
-		textInfo = new android.widget.TextView(context),
+		textInfo = new android.widget.TextView(getContext()),
 		mapLp = new android.widget.RelativeLayout.LayoutParams(settings.locationSize, settings.locationSize),
-		btnZoomInLp = new android.widget.RelativeLayout.LayoutParams(buttonSize * density, buttonSize * density),
-		btnZoomOutLp = new android.widget.RelativeLayout.LayoutParams(buttonSize * density, buttonSize * density),
+		btnZoomInLp = new android.widget.RelativeLayout.LayoutParams(buttonSize * getDisplayDensity(), buttonSize * getDisplayDensity()),
+		btnZoomOutLp = new android.widget.RelativeLayout.LayoutParams(buttonSize * getDisplayDensity(), buttonSize * getDisplayDensity()),
 		textInfoLp = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT),
-		layout = new android.widget.RelativeLayout(context),
+		layout = new android.widget.RelativeLayout(getContext()),
 		mapWin = new android.widget.PopupWindow(layout, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT),
 		btnActions = {
 			set: function() {
@@ -34,7 +37,7 @@ let mapWindow = (function() {
 							["sectionDivider", "Icon"],
 								["checkBox", "indicatorTile", "Chests"]]],
 						["sectionDivider", "View"],
-							["keyValue", "multipleChoice", "Position", "locationRawPosition", ["Top left", "Top left (offset)", "Top right", "Bottom left", "Bottom right"], "locationGravity", [51, 51, 53, 83, 85], "locationOffset", [0, 40 * density, 40 * density, 0, 0]],
+							["keyValue", "multipleChoice", "Position", "locationRawPosition", ["Top left", "Top left (offset)", "Top right", "Bottom left", "Bottom right"], "locationGravity", [51, 51, 53, 83, 85], "locationOffset", [0, 40 * getDisplayDensity(), 40 * getDisplayDensity(), 0, 0]],
 							["keyValue", "slider", "Size", "locationRawSize", 5, 100, 5, "%"],
 							["keyValue", "slider", "Opacity", "mapAlpha", 20, 100, 1, "%"],
 							["subScreen", "Controls", ["Controls", "Apply",
@@ -47,17 +50,18 @@ let mapWindow = (function() {
 							["keyValue", "multipleChoice", "Window shape", "stylesheetShape", ["Square", "Circle"]],
 						["sectionDivider", "Other"],
 							["checkBox", "checkNewestVersion", "Check for updates " + (settings.updateVersion > curVersion ? "(update available)" : "")],
-						["subScreen", "Advanced ", ["Advanced", "Apply",
+						["subScreen", "Advanced", ["Advanced", "Apply",
 							["keyValue", "multipleChoice", "Thread optimization", "priority", ["Background", "Foreground", "No optimization"]],
 							["keyValue", "slider", "Max frequency", "delay", 1, 40, 1, " fps"],
 							["keyValue", "slider", "Threads count", "thread", 1, 12, 1, ""],
 							["checkBox", "developmentVisualize", "Debug pool process"]]],
-						["subScreen", NAME + " Information",
-							[NAME + " " + VERSION, new java.io.File(__dir__).getName() + "/",
+						["subScreen", "About " + NAME,
+							[NAME + " " + __mod__.getInfoProperty("version"), "Understood",
 								["keyValue", "text", "Revision ", curVersion.toFixed(1)],
 								["keyValue", "text", "Developed by ", "Nernar"],
 								["keyValue", "text", "Inspired by ", "MxGoldo"],
-								["keyValue", "text", "<a href=https://m.vk.com/nernar>vk.com</a> development group", ""]]],
+								["keyValue", "text", "Directory ", new java.io.File(__dir__).getName() + "/"],
+								["keyValue", "text", "<a href=https://t.me/ntInsideChat>t.me</a> development channel", ""]]],
 						["keyValue", "text", "Refresh canvas", "", "forceRefresh"]]).show();
 				} else {
 					setWindow.show();
@@ -77,7 +81,7 @@ let mapWindow = (function() {
 	});
 	btnSet.setBackgroundResource(android.R.drawable.ic_menu_mylocation);
 	btnSet.setVisibility(android.view.View.VISIBLE);
-	btnSet.setLayoutParams(new android.widget.LinearLayout.LayoutParams(buttonSize * density, buttonSize * density));
+	btnSet.setLayoutParams(new android.widget.LinearLayout.LayoutParams(buttonSize * getDisplayDensity(), buttonSize * getDisplayDensity()));
 	btnSet.setOnClickListener(function(v) {
 		changeMapState();
 	});
@@ -91,9 +95,9 @@ let mapWindow = (function() {
 	textInfoLp.addRule(android.widget.RelativeLayout.ALIGN_LEFT, 1);
 	textInfoLp.addRule(android.widget.RelativeLayout.ALIGN_RIGHT, 1);
 	textInfo.setTextSize(15);
-	textInfo.setPadding(3 * density, 0, 0, 0);
-	textInfo.setBackgroundColor(colors.gray);
-	textInfo.setTextColor(colors.white);
+	textInfo.setPadding(3 * getDisplayDensity(), 0, 0, 0);
+	textInfo.setBackgroundColor(Colors.GRAY);
+	textInfo.setTextColor(Colors.WHITE);
 	btnZoomOut = minecraftButton("-", buttonSize, buttonSize);
 	btnZoomOut.setId(3);
 	btnZoomOut.setVisibility(android.view.View.GONE);
@@ -158,7 +162,7 @@ let mapWindow = (function() {
 		},
 		show: function() {
 			acquire(function() {
-				mapWin.showAtLocation(context.getWindow().getDecorView(), settings.locationGravity, 0, settings.locationOffset);
+				mapWin.showAtLocation(getDecorView(), settings.locationGravity, 0, settings.locationOffset);
 			});
 		},
 		hide: function() {

@@ -50,7 +50,7 @@ const reloadSettings = function(source) {
 		delay: getProtoNumber(protoConfig, source, "performance.delay"),
 		thread: getProtoNumber(protoConfig, source, "performance.thread")
 	};
-	settings.locationSize = settings.locationRawSize / 100 * displayHeight;
+	settings.locationSize = settings.locationRawSize / 100 * getDisplayHeight();
 };
 
 (function() {
@@ -82,7 +82,7 @@ const reloadSettings = function(source) {
 			raw_size: 40,
 			raw_position: 2,
 			gravity: 53,
-			offset: 40 * density
+			offset: 40 * getDisplayDensity()
 		},
 		stylesheet: {
 			border: 0,

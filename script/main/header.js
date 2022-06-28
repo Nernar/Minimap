@@ -1,7 +1,7 @@
 /*
 
+   Copyright 2020-2022 Nernar (github.com/nernar)
    Copyright 2015 MxGoldo (twitter.com/MxGoldo)
-   Copyright 2020-2021 Nernar (github.com/nernar)
    
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 
 */
 
-const POLICY_SHOW_MULTIPLAYER_PLAYER = true;
 const ENTITY_IDENTIFIER_RANGE = [10, 127];
 const ENTITY_HOSTILE = [32, 33, 34, 35, 37, 38, 39, 40, 41, 42, 43,
 	44, 45, 46, 47, 48, 49, 50, 52, 53, 54, 55, 57, 58, 59, 104, 105,
@@ -29,10 +28,12 @@ const ENTITY_UNACCEPTABLE = [61, 63, 64, 65, 66, 67, 68, 69, 70,
 	71, 72, 73, 76, 77, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
 	90, 91, 93, 94, 95, 96, 97, 98, 100, 101, 103, 117];
 
+let policyShowMultiplayerPlayer = true;
+
 const isAcceptableEntity = function(ent) {
 	let type = Entity.getType(ent);
 	if (type == 1) {
-		return POLICY_SHOW_MULTIPLAYER_PLAYER;
+		return policyShowMultiplayerPlayer;
 	}
 	if (type < ENTITY_IDENTIFIER_RANGE[0] || type > ENTITY_IDENTIFIER_RANGE[1]) {
 		return false;
@@ -44,27 +45,21 @@ const isAcceptableEntity = function(ent) {
 };
 
 const NAME = String(__mod__.getInfoProperty("name"));
-const AUTHOR = String(__mod__.getInfoProperty("author"));
-const VERSION = String(__mod__.getInfoProperty("version"));
 
-let curVersion = parseFloat(VERSION);
+let curVersion = parseFloat(__mod__.getInfoProperty("version"));
 
-IMPORT("Retention:5");
+IMPORT("Retention");
 
-const context = getContext();
 const buttonSize = tryout(function() {
 	if (__config__.get("initialization.button_size") == null) {
 		__config__.set("initialization.button_size", 40);
 		__config__.save();
 	}
 	return __config__.getNumber("initialization.button_size");
-}, undefined, 40);
+}, 40);
 const legacyEntities = tryout(function() {
 	return __config__.getBool("initialization.use_legacy_entities");
-}, undefined, false);
-const metrics = context.getResources().getDisplayMetrics();
-const density = metrics.density;
-const displayHeight = (metrics.widthPixels < metrics.heightPixels) ? metrics.widthPixels : metrics.heightPixels;
+}, false);
 
 let bmpSrc,
 	bmpSrcCopy,
@@ -84,3 +79,9 @@ let canvasBmpSrc = new android.graphics.Canvas(),
 	bmpSrcLock = new java.util.concurrent.Semaphore(1, true),
 	delayChunksArrLock = new java.util.concurrent.Semaphore(1, true),
 	delayChunksArr = [];
+
+const reflectPaintSetColor = function(paint, color) {
+	let clazz = getClass(paint).__javaObject__;
+	let method = clazz.getMethod("setColor", java.lang.Integer.TYPE);
+	method.invoke(paint, java.lang.Integer.valueOf(color));
+};

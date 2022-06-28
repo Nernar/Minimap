@@ -36,14 +36,14 @@ function scheduleChunk(xChunk, zChunk, delay) {
 			}
 			do {
 				do {
-					mapDotArray[mapDotArray.length] = mapDot[type](x - ix, z + iz);
+					mapDotArray[mapDotArray.length] = java.lang.Integer.valueOf(mapDot[type](x - ix, z + iz));
 				} while (iz -= 1);
 				iz = 16;
 			} while (ix -= 1);
 			if (java.lang.Thread.interrupted()) { return; }
 			try {
 				bmpSrcLock.acquire();
-				bmpSrc.setPixels(mapDotArray, 0, 16, ((Math.floor(Z / 16) + settings.radius + 1) * 16) - zChunk, xChunk - ((Math.floor(X / 16) - settings.radius - 1) * 16), 16, 16)
+				bmpSrc.setPixels(mapDotArray, 0, 16, ((Math.floor(Z / 16) + settings.radius + 1) * 16) - zChunk, xChunk - ((Math.floor(X / 16) - settings.radius - 1) * 16), 16, 16);
 			} finally {
 				bmpSrcLock.release();
 			}

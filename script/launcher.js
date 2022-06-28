@@ -20,6 +20,5 @@ const launchModification = function(additionalScope) {
 		});
 		return;
 	}
-
 	launchModification();
 })();

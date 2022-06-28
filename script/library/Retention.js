@@ -1,6 +1,6 @@
 /*
 
-   Copyright 2017-2021 Nernar (github.com/nernar)
+   Copyright 2017-2022 Nernar (github.com/nernar)
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -18,25 +18,75 @@
 
 LIBRARY({
 	name: "Retention",
-	version: 5,
-	shared: false,
-	api: "AdaptedScript"
+	version: 1,
+	api: "AdaptedScript",
+	shared: false
 });
 
 let launchTime = Date.now();
 EXPORT("launchTime", launchTime);
 
-let version = MCSystem.getInnerCoreVersion();
-let code = parseInt(version.toString()[0]);
+EXPORT("isHorizon", (function() {
+	let version = MCSystem.getInnerCoreVersion();
+	return parseInt(version.toString()[0]) >= 2;
+})());
 
-let isHorizon = code >= 2;
-EXPORT("isHorizon", isHorizon);
+EXPORT("minecraftVersion", (function() {
+	let version = MCSystem.getMinecraftVersion();
+	return parseInt(version.toString().split(".")[1]);
+})());
 
 let getContext = function() {
 	return UI.getContext();
 };
 
 EXPORT("getContext", getContext);
+
+/**
+ * Error display window, possibly in particular,
+ * useful for visualizing and debugging problems.
+ * @param {Object} error fallback exception
+ */
+let reportError = (function(what) {
+	EXPORT("registerReportAction", function(when) {
+		what = when;
+	});
+	return function(error) {
+		what(error);
+	};
+})(function(error) {
+	Logger.Log("Retention: " + error, "WARNING");
+});
+
+EXPORT("reportError", reportError);
+
+/**
+ * invoke(what, when => (th)): any
+ * invokeRuntime(what, when => (th)): any
+ * invokeRhino(what, when => (th)): any
+ */
+EXPORT("resolveThrowable", (function() {
+	let decodeBase64 = function(base64) {
+		if (android.os.Build.VERSION.SDK_INT >= 26) {
+			return java.util.Base64.getDecoder().decode(java.lang.String(base64).getBytes());
+		}
+		return android.util.Base64.decode(java.lang.String(base64).getBytes(), android.util.Base64.NO_WRAP);
+	};
+	let bytes = decodeBase64("ZGV4CjAzNQA7yC65zIj/irByxZUNv+ejN5SKUkKw3cq4CgAAcAAAAHhWNBIAAAAAAAAAAAwKAAAoAAAAcAAAABQAAAAQAQAADAAAAGABAAABAAAA8AEAABMAAAD4AQAAAQAAAJACAAAICAAAsAIAALACAAC6AgAAwgIAAMUCAADJAgAAzgIAANQCAADbAgAAAAMAABMDAAA3AwAAWwMAAH0DAACgAwAAtAMAANIDAADmAwAA/QMAACgEAABXBAAAcwQAAJUEAAC4BAAA4QQAAAYFAAAeBQAAIQUAACUFAAA5BQAATgUAAG0FAABzBQAApwUAALAFAAC8BQAAxwUAANcFAADfBQAA7AUAAPsFAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAEQAAABIAAAATAAAAFAAAABUAAAAWAAAAFwAAABkAAAAbAAAAHAAAAAMAAAABAAAAOAYAAAQAAAAGAAAAZAYAAAYAAAAGAAAAWAYAAAQAAAAGAAAASAYAAAUAAAAGAAAALAYAAAIAAAAIAAAAAAAAAAQAAAAMAAAAQAYAAAIAAAANAAAAAAAAAAIAAAAQAAAAAAAAABkAAAARAAAAAAAAABoAAAARAAAAOAYAABoAAAARAAAAUAYAAAAADAAdAAAAAAAJAAAAAAAAAAkAAQAAAAAABwAdAAAAAAADACQAAAAAAAQAJAAAAAAAAwAlAAAAAAAEACUAAAAAAAMAJgAAAAAABAAmAAAAAQAAACAAAAABAAYAIgAAAAQACgABAAAABgAJAAEAAAAJAAUAIQAAAAoACwABAAAADAABACQAAAAOAAIAHgAAAA4ACAAjAAAAEAAIACMAAAAAAAAAAQAAAAYAAAAAAAAAGAAAAAAAAADcCQAAAAAAAAg8Y2xpbml0PgAGPGluaXQ+AAFMAAJMTAADTExMAARMTExMAAVMTExMTAAjTGlvL25lcm5hci9yaGluby9UaHJvd2FibGVSZXNvbHZlcjsAEUxqYXZhL2xhbmcvQ2xhc3M7ACJMamF2YS9sYW5nL0NsYXNzTm90Rm91bmRFeGNlcHRpb247ACJMamF2YS9sYW5nL0lsbGVnYWxBY2Nlc3NFeGNlcHRpb247ACBMamF2YS9sYW5nL05vQ2xhc3NEZWZGb3VuZEVycm9yOwAhTGphdmEvbGFuZy9Ob1N1Y2hNZXRob2RFeGNlcHRpb247ABJMamF2YS9sYW5nL09iamVjdDsAHExqYXZhL2xhbmcvUnVudGltZUV4Y2VwdGlvbjsAEkxqYXZhL2xhbmcvU3RyaW5nOwAVTGphdmEvbGFuZy9UaHJvd2FibGU7AClMamF2YS9sYW5nL1Vuc3VwcG9ydGVkT3BlcmF0aW9uRXhjZXB0aW9uOwAtTGphdmEvbGFuZy9yZWZsZWN0L0ludm9jYXRpb25UYXJnZXRFeGNlcHRpb247ABpMamF2YS9sYW5nL3JlZmxlY3QvTWV0aG9kOwAgTG9yZy9tb3ppbGxhL2phdmFzY3JpcHQvQ29udGV4dDsAIUxvcmcvbW96aWxsYS9qYXZhc2NyaXB0L0Z1bmN0aW9uOwAnTG9yZy9tb3ppbGxhL2phdmFzY3JpcHQvUmhpbm9FeGNlcHRpb247ACNMb3JnL21vemlsbGEvamF2YXNjcmlwdC9TY3JpcHRhYmxlOwAWVGhyb3dhYmxlUmVzb2x2ZXIuamF2YQABVgACVkwAEltMamF2YS9sYW5nL0NsYXNzOwATW0xqYXZhL2xhbmcvT2JqZWN0OwAdYXNzdXJlQ29udGV4dEZvckN1cnJlbnRUaHJlYWQABGNhbGwAMmNvbS56aGVrYXNtaXJub3YuaW5uZXJjb3JlLm1vZC5leGVjdXRhYmxlLkNvbXBpbGVyAAdmb3JOYW1lAApnZXRNZXNzYWdlAAlnZXRNZXRob2QADmdldFBhcmVudFNjb3BlAAZpbnZva2UAC2ludm9rZVJoaW5vAA1pbnZva2VSdW50aW1lAC16aGVrYXNtaXJub3YubGF1bmNoZXIubW9kLmV4ZWN1dGFibGUuQ29tcGlsZXIAAAADAAAAEAAOAA4AAAABAAAACAAAAAIAAAAIABIAAgAAAA4ADgABAAAACQAAAAQAAAANABAAEAATAAIAAAAGABMAAAAAABAABw4BERcCdx3FadN6AntoAEcABw4AHwAHDgEQEGYALgIAAAcOACcDAAAABywBERAbagBGAgAABw4APwMAAAAHLAEREBtqADoCAAAHDgAzAwAAAAcsAREQG2oAAwAAAAMAAwBwBgAAQAAAABoAHwBxEAkAAAAMABoBHQASAiMiEgBuMAoAEAIMAGkAAAAOAA0AIgEEAG4QDQAAAAwAcCALAAEAJwENABoAJwBxEAkAAAAMABoBHQASAiMiEgBuMAoAEAIMAGkAAAAo4g0AIgEKAHAgDgABACcBDQAiAQoAcCAOAAEAJwENACjyAAAAAAUAAQAGAAAAFwAIAB4AAAARAA0AAwMCEgQdBTcCBB0FNwICMAU+AAABAAEAAQAAAIIGAAAEAAAAcBAMAAAADgADAAAAAwABAIcGAAAYAAAAYgEAABIAHwAGABICIyITAG4wDwABAgwAHwANABEADQAiAQoAcCAOAAEAJwENACj5AAAAAA4AAQABAgsWAw8AAAMAAgADAAAAkAYAAAkAAAByEBEAAQAMAHEwBAAQAgwAEQAAAAgAAwAFAAEAlwYAADIAAAASARIEcQACAAAADAI4BQ4AchASAAUADAASAyMzEwByUxAAJlAMABEAEgAfABAAKPUNAAcCcQACAAAADAM4BRAAchASAAUADAASESMREwBNAgEEclEQADdQDAAo5gcQHwAQACjzAgAAABUAAQABAQkYAwACAAMAAACkBgAACQAAAHIQEQABAAwAcTAEABACDAARAAAACAADAAUAAQCrBgAAMgAAABIBEgRxAAIAAAAMAjgFDgByEBIABQAMABIDIzMTAHJTEAAmUAwAEQASAB8AEAAo9Q0ABwJxAAIAAAAMAzgFEAByEBIABQAMABIRIxETAE0CAQRyURAAN1AMACjmBxAfABAAKPMCAAAAFQABAAEBDxgDAAIAAwAAALgGAAAJAAAAchARAAEADABxMAQAEAIMABEAAAAIAAMABQABAL8GAAAyAAAAEgESBHEAAgAAAAwCOAUOAHIQEgAFAAwAEgMjMxMAclMQACZQDAARABIAHwAQACj1DQAHAnEAAgAAAAwDOAUQAHIQEgAFAAwAEhEjERMATQIBBHJREAA3UAwAKOYHEB8AEAAo8wIAAAAVAAEAAQEHGAEACQAAGgCYgATMDQGBgASIDwEKoA8BCfAPAQmUEAEJlBEBCbgRAQm4EgEJ3BIAAA4AAAAAAAAAAQAAAAAAAAABAAAAKAAAAHAAAAACAAAAFAAAABABAAADAAAADAAAAGABAAAEAAAAAQAAAPABAAAFAAAAEwAAAPgBAAAGAAAAAQAAAJACAAACIAAAKAAAALACAAABEAAABwAAACwGAAADEAAAAQAAAGwGAAADIAAACQAAAHAGAAABIAAACQAAAMwGAAAAIAAAAQAAANwJAAAAEAAAAQAAAAwKAAA=");
+	return java.lang.Class.forName("io.nernar.rhino.ThrowableResolver", false, (function() {
+		if (android.os.Build.VERSION.SDK_INT >= 26) {
+			let buffer = java.nio.ByteBuffer.wrap(bytes);
+			return new Packages.dalvik.system.InMemoryDexClassLoader(buffer, getContext().getClassLoader());
+		}
+		let dex = new java.io.File(__dir__ + ".dex/0");
+		dex.getParentFile().mkdirs();
+		dex.createNewFile();
+		let stream = new java.io.FileOutputStream(dex);
+		stream.write(bytes);
+		stream.close();
+		return new Packages.dalvik.system.PathClassLoader(dex.getPath(), getContext().getClassLoader());
+	})()).newInstance();
+})());
 
 /**
  * Tries to just call action or returns
@@ -75,13 +125,11 @@ EXPORT("tryout", tryout);
  * @param {any} [basic] default value
  * @returns {any} action result or default
  */
-let require = function(action, report, basic) {
-	let result = tryout(action, report);
+EXPORT("require", function(action, report, basic) {
+	let result = tryout.call(this, action, report);
 	if (basic === undefined) basic = report;
 	return result !== undefined ? result : basic;
-};
-
-EXPORT("require", require);
+});
 
 /**
  * Delays the action in the interface
@@ -90,15 +138,14 @@ EXPORT("require", require);
  * @param {number} [time] expectation
  * @param {function} [report] action when error
  */
-let handle = function(action, time, report) {
+EXPORT("handle", function(action, time, report) {
+	let self = this;
 	getContext().runOnUiThread(function() {
 		new android.os.Handler().postDelayed(function() {
-			if (action !== undefined) tryout(action, report);
+			if (action !== undefined) tryout.call(self, action, report);
 		}, time >= 0 ? time : 0);
 	});
-};
-
-EXPORT("handle", handle);
+});
 
 /**
  * @async
@@ -109,11 +156,12 @@ EXPORT("handle", handle);
  * @param {any} [basic] default value
  * @returns {any} action result or default
  */
-let acquire = function(action, report, basic) {
+EXPORT("acquire", function(action, report, basic) {
+	let self = this;
 	let completed = false;
 	getContext().runOnUiThread(function() {
 		if (action !== undefined) {
-			let value = tryout(action, report);
+			let value = tryout.call(self, action, report);
 			if (value !== undefined) {
 				basic = value;
 			}
@@ -124,9 +172,7 @@ let acquire = function(action, report, basic) {
 		java.lang.Thread.yield();
 	}
 	return basic;
-};
-
-EXPORT("acquire", acquire);
+});
 
 /**
  * Processes some action, that can be
@@ -135,35 +181,31 @@ EXPORT("acquire", acquire);
  * @param {number} priority number between 1-10
  * @returns {java.lang.Thread} thread
  */
-let handleThread = function(action, priority) {
-	let thread = new java.lang.Thread(function() {
-		if (action !== undefined) tryout(action);
-		let index = handleThread.stack.indexOf(thread);
-		if (index != -1) handleThread.stack.splice(index, 1);
-	});
-	handleThread.stack.push(thread);
-	if (priority !== undefined) {
-		thread.setPriority(priority);
-	}
-	return (thread.start(), thread);
-};
-
-handleThread.MIN_PRIORITY = java.lang.Thread.MIN_PRIORITY;
-handleThread.NORM_PRIORITY = java.lang.Thread.NORM_PRIORITY;
-handleThread.MAX_PRIORITY = java.lang.Thread.MAX_PRIORITY;
-
-handleThread.stack = [];
-
-handleThread.interruptAll = function() {
-	handleThread.stack.forEach(function(thread) {
-		if (thread && !thread.isInterrupted()) {
-			thread.interrupt();
+EXPORT("handleThread", (function() {
+	let stack = [];
+	EXPORT("interruptAllThreads", function() {
+		while (stack.length > 0) {
+			let thread = stack.shift();
+			if (!thread.isInterrupted()) {
+				thread.interrupt();
+			}
 		}
 	});
-	handleThread.stack = [];
-};
-
-EXPORT("handleThread", handleThread);
+	return function(action, report, priority) {
+		let self = this;
+		let thread = new java.lang.Thread(function() {
+			if (action !== undefined) tryout.call(self, action, report);
+			let index = stack.indexOf(thread);
+			if (index != -1) stack.splice(index, 1);
+		});
+		stack.push(thread);
+		if (priority !== undefined) {
+			thread.setPriority(priority);
+		}
+		thread.start();
+		return thread;
+	};
+})());
 
 /**
  * Generates a random number from minimum to
@@ -174,22 +216,18 @@ EXPORT("handleThread", handleThread);
  * @param {number} [max] maximum number
  * @returns {number} random number
  */
-let random = function(min, max) {
+EXPORT("random", function(min, max) {
 	max == undefined && (max = min - 1, min = 0);
 	return Math.floor(Math.random() * (max - min + 1) + min);
-};
-
-EXPORT("random", random);
+});
 
 /**
  * Returns the difference between the current time
  * and the start time of the library.
  */
-let getTime = function() {
+EXPORT("getTime", function() {
 	return Date.now() - launchTime;
-};
-
-EXPORT("getTime", getTime);
+});
 
 /**
  * Translates exiting at launcher strokes,
@@ -198,365 +236,118 @@ EXPORT("getTime", getTime);
  * @param {string|Array} [args] argument(s) to replace
  * @returns {string} translated stroke
  */
-let translate = function(str, args) {
-	return tryout(function() {
-		str = Translation.translate(str);
-		if (args !== undefined) {
-			if (!Array.isArray(args)) {
-				args = [args];
-			}
-			args = args.map(function(value) {
-				return String(value);
-			});
-			str = java.lang.String.format(str, args);
-		}
-		return String(str);
-	}, String(str));
-};
-
-translate.isVerb = function(count) {
-	if (count < 0) count = Math.abs(count);
-	return count % 10 == 1 && count % 100 != 11;
-};
-
-translate.isMany = function(count) {
-	if (count < 0) count = Math.abs(count);
-	return count % 10 == 0 || count % 10 >= 5 || count % 100 - count % 10 == 10;
-};
-
-translate.asCounter = function(count, empty, verb, little, many, args) {
-	return tryout(function() {
-		if (args !== undefined) {
-			if (!Array.isArray(args)) {
-				args = [args];
-			}
-		} else args = [count];
-		let much = translate.isMany(count);
-		if (count != 0 && !much) {
-			let stroke = String(count);
-			stroke = stroke.substring(0, stroke.length - 2);
-			args = args.map(function(value) {
-				if (value == count) {
-					return stroke;
+EXPORT("translateCounter", (function() {
+	let translate = function(str, args) {
+		return tryout(function() {
+			str = Translation.translate(str);
+			if (args !== undefined) {
+				if (!Array.isArray(args)) {
+					args = [args];
 				}
-				return value;
-			});
-		}
-		return translate(count == 0 ? empty : translate.isVerb(count) ? verb : much ? many : little, args);
-	}, translate(empty, args));
-};
+				args = args.map(function(value) {
+					return "" + value;
+				});
+				str = java.lang.String.format(str, args);
+			}
+			return "" + str;
+		}, "" + str);
+	};
+	EXPORT("translate", translate);
+	let isNumeralVerb = function(count) {
+		if (count < 0) count = Math.abs(count);
+		return count % 10 == 1 && count % 100 != 11;
+	};
+	EXPORT("isNumeralVerb", isNumeralVerb);
+	let isNumeralMany = function(count) {
+		if (count < 0) count = Math.abs(count);
+		return count % 10 == 0 || count % 10 >= 5 || count % 100 - count % 10 == 10;
+	};
+	EXPORT("isNumeralMany", isNumeralMany);
+	return function(count, whenZero, whenVerb, whenLittle, whenMany, args) {
+		return tryout(function() {
+			if (args !== undefined) {
+				if (!Array.isArray(args)) {
+					args = [args];
+				}
+			} else args = [count];
+			if (!(count == 0 || isNumeralMany(count))) {
+				let stroke = "" + count;
+				stroke = stroke.substring(0, stroke.length - 2);
+				args = args.map(function(value) {
+					if (value == count) {
+						return stroke;
+					}
+					return value;
+				});
+			}
+			return translate(count == 0 ? whenZero : isNumeralVerb(count) ? whenVerb : isNumeralMany(count) ? whenMany : whenLittle, args);
+		}, translate(whenZero, args));
+	};
+})());
 
-EXPORT("translate", translate);
-EXPORT("translateCounter", translate.asCounter);
+EXPORT("getDecorView", function() {
+	return getContext().getWindow().getDecorView();
+});
+
+(function() {
+	let display = getContext().getWindowManager().getDefaultDisplay();
+	let getDisplayWidth = function() {
+		return Math.max(display.getWidth(), display.getHeight());
+	};
+	EXPORT("getDisplayWidth", getDisplayWidth);
+	EXPORT("getDisplayPercentWidth", function(x) {
+		return Math.round(getDisplayWidth() / 100 * x);
+	});
+	let getDisplayHeight = function() {
+		return Math.min(display.getWidth(), display.getHeight());
+	};
+	EXPORT("getDisplayHeight", getDisplayHeight);
+	EXPORT("getDisplayPercentHeight", function(y) {
+		return Math.round(getDisplayHeight() / 100 * y);
+	});
+	let metrics = getContext().getResources().getDisplayMetrics();
+	EXPORT("getDisplayDensity", function() {
+		return metrics.density;
+	});
+	EXPORT("getRelativeDisplayPercentWidth", function(x) {
+		return Math.round(getDisplayWidth() / 100 * x / metrics.density);
+	});
+	EXPORT("getRelativeDisplayPercentHeight", function(y) {
+		return Math.round(getDisplayHeight() / 100 * y / metrics.density);
+	});
+	EXPORT("toComplexUnitDip", function(value) {
+		return android.util.TypedValue.applyDimension(android.util.TypedValue.COMPLEX_UNIT_DIP, value, metrics);
+	});
+	EXPORT("toComplexUnitSp", function(value) {
+		return android.util.TypedValue.applyDimension(android.util.TypedValue.COMPLEX_UNIT_SP, value, metrics);
+	});
+})();
 
 /**
- * Used to reduce dependencies from
- * system interfaces and their imports.
+ * For caching, you must use the check amount
+ * files and any other content, the so-called hashes.
  */
-let Interface = {
-	Display: {
-		FILL: android.view.ViewGroup.LayoutParams.FILL_PARENT,
-		MATCH: android.view.ViewGroup.LayoutParams.MATCH_PARENT,
-		WRAP: android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-	},
-	Orientate: {
-		HORIZONTAL: android.widget.LinearLayout.HORIZONTAL,
-		VERTICAL: android.widget.LinearLayout.VERTICAL
-	},
-	Scale: {
-		CENTER: android.widget.ImageView.ScaleType.CENTER,
-		CENTER_CROP: android.widget.ImageView.ScaleType.CENTER_CROP,
-		CENTER_INSIDE: android.widget.ImageView.ScaleType.CENTER_INSIDE,
-		FIT_CENTER: android.widget.ImageView.ScaleType.FIT_CENTER,
-		FIT_END: android.widget.ImageView.ScaleType.FIT_END,
-		FIT_START: android.widget.ImageView.ScaleType.FIT_START,
-		FIT_XY: android.widget.ImageView.ScaleType.FIT_XY,
-		MATRIX: android.widget.ImageView.ScaleType.MATRIX
-	},
-	Gravity: {
-		BOTTOM: android.view.Gravity.BOTTOM,
-		CENTER: android.view.Gravity.CENTER,
-		FILL: android.view.Gravity.FILL,
-		RIGHT: android.view.Gravity.RIGHT,
-		LEFT: android.view.Gravity.LEFT,
-		TOP: android.view.Gravity.TOP,
-		NONE: android.view.Gravity.NO_GRAVITY
-	},
-	Color: {
-		BLACK: android.graphics.Color.BLACK,
-		WHITE: android.graphics.Color.WHITE,
-		RED: android.graphics.Color.RED,
-		GREEN: android.graphics.Color.GREEN,
-		BLUE: android.graphics.Color.BLUE,
-		YELLOW: android.graphics.Color.YELLOW,
-		CYAN: android.graphics.Color.CYAN,
-		MAGENTA: android.graphics.Color.MAGENTA,
-		GRAY: android.graphics.Color.GRAY,
-		LTGRAY: android.graphics.Color.LTGRAY,
-		DKGRAY: android.graphics.Color.DKGRAY,
-		TRANSPARENT: android.graphics.Color.TRANSPARENT
-	},
-	Direction: {
-		INHERIT: android.view.View.LAYOUT_DIRECTION_INHERIT,
-		LOCALE: android.view.View.LAYOUT_DIRECTION_LOCALE,
-		LTR: android.view.View.LAYOUT_DIRECTION_LTR,
-		RTL: android.view.View.LAYOUT_DIRECTION_RTL
-	},
-	Visibility: {
-		VISIBLE: android.view.View.VISIBLE,
-		INVISIBLE: android.view.View.INVISIBLE,
-		GONE: android.view.View.GONE
-	},
-	Choice: {
-		NONE: android.widget.ListView.CHOICE_MODE_NONE,
-		SINGLE: android.widget.ListView.CHOICE_MODE_SINGLE,
-		MULTIPLE: android.widget.ListView.CHOICE_MODE_MULTIPLE,
-		MODAL: android.widget.ListView.CHOICE_MODE_MULTIPLE_MODAL
-	},
-	TileMode: {
-		CLAMP: android.graphics.Shader.TileMode.CLAMP,
-		REPEAT: android.graphics.Shader.TileMode.REPEAT,
-		MIRROR: android.graphics.Shader.TileMode.MIRROR
-	}
-};
-
-Interface.Gravity.parse = function(str) {
-	for (let item in this) {
-		if (typeof this[item] == "number") {
-			eval(item + " = this[item]");
+EXPORT("toDigestMd5", (function(){
+	let digest = java.security.MessageDigest.getInstance("md5");
+	return function(bytes) {
+		digest.update(bytes);
+		let byted = digest.digest()
+		let sb = new java.lang.StringBuilder();
+		for (let i = 0; i < byted.length; i++) {
+			sb.append(java.lang.Integer.toHexString(0xFF & byted[i]));
 		}
-	}
-	return eval(str.toUpperCase());
-};
-
-Interface.Color.parse = function(str) {
-	return android.graphics.Color.parseColor(str);
-};
-
-Interface.updateDisplay = function() {
-	let display = getContext().getWindowManager().getDefaultDisplay();
-	this.Display.WIDTH = display.getWidth();
-	this.Display.HEIGHT = display.getHeight();
-	let metrics = getContext().getResources().getDisplayMetrics();
-	this.Display.DENSITY = metrics.density;
-};
-
-Interface.updateDisplay();
-
-Interface.getFontSize = function(size) {
-	return Math.round(this.getX(size) / this.Display.DENSITY);
-};
-
-Interface.getFontMargin = function() {
-	return this.getY(7);
-};
-
-Interface.getX = function(x) {
-	return x > 0 ? Math.round(this.Display.WIDTH / 1000 * x) : x;
-};
-
-Interface.getY = function(y) {
-	return y > 0 ? Math.round(this.Display.HEIGHT / 1000 * y) : y;
-};
-
-Interface.getDecorView = function() {
-	return getContext().getWindow().getDecorView();
-};
-
-Interface.getEmptyDrawable = function() {
-	return new android.graphics.drawable.ColorDrawable();
-};
-
-Interface.setActorName = function(view, name) {
-	android.support.v4.view.ViewCompat.setTransitionName(view, String(name));
-};
+		return sb.toString();
+	};
+})());
 
 /**
  * @requires Requires evaluation in interface thread.
  * Uses device vibrator service to make vibration.
  * @param {number} milliseconds to vibrate
  */
-Interface.vibrate = function(time) {
-	let service = android.content.Context.VIBRATOR_SERVICE;
-	getContext().getSystemService(service).vibrate(time);
-};
-
-Interface.getViewRect = function(view) {
-	let rect = new android.graphics.Rect();
-	view.getGlobalVisibleRect(rect);
-	return rect || null;
-};
-
-Interface.getLayoutParams = function(width, height, direction, margins) {
-	width = this.getX(width), height = this.getY(height);
-	let params = android.view.ViewGroup.LayoutParams(width, height != null ? height : width);
-	margins && params.setMargins(this.getX(margins[0]), this.getY(margins[1]), this.getX(margins[2]), this.getY(margins[3]));
-	direction && params.setLayoutDirection(direction);
-	return params;
-};
-
-Interface.makeViewId = function() {
-	return android.view.View.generateViewId();
-};
-
-Interface.sleepMilliseconds = function(ms) {
-	java.util.concurrent.TimeUnit.MILLISECONDS.sleep(ms);
-};
-
-Interface.getInnerCoreVersion = function() {
-	return { name: version, code: code };
-};
-
-EXPORT("Interface", Interface);
-
-/**
- * For caching, you must use the check amount
- * files and any other content, the so-called hashes.
- */
-let Hashable = {};
-
-Hashable.toMD5 = function(bytes) {
-	let digest = java.security.MessageDigest.getInstance("md5");
-	digest.update(bytes);
-	let byted = digest.digest(),
-		sb = new java.lang.StringBuilder();
-	for (let i = 0; i < byted.length; i++) {
-		sb.append(java.lang.Integer.toHexString(0xFF & byted[i]));
-	}
-	return sb.toString();
-};
-
-EXPORT("Hashable", Hashable);
-
-/**
- * Error display window, possibly in particular,
- * useful for visualizing and debugging problems.
- * @param {Object} err fallback exception
- */
-let reportError = function(err) {
-	if (typeof err != "object" || err === null) {
-		return;
-	}
-	err.date = Date.now();
-	if (reportError.isReporting) {
-		if (reportError.stack.length < 16) {
-			reportError.stack.push(err);
-		}
-		return;
-	} else reportError.isReporting = true;
-	getContext().runOnUiThread(function() {
-		let builder = new android.app.AlertDialog.Builder(getContext(), android.R.style.Theme_DeviceDefault_DialogWhenLarge);
-		builder.setTitle(reportError.title || translate("Oh nose everything broke"));
-		builder.setCancelable(false);
-		
-		reportError.__report && reportError.__report(err);
-		
-		let result = [],
-			message = reportError.message;
-		message && result.push(message + "<br/>");
-		result.push("<font color=\"#CCCC33\"><b>" + err.name + "</b>");
-		result.push(err.stack ? err.message : err.message + "</font>");
-		err.stack && result.push(new java.lang.String(err.stack).replaceAll("\n", "<br/>") + "</font>");
-		
-		let values = reportError.getDebugValues();
-		if (values != null) {
-			result.push(translate("Development debug values"));
-			result.push(values + "<br/>");
-		}
-		
-		builder.setMessage(android.text.Html.fromHtml(result.join("<br/>")));
-		builder.setPositiveButton(translate("Understand"), null);
-		builder.setNeutralButton(translate("Leave"), function() {
-			reportError.stack = [];
-		});
-		builder.setNegativeButton(reportError.getCode(err), function() {
-			reportError.__stack && reportError.__stack(err);
-		});
-		
-		let dialog = builder.create();
-		dialog.getWindow().setLayout(Interface.Display.WIDTH / 1.5, Interface.Display.HEIGHT / 1.2);
-		dialog.setOnDismissListener(function() {
-			reportError.isReporting = false;
-			if (reportError.stack.length > 0) {
-				reportError(reportError.stack.shift());
-			}
-		});
-		dialog.show();
-	});
-};
-
-reportError.stack = [];
-
-reportError.setTitle = function(title) {
-	title && (this.title = title);
-};
-
-reportError.setInfoMessage = function(html) {
-	html && (this.message = html);
-};
-
-reportError.setStackAction = function(action) {
-	this.__stack = function(err) {
-		tryout(function() {
-			action && action(err);
-		});
+EXPORT("vibrate", (function() {
+	let service = getContext().getSystemService(android.content.Context.VIBRATOR_SERVICE);
+	return function(ms) {
+		return service.vibrate(ms);
 	};
-};
-
-reportError.setReportAction = function(action) {
-	this.__report = function(err) {
-		tryout(function() {
-			action && action(err);
-		});
-	};
-};
-
-reportError.values = [];
-
-reportError.addDebugValue = function(name, value) {
-	this.values.push([name, value]);
-};
-
-reportError.formCollectedValues = function() {
-	let collected = [];
-	for (let index = 0; index < this.values.length; index++) {
-		let value = this.values[index];
-		result.push(value[0] + " = " + value[1] + ";");
-	}
-	return collected;
-};
-
-reportError.getDebugValues = function() {
-	let result = [];
-	result.concat(this.formCollectedValues());
-	return result.length > 0 ? "<font face=\"monospace\">" + result.join("<br/>") + "</font>" : null;
-};
-
-reportError.getStack = function(err) {
-	return err.message + "\n" + err.stack;
-};
-
-reportError.getCode = function(err) {
-	let encoded = java.lang.String(this.getStack(err)),
-		counter = Hashable.toMD5(encoded.getBytes());
-	return "NE-" + Math.abs(counter.hashCode());
-};
-
-reportError.getLaunchTime = function() {
-	return new Date(launchTime).toString();
-};
-
-EXPORT("reportError", reportError);
-
-Translation.addTranslation("Oh nose everything broke", {
-	ru: "Ох нет, все сломалось"
-});
-Translation.addTranslation("Development debug values", {
-	ru: "Отладочные значения разработчика"
-});
-Translation.addTranslation("Understand", {
-	ru: "Понятно"
-});
-Translation.addTranslation("Leave", {
-	ru: "Выход"
-});
+})());

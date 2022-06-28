@@ -1,21 +1,20 @@
 function settingsUI() {
 	let textSize = 17,
-		padding = 10 * density,
-		context = UI.getContext();
-	let print = new android.app.AlertDialog.Builder(context,
+		padding = 10 * getDisplayDensity();
+	let print = new android.app.AlertDialog.Builder(getContext(),
 			android.R.style.Theme_DeviceDefault_DialogWhenLarge);
-	let scroll = new android.widget.ScrollView(context),
-		layout = new android.widget.LinearLayout(context),
+	let scroll = new android.widget.ScrollView(getContext()),
+		layout = new android.widget.LinearLayout(getContext()),
 		len = arguments[0].length,
 		rulerLp = new android.view.ViewGroup.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT, 2),
 		addOption = {
 			checkBox: function (args) {
-				let layoutElement = new android.widget.RelativeLayout(context),
-					checkBtn = new android.widget.CheckBox(context),
+				let layoutElement = new android.widget.RelativeLayout(getContext()),
+					checkBtn = new android.widget.CheckBox(getContext()),
 					checkBtnLp = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT),
-					text = new android.widget.TextView(context),
+					text = new android.widget.TextView(getContext()),
 					textLp = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
-				text.setTextColor(colors.ltgray);
+				text.setTextColor(Colors.LTGRAY);
 				text.setTextSize(textSize);
 				text.setText(args[2]);
 				checkBtn.setId(1);
@@ -35,10 +34,10 @@ function settingsUI() {
 				return layoutElement;
 			},
 			subScreen: function (args) {
-				let text = new android.widget.TextView(context);
+				let text = new android.widget.TextView(getContext());
 				text.setTextSize(textSize);
 				text.setText("> " + args[1]);
-				text.setTextColor(colors.ltgray);
+				text.setTextColor(Colors.LTGRAY);
 				text.setPadding(padding, padding, padding, padding);
 				text.setOnClickListener(function(v) {
 					settingsUI(args[2]).show();
@@ -46,33 +45,33 @@ function settingsUI() {
 				return text;
 			},
 			sectionDivider: function (args) {
-				let text = new android.widget.TextView(context);
+				let text = new android.widget.TextView(getContext());
 				text.setTextSize(textSize * 0.9);
 				text.setText(args[1]);
-				text.setTextColor(colors.white);
-				text.setBackgroundDrawable(new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.LEFT_RIGHT, [colors.primary, colors.accent, colors.primary]));
+				text.setTextColor(Colors.WHITE);
+				text.setBackgroundDrawable(new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.LEFT_RIGHT, [Colors.PRIMARY, Colors.ACCENT, Colors.PRIMARY]));
 				text.setPadding(padding, 0, padding, 0);
 				return text;
 			},
 			keyValue: function (args) {
-				let layoutElement = new android.widget.RelativeLayout(context),
-					text = new android.widget.TextView(context),
+				let layoutElement = new android.widget.RelativeLayout(getContext()),
+					text = new android.widget.TextView(getContext()),
 					textLp = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT),
-					textValue = new android.widget.TextView(context),
+					textValue = new android.widget.TextView(getContext()),
 					textValueLp = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
 				text.setTextSize(textSize);
-				text.setTextColor(colors.ltgray);
+				text.setTextColor(Colors.LTGRAY);
 				text.setText(android.text.Html.fromHtml(args[2]));
 				text.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
 				textValue.setTextSize(textSize);
-				textValue.setTextColor(colors.accent);
+				textValue.setTextColor(Colors.ACCENT);
 				textValue.setId(1);
 				switch (args[1]) {
 					case "multipleChoice":
 						if (args[4].length <= settings[args[3]]) { settings[args[3]] = 0; }
 						textValue.setText(args[4][settings[args[3]]]);
 						textValue.setOnClickListener(function(v) {
-							let print = new android.app.AlertDialog.Builder(context,
+							let print = new android.app.AlertDialog.Builder(getContext(),
 									android.R.style.Theme_DeviceDefault_Dialog);
 							print.setSingleChoiceItems(args[4], settings[args[3]], function(parent, position, id) {
 								settings[args[3]] = position;
@@ -88,9 +87,9 @@ function settingsUI() {
 								print.dismiss();
 							});
 							print = print.create();
-							print.getWindow().setLayout(Interface.Display.MATCH, Interface.Display.MATCH);
+							print.getWindow().setLayout(android.view.ViewGroup.LayoutParams.MATCH_PARENT, android.view.ViewGroup.LayoutParams.MATCH_PARENT);
 							let listView = print.getListView();
-							listView.setDivider(new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.LEFT_RIGHT, [colors.primary, colors.accent, colors.primary]));
+							listView.setDivider(new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.LEFT_RIGHT, [Colors.PRIMARY, Colors.ACCENT, Colors.PRIMARY]));
 							listView.setDividerHeight(2);
 							listView.setPadding(padding, padding, padding, padding);
 							print.show();
@@ -99,9 +98,9 @@ function settingsUI() {
 					case "slider":
 						textValue.setText(settings[args[3]] + args[7]);
 						textValue.setOnClickListener(function(v) {
-							let print = new android.app.AlertDialog.Builder(context,
+							let print = new android.app.AlertDialog.Builder(getContext(),
 									android.R.style.Theme_DeviceDefault_Dialog),
-								seekBar = new android.widget.SeekBar(context);
+								seekBar = new android.widget.SeekBar(getContext());
 							seekBar.setMax((args[5] - args[4]) / args[6]);
 							seekBar.setProgress((settings[args[3]] - args[4]) / args[6]);
 							seekBar.setOnSeekBarChangeListener(new android.widget.SeekBar.OnSeekBarChangeListener({
@@ -121,7 +120,7 @@ function settingsUI() {
 								print.dismiss();
 							});
 							print = print.create();
-							print.getWindow().setLayout(Interface.Display.MATCH, Interface.Display.MATCH);
+							print.getWindow().setLayout(android.view.ViewGroup.LayoutParams.MATCH_PARENT, android.view.ViewGroup.LayoutParams.MATCH_PARENT);
 							print.show();
 						});
 						break;
@@ -147,8 +146,8 @@ function settingsUI() {
 	for (let i = 2; i < len; i += 1) {
 		layout.addView(addOption[arguments[0][i][0]](arguments[0][i]));
 		if (i + 1 < len) {
-			let ruler = new android.view.View(context);
-			ruler.setBackgroundDrawable(new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.LEFT_RIGHT, [colors.primary, colors.accent, colors.primary]));
+			let ruler = new android.view.View(getContext());
+			ruler.setBackgroundDrawable(new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.LEFT_RIGHT, [Colors.PRIMARY, Colors.ACCENT, Colors.PRIMARY]));
 			layout.addView(ruler, rulerLp);
 		}
 	}
@@ -160,7 +159,7 @@ function settingsUI() {
 	});
 	let dialog = print.create(),
 		popup = dialog.getWindow();
-	popup.setLayout(Interface.Display.WIDTH / 1.4, Interface.Display.WRAP);
-	popup.setGravity(Interface.Gravity.LEFT | Interface.Gravity.BOTTOM);
+	popup.setLayout(getDisplayPercentWidth(60), android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+	popup.setGravity(android.view.Gravity.LEFT | android.view.Gravity.BOTTOM);
 	return dialog;
 }

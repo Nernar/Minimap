@@ -6,7 +6,7 @@ new java.lang.Thread(function() {
 		android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_FOREGROUND);
 	}
 	if (settings.checkNewestVersion) {
-		var newVersion = loadTxtFromUrl("https://api.github.com/repos/maxfeed/minimap/releases/latest");
+		var newVersion = loadTxtFromUrl("https://api.github.com/repos/nernar/minimap/releases/latest");
 		try {
 			eval("newVersion = " + newVersion);
 		} catch(e) {
@@ -39,7 +39,7 @@ new java.lang.Thread(function() {
 						["keyValue", "text", (settings.updateChangelog ? settings.updateChangelog : "No changes."), "Changelog"],
 					["sectionDivider", "Download update"],
 						["keyValue", "text", "Install from <a href=https://icmods.mineprogramming.org/mod?id=623>icmods.mineprogramming.org</a>" +
-							"<br/>Clone <a href=https://github.com/MaXFeeD/Minimap/releases/latest>github.com</a> open source code", ""],
+							"<br/>Clone <a href=https://github.com/Nernar/Minimap/releases/latest>github.com</a> open source code", ""],
 						["checkBox", "checkNewestVersion", "Check for updates"]]).show();
 			});
 		}

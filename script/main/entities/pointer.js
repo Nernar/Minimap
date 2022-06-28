@@ -2,11 +2,15 @@ let pointerPaint = {
 	RED: (function() {
 		let paint = new android.graphics.Paint();
 		paint.setColorFilter(new android.graphics.LightingColorFilter(android.graphics.Color.RED, 0));
+		paint.setAntiAlias(false);
+		paint.setFilterBitmap(false);
 		return paint;
 	})(),
 	GREEN: (function() {
 		let paint = new android.graphics.Paint();
 		paint.setColorFilter(new android.graphics.LightingColorFilter(android.graphics.Color.GREEN, 0));
+		paint.setAntiAlias(false);
+		paint.setFilterBitmap(false);
 		return paint;
 	})()
 };
@@ -27,15 +31,17 @@ let pointer = [
 	new Pointer(
 		(function() {
 			let paint = new android.graphics.Paint(),
-				bmp = android.graphics.Bitmap.createBitmap(displayHeight * 0.1, displayHeight * 0.1, android.graphics.Bitmap.Config.ARGB_8888),
+				bmp = android.graphics.Bitmap.createBitmap(getDisplayHeight() * 0.1, getDisplayHeight() * 0.1, android.graphics.Bitmap.Config.ARGB_8888),
 				canvas = new android.graphics.Canvas(bmp);
-			paint.setColor(colors.black);
-			canvas.drawLines([0, displayHeight * 0.05, displayHeight * 0.1, displayHeight * 0.05, displayHeight * 0.05, 0, displayHeight * 0.05, displayHeight * 0.1], paint);
+			paint.setAntiAlias(false);
+			paint.setFilterBitmap(false);
+			reflectPaintSetColor(paint, Colors.BLACK);
+			canvas.drawLines([0, getDisplayHeight() * 0.05, getDisplayHeight() * 0.1, getDisplayHeight() * 0.05, getDisplayHeight() * 0.05, 0, getDisplayHeight() * 0.05, getDisplayHeight() * 0.1], paint);
 			return bmp;
 		})(),
 		(function() {
 			let matrix = new android.graphics.Matrix();
-			matrix.setTranslate(-displayHeight * 0.05, -displayHeight * 0.05);
+			matrix.setTranslate(-getDisplayHeight() * 0.05, -getDisplayHeight() * 0.05);
 			return matrix;
 		})(),
 		false
@@ -44,23 +50,25 @@ let pointer = [
 		(function() {
 			let path = new android.graphics.Path(),
 				paint = new android.graphics.Paint(),
-				bmp = android.graphics.Bitmap.createBitmap(displayHeight * 0.025, displayHeight * 0.025, android.graphics.Bitmap.Config.ARGB_8888),
+				bmp = android.graphics.Bitmap.createBitmap(getDisplayHeight() * 0.025, getDisplayHeight() * 0.025, android.graphics.Bitmap.Config.ARGB_8888),
 				canvas = new android.graphics.Canvas(bmp);
-			path.moveTo(displayHeight * 0.0125, 0);
-			path.lineTo(0, displayHeight * 0.025);
-			path.lineTo(displayHeight * 0.0125, displayHeight * 0.015);
-			path.lineTo(displayHeight * 0.025, displayHeight * 0.025);
+			paint.setAntiAlias(false);
+			paint.setFilterBitmap(false);
+			path.moveTo(getDisplayHeight() * 0.0125, 0);
+			path.lineTo(0, getDisplayHeight() * 0.025);
+			path.lineTo(getDisplayHeight() * 0.0125, getDisplayHeight() * 0.015);
+			path.lineTo(getDisplayHeight() * 0.025, getDisplayHeight() * 0.025);
 			path.close();
-			paint.setColor(colors.white);
+			reflectPaintSetColor(paint, Colors.WHITE);
 			canvas.drawPath(path, paint);
-			paint.setColor(colors.black);
+			reflectPaintSetColor(paint, Colors.BLACK);
 			paint.setStyle(android.graphics.Paint.Style.STROKE);
 			canvas.drawPath(path, paint);
 			return bmp;
 		})(),
 		(function() {
 			let matrix = new android.graphics.Matrix();
-			matrix.setTranslate(-displayHeight * 0.0125, 0);
+			matrix.setTranslate(-getDisplayHeight() * 0.0125, 0);
 			return matrix;
 		})(),
 		true
@@ -72,7 +80,7 @@ let pointer = [
 				dy = bitmap.getHeight() / 7,
 				matrix = new android.graphics.Matrix();
 			matrix.setTranslate(-2.5 * dx, -4.5 * dy);
-			matrix.postScale(displayHeight * 0.005 / dx, displayHeight * 0.005 / dy);
+			matrix.postScale(getDisplayHeight() * 0.005 / dx, getDisplayHeight() * 0.005 / dy);
 			return matrix;
 		},
 		true
@@ -84,7 +92,7 @@ let pointer = [
 				dy = bitmap.getHeight() / 16,
 				matrix = new android.graphics.Matrix();
 			matrix.setTranslate(-8 * dx, -8 * dy);
-			matrix.postScale(displayHeight * 0.0012 / dx, displayHeight * 0.0012 / dy);
+			matrix.postScale(getDisplayHeight() * 0.0012 / dx, getDisplayHeight() * 0.0012 / dy);
 			return matrix;
 		},
 		false
@@ -146,7 +154,7 @@ const getIconMatrix = function(head) {
 		dy = head.getHeight() / 16,
 		matrix = new android.graphics.Matrix();
 	matrix.setTranslate(-9 * dx, -14 * dy);
-	matrix.postScale(displayHeight * 0.0012 / dx, displayHeight * 0.0012 / dy);
+	matrix.postScale(getDisplayHeight() * 0.0012 / dx, getDisplayHeight() * 0.0012 / dy);
 	return matrix;
 };
 
