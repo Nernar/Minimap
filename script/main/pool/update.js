@@ -6,13 +6,14 @@ new java.lang.Thread(function() {
 		android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_FOREGROUND);
 	}
 	if (settings.checkNewestVersion) {
-		var newVersion = loadTxtFromUrl("https://api.github.com/repos/nernar/minimap/releases/latest");
+		var newVersion = readUrl("https://api.github.com/repos/nernar/minimap/releases/latest");
 		try {
-			eval("newVersion = " + newVersion);
+			newVersion = JSON.parse(newVersion);
+			// eval("newVersion = " + newVersion);
 		} catch(e) {
 			newVersion = Number.MAX_SAFE_INTEGER;
 		} finally {
-			if (newVersion instanceof Object) {
+			if (typeof newVersion != "number") {
 				let code = parseFloat(newVersion.name);
 				if (code > curVersion) {
 					settings.updateVersion = new Number(code);
@@ -30,7 +31,7 @@ new java.lang.Thread(function() {
 				}
 			}
 		}
-		if (settings.updateVersion instanceof Number) {
+		if (typeof settings.updateVersion == "number") {
 			handle(function() {
 				settingsUI([NAME, "Maybe later",
 					["sectionDivider", "New version availabled!"],

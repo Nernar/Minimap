@@ -117,7 +117,7 @@ const createHeadInArrow = function(bitmap) {
 };
 
 const toSimpleIdentifier = function(name) {
-	name = String(name);
+	name = "" + name;
 	let pointer = name.lastIndexOf(".");
 	return pointer >= 0 ? name.substring(0, pointer) : name;
 };

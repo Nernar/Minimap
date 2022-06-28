@@ -50,8 +50,7 @@ let mapDot = [
 	function minecraftMap(ix, iz) {
 		let color,
 			iy = 130,
-			deltaY = 10,
-			o = android.graphics.Color;
+			deltaY = 10;
 		do {
 			let block = World.getBlockID(ix, iy, iz);
 			if (block != 0) {
@@ -181,12 +180,12 @@ let mapDot = [
 						color = colors[block] || 0x6f6f6f;
 				}
 				if (World.getBlockID(ix - 1, iy - 2, iz)) {
-					return o.rgb(o.red(color) * (180 / 255), o.green(color) * (180 / 255), o.blue(color) * (180 / 255));
+					return reflectColorRgb(android.graphics.Color.red(color) * (180 / 255), android.graphics.Color.green(color) * (180 / 255), android.graphics.Color.blue(color) * (180 / 255));
 				}
 				if (World.getBlockID(ix - 1, iy - 1, iz)) {
-					return o.rgb(o.red(color) * (220 / 255), o.green(color) * (220 / 255), o.blue(color) * (220 / 255));
+					return reflectColorRgb(android.graphics.Color.red(color) * (220 / 255), android.graphics.Color.green(color) * (220 / 255), android.graphics.Color.blue(color) * (220 / 255));
 				}
-				return o.rgb(o.red(color), o.green(color), o.blue(color));
+				return reflectColorRgb(android.graphics.Color.red(color), android.graphics.Color.green(color), android.graphics.Color.blue(color));
 			}
 		} while (iy -= deltaY);
 		return 0;

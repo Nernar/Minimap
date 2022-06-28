@@ -154,19 +154,25 @@ var redraw = false,
 							if (style_pointer != 3) {
 								if (ENTITY_PASSIVE.indexOf(id) >= 0 && settings.indicatorPassive) {
 									matrixPointer.reset();
-									if (pointer[style_pointer].rotate) { matrixPointer.postRotate(yaw); }
+									if (pointer[style_pointer].rotate) {
+										matrixPointer.postRotate(yaw);
+									}
 									matrixPointer.postTranslate((z0 - Entity.getPosition(entities[i]).z) * zoom, (Entity.getPosition(entities[i]).x - x0) * zoom);
 									matrixPointer.preConcat(pointer[style_pointer].matrix);
 									canvas.drawBitmap(pointer[style_pointer].bmp, matrixPointer, pointerPaint.GREEN);
 								} else if (ENTITY_HOSTILE.indexOf(id) >= 0 && settings.indicatorHostile) {
 									matrixPointer.reset();
-									if (pointer[style_pointer].rotate) { matrixPointer.postRotate(yaw); }
+									if (pointer[style_pointer].rotate) {
+										matrixPointer.postRotate(yaw);
+									}
 									matrixPointer.postTranslate((z0 - Entity.getPosition(entities[i]).z) * zoom, (Entity.getPosition(entities[i]).x - x0) * zoom);
 									matrixPointer.preConcat(pointer[style_pointer].matrix);
 									canvas.drawBitmap(pointer[style_pointer].bmp, matrixPointer, pointerPaint.RED);
 								} else if (id == 1 && settings.indicatorPlayer) {
 									matrixPointer.reset();
-									if (pointer[style_pointer].rotate) { matrixPointer.postRotate(yaw); }
+									if (pointer[style_pointer].rotate) {
+										matrixPointer.postRotate(yaw);
+									}
 									matrixPointer.postTranslate((z0 - Entity.getPosition(entities[i]).z) * zoom, (Entity.getPosition(entities[i]).x - x0) * zoom);
 									matrixPointer.preConcat(pointer[style_pointer].matrix);
 									canvas.drawBitmap(pointer[style_pointer].bmp, matrixPointer, null);
@@ -184,7 +190,9 @@ var redraw = false,
 				if (settings.indicatorLocal) {
 					if (style_pointer != 3) {
 						matrixPointer.reset();
-						if (pointer[style_pointer].rotate) { matrixPointer.postRotate(yawNew); }
+						if (pointer[style_pointer].rotate) {
+							matrixPointer.postRotate(yawNew);
+						}
 						matrixPointer.postTranslate(settings.locationSize * 0.5, settings.locationSize * 0.5);
 						matrixPointer.preConcat(pointer[style_pointer].matrix);
 						canvas.drawBitmap(pointer[style_pointer].bmp, matrixPointer, null)

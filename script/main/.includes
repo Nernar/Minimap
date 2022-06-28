@@ -1,21 +1,18 @@
 header.js
 
-polyfill/Object.js
-
 storage/explorer.js
 storage/config.js
 storage/restore.js
 storage/space.js
 
-pool/handle.js
-pool/draw.js
-pool/update.js
-
 visual/widget.js
 visual/drawable.js
 visual/config.js
 visual/map.js
-visual/outdated.js
+
+pool/handle.js
+pool/draw.js
+pool/update.js
 
 world/dot.js
 world/process.js

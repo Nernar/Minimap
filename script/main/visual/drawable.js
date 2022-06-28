@@ -1,4 +1,4 @@
-function drawBtnBack(width, height) {
+const drawBtnBack = function(width, height) {
 	let bmp = android.graphics.Bitmap.createBitmap(width, height, android.graphics.Bitmap.Config.ARGB_8888),
 		canvas = new android.graphics.Canvas(bmp),
 		paint = new android.graphics.Paint();
@@ -8,14 +8,18 @@ function drawBtnBack(width, height) {
 	paint.setMaskFilter(new android.graphics.EmbossMaskFilter([1, 1, 0.3], 0.7, 8, 4 * getDisplayDensity()));
 	canvas.drawRect(0, 0, width, height, paint);
 	return new android.graphics.drawable.BitmapDrawable(bmp);
-}
+};
 
-function decodeBmp(string) {
-	string = android.util.Base64.decode(string, 0);
+const decodeBmp = function(string) {
+	if (android.os.Build.VERSION.SDK_INT >= 26) {
+		string = java.util.Base64.getDecoder().decode(java.lang.String(base64).getBytes());
+	} else {
+		string = android.util.Base64.decode(java.lang.String(base64).getBytes(), android.util.Base64.NO_WRAP);
+	}
 	return android.graphics.BitmapFactory.decodeByteArray(string, 0, string.length);
-}
+};
 
-function drawBorderBmp() {
+const drawBorderBmp = function() {
 	let bmp = android.graphics.Bitmap.createBitmap(settings.locationSize, settings.locationSize, android.graphics.Bitmap.Config.ARGB_8888),
 		canvas = new android.graphics.Canvas(bmp),
 		paint = new android.graphics.Paint();
@@ -27,16 +31,17 @@ function drawBorderBmp() {
 			paint.setARGB(255, 153, 135, 108);
 			break;
 		case 2:
-			paint.setShader(new android.graphics.LinearGradient(0, 0, settings.locationSize * 0.5, settings.locationSize, java.lang.Integer.valueOf(Colors.PRIMARY), java.lang.Integer.valueOf(Colors.ACCENT), android.graphics.Shader.TileMode.REPEAT));
+			paint.setShader(reflectNewLinearGradient(0, 0, settings.locationSize * 0.5, settings.locationSize,
+				Colors.PRIMARY, Colors.ACCENT, android.graphics.Shader.TileMode.REPEAT));
 			break;
 		default:
 			return null;
 	}
 	canvas.drawPath(createPath(true, true), paint);
 	return bmp;
-}
+};
 
-function createPath(outer, inner) {
+const createPath = function(outer, inner) {
 	let path = new android.graphics.Path(),
 		size = settings.locationSize;
 	path.setFillType(android.graphics.Path.FillType.EVEN_ODD);
@@ -48,13 +53,12 @@ function createPath(outer, inner) {
 			path.addCircle(size / 2, size / 2, size / 2, android.graphics.Path.Direction.CW);
 		}
 		return path;
-	} else {
-		if (inner) {
-			path.addRect(7 * getDisplayDensity(), 7 * getDisplayDensity(), size - (7 * getDisplayDensity()), size - (7 * getDisplayDensity()), android.graphics.Path.Direction.CW);
-		}
-		if (outer) {
-			path.addRect(0, 0, size, size, android.graphics.Path.Direction.CW);
-		}
-		return path;
 	}
-}
+	if (inner) {
+		path.addRect(7 * getDisplayDensity(), 7 * getDisplayDensity(), size - (7 * getDisplayDensity()), size - (7 * getDisplayDensity()), android.graphics.Path.Direction.CW);
+	}
+	if (outer) {
+		path.addRect(0, 0, size, size, android.graphics.Path.Direction.CW);
+	}
+	return path;
+};

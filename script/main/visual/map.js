@@ -6,6 +6,7 @@ bmpPaint.setAntiAlias(false);
 bmpPaint.setFilterBitmap(false);
 
 let map_state = false;
+let windowManager = getContext().getSystemService(android.content.Context.WINDOW_SERVICE);
 
 let mapWindow = (function() {
 	let btnSet = new android.widget.Button(getContext()),
@@ -138,12 +139,12 @@ let mapWindow = (function() {
 			return layout;
 		},
 		setInfo: function() {
-			acquire(function() {
+			handle(function() {
 				textInfo.setText(Math.floor(Player.getPosition().x) + ", " + Math.floor(Player.getPosition().y - 2) + ", " + Math.floor(Player.getPosition().z));
 			});
 		},
 		resetVisibility: function() {
-			acquire(function() {
+			handle(function() {
 				let visible = android.view.View.VISIBLE, gone = android.view.View.GONE;
 				if (map_state) {
 					btnSet.setVisibility(gone);
@@ -161,12 +162,16 @@ let mapWindow = (function() {
 			});
 		},
 		show: function() {
-			acquire(function() {
+			handle(function() {
 				mapWin.showAtLocation(getDecorView(), settings.locationGravity, 0, settings.locationOffset);
+				let container = mapWin.getContentView().getRootView();
+				let params = container.getLayoutParams();
+				params.flags |= android.view.WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED;
+				windowManager.updateViewLayout(container, params);
 			});
 		},
 		hide: function() {
-			acquire(function() {
+			handle(function() {
 				mapWin.dismiss();
 			});
 		}

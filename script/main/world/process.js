@@ -40,7 +40,9 @@ function scheduleChunk(xChunk, zChunk, delay) {
 				} while (iz -= 1);
 				iz = 16;
 			} while (ix -= 1);
-			if (java.lang.Thread.interrupted()) { return; }
+			if (java.lang.Thread.interrupted()) {
+				return;
+			}
 			try {
 				bmpSrcLock.acquire();
 				bmpSrc.setPixels(mapDotArray, 0, 16, ((Math.floor(Z / 16) + settings.radius + 1) * 16) - zChunk, xChunk - ((Math.floor(X / 16) - settings.radius - 1) * 16), 16, 16);

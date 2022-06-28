@@ -1,4 +1,4 @@
-function settingsUI() {
+const settingsUI = function() {
 	let textSize = 17,
 		padding = 10 * getDisplayDensity();
 	let print = new android.app.AlertDialog.Builder(getContext(),
@@ -8,7 +8,7 @@ function settingsUI() {
 		len = arguments[0].length,
 		rulerLp = new android.view.ViewGroup.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT, 2),
 		addOption = {
-			checkBox: function (args) {
+			checkBox: function(args) {
 				let layoutElement = new android.widget.RelativeLayout(getContext()),
 					checkBtn = new android.widget.CheckBox(getContext()),
 					checkBtnLp = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT),
@@ -18,9 +18,9 @@ function settingsUI() {
 				text.setTextSize(textSize);
 				text.setText(args[2]);
 				checkBtn.setId(1);
-				checkBtn.setChecked(Boolean(settings[args[1]]));
+				checkBtn.setChecked(!!settings[args[1]]);
 				checkBtn.setOnCheckedChangeListener(function(buttonView, isChecked) {
-					settings[args[1]] = Boolean(isChecked);
+					settings[args[1]] = !!isChecked;
 					settingsChanged(args[1]);
 				});
 				checkBtnLp.addRule(android.widget.RelativeLayout.ALIGN_PARENT_RIGHT);
@@ -33,7 +33,7 @@ function settingsUI() {
 				layoutElement.setPadding(padding, padding * 0.5, padding, padding * 0.5);
 				return layoutElement;
 			},
-			subScreen: function (args) {
+			subScreen: function(args) {
 				let text = new android.widget.TextView(getContext());
 				text.setTextSize(textSize);
 				text.setText("> " + args[1]);
@@ -44,7 +44,7 @@ function settingsUI() {
 				});
 				return text;
 			},
-			sectionDivider: function (args) {
+			sectionDivider: function(args) {
 				let text = new android.widget.TextView(getContext());
 				text.setTextSize(textSize * 0.9);
 				text.setText(args[1]);
@@ -53,7 +53,7 @@ function settingsUI() {
 				text.setPadding(padding, 0, padding, 0);
 				return text;
 			},
-			keyValue: function (args) {
+			keyValue: function(args) {
 				let layoutElement = new android.widget.RelativeLayout(getContext()),
 					text = new android.widget.TextView(getContext()),
 					textLp = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT),
@@ -68,7 +68,9 @@ function settingsUI() {
 				textValue.setId(1);
 				switch (args[1]) {
 					case "multipleChoice":
-						if (args[4].length <= settings[args[3]]) { settings[args[3]] = 0; }
+						if (args[4].length <= settings[args[3]]) {
+							settings[args[3]] = 0;
+						}
 						textValue.setText(args[4][settings[args[3]]]);
 						textValue.setOnClickListener(function(v) {
 							let print = new android.app.AlertDialog.Builder(getContext(),
@@ -125,7 +127,7 @@ function settingsUI() {
 						});
 						break;
 					default:
-						textValue.setText(String(args[3]));
+						textValue.setText("" + args[3]);
 						textValue.setOnClickListener(function() {
 						    if (args[4]) headerClicked(args[4]);
 						});
@@ -162,4 +164,4 @@ function settingsUI() {
 	popup.setLayout(getDisplayPercentWidth(60), android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
 	popup.setGravity(android.view.Gravity.LEFT | android.view.Gravity.BOTTOM);
 	return dialog;
-}
+};

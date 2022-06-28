@@ -4,10 +4,22 @@
     "use_legacy_entities":false,
     "button_size":40
   },
-  "runtime":{},
-  "indicator":{},
-  "location":{},
-  "stylesheet":{},
-  "performance":{},
-  "development":{}
+  "runtime":{
+    
+  },
+  "indicator":{
+    
+  },
+  "location":{
+    
+  },
+  "stylesheet":{
+    
+  },
+  "performance":{
+    
+  },
+  "development":{
+    
+  }
 }

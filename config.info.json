@@ -30,7 +30,7 @@
 		"initialization.use_legacy_entities": {
 			"name": {
 				"en": "Use Legacy Entities",
-				"ru": "Использовать старые отметки"
+				"ru": "Использовать старые указатели"
 			},
 			"description": {
 				"en": "Behold on use default entities icons, deprecated one stay in use. It's may increase performance, but certain entities indicators no longer can be displayed in map.",
@@ -48,6 +48,8 @@
 				"en": "Setups user interface elements scaling during modification initialization.",
 				"ru": "Используется при инициализации интерфейса для указания размеров элементов."
 			},
+			
+			"type": "SeekBar",
 			"index": 3
 		},
 		
