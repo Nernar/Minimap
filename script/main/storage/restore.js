@@ -44,7 +44,6 @@ const reloadSettings = function(source) {
 		mapLocation: getProtoBool(protoConfig, source, "development.location"),
 		mapZoomButton: getProtoBool(protoConfig, source, "development.zoom_button"),
 		developmentVisualize: getProtoBool(protoConfig, source, "development.show_process"),
-		checkNewestVersion: getProtoBool(protoConfig, source, "development.check_newest_version"),
 		radius: getProtoNumber(protoConfig, source, "performance.radius"),
 		priority: getProtoNumber(protoConfig, source, "performance.priority"),
 		delay: getProtoNumber(protoConfig, source, "performance.delay"),
@@ -55,13 +54,13 @@ const reloadSettings = function(source) {
 
 (function() {
 	protoConfig = new Config(__dir__ + "config.proto.json");
-	if (protoConfig.getNumber("version") != curVersion) {
+	if (protoConfig.getNumber("version") < REVISION) {
 		let file = new java.io.File(__dir__ + "config.proto.json");
 		if (file.exists()) {
 			file.delete();
 			protoConfig = new Config(file);
 		}
-		protoConfig.set("version", curVersion);
+		protoConfig.set("version", REVISION);
 	}
 	protoConfig.checkAndRestore(JSON.stringify({
 		runtime: {

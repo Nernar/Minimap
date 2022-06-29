@@ -45,8 +45,7 @@ const isAcceptableEntity = function(ent) {
 };
 
 const NAME = "" + __mod__.getInfoProperty("name");
-
-let curVersion = parseFloat(__mod__.getInfoProperty("version"));
+const REVISION = parseFloat(__mod__.getInfoProperty("version"));
 
 IMPORT("Retention");
 

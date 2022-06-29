@@ -19,38 +19,36 @@ let mapWindow = (function() {
 		textInfoLp = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT),
 		layout = new android.widget.RelativeLayout(getContext()),
 		mapWin = new android.widget.PopupWindow(layout, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT),
-		btnActions = {
-			set: function() {
-				if (!setWindow) {
-					setWindow = settingsUI([NAME, "Leave",
-						["sectionDivider", "Graphics"],
-							["keyValue", "multipleChoice", "Type", "mapType", ["Basic surface (fast)", "Surface", "Cave"]],
-							["keyValue", "slider", "Render distance", "radius", 1, 96, 1, " chunks"],
-							["keyValue", "slider", "Zoom", "mapZoom", 10, 100, 1, "%"],
-						["subScreen", "Icons and Indicators", ["Icons and Indicators", "Apply",
-							["sectionDivider", "Entity"],
-								["keyValue", "multipleChoice", "Pointer style", "stylesheetPointer", ["crosshairs", "arrow", "minecraft", "head"]],
-								["checkBox", "indicatorOnlySurface", "Hide entities below sea level"],
-								["checkBox", "indicatorLocal", "You"],
-								["checkBox", "indicatorPlayer", "Other players"],
-								["checkBox", "indicatorPassive", "Passive mobs"],
-								["checkBox", "indicatorHostile", "Hostile mobs"],
-							["sectionDivider", "Icon"],
-								["checkBox", "indicatorTile", "Chests"]]],
-						["sectionDivider", "View"],
-							["keyValue", "multipleChoice", "Position", "locationRawPosition", ["Top left", "Top left (offset)", "Top right", "Bottom left", "Bottom right"], "locationGravity", [51, 51, 53, 83, 85], "locationOffset", [0, 40 * getDisplayDensity(), 40 * getDisplayDensity(), 0, 0]],
-							["keyValue", "slider", "Size", "locationRawSize", 5, 100, 5, "%"],
-							["keyValue", "slider", "Opacity", "mapAlpha", 20, 100, 1, "%"],
-							["subScreen", "Controls", ["Controls", "Apply",
-								["keyValue", "text", "Button size", buttonSize + "dp"],
-								["checkBox", "mapLocation", "Coordinates visible"],
-								["checkBox", "mapZoomButton", "Zoom buttons visible"]]],
-							["checkBox", "mapRotation", "Spin with player"],
-						["sectionDivider", "Style"],
-							["keyValue", "multipleChoice", "Border style", "stylesheetBorder", ["None", "Simple", "Colourful"]],
-							["keyValue", "multipleChoice", "Window shape", "stylesheetShape", ["Square", "Circle"]],
-						["sectionDivider", "Other"],
-							["checkBox", "checkNewestVersion", "Check for updates " + (settings.updateVersion > curVersion ? "(update available)" : "")],
+		showConfigDialog = function() {
+			if (!setWindow) {
+				setWindow = settingsUI([NAME, "Leave",
+					["sectionDivider", "Graphics"],
+						["keyValue", "multipleChoice", "Type", "mapType", ["Basic surface (fast)", "Surface", "Cave"]],
+						["keyValue", "slider", "Render distance", "radius", 1, 96, 1, " chunks"],
+						["keyValue", "slider", "Zoom", "mapZoom", 10, 100, 1, "%"],
+					["subScreen", "Icons and Indicators", ["Icons and Indicators", "Apply",
+						["sectionDivider", "Entity"],
+							["keyValue", "multipleChoice", "Pointer style", "stylesheetPointer", ["crosshairs", "arrow", "minecraft", "head"]],
+							["checkBox", "indicatorOnlySurface", "Hide entities below sea level"],
+							["checkBox", "indicatorLocal", "You"],
+							["checkBox", "indicatorPlayer", "Other players"],
+							["checkBox", "indicatorPassive", "Passive mobs"],
+							["checkBox", "indicatorHostile", "Hostile mobs"],
+						["sectionDivider", "Icon"],
+							["checkBox", "indicatorTile", "Chests"]]],
+					["sectionDivider", "View"],
+						["keyValue", "multipleChoice", "Position", "locationRawPosition", ["Top left", "Top left (offset)", "Top right", "Bottom left", "Bottom right"], "locationGravity", [51, 51, 53, 83, 85], "locationOffset", [0, 40 * getDisplayDensity(), 40 * getDisplayDensity(), 0, 0]],
+						["keyValue", "slider", "Size", "locationRawSize", 5, 100, 5, "%"],
+						["keyValue", "slider", "Opacity", "mapAlpha", 20, 100, 1, "%"],
+						["subScreen", "Controls", ["Controls", "Apply",
+							["keyValue", "text", "Button size", buttonSize + "dp"],
+							["checkBox", "mapLocation", "Coordinates visible"],
+							["checkBox", "mapZoomButton", "Zoom buttons visible"]]],
+						["checkBox", "mapRotation", "Spin with player"],
+					["sectionDivider", "Style"],
+						["keyValue", "multipleChoice", "Border style", "stylesheetBorder", ["None", "Simple", "Colourful"]],
+						["keyValue", "multipleChoice", "Window shape", "stylesheetShape", ["Square", "Circle"]],
+					["sectionDivider", "Other"],
 						["subScreen", "Advanced", ["Advanced", "Apply",
 							["keyValue", "multipleChoice", "Thread optimization", "priority", ["Background", "Foreground", "No optimization"]],
 							["keyValue", "slider", "Max frequency", "delay", 1, 40, 1, " fps"],
@@ -58,15 +56,14 @@ let mapWindow = (function() {
 							["checkBox", "developmentVisualize", "Debug pool process"]]],
 						["subScreen", "About " + NAME,
 							[NAME + " " + __mod__.getInfoProperty("version"), "Understood",
-								["keyValue", "text", "Revision ", curVersion.toFixed(1)],
+								["keyValue", "text", "Revision ", REVISION],
 								["keyValue", "text", "Developed by ", "Nernar"],
 								["keyValue", "text", "Inspired by ", "MxGoldo"],
 								["keyValue", "text", "Location ", new java.io.File(__dir__).getName() + "/"],
 								["keyValue", "text", "<a href=https://t.me/ntInsideChat>t.me</a> development channel", ""]]],
 						["keyValue", "text", "Refresh canvas", "", "forceRefresh"]]).show();
-				} else {
-					setWindow.show();
-				}
+			} else {
+				setWindow.show();
 			}
 		};
 	bmpPaint.setXfermode(new android.graphics.PorterDuffXfermode(android.graphics.PorterDuff.Mode.SRC));
@@ -77,7 +74,7 @@ let mapWindow = (function() {
 		changeMapState();
 	});
 	mapView.setOnLongClickListener(function(v) {
-		btnActions.set();
+		showConfigDialog();
 		return true;
 	});
 	btnSet.setBackgroundResource(android.R.drawable.ic_menu_mylocation);
@@ -87,7 +84,7 @@ let mapWindow = (function() {
 		changeMapState();
 	});
 	btnSet.setOnLongClickListener(function(v) {
-		btnActions.set();
+		showConfigDialog();
 		return true;
 	});
 	textInfo.setId(2);

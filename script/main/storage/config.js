@@ -124,13 +124,6 @@ const settingsChanged = function(key) {
 				});
 			}
 			break;
-		case "checkNewestVersion":
-			if (settings.checkNewestVersion) {
-				handleThread(function() {
-					checkUpdateNow();
-				});
-			}
-			break;
 	}
 };
 
@@ -189,7 +182,6 @@ const saveSettings = function() {
 	setConfigOptionIfNeeded(protoConfig, "development.location", settings.mapLocation);
 	setConfigOptionIfNeeded(protoConfig, "development.zoom_button", settings.mapZoomButton);
 	setConfigOptionIfNeeded(protoConfig, "development.show_process", settings.developmentVisualize);
-	setConfigOptionIfNeeded(protoConfig, "development.check_newest_version", settings.checkNewestVersion);
 	setConfigOptionIfNeeded(protoConfig, "performance.radius", settings.radius);
 	setConfigOptionIfNeeded(protoConfig, "performance.priority", settings.priority);
 	setConfigOptionIfNeeded(protoConfig, "performance.delay", settings.delay);
