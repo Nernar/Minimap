@@ -6,28 +6,31 @@
   },
   "runtime":{
     "rotation":true,
-    "zoom":55,
-    "type":0
+    "zoom":32,
+    "type":0,
+    "translucent":75
   },
   "indicator":{
     "tile":false,
-    "only_surface":false
+    "only_surface":false,
+    "hostile":true
   },
   "location":{
-    "raw_size":60,
+    "raw_size":50,
     "raw_position":2,
     "gravity":53,
     "offset":70
   },
   "stylesheet":{
-    "border":1,
-    "shape":1
+    "border":0,
+    "shape":1,
+    "pointer":3
   },
   "performance":{
-    "delay":1,
+    "delay":40,
     "thread":1,
-    "radius":7,
-    "priority":0
+    "radius":14,
+    "priority":1
   },
   "development":{
     "show_process":false,

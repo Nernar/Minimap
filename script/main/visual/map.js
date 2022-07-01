@@ -9,73 +9,99 @@ let map_state = false;
 let windowManager = getContext().getSystemService(android.content.Context.WINDOW_SERVICE);
 
 let mapWindow = (function() {
-	let btnSet = new android.widget.Button(getContext()),
-		textInfo = new android.widget.TextView(getContext()),
-		mapLp = new android.widget.RelativeLayout.LayoutParams(settings.locationSize, settings.locationSize),
-		textInfoLp = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT),
-		layout = new android.widget.RelativeLayout(getContext()),
-		mapWin = new android.widget.PopupWindow(layout, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT),
-		showConfigDialog = function() {
-			if (!setWindow) {
-				setWindow = settingsUI([NAME, "Leave",
-					["sectionDivider", "Graphics"],
-						["keyValue", "multipleChoice", "Type", "mapType", ["Monochromatic", "Surface", "Underground"]],
-						["keyValue", "slider", "Render distance", "radius", 1, 96, 1, " chunks"],
-						["keyValue", "slider", "Zoom", "mapZoom", 10, 100, 1, "%"],
-					["subScreen", "Icons and Indicators", ["Icons and Indicators", "Apply",
-						["sectionDivider", "Entity"],
-							["keyValue", "multipleChoice", "Pointer style", "stylesheetPointer", ["crosshairs", "arrow", "minecraft", "head"]],
-							["checkBox", "indicatorOnlySurface", "Hide entities below sea level"],
-							["checkBox", "indicatorLocal", "Yourself"],
-							["checkBox", "indicatorPlayer", "Other players"],
-							["checkBox", "indicatorPassive", "Passive mobs"],
-							["checkBox", "indicatorHostile", "Hostile mobs"],
-						["sectionDivider", "Icon"],
-							["checkBox", "indicatorTile", "Containers"]]],
-					["sectionDivider", "View"],
-						["keyValue", "multipleChoice", "Position", "locationRawPosition", ["Top left", "Top left (offset)", "Top right", "Bottom left", "Bottom right"], "locationGravity", [51, 51, 53, 83, 85], "locationOffset", [0, 40 * getDisplayDensity(), 40 * getDisplayDensity(), 0, 0]],
-						["keyValue", "slider", "Size", "locationRawSize", 20, 100, 5, "%"],
-						["keyValue", "slider", "Opacity", "mapAlpha", 20, 100, 1, "%"],
-						["subScreen", "Controls", ["Controls", "Apply",
-							["keyValue", "text", "Button size", buttonSize + "dp"],
-							["checkBox", "mapLocation", "Coordinates visible"]]],
-						["checkBox", "mapRotation", "Spin with player"],
-					["sectionDivider", "Style"],
-						["keyValue", "multipleChoice", "Border style", "stylesheetBorder", ["None", "Simple", "Colourful"]],
-						["keyValue", "multipleChoice", "Window shape", "stylesheetShape", ["Square", "Circle"]],
-					["sectionDivider", "Other"],
-						["subScreen", "Advanced", ["Advanced", "Apply",
-							["keyValue", "multipleChoice", "Thread optimization", "priority", ["Background", "Foreground", "No optimization"]],
-							["keyValue", "slider", "Max frequency", "delay", 1, 40, 1, " fps"],
-							["keyValue", "slider", "Threads count", "thread", 1, 12, 1, ""],
-							["checkBox", "developmentVisualize", "Display background processes"]]],
-						["keyValue", "text", "Refresh canvas", "", "forceRefresh"],
-						["subScreen", "Reset to defaults", ["Reset to defaults", "I don't like this",
-							["keyValue", "text", "You are about to RESET minimap, all memories and user information will be lost.", ""],
-							["keyValue", "text", "Way points are stored in worlds and will not be affected.", ""],
-							["keyValue", "text", "<br/><b><font color=\"red\">RESET</font></b><br/>", "", "resetConfig"]]],
-						["subScreen", "About " + NAME,
-							[NAME + " " + __mod__.getInfoProperty("version"), "Understood",
-								["keyValue", "text", "Revision ", REVISION.toFixed(1)],
-								["keyValue", "text", "Developed by ", "Nernar"],
-								["keyValue", "text", "Inspired by ", "MxGoldo"],
-								["keyValue", "text", "Location ", new java.io.File(__dir__).getName() + "/"],
-								["keyValue", "text", "<a href=https://t.me/ntInsideChat>t.me</a> development channel", ""]]]]).show();
-			} else {
-				setWindow.show();
-			}
-		};
+	let showConfigDialog = function() {
+		if (!setWindow) {
+			setWindow = settingsUI([NAME, "Leave",
+				["sectionDivider", "Rendering"],
+					["keyValue", "multipleChoice", "Type", "mapType", ["Monochromatic", "Surface", "Underground"]],
+					["keyValue", "slider", "Render distance", "radius", 1, 96, 1, " chunks"],
+					["keyValue", "slider", "Zoom", "mapZoom", 10, 100, 1, "%"],
+				["subScreen", "Icons / Indicators", ["Icons / Indicators", "Apply",
+					["sectionDivider", "Entity"],
+						["keyValue", "multipleChoice", "Pointer style", "stylesheetPointer", ["Crosshair", "Arrow", "Map", "Head"]],
+						["checkBox", "indicatorOnlySurface", "Hide entities below sea level"],
+						["checkBox", "indicatorLocal", "Yourself"],
+						["checkBox", "indicatorPlayer", "Multiplayer"],
+						["checkBox", "indicatorPassive", "Passive / Friendly"],
+						["checkBox", "indicatorHostile", "Hostile"],
+					["sectionDivider", "Marks"],
+						["checkBox", "indicatorTile", "Container"],
+						["checkBox", "indicatorTile", "Waypoint"]]],
+				["sectionDivider", "Window"],
+					["keyValue", "multipleChoice", "Position", "locationRawPosition", ["Top left", "Top left (offset)", "Top right", "Bottom left", "Bottom right"], "locationGravity", [51, 51, 53, 83, 85], "locationOffset", [0, 40 * getDisplayDensity(), 40 * getDisplayDensity(), 0, 0]],
+					["keyValue", "slider", "Size", "locationRawSize", 20, 100, 5, "%"],
+					["keyValue", "slider", "Opacity", "mapAlpha", 20, 100, 1, "%"],
+					["subScreen", "Controls", ["Controls", "Apply",
+						["keyValue", "text", "Button size", buttonSize + "dp"],
+						["checkBox", "mapLocation", "Coordinates visible"]]],
+					["checkBox", "mapRotation", "Spin with player"],
+				["sectionDivider", "Style"],
+					["keyValue", "multipleChoice", "Border style", "stylesheetBorder", ["None", "Simple", "Colourful"]],
+					["keyValue", "multipleChoice", "Window shape", "stylesheetShape", ["Square", "Circle"]],
+				["sectionDivider", "Other"],
+					["subScreen", "Advanced", ["Advanced", "Apply",
+						["keyValue", "multipleChoice", "Thread optimization", "priority", ["Background", "Foreground", "No optimization"]],
+						["keyValue", "slider", "Max frequency", "delay", 1, 40, 1, " fps"],
+						["keyValue", "slider", "Threads count", "thread", 1, 12, 1, ""],
+						["checkBox", "developmentVisualize", "Display background processes"]]],
+					["keyValue", "text", "Refresh canvas", "", "forceRefresh"],
+					["subScreen", "Reset to defaults", ["Reset to defaults", "I don't like this",
+						["keyValue", "text", "You are about to RESET minimap, all memories and user information will be lost.", ""],
+						["keyValue", "text", "Way points are stored in worlds and will not be affected.", ""],
+						["keyValue", "text", "<br/>Yes, I really want to <b><font color=\"red\">RESET</font></b><br/>", "", "resetConfig"]]],
+					["subScreen", "About " + NAME,
+						[NAME + " " + __mod__.getInfoProperty("version"), "Understood",
+							["keyValue", "text", "Revision ", REVISION.toFixed(1)],
+							["keyValue", "text", "Developed by ", "Nernar"],
+							["keyValue", "text", "Inspired by ", "MxGoldo"],
+							["keyValue", "text", "Location ", new java.io.File(__dir__).getName() + "/"],
+							["keyValue", "text", "<a href=https://t.me/ntInsideChat>t.me</a> development channel", ""]]]]).show();
+		} else {
+			setWindow.show();
+		}
+	};
+	let layout = new android.widget.RelativeLayout(getContext());
+	let mapWin = new android.widget.PopupWindow(layout, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, android.widget.LinearLayout.LayoutParams.WRAP_CONTENT);
 	bmpPaint.setXfermode(new android.graphics.PorterDuffXfermode(android.graphics.PorterDuff.Mode.SRC));
 	mapView.setId(1);
 	mapView.setVisibility(android.view.View.GONE);
+	let mapLp = new android.widget.RelativeLayout.LayoutParams(settings.locationSize, settings.locationSize);
 	mapLp.addRule(android.widget.RelativeLayout.ALIGN_PARENT_TOP);
-	mapView.setOnClickListener(function(v) {
-		changeMapState();
+	handle(function() {
+		mapView.setOnClickListener(function(v) {
+			changeMapState();
+		});
+		mapView.setOnLongClickListener(function(v) {
+			showConfigDialog();
+			return true;
+		});
+		let mScaleFactor = 1.;
+		let mRequiredStandartAction = false;
+		let mScaleGestureDetector = new android.view.ScaleGestureDetector(getContext(), new JavaAdapter(android.view.ScaleGestureDetector.SimpleOnScaleGestureListener, android.view.ScaleGestureDetector.OnScaleGestureListener, {
+			onScale: function(scaleGestureDetector) {
+				mScaleFactor *= scaleGestureDetector.getScaleFactor();
+				mScaleFactor = Math.max(1.0, Math.min(mScaleFactor, 10.0));
+				let mPrescaledZoom = Math.round(mScaleFactor * 10);
+				if (mPrescaledZoom != settings.mapZoom) {
+					settings.mapZoom = mPrescaledZoom;
+					settingsChanged("mapZoom");
+					mRequiredStandartAction = true;
+				}
+				return true;
+			}
+		}));
+		mapView.setOnTouchListener(function(mView, event) {
+			mScaleGestureDetector.onTouchEvent(event)
+			if (event.getAction() == android.view.MotionEvent.ACTION_DOWN) {
+				mRequiredStandartAction = false;
+				return false;
+			} else if (event.getAction() == android.view.MotionEvent.ACTION_UP) {
+				return mRequiredStandartAction;
+			}
+			return true;
+		});
 	});
-	mapView.setOnLongClickListener(function(v) {
-		showConfigDialog();
-		return true;
-	});
+	let btnSet = new android.widget.Button(getContext());
 	btnSet.setBackgroundResource(android.R.drawable.ic_menu_mylocation);
 	btnSet.setVisibility(android.view.View.VISIBLE);
 	btnSet.setLayoutParams(new android.widget.LinearLayout.LayoutParams(buttonSize * getDisplayDensity(), buttonSize * getDisplayDensity()));
@@ -86,9 +112,11 @@ let mapWindow = (function() {
 		showConfigDialog();
 		return true;
 	});
+	let textInfo = new android.widget.TextView(getContext());
 	textInfo.setId(2);
 	textInfo.setVisibility(android.view.View.GONE);
 	textInfo.setGravity(android.view.Gravity.CENTER);
+	let textInfoLp = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
 	textInfoLp.addRule(android.widget.RelativeLayout.BELOW, 1);
 	textInfoLp.addRule(android.widget.RelativeLayout.ALIGN_LEFT, 1);
 	textInfoLp.addRule(android.widget.RelativeLayout.ALIGN_RIGHT, 1);
@@ -111,20 +139,21 @@ let mapWindow = (function() {
 		},
 		setInfo: function() {
 			handle(function() {
-				textInfo.setText(Math.floor(Player.getPosition().x) + ", " + Math.floor(Player.getPosition().y - 2) + ", " + Math.floor(Player.getPosition().z));
+				let position = Player.getPosition();
+				textInfo.setText(Math.floor(position.x) + ", " + Math.floor(position.y - 2) + ", " + Math.floor(position.z));
 			});
 		},
 		resetVisibility: function() {
 			handle(function() {
-				let visible = android.view.View.VISIBLE, gone = android.view.View.GONE;
 				if (map_state) {
-					btnSet.setVisibility(gone);
-					mapView.setVisibility(visible);
-					textInfo.setVisibility(settings.mapLocation ? visible : gone);
+					btnSet.setVisibility(android.view.View.GONE);
+					mapView.setVisibility(android.view.View.VISIBLE);
+					textInfo.setVisibility(settings.mapLocation ?
+						android.view.View.VISIBLE : android.view.View.GONE);
 				} else {
-					btnSet.setVisibility(visible);
-					mapView.setVisibility(gone);
-					textInfo.setVisibility(gone);
+					btnSet.setVisibility(android.view.View.VISIBLE);
+					mapView.setVisibility(android.view.View.GONE);
+					textInfo.setVisibility(android.view.View.GONE);
 				}
 			});
 		},

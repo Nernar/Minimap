@@ -1,6 +1,74 @@
+const mapDotFauna = [
+	6, // saplings
+	20, // glass
+	31, // grass
+	32, // dead grass
+	37, // yellow flower
+	38, // flowers
+	39, // mushroom
+	40, // fly agaric
+	50, // torch
+	59, // wheat
+	74, // unlit redstone torch
+	75, // lit redstone torch
+	76, // redstone torch
+	77, // stone button
+	95, // invisible bedrock
+	102, // glass panel
+	104, // pumpkin sprout
+	105, // watermelon sprout
+	106, // creeper
+	127, // cocoa
+	132, // string
+	141, // carrot
+	142, // potato
+	143, // wooden button
+	175, // sunflower, roses, tall grasses
+	191, // colored glass panel
+	199, // frame
+	202, // chemkstry red torch
+	204, // chemistry blue torch
+	217, // structure void
+	239, // chemistry underwater torch
+	241, // colored glass
+	244, // beetroot
+	250, // some tech
+	253, // tinted glass
+	254, // tinted colored glass
+	385, // sea grass
+	386, // coral fan
+	388, // mosses
+	389, // colored mosses
+	390, // lichens
+	391, // lichens
+	392, // lichens
+	393, // kelp
+	395, // acacia button
+	396, // birch button
+	397, // dark oak button
+	398, // jungle button
+	399, // spruce button
+	411, // sea pickles
+	415, // bubbles
+	416, // barrier
+	419, // bamboo sapling
+	470, // light block
+	478, // red nether grass
+	479, // blue nether grass
+	483, // red nether mushroom
+	484, // blue nether mushroom
+	486, // nether roots
+	493, // blue small nether grass
+	515, // red nether button
+	516, // blue nether button
+	523, // soul torch
+	542, // nether germ
+	551 // nether bastion button
+];
+
 const mapDot = [
 	function monochromaticColormap(ix, iz) {
-		let iy = 130;
+		let iy = 256;
 		let deltaY = 10;
 		do {
 			let block = World.getBlockID(ix, iy - 10, iz);
@@ -9,7 +77,9 @@ const mapDot = [
 					deltaY = 1;
 					iy += 10;
 				} else {
-					return (colormap[block] ? colormap[block][World.getBlockData(ix, iy, iz)] : 0) || -1;
+					if (mapDotFauna.indexOf(block) == -1) {
+						return (colormap[block] ? colormap[block][World.getBlockData(ix, iy, iz)] : 0) || -1;
+					}
 				}
 			}
 		} while (iy -= deltaY);
@@ -17,7 +87,7 @@ const mapDot = [
 	},
 	function surfaceHeightMap(ix, iz) {
 		let color = 0;
-		let iy = 130;
+		let iy = 256;
 		let deltaY = 10;
 		do {
 			let block = World.getBlockID(ix, iy, iz);
@@ -64,7 +134,10 @@ const mapDot = [
 						color = [0x6f6f6f, 0xf4e6a1, 0x8d7647, 0x6f6f6f, 0x973232, 0x6f6f6f, 0xfcfcfc, 0x6f0200, 0x6f6f6f, 0xf4e6a1, 0x8d7647, 0x6f6f6f, 0x973232, 0x6f6f6f, 0xfcfcfc, 0x6f0200][World.getBlockData(ix, iy - 10, iz)];
 						break;
 					default:
-						color = (colormap[block] ? -colormap[block][World.getBlockData(ix, iy, iz)] : 0) || 1;
+						if (mapDotFauna.indexOf(block) != -1) {
+							continue;
+						}
+						color = (colormapHex[block] ? colormapHex[block][World.getBlockData(ix, iy, iz)] : 0) || 0;
 				}
 				if (World.getBlockID(ix - 1, iy - 2, iz)) {
 					return reflectColorRgb(android.graphics.Color.red(color) * 0.703125, android.graphics.Color.green(color) * 0.703125, android.graphics.Color.blue(color) * 0.703125);
@@ -74,75 +147,75 @@ const mapDot = [
 				}
 				return reflectColorRgb(android.graphics.Color.red(color), android.graphics.Color.green(color), android.graphics.Color.blue(color));
 			}
-		} while (iy -= deltaY);
+		} while ((iy -= deltaY) > 0);
 		return 0;
 	},
 	function undergroundMap(ix, iz) {
 		let count = 0;
 		let block = 1;
 		let blockNew;
-		let iy = 62;
-		let y = 0;
-		let r = 0;
-		let g = 0;
-		let b = 0;
+		let iy = 128;
+		let y = iy;
+		let r;
+		let g;
+		let b;
 		let increment = 3;
 		do {
 			blockNew = World.getBlockID(ix, iy - 3, iz);
-			switch (blockNew) {
-				case 0:
-				case 17:
-				case 18:
-				case 20:
-				case 50:
-				case 64:
-				case 66:
-				case 106:
-				case 127:
-				case 161:
-				case 162:
-					blockNew = 1;
-					break;
-				case 8:
-				case 9:
-					blockNew = 0;
-					if (count > 1) {
-						r = r || 1;
-						g = g || 1;
-						b = b || 255;
+			if (mapDotFauna.indexOf(blockNew) == -1) {
+				switch (blockNew) {
+					case 0:
+					case 17:
+					case 18:
+					case 64:
+					case 66:
+					case 161:
+					case 162:
 						blockNew = 1;
-					}
-					break;
-				case 10:
-				case 11:
-					blockNew = 0;
-					if (count > 1) {
-						r = r || 255;
-						g = g || 1;
-						b = b || 1;
-						blockNew = 1;
-					}
-					break;
-				case 4:
-				case 48:
-					blockNew = 2;
-					if (count > 2) {
-						r = r || 1;
-						g = g || 255;
-						b = b || 255;
-					}
-					break;
-				case 97:
-				case 98:
-					blockNew = 2;
-					if (count > 2) {
-						r = r || 255;
-						g = g || 1;
-						b = b || 255;
-					}
-					break;
-				default:
-					blockNew = 2;
+						break;
+					case 8:
+					case 9:
+						blockNew = 0;
+						if (count > 1) {
+							r = r || 1;
+							g = g || 1;
+							b = b || 255;
+							blockNew = 1;
+						}
+						break;
+					case 10:
+					case 11:
+						blockNew = 0;
+						if (count > 1) {
+							r = r || 255;
+							g = g || 1;
+							b = b || 1;
+							blockNew = 1;
+						}
+						break;
+					case 4:
+					case 48:
+						blockNew = 2;
+						if (count > 2) {
+							r = r || 1;
+							g = g || 255;
+							b = b || 255;
+						}
+						break;
+					case 97:
+					case 98:
+						blockNew = 2;
+						if (count > 2) {
+							r = r || 255;
+							g = g || 1;
+							b = b || 255;
+						}
+						break;
+					default:
+						blockNew = 2;
+				}
+			} else {
+				blockNew = 1;
 			}
 			if (blockNew != block) {
 				count += blockNew;
@@ -160,14 +233,8 @@ const mapDot = [
 				return reflectColorRgb(r * (0.8 * (y / 127) + 0.2), g * (0.9 * (y / 127) + 0.1), b * (0.9 * (y / 127) + 0.1));
 			}
 			block = blockNew;
-			if (iy < 0 || iy > 127) {
-				break;
-			}
-		} while (iy -= increment);
+		} while ((iy -= increment) > 0);
 		y = y || 127;
-		r = 255;
-		g = 255;
-		b = 255;
-		return reflectColorRgb(r * (0.8 * (y / 127) + 0.2), g * (0.8 * (y / 127) + 0.2), b * (0.8 * (y / 127) + 0.2));
+		return reflectColorRgb(255 * (y / 127), 255 * (y / 127), 255 * (y / 127));
 	}
 ];

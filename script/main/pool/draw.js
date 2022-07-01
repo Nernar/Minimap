@@ -23,7 +23,7 @@ var redraw = false,
 			}
 			let xNew = Player.getPosition().x,
 				zNew = Player.getPosition().z,
-				yawNew = Entity.getLookAngle(Player.get()).yaw / 3.1415 * 180 - 90,
+				yawNew = Entity.getLookAngle(Player.get()).yaw / Math.PI * 180 - 90,
 				xChunkNew,
 				zChunkNew,
 				xChunkOld,
@@ -141,7 +141,7 @@ var redraw = false,
 					while (i--) {
 						if (!settings.indicatorOnlySurface || Entity.getPosition(entities[i]).y > 60) {
 							id = Entity.getType(entities[i])
-							let yaw = Entity.getLookAngle(entities[i]).yaw / 3.1415 * 180 - 90
+							let yaw = style_pointer == 3 ? settings.mapRotation ? YAW : 0 : Entity.getLookAngle(entities[i]).yaw / Math.PI * 180 - 90
 							if (style_pointer != 3) {
 								if (ENTITY_PASSIVE.indexOf(id) >= 0 && settings.indicatorPassive) {
 									matrixPointer.reset();

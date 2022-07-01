@@ -36,7 +36,7 @@ const settingsUI = function() {
 			subScreen: function(args) {
 				let text = new android.widget.TextView(getContext());
 				text.setTextSize(textSize);
-				text.setText("> " + args[1]);
+				text.setText(args[1]);
 				text.setTextColor(Colors.LTGRAY);
 				text.setPadding(padding, padding, padding, padding);
 				text.setOnClickListener(function(v) {
@@ -72,7 +72,7 @@ const settingsUI = function() {
 							settings[args[3]] = 0;
 						}
 						textValue.setText(args[4][settings[args[3]]]);
-						textValue.setOnClickListener(function(v) {
+						layoutElement.setOnClickListener(function(v) {
 							let print = new android.app.AlertDialog.Builder(getContext(),
 									android.R.style.Theme_DeviceDefault_Dialog);
 							print.setSingleChoiceItems(args[4], settings[args[3]], function(parent, position, id) {
@@ -99,17 +99,17 @@ const settingsUI = function() {
 						break;
 					case "slider":
 						textValue.setText(settings[args[3]] + args[7]);
-						textValue.setOnClickListener(function(v) {
+						layoutElement.setOnClickListener(function(v) {
 							let print = new android.app.AlertDialog.Builder(getContext(),
 									android.R.style.Theme_DeviceDefault_Dialog),
 								seekBar = new android.widget.SeekBar(getContext());
 							seekBar.setMax((args[5] - args[4]) / args[6]);
 							seekBar.setProgress((settings[args[3]] - args[4]) / args[6]);
-							seekBar.setOnSeekBarChangeListener(new android.widget.SeekBar.OnSeekBarChangeListener({
+							seekBar.setOnSeekBarChangeListener({
 								onProgressChanged: function(seekBar, progress, fromUser) {
 									print.setTitle(args[2] + "  " + (progress * args[6] + args[4]) + args[7]);
 								}
-							}));
+							});
 							print.setView(seekBar);
 							print.setTitle(args[2] + "  " + settings[args[3]] + args[7]);
 							print.setPositiveButton("Apply", function(dialog, whichButton) {
@@ -128,7 +128,7 @@ const settingsUI = function() {
 						break;
 					default:
 						textValue.setText("" + args[3]);
-						textValue.setOnClickListener(function() {
+						layoutElement.setOnClickListener(function(v) {
 						    if (args[4]) {
 						    	settingsChanged(args[4]);
 						    	print.dismiss();

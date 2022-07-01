@@ -41,10 +41,21 @@ let colormap = (function(what) {
 	return what;
 })({});
 
+let colormapHex = (function(what) {
+	for (let element in colormap) {
+		what[element] = [];
+		for (let i = 0; i < colormap[element].length; i++) {
+			what[element][i] = java.lang.Integer.decode(java.lang.String.format("0x%06X", java.lang.Integer.valueOf(0xFFFFFF & colormap[element][i])));
+		}
+	}
+	return what;
+})({});
+
 Callback.addCallback("BlocksDefined", function() {
 	for (let element in BlockID) {
 		if (colormapRaw.hasOwnProperty(element)) {
 			colormap[BlockID[element]] = colormapRaw[element];
+			colormapHex[BlockID[element]] = java.lang.Integer.decode(java.lang.String.format("0x%06X", java.lang.Integer.valueOf(0xFFFFFF & colormapRaw[element])));
 			continue;
 		}
 		Logger.Log("Minimap: not found color for block " + element, "DEBUG");
