@@ -1,18 +1,9 @@
 let settings = {};
 
-const headerClicked = function(key) {
-	switch (key) {
-		case "forceRefresh":
-			mapWindow.hide();
-			refresh = true;
-			mapWindow.show();
-			break;
-	}
-};
-
 const settingsChanged = function(key) {
 	switch (key) {
 		case "radius":
+		case "forceRefresh":
 			let widthOld = bmpSrc.getWidth(),
 				widthNew = ((settings.radius + 1) * 2 + 1) * 16,
 				xChunk = Math.floor(X / 16) * 16,
@@ -107,12 +98,13 @@ const settingsChanged = function(key) {
 			redraw = true;
 			break;
 		case "mapLocation":
-		case "mapZoomButton":
 			mapWindow.resetVisibility();
 			break;
 		case "delay":
-			scheduledFutureUpdateMap.cancel(false);
-			scheduledFutureUpdateMap = poolTick.scheduleWithFixedDelay(runnableUpdateMap, 1000, Math.round(1000 / settings.delay), java.util.concurrent.TimeUnit.MILLISECONDS);
+			if (scheduledFutureUpdateMap) {
+				scheduledFutureUpdateMap.cancel(false);
+				scheduledFutureUpdateMap = poolTick.scheduleWithFixedDelay(runnableUpdateMap, 1000, Math.round(1000 / settings.delay), java.util.concurrent.TimeUnit.MILLISECONDS);
+			}
 			break;
 		case "thread":
 			pool.setCorePoolSize(settings.thread);
@@ -124,11 +116,20 @@ const settingsChanged = function(key) {
 				});
 			}
 			break;
+		case "resetConfig":
+			restoreSettings(true);
+			if (setWindow) {
+				setWindow.dismiss();
+				setWindow = null;
+			}
+			break;
+		default:
+			Logger.Log("Minimap: option " + key + " will be changed in future", "MOD");
 	}
 };
 
 const checkRenderDistance = function() {
-	let options = load(android.os.Environment.getExternalStorageDirectory().getPath() + "/games/" + (getCoreAPILevel() > 8 ? "horizon" : "com.mojang") + "/minecraftpe/", "options.txt");
+	let options = load(android.os.Environment.getExternalStorageDirectory() + "/games/com.mojang/minecraftpe/", "options.txt");
 	if (options != "") {
 		options = options.split("\n");
 		if (!options) {
@@ -136,7 +137,7 @@ const checkRenderDistance = function() {
 		}
 		for (let i = 0; i < options.length; i += 1) {
 			options[i] = options[i].split(":");
-			if (getCoreAPILevel() > 8) {
+			if (isHorizon) {
 				if (options[i][0] == "gfx_viewdistance") {
 					return Math.round(parseInt(options[i][1], 10) / 16);
 				}
@@ -180,13 +181,10 @@ const saveSettings = function() {
 	setConfigOptionIfNeeded(protoConfig, "stylesheet.pointer", settings.stylesheetPointer);
 	setConfigOptionIfNeeded(protoConfig, "stylesheet.shape", settings.stylesheetShape);
 	setConfigOptionIfNeeded(protoConfig, "development.location", settings.mapLocation);
-	setConfigOptionIfNeeded(protoConfig, "development.zoom_button", settings.mapZoomButton);
 	setConfigOptionIfNeeded(protoConfig, "development.show_process", settings.developmentVisualize);
 	setConfigOptionIfNeeded(protoConfig, "performance.radius", settings.radius);
 	setConfigOptionIfNeeded(protoConfig, "performance.priority", settings.priority);
 	setConfigOptionIfNeeded(protoConfig, "performance.delay", settings.delay);
 	setConfigOptionIfNeeded(protoConfig, "performance.thread", settings.thread);
-	setConfigOptionIfNeeded(protoConfig, "development.update_version", settings.updateVersion);
-	setConfigOptionIfNeeded(protoConfig, "development.update_changelog", settings.updateChangelog);
 	__config__.save();
 };

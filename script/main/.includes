@@ -5,10 +5,11 @@ storage/config.js
 storage/restore.js
 storage/space.js
 
-visual/widget.js
 visual/drawable.js
 visual/config.js
 visual/map.js
+
+terrain/colormap.js
 
 pool/handle.js
 pool/draw.js

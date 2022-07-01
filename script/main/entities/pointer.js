@@ -74,7 +74,7 @@ let pointer = [
 		true
 	),
 	new MatrixPointer(
-		android.graphics.BitmapFactory.decodeFile(__dir__ + "resource/arrow.png"),
+		android.graphics.BitmapFactory.decodeFile(__dir__ + "assets/arrow.png"),
 		function(bitmap) {
 			let dx = bitmap.getWidth() / 5,
 				dy = bitmap.getHeight() / 7,
@@ -84,37 +84,8 @@ let pointer = [
 			return matrix;
 		},
 		true
-	),
-	new MatrixPointer(
-		android.graphics.BitmapFactory.decodeFile(__dir__ + "resource/chest.png"),
-		function(bitmap) {
-			let dx = bitmap.getWidth() / 16,
-				dy = bitmap.getHeight() / 16,
-				matrix = new android.graphics.Matrix();
-			matrix.setTranslate(-8 * dx, -8 * dy);
-			matrix.postScale(getDisplayHeight() * 0.0012 / dx, getDisplayHeight() * 0.0012 / dy);
-			return matrix;
-		},
-		false
 	)
 ];
-
-let arrow = android.graphics.BitmapFactory.decodeFile(__dir__ + "resource/head.png");
-
-const headArrow = function(string) {
-	return createHeadInArrow(decodeBmp(string));
-};
-
-const createHeadInArrow = function(bitmap) {
-	let dx = bitmap.getWidth() * 1.125,
-		dy = bitmap.getHeight() * 1.4375,
-		source = android.graphics.Bitmap.createBitmap(dx, dy, android.graphics.Bitmap.Config.ARGB_8888),
-		scaled = android.graphics.Bitmap.createScaledBitmap(arrow, dx, dy, false),
-		canvas = new android.graphics.Canvas(source);
-	canvas.drawBitmap(scaled, 0, 0, null);
-	canvas.drawBitmap(bitmap, 1 * (dx / 18), 6 * (dy / 23), null);
-	return source;
-};
 
 const toSimpleIdentifier = function(name) {
 	name = "" + name;
@@ -124,9 +95,9 @@ const toSimpleIdentifier = function(name) {
 
 let heads = (function() {
 	let founded = {},
-		directory = new java.io.File(__dir__ + "resource/" + (legacyEntities ? "entities-legacy" : "entities"));
+		directory = new java.io.File(__dir__ + "assets/" + (legacyEntities ? "entities-legacy" : "entities"));
 	if (!directory.exists() || !directory.isDirectory()) {
-		Logger.Log("Couldn't find entities indicators in " + directory.getName() + "/", "Minimap");
+		Logger.Log("Minimap: not found entities indicators in " + directory.getName() + "/", "WARNING");
 		return founded;
 	}
 	let entities = directory.listFiles();
@@ -134,13 +105,13 @@ let heads = (function() {
 		let file = entities[i];
 		if (!file.isFile()) continue;
 		let bitmap = android.graphics.BitmapFactory.decodeFile(file.getPath());
-		founded[toSimpleIdentifier(file.getName())] = createHeadInArrow(bitmap);
+		founded[toSimpleIdentifier(file.getName())] = bitmap;
 	}
 	return founded;
 })();
 
 if (heads[0] === undefined || heads[0] === null) {
-	heads[0] = headArrow("iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4ggLFSgULUPHpQAAARlJREFUKM+dz7FrEwEcxfHP3eVyiVJTQZoOBfsf+A9IRxE6tnuHgA7+CdLORXFxcfEvsJQO7aAOGdz8FyykTRvUDCVQEsO1dxeHg9tzb/nB7/Helxc821xBVkAjCJHmGbIsRxiGiBsRFgsILalG2V0qWxR42Gqi0wyQi3AzTZEv8lqE8rx/s4ckbqLdeoT57BaiEJO/v3F48rUOIfiy/woPkgT/0hRRlGByO8HT7hqGl7+qwPIbyu7ttx+xs/UOva1B1f3prIvjHx9wdPC61obPvRform+gkazitN+v7N2XzzG6OsdgfFNrw/Q+x91ogOH1DCthXNnfvv/E+kYbgbgW4eLPGEVR4MnjTmWk93doJy1M53n1WZrwHwiMVs+tK7U4AAAAAElFTkSuQmCC");
+	heads[0] = decodeBmp("iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4ggLFSgULUPHpQAAARlJREFUKM+dz7FrEwEcxfHP3eVyiVJTQZoOBfsf+A9IRxE6tnuHgA7+CdLORXFxcfEvsJQO7aAOGdz8FyykTRvUDCVQEsO1dxeHg9tzb/nB7/Helxc821xBVkAjCJHmGbIsRxiGiBsRFgsILalG2V0qWxR42Gqi0wyQi3AzTZEv8lqE8rx/s4ckbqLdeoT57BaiEJO/v3F48rUOIfiy/woPkgT/0hRRlGByO8HT7hqGl7+qwPIbyu7ttx+xs/UOva1B1f3prIvjHx9wdPC61obPvRform+gkazitN+v7N2XzzG6OsdgfFNrw/Q+x91ogOH1DCthXNnfvv/E+kYbgbgW4eLPGEVR4MnjTmWk93doJy1M53n1WZrwHwiMVs+tK7U4AAAAAElFTkSuQmCC");
 }
 
 const getIconMatrix = function(head) {
@@ -153,8 +124,8 @@ const getIconMatrix = function(head) {
 	let dx = head.getWidth() / 16,
 		dy = head.getHeight() / 16,
 		matrix = new android.graphics.Matrix();
-	matrix.setTranslate(-9 * dx, -14 * dy);
-	matrix.postScale(getDisplayHeight() * 0.0012 / dx, getDisplayHeight() * 0.0012 / dy);
+	matrix.setTranslate(-8 * dx, -8 * dy);
+	matrix.postScale(getDisplayHeight() * 0.0015 / dx, getDisplayHeight() * 0.0015 / dy);
 	return matrix;
 };
 

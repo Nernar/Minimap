@@ -129,7 +129,10 @@ const settingsUI = function() {
 					default:
 						textValue.setText("" + args[3]);
 						textValue.setOnClickListener(function() {
-						    if (args[4]) headerClicked(args[4]);
+						    if (args[4]) {
+						    	settingsChanged(args[4]);
+						    	print.dismiss();
+						    }
 						});
 				}
 				textLp.addRule(android.widget.RelativeLayout.ALIGN_PARENT_LEFT);

@@ -1,15 +1,3 @@
-const drawBtnBack = function(width, height) {
-	let bmp = android.graphics.Bitmap.createBitmap(width, height, android.graphics.Bitmap.Config.ARGB_8888),
-		canvas = new android.graphics.Canvas(bmp),
-		paint = new android.graphics.Paint();
-	paint.setAntiAlias(false);
-	paint.setFilterBitmap(false);
-	reflectPaintSetColor(paint, Colors.GRAY);
-	paint.setMaskFilter(new android.graphics.EmbossMaskFilter([1, 1, 0.3], 0.7, 8, 4 * getDisplayDensity()));
-	canvas.drawRect(0, 0, width, height, paint);
-	return new android.graphics.drawable.BitmapDrawable(bmp);
-};
-
 const decodeBmp = function(string) {
 	if (android.os.Build.VERSION.SDK_INT >= 26) {
 		string = java.util.Base64.getDecoder().decode(java.lang.String(base64).getBytes());

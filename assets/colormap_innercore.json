@@ -1,0 +1,9734 @@
+{
+	"op.nether_star_block": [
+		-3735559
+	],
+	"plakat": [
+		-15321004,
+		-15321004,
+		-15321004,
+		-15321004,
+		-15321004,
+		-15321004
+	],
+	"blockadvanced": [
+		-14245028,
+		-14245028,
+		-14245028,
+		-14245028
+	],
+	"blockbone": [
+		-2763575,
+		-2763575,
+		-2763575,
+		-2763575
+	],
+	"blockdiamond": [
+		-14525107,
+		-14525107,
+		-14525107,
+		-14525107
+	],
+	"blockemerald": [
+		-14787026,
+		-14787026,
+		-14787026,
+		-14787026
+	],
+	"blockgold": [
+		-10264778,
+		-10264778,
+		-10264778,
+		-10264778
+	],
+	"blockiron": [
+		-12369085,
+		-12369085,
+		-12369085,
+		-12369085
+	],
+	"blockquartz": [
+		-2436658,
+		-2436658,
+		-2436658,
+		-2436658
+	],
+	"blockredstone": [
+		-3921117,
+		-3921117,
+		-3921117,
+		-3921117
+	],
+	"blockwood": [
+		-12767723,
+		-12767723,
+		-12767723,
+		-12767723
+	],
+	"WeatherDeflector": [
+		-14728380
+	],
+	"azuriteore": [
+		-6204335
+	],
+	"azuriteblock": [
+		-14660100
+	],
+	"etheriumore": [
+		-11584722
+	],
+	"inferniumoreb": [
+		-3453917
+	],
+	"inferniumore": [
+		-13751254
+	],
+	"inferniumblock": [
+		-172518
+	],
+	"nightOre": [
+		-6334636
+	],
+	"bloodrockore": [
+		-4962487
+	],
+	"bloodrockblock": [
+		-5226685
+	],
+	"shadowquartzore": [
+		-12769755
+	],
+	"shadowquartzblock": [
+		-15592164
+	],
+	"starciliumore": [
+		-13489102
+	],
+	"starciliumblock": [
+		-3188764
+	],
+	"basaltCb": [
+		-13619152
+	],
+	"ebonLog": [
+		-13037233
+	],
+	"plankEbonite": [
+		-13565876
+	],
+	"ebonLeaves": [
+		-15204312
+	],
+	"ebonSapling": [
+		-15594471
+	],
+	"hellbarkLog": [
+		-10542583
+	],
+	"plankHellbark": [
+		-7726842
+	],
+	"hellbarkLeaves": [
+		-5427456
+	],
+	"hellbarkSapling": [
+		-14939131
+	],
+	"basaltBr": [
+		-13027015
+	],
+	"basaltSm": [
+		-13092808
+	],
+	"shadowbricks": [
+		-15921907
+	],
+	"splitshadowbricks": [
+		-16185079
+	],
+	"carvBr": [
+		-3487030
+	],
+	"carvedBr": [
+		-3815995
+	],
+	"carvedsBr": [
+		-3814967
+	],
+	"lampSt": [
+		-16178140
+	],
+	"cen": [
+		-38083
+	],
+	"chendelier": [
+		-6198751
+	],
+	"MPChest": [
+		-14937081,
+		-14937081,
+		-14937081,
+		-14937081
+	],
+	"blockSteel": [
+		-6513508,
+		-4210215,
+		-4210215,
+		-4210215
+	],
+	"rybinovii_block": [
+		-6550011
+	],
+	"meteoritovii_block": [
+		-13949889
+	],
+	"block_zoli": [
+		-13948115
+	],
+	"lavacristall": [
+		-5941943
+	],
+	"antratcit": [
+		-9474193
+	],
+	"sernaia_ryda": [
+		-8947849
+	],
+	"rybinovaia_ryda": [
+		-9474965
+	],
+	"meteoritovaia_ryyda": [
+		-10592926
+	],
+	"sito1": [
+		-5140391
+	],
+	"sito": [
+		-5140392
+	],
+	"sit": [
+		-5140392
+	],
+	"si": [
+		-5140392
+	],
+	"s": [
+		-5140392
+	],
+	"i": [
+		-5140392
+	],
+	"t": [
+		-5140392
+	],
+	"tk": [
+		-5140392
+	],
+	"tks": [
+		-5140392
+	],
+	"tkb": [
+		-5140392
+	],
+	"tktr": [
+		-5140392
+	],
+	"tka": [
+		-5140392
+	],
+	"tktd": [
+		-5140392
+	],
+	"fabrshem": [
+		-2302756
+	],
+	"stee": [
+		-9342607
+	],
+	"mini_pres": [
+		-2302756
+	],
+	"oker": [
+		-2302756
+	],
+	"reshetka": [
+		-13224652
+	],
+	"kap": [
+		-14148085
+	],
+	"kb": [
+		-11979243
+	],
+	"kc": [
+		-9941474
+	],
+	"kd": [
+		-7772377
+	],
+	"pal": [
+		-16317182
+	],
+	"palt": [
+		-16317182
+	],
+	"azhenetc_vishni": [
+		-15199476
+	],
+	"veshni": [
+		-16056061
+	],
+	"avishnia": [
+		-16054012
+	],
+	"drevesina_vishni": [
+		-10404825
+	],
+	"drevesina_palmi": [
+		-9148084
+	],
+	"drevesina_dyriana": [
+		-9148353,
+		-9148353,
+		-9148353,
+		-9148353
+	],
+	"drevesina_dyrianad": [
+		-9148353,
+		-9148353,
+		-9148353,
+		-9148353
+	],
+	"listva_vishni": [
+		-14601959
+	],
+	"listva_palmi": [
+		-13148160
+	],
+	"listva_dyriana": [
+		-14471922
+	],
+	"listva_vishnii": [
+		-14601959
+	],
+	"listva_palmii": [
+		-13148160
+	],
+	"listva_dyrianaa": [
+		-14471922
+	],
+	"vis": [
+		-16777216
+	],
+	"kamni": [
+		-10197916
+	],
+	"kamn": [
+		-10197916
+	],
+	"kam": [
+		-10197916
+	],
+	"ka": [
+		-16777216
+	],
+	"k": [
+		-16777216
+	],
+	"a": [
+		-16777216
+	],
+	"c": [
+		-14937333
+	],
+	"azhenetc_palmi": [
+		-15789050
+	],
+	"palmovie_doski": [
+		-8228015
+	],
+	"kokos": [
+		-14937333
+	],
+	"vi": [
+		-16777216
+	],
+	"kak": [
+		-16777216
+	],
+	"kakty": [
+		-16711168
+	],
+	"stalnaia_tryba": [
+		-13036014
+	],
+	"stalnaia_obolochka": [
+		-15856114
+	],
+	"rybinovaia_tryba": [
+		-13433343
+	],
+	"rybinovaia_obolochka": [
+		-4959662
+	],
+	"vodge": [
+		-10197916
+	],
+	"vodg": [
+		-2302756
+	],
+	"vodgen": [
+		-4737097
+	],
+	"blet": [
+		-15658735
+	],
+	"vo": [
+		-15397370
+	],
+	"shgtvp": [
+		-15397370
+	],
+	"shgtvvpp": [
+		-15397370
+	],
+	"shgtvv": [
+		-15331579
+	],
+	"shgtn": [
+		-15397370
+	],
+	"rice_plant_stage0": [
+		-10902465
+	],
+	"rice_plant_stage1": [
+		-16645119
+	],
+	"rice_plant_stage2": [
+		-7028635
+	],
+	"rice_plant_stage3": [
+		-9926842
+	],
+	"rice_plant_stage4": [
+		-7160476
+	],
+	"pepper_plant_stage0": [
+		-15300864
+	],
+	"pepper_plant_stage1": [
+		-16776960
+	],
+	"pepper_plant_stage2": [
+		-16776704
+	],
+	"pepper_plant_stage3": [
+		-16775936
+	],
+	"pepper_plant_stage4": [
+		-16709632
+	],
+	"pepper_plant_stage5": [
+		-16708608
+	],
+	"pepper_plant_stage6": [
+		-16642304
+	],
+	"pepper_plant_stage7": [
+		-16709632
+	],
+	"corn_plant_stage0": [
+		-15300864
+	],
+	"corn_plant_stage1": [
+		-16776960
+	],
+	"corn_plant_stage2": [
+		-16776704
+	],
+	"corn_plant_stage3": [
+		-16776704
+	],
+	"corn_plant_stage4": [
+		-16776192
+	],
+	"corn_plant_stage5": [
+		-16579584
+	],
+	"corn_plant_stage6": [
+		-16316416
+	],
+	"corn_plant_stage7": [
+		-16250880
+	],
+	"cucumber_plant_stage0": [
+		-13136543
+	],
+	"cucumber_plant_stage1": [
+		-16776703
+	],
+	"cucumber_plant_stage2": [
+		-16776447
+	],
+	"cucumber_plant_stage3": [
+		-16775422
+	],
+	"cucumber_plant_stage4": [
+		-16708860
+	],
+	"cucumber_plant_stage5": [
+		-16773884
+	],
+	"cucumber_plant_stage6": [
+		-16707322
+	],
+	"lettuce_plant_stage0": [
+		-11564288
+	],
+	"lettuce_plant_stage1": [
+		-16711168
+	],
+	"lettuce_plant_stage2": [
+		-16645120
+	],
+	"lettuce_plant_stage3": [
+		-16645120
+	],
+	"lettuce_plant_stage4": [
+		-16447232
+	],
+	"lettuce_plant_stage5": [
+		-16182528
+	],
+	"lettuce_plant_stage6": [
+		-16446464
+	],
+	"lettuce_plant_stage7": [
+		-16314624
+	],
+	"onion_plant_stage0": [
+		-16776959
+	],
+	"onion_plant_stage1": [
+		-16776703
+	],
+	"onion_plant_stage2": [
+		-16710910
+	],
+	"onion_plant_stage3": [
+		-16710910
+	],
+	"onion_plant_stage4": [
+		-16710396
+	],
+	"onion_plant_stage5": [
+		-16644604
+	],
+	"onion_plant_stage6": [
+		-16776702
+	],
+	"tomato_plant_stage0": [
+		-16776960
+	],
+	"tomato_plant_stage1": [
+		-16711167
+	],
+	"tomato_plant_stage2": [
+		-16645374
+	],
+	"tomato_plant_stage3": [
+		-16579582
+	],
+	"tomato_plant_stage4": [
+		-16513789
+	],
+	"tomato_plant_stage5": [
+		-16447740
+	],
+	"tomato_plant_stage6": [
+		-16381947
+	],
+	"strawberry_plant_stage0": [
+		-16776192
+	],
+	"strawberry_plant_stage1": [
+		-16775680
+	],
+	"strawberry_plant_stage2": [
+		-16774656
+	],
+	"strawberry_plant_stage3": [
+		-16773120
+	],
+	"strawberry_plant_stage4": [
+		-16771328
+	],
+	"strawberry_plant_stage5": [
+		-16771328
+	],
+	"strawberry_plant_stage6": [
+		-16773376
+	],
+	"lemon_plant_stage0": [
+		-16776192
+	],
+	"lemon_plant_stage1": [
+		-16775680
+	],
+	"lemon_plant_stage2": [
+		-16774656
+	],
+	"lemon_plant_stage3": [
+		-16773120
+	],
+	"lemon_plant_stage4": [
+		-16771328
+	],
+	"lemon_plant_stage5": [
+		-16771072
+	],
+	"lemon_plant_stage6": [
+		-16773376
+	],
+	"pineapple_plant_stage0": [
+		-16644860
+	],
+	"pineapple_plant_stage1": [
+		-16578554
+	],
+	"pineapple_plant_stage2": [
+		-16446968
+	],
+	"pineapple_plant_stage3": [
+		-16248819
+	],
+	"pineapple_plant_stage4": [
+		-15919085
+	],
+	"soilCharred": [
+		-13423314
+	],
+	"ashPiled": [
+		-6512991,
+		-6512991,
+		-6512991,
+		-6512991
+	],
+	"emberBlock": [
+		-14343903
+	],
+	"emberBlockCooled": [
+		-14474461
+	],
+	"charredLog": [
+		-12829118,
+		-13354950,
+		-13354950
+	],
+	"plankCharred": [
+		-12829118
+	],
+	"burnedLeaves": [
+		-15592683
+	],
+	"burnedLeavesNS": [
+		-15658477
+	],
+	"activeCoalBlock": [
+		-16251129
+	],
+	"cinderFruits": [
+		-15461870
+	],
+	"cinderFruit": [
+		-15330285
+	],
+	"scorchedTuftm": [
+		-16514044
+	],
+	"scorchedTuftl": [
+		-16119286
+	],
+	"scorchedTuftlg": [
+		-16119286
+	],
+	"saplingCharred": [
+		-15988214
+	],
+	"cland": [
+		-5328724
+	],
+	"clavel": [
+		-9145482
+	],
+	"kakkatzhan": [
+		-7320239
+	],
+	"nethercobble": [
+		-7188400
+	],
+	"netherstone": [
+		-7320757
+	],
+	"netherstonebrick": [
+		-7447203
+	],
+	"netherstonebrickglow": [
+		-7447203
+	],
+	"soulnetherrack": [
+		-11258578
+	],
+	"bricglass": [
+		-4959688
+	],
+	"rediron": [
+		-7107448
+	],
+	"redgold": [
+		-6908275
+	],
+	"golddiamond": [
+		-6577254
+	],
+	"coaliron": [
+		-7501176
+	],
+	"obsidianstone": [
+		-7895161
+	],
+	"clayore": [
+		-7762792
+	],
+	"lapis_lotus": [
+		-16644345
+	],
+	"mythanore": [
+		-8947849
+	],
+	"octineore": [
+		-8948620
+	],
+	"reminantore": [
+		-9869718
+	],
+	"bedrockiumOre": [
+		-9605779
+	],
+	"water_tnt": [
+		-16777063
+	],
+	"lava_tnt": [
+		-65536
+	],
+	"super_tnt": [
+		-5766653
+	],
+	"mega_tnt": [
+		-10485246
+	],
+	"atom_tnt": [
+		-16716288
+	],
+	"fire_tnt": [
+		-526592
+	],
+	"brickFurnace": [
+		-10997466,
+		-10997466,
+		-10997466,
+		-10997466
+	],
+	"plank_fancy_oak": [
+		-5073834
+	],
+	"plank_fancy_spruce": [
+		-10994914
+	],
+	"plank_fancy_birch": [
+		-4742547
+	],
+	"plank_fancy_jungle": [
+		-6196921
+	],
+	"plank_fancy_acacia": [
+		-6204373
+	],
+	"plank_fancy_dark_oak": [
+		-12573430
+	],
+	"brick_path": [
+		-6398388
+	],
+	"brick_tile": [
+		-9290447
+	],
+	"cracked_bricks": [
+		-9092556
+	],
+	"dirty_bricks": [
+		-11128287
+	],
+	"mixed_cobble": [
+		-9673637
+	],
+	"mossy_bricks": [
+		-9074350
+	],
+	"black_terracotta_brick": [
+		-14083821
+	],
+	"blue_terracotta_brick": [
+		-11714978
+	],
+	"brown_terracotta_brick": [
+		-11586267
+	],
+	"cyan_terracotta_brick": [
+		-11117476
+	],
+	"gray_terracotta_brick": [
+		-12965083
+	],
+	"green_terracotta_brick": [
+		-11774933
+	],
+	"light_blue_terracotta_brick": [
+		-8092256
+	],
+	"light_gray_terracotta_brick": [
+		-6586249
+	],
+	"lime_terracotta_brick": [
+		-9206469
+	],
+	"magenta_terracotta_brick": [
+		-5476988
+	],
+	"orange_terracotta_brick": [
+		-6138329
+	],
+	"pink_terracotta_brick": [
+		-6074800
+	],
+	"purple_terracotta_brick": [
+		-8039837
+	],
+	"red_terracotta_brick": [
+		-6930127
+	],
+	"terracotta_tile": [
+		-6791099
+	],
+	"white_terracotta_brick": [
+		-2968155
+	],
+	"yellow_terracotta_brick": [
+		-4223961
+	],
+	"oakDrawer": [
+		-9414348,
+		-9414348,
+		-9414348,
+		-9414348
+	],
+	"brichDrawer": [
+		-4609935,
+		-4609935,
+		-4609935,
+		-4609935
+	],
+	"bigDrawer": [
+		-12901622,
+		-12901622,
+		-12901622,
+		-12901622
+	],
+	"acaciaDrawer": [
+		-5415888,
+		-5415888,
+		-5415888,
+		-5415888
+	],
+	"spruceDrawer": [
+		-10598872,
+		-10598872,
+		-10598872,
+		-10598872
+	],
+	"jungleDrawer": [
+		-9549265,
+		-9549265,
+		-9549265,
+		-9549265
+	],
+	"workbench": [
+		-10334673
+	],
+	"mesadeartesanato": [
+		-6983351
+	],
+	"plankcolorido": [
+		-15379542,
+		-1925596,
+		-4761826,
+		-8904562,
+		-12743105,
+		-12675701,
+		-14540254,
+		-5504253,
+		-3719585,
+		-4868683,
+		-10183626,
+		-6353090,
+		-16609826,
+		-10857132,
+		-14144207,
+		-13624564
+	],
+	"vidrolizo": [
+		-16777216
+	],
+	"vidrolizoIronT": [
+		-1180932
+	],
+	"vidrolizopuro": [
+		-16777216
+	],
+	"virodeferrot": [
+		-2166541
+	],
+	"tijoloquadriculado": [
+		-7105645
+	],
+	"tijolinhoquadriculado": [
+		-7303024
+	],
+	"tijoloquadriculadogrande": [
+		-7631989
+	],
+	"tijoloquadriculadoa": [
+		-7434610
+	],
+	"tijoloquadriculadob": [
+		-7500403
+	],
+	"tijoloquadriculadoc": [
+		-7500403
+	],
+	"tijoloquadriculadod": [
+		-7434610
+	],
+	"pilardepedra": [
+		-7303024
+	],
+	"cwhite": [
+		-2039584
+	],
+	"cblue": [
+		-15906911
+	],
+	"cbluec": [
+		-16537100
+	],
+	"cgreen": [
+		-13407970
+	],
+	"cgreenclaro": [
+		-11751600
+	],
+	"cred": [
+		-2752512
+	],
+	"cmangeta": [
+		-4057253
+	],
+	"cpink": [
+		-1023342
+	],
+	"cmarron": [
+		-10665929
+	],
+	"claranja": [
+		-37120
+	],
+	"cciano": [
+		-16738680
+	],
+	"ccinza": [
+		-8225927
+	],
+	"cpreto": [
+		-14342875
+	],
+	"croxo": [
+		-11457112
+	],
+	"camarelo": [
+		-81657
+	],
+	"ccinzaescuro": [
+		-13485503
+	],
+	"cbranco": [
+		-1
+	],
+	"slabtijoloquadriculado": [
+		-7303024,
+		-7303024,
+		-7303024,
+		-7303024,
+		-7303024,
+		-7303024
+	],
+	"tijoloquadriculadoslab": [
+		-7105645,
+		-7105645,
+		-7105645,
+		-7105645,
+		-7105645,
+		-7105645
+	],
+	"tijoloquadriculadograndeslab": [
+		-7631989,
+		-7631989,
+		-7631989,
+		-7631989,
+		-7631989,
+		-7631989
+	],
+	"slabtijoloquadriculadoa": [
+		-7434610,
+		-7434610,
+		-7434610,
+		-7434610,
+		-7434610,
+		-7434610
+	],
+	"tijoloquadriculadobslab": [
+		-7500403,
+		-7500403,
+		-7500403,
+		-7500403,
+		-7500403,
+		-7500403
+	],
+	"slabtijoloquadriculadoc": [
+		-7500403,
+		-7500403,
+		-7500403,
+		-7500403,
+		-7500403,
+		-7500403
+	],
+	"slabtijoloquadriculadod": [
+		-7434610,
+		-7434610,
+		-7434610,
+		-7434610,
+		-7434610,
+		-7434610
+	],
+	"slabpilardepedra": [
+		-7303024,
+		-7303024,
+		-7303024,
+		-7303024,
+		-7303024,
+		-7303024
+	],
+	"OreColor": [
+		-8947849
+	],
+	"OreColorNether": [
+		-6010811
+	],
+	"OreColorEnd": [
+		-2170458
+	],
+	"lanpadabranca": [
+		-3291967
+	],
+	"lanpadaazulclaro": [
+		-5729139
+	],
+	"lanpadaazul": [
+		-5729139
+	],
+	"lanpadaverdec": [
+		-5729139
+	],
+	"lanpadaamarela": [
+		-5729139
+	],
+	"lanpadaVermelha": [
+		-5729139
+	],
+	"lanpadaLaranja": [
+		-5729139
+	],
+	"Lanpadaciano": [
+		-5729139
+	],
+	"LanpadaRosa": [
+		-5729139
+	],
+	"lanpadaPreta": [
+		-5729139
+	],
+	"LanpadaRoxa": [
+		-5729139
+	],
+	"LanpadaSinza": [
+		-5729139
+	],
+	"LanpadaSinzaEscuro": [
+		-5729139
+	],
+	"LanpadaVerdeEscuro": [
+		-5729139
+	],
+	"LanpadaMarron": [
+		-5729139
+	],
+	"LanpadaMagenta": [
+		-5729139
+	],
+	"TecFurnace_iro": [
+		-789517,
+		-789517,
+		-789517,
+		-789517
+	],
+	"TecFurnace_gol": [
+		-528571,
+		-528571,
+		-528571,
+		-528571
+	],
+	"TecFurnace_dia": [
+		-10758448,
+		-10758448,
+		-10758448,
+		-10758448
+	],
+	"TecFurnace_hel": [
+		-843230,
+		-843230,
+		-843230,
+		-843230
+	],
+	"TecFurnace_ext": [
+		-13684945,
+		-13684945,
+		-13684945,
+		-13684945
+	],
+	"TecFurnace_utraext": [
+		-16713729,
+		-16713729,
+		-16713729,
+		-16713729
+	],
+	"MachineBlockMG": [
+		-4406331
+	],
+	"MachineBlockTier2MG": [
+		-4603711
+	],
+	"storageExtraBox": [
+		-4406331,
+		-4406331,
+		-4406331,
+		-4406331
+	],
+	"TecenergyConverter": [
+		-4406331,
+		-4406331,
+		-4406331,
+		-4406331
+	],
+	"minerduplicator": [
+		-4406331,
+		-4406331,
+		-4406331,
+		-4406331
+	],
+	"minerduplicatorTier2": [
+		-4406331,
+		-4406331,
+		-4406331,
+		-4406331
+	],
+	"teleporteWool": [
+		-2171170
+	],
+	"solarPanellevel1": [
+		-6644064
+	],
+	"solarPanellevel2": [
+		-6644064
+	],
+	"solarPanellevel3": [
+		-6644064
+	],
+	"solarPanellevel4": [
+		-6644064
+	],
+	"solarPanellevel5": [
+		-6644064
+	],
+	"solarPanellevel6": [
+		-6905427
+	],
+	"solarPanellevel7": [
+		-2960428
+	],
+	"solarPanellevelsupremeTec": [
+		-3550766
+	],
+	"CableDefaultColor": [
+		-14606047
+	],
+	"CableRedColor": [
+		-14606047
+	],
+	"CableBlueColor": [
+		-14606047
+	],
+	"CableGreenColor": [
+		-14606047
+	],
+	"CablePurpleColor": [
+		-14606047
+	],
+	"RFCableDefaultColor": [
+		-1
+	],
+	"RFCableRedColor": [
+		-1
+	],
+	"RFCableBlueColor": [
+		-1
+	],
+	"RFCableGreenColor": [
+		-1
+	],
+	"RFCablePurpleColor": [
+		-1
+	],
+	"PlugCableTEnergistc": [
+		-16749057
+	],
+	"TecBateriaUtraExtrema": [
+		-3550766
+	],
+	"LoandTextures": [
+		-10627585
+	],
+	"GrinderTecMod": [
+		-4340282,
+		-4340282,
+		-4340282,
+		-4340282
+	],
+	"tecIndustrialFurnace": [
+		-4340282,
+		-4340282,
+		-4340282,
+		-4340282
+	],
+	"tecCircultBlock": [
+		-13092808
+	],
+	"TecCraftTable": [
+		-4143160,
+		-4143160,
+		-4143160,
+		-4143160
+	],
+	"TankTec": [
+		-4406331,
+		-4406331,
+		-4406331,
+		-4406331
+	],
+	"condenserMK2T": [
+		-15459815,
+		-15459815,
+		-15459815,
+		-15459815
+	],
+	"single_compressed_cobblestone": [
+		-11250604
+	],
+	"single_compressed_stone": [
+		-7829368
+	],
+	"single_compressed_blocksand": [
+		-2239069
+	],
+	"single_compressed_dirt": [
+		-11388635
+	],
+	"single_compressed_gravel": [
+		-6645609
+	],
+	"single_compressed_cobblestone_mossy": [
+		-12167866
+	],
+	"single_compressed_endstone": [
+		-3486570
+	],
+	"single_compressed_charcoal": [
+		-14475755
+	],
+	"single_compressed_netherrack": [
+		-10673117
+	],
+	"single_compressed_soulsand": [
+		-14741240
+	],
+	"compressed_logwood": [
+		-11058138
+	],
+	"compressed_logspruce": [
+		-10269138
+	],
+	"compressed_logbirch": [
+		-2171955
+	],
+	"compressed_logjungle": [
+		-11255527
+	],
+	"compressed_logacacia": [
+		-10528432
+	],
+	"compressed_logdarkoak": [
+		-11649495
+	],
+	"single_compressed_feather": [
+		-2302756
+	],
+	"compressed_string": [
+		-2171170
+	],
+	"single_compressed_porkchop": [
+		-1806995
+	],
+	"single_compressed_chicken": [
+		-6196637
+	],
+	"single_compressed_beef": [
+		-12055799
+	],
+	"single_compressed_fish": [
+		-13942723
+	],
+	"single_compressed_bone": [
+		-2566471
+	],
+	"single_compressed_egg": [
+		-2899053
+	],
+	"single_compressed_leather": [
+		-9359853
+	],
+	"compressed_bread": [
+		-6655969
+	],
+	"compressed_cookie": [
+		-1995970
+	],
+	"single_compressed_potato": [
+		-2446247
+	],
+	"single_compressed_carrot": [
+		-3580924
+	],
+	"single_compressed_netherwart": [
+		-9370876
+	],
+	"single_compressed_melon": [
+		-11316468
+	],
+	"single_compressed_apple": [
+		-1763546
+	],
+	"single_compressed_rotten": [
+		-9948659
+	],
+	"single_compressed_blazerod": [
+		-7374
+	],
+	"single_compressed_spider_eye": [
+		-9501918
+	],
+	"single_compressed_enderpearl": [
+		-16097968
+	],
+	"single_compressed_sugar": [
+		-3092272
+	],
+	"single_compressed_gunpowder": [
+		-10132123
+	],
+	"single_compressed_sugarcane": [
+		-6962845
+	],
+	"compressed_netherstar": [
+		-3877951
+	],
+	"single_compressed_clay": [
+		-5985610
+	],
+	"single_compressed_flint": [
+		-15856114
+	],
+	"double_compressed_cobblestone": [
+		-11711155
+	],
+	"double_compressed_stone": [
+		-7763575
+	],
+	"double_compressed_blocksand": [
+		-2107483
+	],
+	"double_compressed_dirt": [
+		-11848671
+	],
+	"double_compressed_gravel": [
+		-6316644
+	],
+	"double_compressed_cobblestone_mossy": [
+		-12562880
+	],
+	"double_compressed_endstone": [
+		-3420777
+	],
+	"double_compressed_charcoal": [
+		-14475755
+	],
+	"double_compressed_coal": [
+		-16053493
+	],
+	"double_compressed_netherrack": [
+		-11067361
+	],
+	"double_compressed_soulsand": [
+		-15004153
+	],
+	"double_compressed_feather": [
+		-2368549
+	],
+	"double_compressed_porkchop": [
+		-2397590
+	],
+	"double_compressed_chicken": [
+		-6130845
+	],
+	"double_compressed_beef": [
+		-11990263
+	],
+	"double_compressed_fish": [
+		-13482939
+	],
+	"double_compressed_bone": [
+		-2566471
+	],
+	"double_compressed_egg": [
+		-3425139
+	],
+	"double_compressed_leather": [
+		-9294316
+	],
+	"double_compressed_potato": [
+		-2643366
+	],
+	"double_compressed_carrot": [
+		-3186171
+	],
+	"double_compressed_netherwart": [
+		-9371648
+	],
+	"double_compressed_melon": [
+		-13093888
+	],
+	"double_compressed_apple": [
+		-1763032
+	],
+	"double_compressed_rotten": [
+		-10607090
+	],
+	"double_compressed_blazerod": [
+		-140243
+	],
+	"double_compressed_spider_eye": [
+		-9567710
+	],
+	"double_compressed_enderpearl": [
+		-16164275
+	],
+	"double_compressed_sugar": [
+		-3092272
+	],
+	"double_compressed_gunpowder": [
+		-10132123
+	],
+	"double_compressed_sugarcane": [
+		-7028638
+	],
+	"double_compressed_iron": [
+		-2565928
+	],
+	"double_compressed_gold": [
+		-530359
+	],
+	"double_compressed_diamond": [
+		-14365500
+	],
+	"double_compressed_emerald": [
+		-7408723
+	],
+	"double_compressed_lapis": [
+		-14597487
+	],
+	"double_compressed_redstone": [
+		-4712446
+	],
+	"double_compressed_hay": [
+		-5139961
+	],
+	"double_compressed_clay": [
+		-5919818
+	],
+	"double_compressed_slime": [
+		-9124513
+	],
+	"double_compressed_flint": [
+		-15987700
+	],
+	"triple_compressed_cobblestone": [
+		-12105913
+	],
+	"triple_compressed_stone": [
+		-7697782
+	],
+	"triple_compressed_blocksand": [
+		-2041690
+	],
+	"triple_compressed_dirt": [
+		-12177378
+	],
+	"triple_compressed_gravel": [
+		-5922143
+	],
+	"triple_compressed_cobblestone_mossy": [
+		-12826564
+	],
+	"triple_compressed_endstone": [
+		-3420521
+	],
+	"triple_compressed_charcoal": [
+		-14476011
+	],
+	"triple_compressed_coal": [
+		-16053493
+	],
+	"triple_compressed_netherrack": [
+		-11330533
+	],
+	"triple_compressed_soulsand": [
+		-15201274
+	],
+	"triple_compressed_feather": [
+		-2368549
+	],
+	"triple_compressed_porkchop": [
+		-2922392
+	],
+	"triple_compressed_chicken": [
+		-6262174
+	],
+	"triple_compressed_beef": [
+		-11990263
+	],
+	"triple_compressed_fish": [
+		-14536656
+	],
+	"triple_compressed_bone": [
+		-2632007
+	],
+	"triple_compressed_egg": [
+		-2832479
+	],
+	"triple_compressed_leather": [
+		-9359852
+	],
+	"triple_compressed_potato": [
+		-2643365
+	],
+	"triple_compressed_carrot": [
+		-4561914
+	],
+	"triple_compressed_netherwart": [
+		-9306111
+	],
+	"triple_compressed_apple": [
+		-1763031
+	],
+	"triple_compressed_rotten": [
+		-10673138
+	],
+	"triple_compressed_blazerod": [
+		-206551
+	],
+	"triple_compressed_spider_eye": [
+		-9172953
+	],
+	"triple_compressed_enderpearl": [
+		-16229811
+	],
+	"triple_compressed_sugar": [
+		-3158065
+	],
+	"triple_compressed_gunpowder": [
+		-10197916
+	],
+	"triple_compressed_sugarcane": [
+		-7026853
+	],
+	"triple_compressed_iron": [
+		-2894893
+	],
+	"triple_compressed_gold": [
+		-662456
+	],
+	"triple_compressed_diamond": [
+		-15152961
+	],
+	"triple_compressed_emerald": [
+		-12858015
+	],
+	"triple_compressed_lapis": [
+		-14531439
+	],
+	"triple_compressed_redstone": [
+		-4843518
+	],
+	"triple_compressed_hay": [
+		-5271032
+	],
+	"triple_compressed_clay": [
+		-5985611
+	],
+	"triple_compressed_slime": [
+		-9321892
+	],
+	"triple_compressed_flint": [
+		-15724528
+	],
+	"quadruple_compressed_cobblestone": [
+		-12434878
+	],
+	"quadruple_compressed_stone": [
+		-7566196
+	],
+	"quadruple_compressed_blocksand": [
+		-1975639
+	],
+	"quadruple_compressed_dirt": [
+		-12374500
+	],
+	"quadruple_compressed_gravel": [
+		-5592921
+	],
+	"quadruple_compressed_cobblestone_mossy": [
+		-13089992
+	],
+	"quadruple_compressed_endstone": [
+		-3289192
+	],
+	"quadruple_compressed_netherrack": [
+		-11658984
+	],
+	"quadruple_compressed_soulsand": [
+		-15398395
+	],
+	"quadruple_compressed_egg": [
+		-4282038
+	],
+	"quadruple_compressed_rotten": [
+		-10738929
+	],
+	"quadruple_compressed_sugarcane": [
+		-7222700
+	],
+	"quadruple_compressed_clay": [
+		-5985867
+	],
+	"quintuple_compressed_cobblestone": [
+		-12698050
+	],
+	"quintuple_compressed_stone": [
+		-7500403
+	],
+	"quintuple_compressed_blocksand": [
+		-1909846
+	],
+	"quintuple_compressed_dirt": [
+		-12506085
+	],
+	"quintuple_compressed_gravel": [
+		-5461335
+	],
+	"quintuple_compressed_cobblestone_mossy": [
+		-13287371
+	],
+	"quintuple_compressed_endstone": [
+		-3288935
+	],
+	"quintuple_compressed_netherrack": [
+		-11790570
+	],
+	"quintuple_compressed_soulsand": [
+		-15529724
+	],
+	"quintuple_compressed_egg": [
+		-2179299
+	],
+	"quintuple_compressed_rotten": [
+		-10804465
+	],
+	"quintuple_compressed_sugarcane": [
+		-7153338
+	],
+	"quintuple_compressed_clay": [
+		-5985868
+	],
+	"sextuple_compressed_cobblestone": [
+		-12763843
+	],
+	"sextuple_compressed_stone": [
+		-7434610
+	],
+	"sextuple_compressed_blocksand": [
+		-1844310
+	],
+	"sextuple_compressed_dirt": [
+		-12637414
+	],
+	"sextuple_compressed_gravel": [
+		-5395541
+	],
+	"sextuple_compressed_cobblestone_mossy": [
+		-13418957
+	],
+	"sextuple_compressed_endstone": [
+		-3223143
+	],
+	"sextuple_compressed_netherrack": [
+		-11921899
+	],
+	"sextuple_compressed_soulsand": [
+		-15595516
+	],
+	"sextuple_compressed_clay": [
+		-6051404
+	],
+	"septuple_compressed_cobblestone": [
+		-12763843
+	],
+	"septuple_compressed_stone": [
+		-7500403
+	],
+	"septuple_compressed_blocksand": [
+		-1844309
+	],
+	"septuple_compressed_dirt": [
+		-12637414
+	],
+	"septuple_compressed_gravel": [
+		-5329748
+	],
+	"septuple_compressed_cobblestone_mossy": [
+		-13418957
+	],
+	"septuple_compressed_endstone": [
+		-3223399
+	],
+	"septuple_compressed_netherrack": [
+		-11921899
+	],
+	"septuple_compressed_soulsand": [
+		-15595516
+	],
+	"septuple_compressed_clay": [
+		-6051404
+	],
+	"octuple_compressed_cobblestone": [
+		-12829636
+	],
+	"octuple_compressed_stone": [
+		-7434610
+	],
+	"octuple_compressed_blocksand": [
+		-1844309
+	],
+	"octuple_compressed_dirt": [
+		-12703207
+	],
+	"octuple_compressed_gravel": [
+		-5263956
+	],
+	"octuple_compressed_cobblestone_mossy": [
+		-13484750
+	],
+	"octuple_compressed_endstone": [
+		-3223143
+	],
+	"octuple_compressed_netherrack": [
+		-11987691
+	],
+	"octuple_compressed_soulsand": [
+		-15661053
+	],
+	"octuple_compressed_clay": [
+		-6051404
+	],
+	"nonuple_compressed_cobblestone": [
+		-12961222
+	],
+	"nonuple_compressed_stone": [
+		-7434610
+	],
+	"nonuple_compressed_blocksand": [
+		-1844309
+	],
+	"nonuple_compressed_dirt": [
+		-12834536
+	],
+	"nonuple_compressed_gravel": [
+		-5263956
+	],
+	"nonuple_compressed_cobblestone_mossy": [
+		-13550543
+	],
+	"nonuple_compressed_endstone": [
+		-3223143
+	],
+	"nonuple_compressed_netherrack": [
+		-11987692
+	],
+	"nonuple_compressed_soulsand": [
+		-15661053
+	],
+	"nonuple_compressed_clay": [
+		-6051661
+	],
+	"decuple_compressed_cobblestone": [
+		-13092808
+	],
+	"decuple_compressed_stone": [
+		-7434610
+	],
+	"decuple_compressed_blocksand": [
+		-1778516
+	],
+	"decuple_compressed_dirt": [
+		-12900328
+	],
+	"decuple_compressed_gravel": [
+		-5066577
+	],
+	"decuple_compressed_cobblestone_mossy": [
+		-13682385
+	],
+	"decuple_compressed_endstone": [
+		-3157606
+	],
+	"decuple_compressed_netherrack": [
+		-12119021
+	],
+	"decuple_compressed_soulsand": [
+		-15726845
+	],
+	"decuple_compressed_clay": [
+		-6117455
+	],
+	"carbonadoOre": [
+		-13224394
+	],
+	"carbonadoGlass": [
+		-16711423
+	],
+	"carbonadoBlock": [
+		-16316665
+	],
+	"blockCopper": [
+		-604531
+	],
+	"blockTin": [
+		-5060912
+	],
+	"blockLead": [
+		-6444073
+	],
+	"blockThorium": [
+		-13750478
+	],
+	"blockUranium": [
+		-4932933
+	],
+	"nc_block_boron": [
+		-11382190
+	],
+	"blockLithium": [
+		-2631721
+	],
+	"blockMagnesium": [
+		-1059102
+	],
+	"nc_block_graphite": [
+		-16119286
+	],
+	"blockBeryllium": [
+		-7627927
+	],
+	"nc_block_zirconium": [
+		-5460639
+	],
+	"blockManganese": [
+		-10652467
+	],
+	"blockAluminum": [
+		-4407864
+	],
+	"blockSilver": [
+		-4796716
+	],
+	"nc_block_thorium230": [
+		-13882324
+	],
+	"nc_block_uranium238": [
+		-14339803
+	],
+	"nc_block_neptunium237": [
+		-13944509
+	],
+	"nc_block_plutonium242": [
+		-5526869
+	],
+	"nc_block_americium243": [
+		-13883889
+	],
+	"nc_block_curium246": [
+		-13363395
+	],
+	"nc_block_berkelium247": [
+		-11330816
+	],
+	"nc_block_californium252": [
+		-12385270
+	],
+	"nc_chassis": [
+		-11707814
+	],
+	"nc_empty_frame": [
+		-12235186
+	],
+	"nc_steel_frame": [
+		-9145228
+	],
+	"nc_reactor_casing": [
+		-11509921,
+		-14538712
+	],
+	"nc_reactor_cell": [
+		-15131876
+	],
+	"nc_cooler_empty": [
+		-11184297
+	],
+	"nc_cooler_water": [
+		-12828350
+	],
+	"nc_cooler_redstone": [
+		-11522772
+	],
+	"nc_cooler_quartz": [
+		-12828350
+	],
+	"nc_cooler_gold": [
+		-12828350
+	],
+	"nc_cooler_glowstone": [
+		-11580873
+	],
+	"nc_cooler_lapis": [
+		-13221811
+	],
+	"nc_cooler_diamond": [
+		-12828350
+	],
+	"nc_cooler_helium": [
+		-12828350
+	],
+	"nc_cooler_enderium": [
+		-15121338
+	],
+	"nc_cooler_cryotheum": [
+		-12828350
+	],
+	"nc_cooler_iron": [
+		-12828350
+	],
+	"nc_cooler_emerald": [
+		-12828350
+	],
+	"nc_cooler_copper": [
+		-11717594
+	],
+	"nc_cooler_tin": [
+		-12828350
+	],
+	"nc_cooler_magnesium": [
+		-12828350
+	],
+	"oreCopper": [
+		-8948108
+	],
+	"oreTin": [
+		-8947849
+	],
+	"oreLead": [
+		-7302763
+	],
+	"oreThorium": [
+		-7368817
+	],
+	"oreUranium": [
+		-7368817
+	],
+	"oreBoron": [
+		-7368817
+	],
+	"oreLithium": [
+		-4210753
+	],
+	"oreMagnesium": [
+		-7960954
+	],
+	"bronzeBoiler": [
+		-5590348
+	],
+	"blastFurnaceBrick": [
+		-13815497
+	],
+	"crudeBlastFurnace": [
+		-13815497
+	],
+	"transformerLV": [
+		-11058649
+	],
+	"transformerMV": [
+		-4537919
+	],
+	"transformerHV": [
+		-4142903
+	],
+	"transformerEV": [
+		-4274233
+	],
+	"wireless_core": [
+		-11519034
+	],
+	"wireless_point": [
+		-4768571
+	],
+	"wireless_input": [
+		-12528818
+	],
+	"wireless_requester": [
+		-2999191
+	],
+	"wireless_clipboard": [
+		-3684290
+	],
+	"hexibiscus": [
+		-16777216
+	],
+	"lithiumlantern": [
+		-8356233
+	],
+	"amberglass": [
+		-4812028
+	],
+	"hardglass": [
+		-15724785
+	],
+	"fossilrock": [
+		-11119790
+	],
+	"copperblock": [
+		-5872637
+	],
+	"brassblock": [
+		-10858752
+	],
+	"titaniumblock": [
+		-11847085
+	],
+	"bronzeblock": [
+		-10802936
+	],
+	"lithiumblock": [
+		-11449032
+	],
+	"bismuthblock2": [
+		-12501441
+	],
+	"copperore": [
+		-8947849
+	],
+	"zincore": [
+		-8947849
+	],
+	"tinore": [
+		-8947849
+	],
+	"titaniumore": [
+		-9276814
+	],
+	"saltore": [
+		-9408400
+	],
+	"bismuthore": [
+		-9079693
+	],
+	"lithiumore": [
+		-8947849
+	],
+	"plumbumore": [
+		-9342607
+	],
+	"rubyore": [
+		-9079435
+	],
+	"sapphireore": [
+		-9473419
+	],
+	"amberore": [
+		-9079435
+	],
+	"slateblue": [
+		-11974063
+	],
+	"slate": [
+		-11711155
+	],
+	"graniteblack": [
+		-14672097
+	],
+	"ex_oreSaltsCopper": [
+		-12756158
+	],
+	"ex_oreSaltsTin": [
+		-12627888
+	],
+	"ex_oreSaltsLead": [
+		-12435881
+	],
+	"ex_oreSaltsSilver": [
+		-12033174
+	],
+	"ex_oreSaltsIron": [
+		-11860480
+	],
+	"ex_oreSaltsGold": [
+		-10859264
+	],
+	"ex_oreSaltsNickel": [
+		-11054542
+	],
+	"ex_oreSaltsPlatinum": [
+		-16769949
+	],
+	"ex_Irongravel": [
+		-7963013
+	],
+	"ex_netherIrongravel": [
+		-11786714
+	],
+	"ex_enderIrongravel": [
+		-3093604
+	],
+	"ex_Ironsand": [
+		-1001052
+	],
+	"ex_Irondust": [
+		-867407
+	],
+	"ex_Goldgravel": [
+		-8290690
+	],
+	"ex_netherGoldgravel": [
+		-11786714
+	],
+	"ex_enderGoldgravel": [
+		-3355493
+	],
+	"ex_Goldsand": [
+		-10132
+	],
+	"ex_Golddust": [
+		-68702
+	],
+	"ex_Nickelgravel": [
+		-8290690
+	],
+	"ex_netherNickelgravel": [
+		-11786714
+	],
+	"ex_enderNickelgravel": [
+		-3355493
+	],
+	"ex_Nickelsand": [
+		-7368843
+	],
+	"ex_Nickeldust": [
+		-5329517
+	],
+	"ex_Platinumgravel": [
+		-8290690
+	],
+	"ex_netherPlatinumgravel": [
+		-11786714
+	],
+	"ex_enderPlatinumgravel": [
+		-3355493
+	],
+	"ex_Platinumsand": [
+		-9261631
+	],
+	"ex_Platinumdust": [
+		-5643017
+	],
+	"ex_Aluminumgravel": [
+		-8290690
+	],
+	"ex_netherAluminumgravel": [
+		-11786714
+	],
+	"ex_enderAluminumgravel": [
+		-3159903
+	],
+	"ex_Aluminumsand": [
+		-3755856
+	],
+	"ex_Aluminumdust": [
+		-4019285
+	],
+	"compressedcobblestone": [
+		-11711155
+	],
+	"compresseddirt": [
+		-11128034
+	],
+	"compressedflint": [
+		-13487566
+	],
+	"compresseddust": [
+		-5725321
+	],
+	"compressedsand": [
+		-4608410
+	],
+	"compressednetherrack": [
+		-6467509
+	],
+	"compressedgravel": [
+		-11119791
+	],
+	"compressedstone": [
+		-10658467
+	],
+	"compressednethergravel": [
+		-12706531
+	],
+	"compressedendstone": [
+		-4669849
+	],
+	"compressedendergravel": [
+		-5131915
+	],
+	"compressedsoulsand": [
+		-12439772
+	],
+	"ex_heavysieve_oak": [
+		-10860500
+	],
+	"ex_heavysieve_spruce": [
+		-12966640
+	],
+	"ex_heavysieve_birch": [
+		-1381915
+	],
+	"ex_heavysieve_jungle": [
+		-11189479
+	],
+	"ex_heavysieve_acacia": [
+		-10133931
+	],
+	"ex_heavysieve_big_oak": [
+		-12833254
+	],
+	"ex_infestedRaw0": [
+		-14994415
+	],
+	"ex_infestedRaw1": [
+		-14725877
+	],
+	"ex_infestedRaw2": [
+		-14799076
+	],
+	"ex_infestedLeaf0": [
+		-6316129
+	],
+	"ex_infestedLeaf1": [
+		-12434878
+	],
+	"ex_infestedLeaf2": [
+		-7039852
+	],
+	"ex_endCake": [
+		-16044523,
+		-16044523,
+		-16044523,
+		-16044523
+	],
+	"ex_dust": [
+		-2435140
+	],
+	"ex_gravelNether": [
+		-10738909
+	],
+	"ex_gravelEnder": [
+		-4868747
+	],
+	"ex_saltcoarse": [
+		-8490917
+	],
+	"ex_dirtEarth": [
+		-13487566
+	],
+	"ex_chorusSprout": [
+		-3426101
+	],
+	"ex_chorusSprout1": [
+		-16711423
+	],
+	"ex_chorusSprout2": [
+		-16185847
+	],
+	"ex_chorusSprout3": [
+		-15791601
+	],
+	"ex_evaporatingdish_oak": [
+		-5271976
+	],
+	"ex_evaporatingdish_birch": [
+		-2636408
+	],
+	"ex_evaporatingdish_acacia": [
+		-5744078
+	],
+	"ex_evaporatingdish_big_oak": [
+		-12440812
+	],
+	"ex_evaporatingdish_jungle": [
+		-4552346
+	],
+	"ex_evaporatingdish_spruce": [
+		-8101319
+	],
+	"ex_barrelStone": [
+		-7368817
+	],
+	"ex_barrelOak": [
+		-5271976
+	],
+	"ex_barrelBirch": [
+		-2636408
+	],
+	"ex_barrelAcacia": [
+		-5744078
+	],
+	"ex_barrelBigOak": [
+		-12440812
+	],
+	"ex_barrelJungle": [
+		-4552346
+	],
+	"ex_barrelSpruce": [
+		-8101319
+	],
+	"ex_barrel_glass_black": [
+		-15132391
+	],
+	"ex_barrel_glass_blue": [
+		-13481038
+	],
+	"ex_barrel_glass_brown": [
+		-10073294
+	],
+	"ex_barrel_glass_cyan": [
+		-11763815
+	],
+	"ex_barrel_glass_gray": [
+		-11842741
+	],
+	"ex_barrel_glass_green": [
+		-10059981
+	],
+	"ex_barrel_glass_light_blue": [
+		-10053161
+	],
+	"ex_barrel_glass_lime": [
+		-8402151
+	],
+	"ex_barrel_glass_magenta": [
+		-5092393
+	],
+	"ex_barrel_glass_orange": [
+		-2588877
+	],
+	"ex_barrel_glass_pink": [
+		-884828
+	],
+	"ex_barrel_glass_purple": [
+		-8437838
+	],
+	"ex_barrel_glass_red": [
+		-6737101
+	],
+	"ex_barrel_glass_silver": [
+		-15856114
+	],
+	"ex_barrel_glass_white": [
+		-1
+	],
+	"ex_barrel_glass_yellow": [
+		-1710798
+	],
+	"ex_crucibleRaw": [
+		-3220773
+	],
+	"ex_crucible": [
+		-5065806
+	],
+	"ex_furnace0": [
+		-10658724
+	],
+	"ex_damage0": [
+		-10658724,
+		-10658724,
+		-10658724,
+		-10658724
+	],
+	"ex_auto_crafting_table": [
+		-13224394
+	],
+	"ex_compressedObsidian_level1": [
+		-15528163
+	],
+	"ex_compressedObsidian_level2": [
+		-15068389
+	],
+	"ex_beeTrap": [
+		-5205488
+	],
+	"ex_beeTrapTreated": [
+		-6452950
+	],
+	"ex_sieve_birch": [
+		-2636408
+	],
+	"ex_sieve_acacia": [
+		-5744078
+	],
+	"ex_sieve_big_oak": [
+		-12440812
+	],
+	"ex_sieve_jungle": [
+		-4552346
+	],
+	"ex_sieve_spruce": [
+		-8101319
+	],
+	"ex_sieve_oak": [
+		-5271976
+	],
+	"baitBSheep": [
+		-16777216
+	],
+	"baitBCow": [
+		-16777216
+	],
+	"baitBChicken": [
+		-16777216
+	],
+	"baitBPig": [
+		-16777216
+	],
+	"baitBWolf": [
+		-16777216
+	],
+	"baitBOcelot": [
+		-16777216
+	],
+	"ex_crucible_oak": [
+		-10860500
+	],
+	"ex_crucible_spruce": [
+		-12966640
+	],
+	"ex_crucible_birch": [
+		-1381915
+	],
+	"ex_crucible_jungle": [
+		-11189479
+	],
+	"ex_crucible_acacia": [
+		-10133931
+	],
+	"ex_crucible_big_oak": [
+		-12833254
+	],
+	"carved_askabak": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"carved_askabak2": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"carved_askabak3": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"carved_askabak4": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"carved_askabak5": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"carved_askabak6": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"carved_askabak7": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"carved_askabak8": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"carved_askabak9": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"carved_askabak10": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"carved_askabak11": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"carved_askabak12": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"carved_askabak13": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"carved_askabak14": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"carved_askabak15": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"carved_askabak16": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"carved_askabak17": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"carved_askabak18": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"carved_askabak19": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"carved_askabak20": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"carved_askabak21": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"carved_askabak22": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"carved_askabak23": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"carved_askabak24": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"jack_o_lantern": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"jack_o_lantern2": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"jack_o_lantern3": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"jack_o_lantern4": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"jack_o_lantern5": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"jack_o_lantern6": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"jack_o_lantern7": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"jack_o_lantern8": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"jack_o_lantern9": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"jack_o_lantern10": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"jack_o_lantern11": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"jack_o_lantern12": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"jack_o_lantern13": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"jack_o_lantern14": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"jack_o_lantern15": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"jack_o_lantern16": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"jack_o_lantern17": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"jack_o_lantern18": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"jack_o_lantern19": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"jack_o_lantern20": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"jack_o_lantern21": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"jack_o_lantern22": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"jack_o_lantern23": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"jack_o_lantern24": [
+		-4757742,
+		-4757742,
+		-4757742,
+		-4757742
+	],
+	"super_coal": [
+		-10855846
+	],
+	"super_iron": [
+		-5535889
+	],
+	"super_gold": [
+		-339658
+	],
+	"super_lapis": [
+		-15122534
+	],
+	"super_redstone": [
+		-5373695
+	],
+	"super_emerald": [
+		-15476647
+	],
+	"super_diamond": [
+		-9842695
+	],
+	"super_quartz": [
+		-2307393
+	],
+	"super_copper": [
+		-5614080
+	],
+	"super_iridium": [
+		-2631721
+	],
+	"super_tin": [
+		-8875348
+	],
+	"super_uranium": [
+		-10523820
+	],
+	"DWwood": [
+		-10724260
+	],
+	"Heart": [
+		-11730173
+	],
+	"sapDea": [
+		-7368817
+	],
+	"bumAga": [
+		-7368817
+	],
+	"per": [
+		-21121
+	],
+	"ruk": [
+		-7368817
+	],
+	"bcid": [
+		-1867156
+	],
+	"btid": [
+		-10848886
+	],
+	"blid": [
+		-12959148
+	],
+	"bsid": [
+		-8811118
+	],
+	"bnid": [
+		-8160679
+	],
+	"bpid": [
+		-11555104
+	],
+	"bbid": [
+		-5478881
+	],
+	"biid": [
+		-6444636
+	],
+	"beid": [
+		-2508283
+	],
+	"bsgid": [
+		-9362681
+	],
+	"benid": [
+		-16619949
+	],
+	"bpeid": [
+		-14277082
+	],
+	"ocid": [
+		-8947849
+	],
+	"olid": [
+		-8947849
+	],
+	"osid": [
+		-8947849
+	],
+	"onid": [
+		-8947849
+	],
+	"opid": [
+		-8947849
+	],
+	"opeid": [
+		-7368817
+	],
+	"cookieOre": [
+		-9079693
+	],
+	"stoneFurniture": [
+		-2892303
+	],
+	"white_chair": [
+		-5271976,
+		-5271976,
+		-5271976,
+		-5271976
+	],
+	"silver_chair": [
+		-5271976,
+		-5271976,
+		-5271976,
+		-5271976
+	],
+	"gray_chair": [
+		-5271976,
+		-5271976,
+		-5271976,
+		-5271976
+	],
+	"black_chair": [
+		-5271976,
+		-5271976,
+		-5271976,
+		-5271976
+	],
+	"brown_chair": [
+		-5271976,
+		-5271976,
+		-5271976,
+		-5271976
+	],
+	"red_chair": [
+		-5271976,
+		-5271976,
+		-5271976,
+		-5271976
+	],
+	"orange_chair": [
+		-5271976,
+		-5271976,
+		-5271976,
+		-5271976
+	],
+	"yellow_chair": [
+		-5271976,
+		-5271976,
+		-5271976,
+		-5271976
+	],
+	"lime_chair": [
+		-5271976,
+		-5271976,
+		-5271976,
+		-5271976
+	],
+	"green_chair": [
+		-5271976,
+		-5271976,
+		-5271976,
+		-5271976
+	],
+	"cyan_chair": [
+		-5271976,
+		-5271976,
+		-5271976,
+		-5271976
+	],
+	"light_blue_chair": [
+		-5271976,
+		-5271976,
+		-5271976,
+		-5271976
+	],
+	"blue_chair": [
+		-5271976,
+		-5271976,
+		-5271976,
+		-5271976
+	],
+	"purple_chair": [
+		-5271976,
+		-5271976,
+		-5271976,
+		-5271976
+	],
+	"magenta_chair": [
+		-5271976,
+		-5271976,
+		-5271976,
+		-5271976
+	],
+	"pink_chair": [
+		-5271976,
+		-5271976,
+		-5271976,
+		-5271976
+	],
+	"white_big_bed": [
+		-1446676,
+		-1446676,
+		-1446676,
+		-1446676
+	],
+	"silver_big_bed": [
+		-8092549,
+		-8092549,
+		-8092549,
+		-8092549
+	],
+	"gray_big_bed": [
+		-12696505,
+		-12696505,
+		-12696505,
+		-12696505
+	],
+	"black_big_bed": [
+		-15461095,
+		-15461095,
+		-15461095,
+		-15461095
+	],
+	"brown_big_bed": [
+		-9419225,
+		-9419225,
+		-9419225,
+		-9419225
+	],
+	"red_big_bed": [
+		-6281438,
+		-6281438,
+		-6281438,
+		-6281438
+	],
+	"orange_big_bed": [
+		-1216754,
+		-1216754,
+		-1216754,
+		-1216754
+	],
+	"yellow_big_bed": [
+		-473817,
+		-473817,
+		-473817,
+		-473817
+	],
+	"lime_big_bed": [
+		-9521384,
+		-9521384,
+		-9521384,
+		-9521384
+	],
+	"green_big_bed": [
+		-11310309,
+		-11310309,
+		-11310309,
+		-11310309
+	],
+	"cyan_big_bed": [
+		-15369334,
+		-15369334,
+		-15369334,
+		-15369334
+	],
+	"light_blue_big_bed": [
+		-12931111,
+		-12931111,
+		-12931111,
+		-12931111
+	],
+	"blue_big_bed": [
+		-13289059,
+		-13289059,
+		-13289059,
+		-13289059
+	],
+	"purple_big_bed": [
+		-9296475,
+		-9296475,
+		-9296475,
+		-9296475
+	],
+	"magenta_big_bed": [
+		-4373325,
+		-4373325,
+		-4373325,
+		-4373325
+	],
+	"pink_big_bed": [
+		-1936487,
+		-1936487,
+		-1936487,
+		-1936487
+	],
+	"white_sofa": [
+		-1446676,
+		-1446676,
+		-1446676,
+		-1446676
+	],
+	"silver_sofa": [
+		-8092549,
+		-8092549,
+		-8092549,
+		-8092549
+	],
+	"gray_sofa": [
+		-12696505,
+		-12696505,
+		-12696505,
+		-12696505
+	],
+	"black_sofa": [
+		-15461095,
+		-15461095,
+		-15461095,
+		-15461095
+	],
+	"brown_sofa": [
+		-9419225,
+		-9419225,
+		-9419225,
+		-9419225
+	],
+	"red_sofa": [
+		-6281438,
+		-6281438,
+		-6281438,
+		-6281438
+	],
+	"orange_sofa": [
+		-1216754,
+		-1216754,
+		-1216754,
+		-1216754
+	],
+	"yellow_sofa": [
+		-473817,
+		-473817,
+		-473817,
+		-473817
+	],
+	"lime_sofa": [
+		-9521384,
+		-9521384,
+		-9521384,
+		-9521384
+	],
+	"green_sofa": [
+		-11310309,
+		-11310309,
+		-11310309,
+		-11310309
+	],
+	"cyan_sofa": [
+		-15369334,
+		-15369334,
+		-15369334,
+		-15369334
+	],
+	"light_blue_sofa": [
+		-12931111,
+		-12931111,
+		-12931111,
+		-12931111
+	],
+	"blue_sofa": [
+		-13289059,
+		-13289059,
+		-13289059,
+		-13289059
+	],
+	"purple_sofa": [
+		-9296475,
+		-9296475,
+		-9296475,
+		-9296475
+	],
+	"magenta_sofa": [
+		-4373325,
+		-4373325,
+		-4373325,
+		-4373325
+	],
+	"pink_sofa": [
+		-1936487,
+		-1936487,
+		-1936487,
+		-1936487
+	],
+	"white_scarecrow": [
+		-1446676,
+		-1446676,
+		-1446676,
+		-1446676
+	],
+	"silver_scarecrow": [
+		-8092549,
+		-8092549,
+		-8092549,
+		-8092549
+	],
+	"gray_scarecrow": [
+		-12696505,
+		-12696505,
+		-12696505,
+		-12696505
+	],
+	"black_scarecrow": [
+		-15461095,
+		-15461095,
+		-15461095,
+		-15461095
+	],
+	"brown_scarecrow": [
+		-9419225,
+		-9419225,
+		-9419225,
+		-9419225
+	],
+	"red_scarecrow": [
+		-6281438,
+		-6281438,
+		-6281438,
+		-6281438
+	],
+	"orange_scarecrow": [
+		-1216754,
+		-1216754,
+		-1216754,
+		-1216754
+	],
+	"yellow_scarecrow": [
+		-473817,
+		-473817,
+		-473817,
+		-473817
+	],
+	"lime_scarecrow": [
+		-9521384,
+		-9521384,
+		-9521384,
+		-9521384
+	],
+	"green_scarecrow": [
+		-11310309,
+		-11310309,
+		-11310309,
+		-11310309
+	],
+	"cyan_scarecrow": [
+		-15369334,
+		-15369334,
+		-15369334,
+		-15369334
+	],
+	"light_blue_scarecrow": [
+		-12931111,
+		-12931111,
+		-12931111,
+		-12931111
+	],
+	"blue_scarecrow": [
+		-13289059,
+		-13289059,
+		-13289059,
+		-13289059
+	],
+	"purple_scarecrow": [
+		-9296475,
+		-9296475,
+		-9296475,
+		-9296475
+	],
+	"magenta_scarecrow": [
+		-4373325,
+		-4373325,
+		-4373325,
+		-4373325
+	],
+	"pink_scarecrow": [
+		-1936487,
+		-1936487,
+		-1936487,
+		-1936487
+	],
+	"white_lamp": [
+		-1446676
+	],
+	"silver_lamp": [
+		-8092549
+	],
+	"gray_lamp": [
+		-12696505
+	],
+	"black_lamp": [
+		-15461095
+	],
+	"brown_lamp": [
+		-9419225
+	],
+	"red_lamp": [
+		-6281438
+	],
+	"orange_lamp": [
+		-1216754
+	],
+	"yellow_lamp": [
+		-473817
+	],
+	"lime_lamp": [
+		-9521384
+	],
+	"green_lamp": [
+		-11310309
+	],
+	"cyan_lamp": [
+		-15369334
+	],
+	"light_blue_lamp": [
+		-12931111
+	],
+	"blue_lamp": [
+		-13289059
+	],
+	"purple_lamp": [
+		-9296475
+	],
+	"magenta_lamp": [
+		-4373325
+	],
+	"pink_lamp": [
+		-1936487
+	],
+	"oak_barrel": [
+		-5271976
+	],
+	"spruce_barrel": [
+		-8101319
+	],
+	"birch_barrel": [
+		-2636408
+	],
+	"jungle_barrel": [
+		-4552346
+	],
+	"acacia_barrel": [
+		-5744078
+	],
+	"dark_oak_barrel": [
+		-12440812
+	],
+	"oak_chest": [
+		-5271976,
+		-5271976,
+		-5271976,
+		-5271976
+	],
+	"spruce_chest": [
+		-8101319,
+		-8101319,
+		-8101319,
+		-8101319
+	],
+	"birch_chest": [
+		-2636408,
+		-2636408,
+		-2636408,
+		-2636408
+	],
+	"jungle_chest": [
+		-4552346,
+		-4552346,
+		-4552346,
+		-4552346
+	],
+	"acacia_chest": [
+		-5744078,
+		-5744078,
+		-5744078,
+		-5744078
+	],
+	"dark_oak_chest": [
+		-12440812,
+		-12440812,
+		-12440812,
+		-12440812
+	],
+	"oak_trough_wheat": [
+		-5271976,
+		-5271976,
+		-5271976,
+		-5271976
+	],
+	"spruce_trough_wheat": [
+		-8101319,
+		-8101319,
+		-8101319,
+		-8101319
+	],
+	"birch_trough_wheat": [
+		-2636408,
+		-2636408,
+		-2636408,
+		-2636408
+	],
+	"jungle_trough_wheat": [
+		-4552346,
+		-4552346,
+		-4552346,
+		-4552346
+	],
+	"acacia_trough_wheat": [
+		-5744078,
+		-5744078,
+		-5744078,
+		-5744078
+	],
+	"dark_oak_trough_wheat": [
+		-12440812,
+		-12440812,
+		-12440812,
+		-12440812
+	],
+	"oak_trough_water": [
+		-5271976,
+		-5271976,
+		-5271976,
+		-5271976
+	],
+	"spruce_trough_water": [
+		-8101319,
+		-8101319,
+		-8101319,
+		-8101319
+	],
+	"birch_trough_water": [
+		-2636408,
+		-2636408,
+		-2636408,
+		-2636408
+	],
+	"jungle_trough_water": [
+		-4552346,
+		-4552346,
+		-4552346,
+		-4552346
+	],
+	"acacia_trough_water": [
+		-5744078,
+		-5744078,
+		-5744078,
+		-5744078
+	],
+	"dark_oak_trough_water": [
+		-12440812,
+		-12440812,
+		-12440812,
+		-12440812
+	],
+	"oak_cradle": [
+		-5271976,
+		-5271976,
+		-5271976,
+		-5271976
+	],
+	"spruce_cradle": [
+		-8101319,
+		-8101319,
+		-8101319,
+		-8101319
+	],
+	"birch_cradle": [
+		-2636408,
+		-2636408,
+		-2636408,
+		-2636408
+	],
+	"jungle_cradle": [
+		-4552346,
+		-4552346,
+		-4552346,
+		-4552346
+	],
+	"acacia_cradle": [
+		-5744078,
+		-5744078,
+		-5744078,
+		-5744078
+	],
+	"dark_oak_cradle": [
+		-12440812,
+		-12440812,
+		-12440812,
+		-12440812
+	],
+	"paladiumChest": [
+		-13432566,
+		-13432566,
+		-13432566,
+		-13432566
+	],
+	"paladiumChest2": [
+		-13432566,
+		-13432566,
+		-13432566,
+		-13432566
+	],
+	"endiumChest": [
+		-15659203,
+		-15659203,
+		-15659203,
+		-15659203
+	],
+	"SpecialWood1": [
+		-10728660
+	],
+	"energy_convertor": [
+		-9740963
+	],
+	"boletus": [
+		-16054522
+	],
+	"chanterelle": [
+		-2857213
+	],
+	"wickerBlock": [
+		-2636665
+	],
+	"sedgeBlock": [
+		-15130868
+	],
+	"sedgeBlockSafe": [
+		-15130868
+	],
+	"sedgeBlockp": [
+		-12233697
+	],
+	"sedgeBlockpSafe": [
+		-12233697
+	],
+	"sedgeBlockt": [
+		-15196661
+	],
+	"sedgeBlocktSafe": [
+		-15196661
+	],
+	"blueberryBushmicro": [
+		-16248823
+	],
+	"blueberryBushmini": [
+		-15126245
+	],
+	"blueberryBushBerried": [
+		-14862556
+	],
+	"sweetberryGiant": [
+		-4514280
+	],
+	"blueberryGiant": [
+		-13479849
+	],
+	"raspberryBushmicro": [
+		-16248824
+	],
+	"raspberryBushmini": [
+		-15720431
+	],
+	"raspberryBush": [
+		-15324393
+	],
+	"raspberryBushBerried": [
+		-14602722
+	],
+	"raspberryGiant": [
+		-5164458
+	],
+	"lingonberryBushmicro": [
+		-16514046
+	],
+	"lingonberryBushmini": [
+		-16316669
+	],
+	"lingonberryBush": [
+		-16119291
+	],
+	"lingonberryBushBerried": [
+		-15659767
+	],
+	"lingonberryGiant": [
+		-11127254
+	],
+	"boletusGiant": [
+		-9023674
+	],
+	"boletusGiantStem": [
+		-1455459
+	],
+	"chanterelleGiant": [
+		-415948
+	],
+	"chanterelleGiantStem": [
+		-1336021
+	],
+	"swetPouch": [
+		-9551810,
+		-9551810,
+		-9551810,
+		-9551810
+	],
+	"blueberryPouch": [
+		-11842982,
+		-11842982,
+		-11842982,
+		-11842982
+	],
+	"raspberryPouch": [
+		-9748662,
+		-9748662,
+		-9748662,
+		-9748662
+	],
+	"lingonberryPouch": [
+		-9619906,
+		-9619906,
+		-9619906,
+		-9619906
+	],
+	"compressed_coal_ore": [
+		-10132123
+	],
+	"compressed_diamond_ore": [
+		-8947849
+	],
+	"compressed_emerald_ore": [
+		-10063256
+	],
+	"compressed_gold_ore": [
+		-8947849
+	],
+	"compressed_iron_ore": [
+		-8947849
+	],
+	"compressed_lapis_ore": [
+		-8947849
+	],
+	"compressed_nether_coal_ore": [
+		-11653843
+	],
+	"compressed_nether_diamond_ore": [
+		-10165258
+	],
+	"compressed_nether_emerald_ore": [
+		-15348391
+	],
+	"compressed_nether_glowstone_ore": [
+		-17314
+	],
+	"compressed_nether_gold_ore": [
+		-336574
+	],
+	"compressed_nether_iron_ore": [
+		-3627894
+	],
+	"compressed_nether_lapis_ore": [
+		-15252031
+	],
+	"compressed_nether_quartz_ore": [
+		-3228239
+	],
+	"compressed_nether_redstone_ore": [
+		-5437432
+	],
+	"compressed_quartz_ore": [
+		-6972509
+	],
+	"compressed_redstone_ore": [
+		-8947849
+	],
+	"end_bone_ore": [
+		-2104916
+	],
+	"end_coal_ore": [
+		-2236507
+	],
+	"end_diamond_ore": [
+		-2301520
+	],
+	"end_emerald_ore": [
+		-2236249
+	],
+	"end_fossil_ore": [
+		-2170706
+	],
+	"end_fossil_ore1": [
+		-2039125
+	],
+	"end_fossil_ore2": [
+		-1907793
+	],
+	"end_fossil_ore3": [
+		-1907537
+	],
+	"end_fossil_ore4": [
+		-1907535
+	],
+	"end_fossil_ore5": [
+		-1775949
+	],
+	"end_fossil_ore6": [
+		-1907537
+	],
+	"end_glowstone_ore": [
+		-2105439
+	],
+	"end_gold_ore": [
+		-1973334
+	],
+	"end_iron_ore": [
+		-2501985
+	],
+	"end_lapis_ore": [
+		-2236507
+	],
+	"end_redstone_ore": [
+		-2236507
+	],
+	"fossil_ore": [
+		-8882056
+	],
+	"fossil_ore1": [
+		-8947849
+	],
+	"fossil_ore2": [
+		-8947849
+	],
+	"fossil_ore3": [
+		-8947849
+	],
+	"fossil_ore4": [
+		-8947849
+	],
+	"fossil_ore5": [
+		-8947849
+	],
+	"fossil_ore6": [
+		-8947849
+	],
+	"gold_gravel_ore": [
+		-9607590
+	],
+	"iron_gravel_ore": [
+		-9804701
+	],
+	"lava_crystal_ore": [
+		-10476251
+	],
+	"nether_coal_ore": [
+		-12441817
+	],
+	"nether_diamond_ore": [
+		-2829607
+	],
+	"nether_emerald_ore": [
+		-15348390
+	],
+	"nether_fossil_ore": [
+		-10542044
+	],
+	"nether_fossil_ore1": [
+		-10542044
+	],
+	"nether_fossil_ore2": [
+		-10542044
+	],
+	"nether_fossil_ore3": [
+		-10673373
+	],
+	"nether_fossil_ore4": [
+		-10542044
+	],
+	"nether_fossil_ore5": [
+		-10542044
+	],
+	"nether_fossil_ore6": [
+		-10542044
+	],
+	"nether_glowstone_ore": [
+		-336205
+	],
+	"nether_goold_ore": [
+		-51
+	],
+	"nether_iron_ore": [
+		-3562611
+	],
+	"nether_lapis_ore": [
+		-15186239
+	],
+	"nether_redstone_ore": [
+		-5627616
+	],
+	"end_copper_ore": [
+		-2302049
+	],
+	"nether_copper_ore": [
+		-5152204
+	],
+	"compressed_copper_ore": [
+		-7960954
+	],
+	"compressed_iridium_ore": [
+		-8947849
+	],
+	"end_iridium_ore": [
+		-3157858
+	],
+	"nether_iridium_ore": [
+		-5133155
+	],
+	"nether_lead_ore": [
+		-4534573
+	],
+	"compressed_lead_ore": [
+		-7103845
+	],
+	"end_lead_ore": [
+		-2827092
+	],
+	"end_tin_ore": [
+		-2762582
+	],
+	"nether_tin_ore": [
+		-3750202
+	],
+	"compressed_tin_ore": [
+		-8947849
+	],
+	"end_uranium_ore": [
+		-2302049
+	],
+	"nether_uranium_ore": [
+		-9846255
+	],
+	"compressed_uranium_ore": [
+		-8947849
+	],
+	"mixed_ore": [
+		-7237748
+	],
+	"basalt_ore": [
+		-13882324
+	],
+	"basalt_block": [
+		-12566464
+	],
+	"marmor_ore": [
+		-3947581
+	],
+	"marmor_block": [
+		-4276546
+	],
+	"loam_block": [
+		-3887721
+	],
+	"loam_brick_block": [
+		-6982848
+	],
+	"slate_ore": [
+		-12105913
+	],
+	"oil_slate_ore": [
+		-12303292
+	],
+	"slate_block": [
+		-10987432
+	],
+	"xp_ore": [
+		-7960954
+	],
+	"nether_xp_ore": [
+		-6269357
+	],
+	"end_xp_ore": [
+		-2170714
+	],
+	"advsolar": [
+		-3943981
+	],
+	"diskDrive": [
+		-10526881,
+		-10526881,
+		-10526881,
+		-10526881
+	],
+	"RS_controller": [
+		-12763843,
+		-12370883,
+		-12500671,
+		-12500671
+	],
+	"RS_grid": [
+		-10855846,
+		-10855846,
+		-10855846,
+		-10855846
+	],
+	"RS_cable": [
+		-14474461
+	],
+	"RSmachine_casing": [
+		-10856103
+	],
+	"RS_interface": [
+		-11053225
+	],
+	"cookie_ore": [
+		-9079693
+	],
+	"cookie_block": [
+		-5610194
+	],
+	"cookie_grass": [
+		-5346509
+	],
+	"cookie_dirt": [
+		-12179188
+	],
+	"cookie_farmland": [
+		-13230586
+	],
+	"cookie_oak": [
+		-10668775
+	],
+	"cookie_leaves": [
+		-14347509
+	],
+	"cookie_sapling_b": [
+		-15857661
+	],
+	"cookie_planks": [
+		-5738428
+	],
+	"cookie_tallGrass_b": [
+		-16580095
+	],
+	"cookie_flower_b": [
+		-16447744
+	],
+	"cookie_rye": [
+		-1983464,
+		-2312170,
+		-16711680,
+		-4416498,
+		-15856895,
+		-15659519,
+		-14147325,
+		-13358333
+	],
+	"cookie_cake_b": [
+		-15332602
+	],
+	"dummyoilore": [
+		-7960954
+	],
+	"asphalt": [
+		-14079703,
+		-11974327,
+		-12500671,
+		-12434878,
+		-12500671,
+		-12500671,
+		-12566464,
+		-12632257,
+		-2368549,
+		-2368549,
+		-12566464
+	],
+	"distillationtower": [
+		-14080218
+	],
+	"pumpJack": [
+		-12502216
+	],
+	"gasGenerator": [
+		-14607075
+	],
+	"cinderOre": [
+		-8947849
+	],
+	"freezariteOre": [
+		-8947849
+	],
+	"xoanonOre": [
+		-8947849
+	],
+	"minuriteOre": [
+		-9078925
+	],
+	"mow": [
+		-4350896
+	],
+	"rockblock": [
+		-14080481
+	],
+	"stickblock": [
+		-16317182
+	],
+	"coppernug": [
+		-15001837
+	],
+	"template_creator": [
+		-7368817
+	],
+	"forgeStone": [
+		-7368817
+	],
+	"unfiredKiln": [
+		-6248781
+	],
+	"firedKiln": [
+		-6791613
+	],
+	"shammer_table": [
+		-11119018
+	],
+	"coalpowderblock": [
+		-14672361
+	],
+	"diamondpowderblock": [
+		-9646128
+	],
+	"emeraldpowderblock": [
+		-12543953
+	],
+	"goldpowderblock": [
+		-1185457
+	],
+	"ironpowderblock": [
+		-3816519
+	],
+	"lapislazulipowderblock": [
+		-11843106
+	],
+	"netherquartzpowderblock": [
+		-724253
+	],
+	"redstonepowderblock": [
+		-6933721
+	],
+	"box": [
+		-9685504
+	],
+	"luxtarore": [
+		-8947849
+	],
+	"darkhamore": [
+		-10591138
+	],
+	"aquaturaore": [
+		-8947849
+	],
+	"flisotuachewnore": [
+		-8947849
+	],
+	"moonbricks": [
+		-601866
+	],
+	"cometbricks": [
+		-1
+	],
+	"blackbricks": [
+		-13619152
+	],
+	"redbricks": [
+		-2621440
+	],
+	"fireleav": [
+		-916992
+	],
+	"fireleav4": [
+		-65536
+	],
+	"fireleav3": [
+		-983040
+	],
+	"fireleav2": [
+		-1048576
+	],
+	"fireleav1": [
+		-1048576
+	],
+	"aFurnace": [
+		-11119018
+	],
+	"realitybanner": [
+		-15915234,
+		-15915234,
+		-15915234,
+		-15915234
+	],
+	"bronzerealitybanner": [
+		-15528960,
+		-15528960,
+		-15528960,
+		-15528960
+	],
+	"silverrealitybanner": [
+		-15528960,
+		-15528960,
+		-15528960,
+		-15528960
+	],
+	"goldrealitybanner": [
+		-15528960,
+		-15528960,
+		-15528960,
+		-15528960
+	],
+	"mushroombanner": [
+		-16571099,
+		-16571099,
+		-16571099,
+		-16571099
+	],
+	"bronzemushroombanner": [
+		-16448509,
+		-16448509,
+		-16448509,
+		-16448509
+	],
+	"silvermushroombanner": [
+		-16448509,
+		-16448509,
+		-16448509,
+		-16448509
+	],
+	"goldmushroombanner": [
+		-16448509,
+		-16448509,
+		-16448509,
+		-16448509
+	],
+	"waterbanner": [
+		-16767451,
+		-16767451,
+		-16767451,
+		-16767451
+	],
+	"bronzewaterbanner": [
+		-16775676,
+		-16775676,
+		-16775676,
+		-16775676
+	],
+	"silverwaterbanner": [
+		-16775676,
+		-16775676,
+		-16775676,
+		-16775676
+	],
+	"goldwaterbanner": [
+		-16775676,
+		-16775676,
+		-16775676,
+		-16775676
+	],
+	"netherbanner": [
+		-16637408,
+		-16637408,
+		-16637408,
+		-16637408
+	],
+	"bronzenetherbanner": [
+		-16514560,
+		-16514560,
+		-16514560,
+		-16514560
+	],
+	"silvernetherbanner": [
+		-16514560,
+		-16514560,
+		-16514560,
+		-16514560
+	],
+	"goldnetherbanner": [
+		-16514560,
+		-16514560,
+		-16514560,
+		-16514560
+	],
+	"endbanner": [
+		-15198921,
+		-15198921,
+		-15198921,
+		-15198921
+	],
+	"bronzeendbanner": [
+		-14745557,
+		-14745557,
+		-14745557,
+		-14745557
+	],
+	"silverendbanner": [
+		-14745557,
+		-14745557,
+		-14745557,
+		-14745557
+	],
+	"goldendbanner": [
+		-14745557,
+		-14745557,
+		-14745557,
+		-14745557
+	],
+	"cometbanner": [
+		-16768220,
+		-16768220,
+		-16768220,
+		-16768220
+	],
+	"bronzecometbanner": [
+		-23986,
+		-23986,
+		-23986,
+		-23986
+	],
+	"silvercometbanner": [
+		-2768418,
+		-2768418,
+		-2768418,
+		-2768418
+	],
+	"goldcometbanner": [
+		-9216,
+		-9216,
+		-9216,
+		-9216
+	],
+	"cometgrass": [
+		-48129
+	],
+	"cometdirt": [
+		-16897
+	],
+	"cometstone": [
+		-16727553
+	],
+	"skyliteore": [
+		-10496
+	],
+	"cometwood": [
+		-4086017
+	],
+	"cometplanks": [
+		-14080
+	],
+	"cometleaves": [
+		-16762369
+	],
+	"cometportal": [
+		-1713409
+	],
+	"cometspawner": [
+		-19968
+	],
+	"cometspawner1": [
+		-19968
+	],
+	"experienceOre": [
+		-10197916
+	],
+	"sapling_coal": [
+		-15921648
+	],
+	"log_coal": [
+		-10992086
+	],
+	"leaves_coal": [
+		-15395046,
+		-15395046,
+		-15395046,
+		-14868700
+	],
+	"leaves2_coal": [
+		-15395046
+	],
+	"amber_coal": [
+		-14473685
+	],
+	"sapling_iron": [
+		-14410472
+	],
+	"log_iron": [
+		-10992086
+	],
+	"leaves_iron": [
+		-12964313,
+		-12964313,
+		-12964313,
+		-10992325
+	],
+	"leaves2_iron": [
+		-12964313
+	],
+	"amber_iron": [
+		-8361897
+	],
+	"sapling_gold": [
+		-14869752
+	],
+	"log_gold": [
+		-10992086
+	],
+	"leaves_gold": [
+		-13488625,
+		-13488625,
+		-13488625,
+		-9806049
+	],
+	"leaves2_gold": [
+		-13488625
+	],
+	"amber_gold": [
+		-6450130
+	],
+	"sapling_lapis": [
+		-16445402
+	],
+	"log_lapis": [
+		-10992086
+	],
+	"leaves_lapis": [
+		-16246211,
+		-16246211,
+		-16246211,
+		-15980708
+	],
+	"leaves2_lapis": [
+		-16246211
+	],
+	"amber_lapis": [
+		-15582589
+	],
+	"sapling_redstone": [
+		-14548992
+	],
+	"log_redstone": [
+		-10992086
+	],
+	"leaves_redstone": [
+		-13041407,
+		-13041407,
+		-13041407,
+		-11730687
+	],
+	"leaves2_redstone": [
+		-13041407
+	],
+	"amber_redstone": [
+		-10682111
+	],
+	"sapling_diamond": [
+		-15919075
+	],
+	"log_diamond": [
+		-10992086
+	],
+	"leaves_diamond": [
+		-15194062,
+		-15194062,
+		-15194062,
+		-13479063
+	],
+	"leaves2_diamond": [
+		-15194062
+	],
+	"amber_diamond": [
+		-11630683
+	],
+	"sapling_emerald": [
+		-16311025
+	],
+	"log_emerald": [
+		-10992086
+	],
+	"leaves_emerald": [
+		-15978214,
+		-15978214,
+		-15978214,
+		-15046857
+	],
+	"leaves2_emerald": [
+		-15978214
+	],
+	"amber_emerald": [
+		-14180782
+	],
+	"plank1": [
+		-12440812
+	],
+	"plank2": [
+		-2636665
+	],
+	"plank3": [
+		-4552346
+	],
+	"plank4": [
+		-5140392
+	],
+	"plank5": [
+		-7053770
+	],
+	"plank6": [
+		-5744078
+	],
+	"plank7": [
+		-5744078
+	],
+	"plank8": [
+		-5873094
+	],
+	"plank9": [
+		-5809101
+	],
+	"plank10": [
+		-6333388
+	],
+	"plank11": [
+		-12375276
+	],
+	"plank12": [
+		-2636408
+	],
+	"plank13": [
+		-4486553
+	],
+	"plank14": [
+		-5074599
+	],
+	"plank15": [
+		-6398924
+	],
+	"plank16": [
+		-5744078
+	],
+	"plank17": [
+		-5744078
+	],
+	"plank18": [
+		-5873607
+	],
+	"plank19": [
+		-5809101
+	],
+	"plank20": [
+		-6202317
+	],
+	"plank21": [
+		-5744078
+	],
+	"plank22": [
+		-2636665
+	],
+	"plank23": [
+		-4552346
+	],
+	"plank24": [
+		-5140392
+	],
+	"plank25": [
+		-8101319
+	],
+	"plank26": [
+		-12375276
+	],
+	"plank27": [
+		-12375276
+	],
+	"plank28": [
+		-11914983
+	],
+	"plank29": [
+		-11848935
+	],
+	"plank30": [
+		-11388643
+	],
+	"plank31": [
+		-5744078
+	],
+	"plank32": [
+		-2636408
+	],
+	"plank33": [
+		-4486553
+	],
+	"plank34": [
+		-5074599
+	],
+	"plank35": [
+		-8101319
+	],
+	"plank36": [
+		-12440812
+	],
+	"plank37": [
+		-12440812
+	],
+	"plank38": [
+		-11981032
+	],
+	"plank39": [
+		-11980520
+	],
+	"plank40": [
+		-11586020
+	],
+	"plank41": [
+		-5744078
+	],
+	"plank42": [
+		-12440812
+	],
+	"plank43": [
+		-4680598
+	],
+	"plank44": [
+		-5073570
+	],
+	"plank45": [
+		-8101319
+	],
+	"plank46": [
+		-2636408
+	],
+	"plank47": [
+		-2636408
+	],
+	"plank48": [
+		-2636408
+	],
+	"plank49": [
+		-2636408
+	],
+	"plank50": [
+		-2636408
+	],
+	"plank51": [
+		-5744078
+	],
+	"plank52": [
+		-12375276
+	],
+	"plank53": [
+		-4810131
+	],
+	"plank54": [
+		-5006748
+	],
+	"plank55": [
+		-8101319
+	],
+	"plank56": [
+		-2636664
+	],
+	"plank57": [
+		-2636664
+	],
+	"plank58": [
+		-2636664
+	],
+	"plank59": [
+		-2636664
+	],
+	"plank60": [
+		-2636664
+	],
+	"plank61": [
+		-5808586
+	],
+	"plank62": [
+		-12243690
+	],
+	"plank63": [
+		-2636665
+	],
+	"plank64": [
+		-5075110
+	],
+	"plank65": [
+		-7510209
+	],
+	"plank66": [
+		-4486553
+	],
+	"plank67": [
+		-4486553
+	],
+	"plank68": [
+		-4810131
+	],
+	"plank69": [
+		-4944547
+	],
+	"plank70": [
+		-4486553
+	],
+	"plank71": [
+		-5873094
+	],
+	"plank72": [
+		-11914983
+	],
+	"plank73": [
+		-2636408
+	],
+	"plank74": [
+		-4944291
+	],
+	"plank75": [
+		-6984892
+	],
+	"plank76": [
+		-4552346
+	],
+	"plank77": [
+		-4552346
+	],
+	"plank78": [
+		-4810644
+	],
+	"plank79": [
+		-4944547
+	],
+	"plank80": [
+		-4552346
+	],
+	"plank81": [
+		-5809358
+	],
+	"plank82": [
+		-12243690
+	],
+	"plank83": [
+		-2636665
+	],
+	"plank84": [
+		-4813728
+	],
+	"plank85": [
+		-8035526
+	],
+	"plank86": [
+		-5074599
+	],
+	"plank87": [
+		-5074599
+	],
+	"plank88": [
+		-5006748
+	],
+	"plank89": [
+		-4944291
+	],
+	"plank90": [
+		-5074599
+	],
+	"plank91": [
+		-5809101
+	],
+	"plank92": [
+		-11848935
+	],
+	"plank93": [
+		-2636408
+	],
+	"plank94": [
+		-4944547
+	],
+	"plank95": [
+		-7903942
+	],
+	"plank96": [
+		-5140392
+	],
+	"plank97": [
+		-5140392
+	],
+	"plank98": [
+		-5072798
+	],
+	"plank99": [
+		-4944036
+	],
+	"plank100": [
+		-5140392
+	],
+	"plank101": [
+		-5940430
+	],
+	"plank102": [
+		-11914984
+	],
+	"plank103": [
+		-2636665
+	],
+	"plank104": [
+		-4552346
+	],
+	"plank105": [
+		-5140392
+	],
+	"plank106": [
+		-6398924
+	],
+	"plank107": [
+		-8101319
+	],
+	"plank108": [
+		-8101319
+	],
+	"plank109": [
+		-6984892
+	],
+	"plank110": [
+		-7903942
+	],
+	"plank111": [
+		-6333388
+	],
+	"plank112": [
+		-11388643
+	],
+	"plank113": [
+		-2636408
+	],
+	"plank114": [
+		-4486553
+	],
+	"plank115": [
+		-5074599
+	],
+	"plank116": [
+		-6529996
+	],
+	"plank117": [
+		-8101319
+	],
+	"plank118": [
+		-8101319
+	],
+	"plank119": [
+		-7181758
+	],
+	"plank120": [
+		-7969478
+	],
+	"Scapoliteore": [
+		-8947849
+	],
+	"Latuneore": [
+		-7368817
+	],
+	"latuneFurnace": [
+		-997351,
+		-997351,
+		-997351,
+		-997351
+	],
+	"oreShaleOil": [
+		-12237499
+	],
+	"oreGalliumArsenide": [
+		-7960954
+	],
+	"oreTitanium": [
+		-16759740
+	],
+	"oreAluminum": [
+		-7566196
+	],
+	"oreSulfur": [
+		-8947849
+	],
+	"oreFluorite": [
+		-8947849
+	],
+	"oreRuby": [
+		-5924196
+	],
+	"blockTitanium": [
+		-16760768,
+		-16760768,
+		-16760768,
+		-16760768
+	],
+	"blockSulfur": [
+		-5213184
+	],
+	"blockFluorite": [
+		-1315861
+	],
+	"bricksConcrete": [
+		-9276814
+	],
+	"bricksLight": [
+		-5728926
+	],
+	"machineBlockBasic": [
+		-4340795
+	],
+	"sign": [
+		-5140392,
+		-5140392,
+		-5140392,
+		-5140392,
+		-5140392,
+		-5140392,
+		-5140392,
+		-5140392,
+		-5140392,
+		-5140392,
+		-5140392,
+		-5140392,
+		-5140392,
+		-5140392,
+		-5140392,
+		-5140392,
+		-5140392,
+		-5140392
+	],
+	"radiatorIron": [
+		-2302756
+	],
+	"radiatorGold": [
+		-668361
+	],
+	"radiatorTitanium": [
+		-16760768
+	],
+	"radiatorLead": [
+		-6444073
+	],
+	"radiatorAluminum": [
+		-4407864
+	],
+	"radiatorCopper": [
+		-604531
+	],
+	"radiatorTin": [
+		-5060912
+	],
+	"cokeOven": [
+		-12105913,
+		-789517,
+		-789517,
+		-789517
+	],
+	"extruder": [
+		-855310,
+		-855310,
+		-855310,
+		-855310
+	],
+	"pressPlastic": [
+		-789517,
+		-789517,
+		-789517,
+		-789517
+	],
+	"rectifier": [
+		-3552823,
+		-3552823,
+		-3552823,
+		-3552823
+	],
+	"polymerizer": [
+		-789517,
+		-789517,
+		-789517,
+		-789517
+	],
+	"hvTransformer": [
+		-789517
+	],
+	"hvConnector": [
+		-15395560
+	],
+	"pressMetal": [
+		-789517,
+		-789517,
+		-789517,
+		-789517
+	],
+	"tableAssembly": [
+		-9409942,
+		-9409942,
+		-9409942,
+		-9409942
+	],
+	"solderingStation": [
+		-11120560,
+		-11120560,
+		-11120560,
+		-11120560
+	],
+	"burnerLaser": [
+		-10001565,
+		-10001565,
+		-10001565,
+		-10001565
+	],
+	"crystalizer": [
+		-10001565,
+		-10001565,
+		-10001565,
+		-10001565
+	],
+	"casingStabilizer": [
+		-9869979
+	],
+	"stabilizer": [
+		-10593445
+	],
+	"windingStabilizer": [
+		-6444073
+	],
+	"shredder": [
+		-9541014,
+		-9541014,
+		-9541014,
+		-9541014
+	],
+	"generatorFuel": [
+		-9541014,
+		-9541014,
+		-9541014,
+		-9541014
+	],
+	"generatorLightning": [
+		-9607321,
+		-9607321,
+		-9607321,
+		-9607321
+	],
+	"wichitumore": [
+		-2368093
+	],
+	"olgrass": [
+		-16746240
+	],
+	"oldirt": [
+		-4887807
+	],
+	"olstone": [
+		-10451608
+	],
+	"wakefulnessrock": [
+		-9604055
+	],
+	"olwood": [
+		-11122888
+	],
+	"olleaves": [
+		-9397504
+	],
+	"olgr1": [
+		-15657728
+	],
+	"olgr2": [
+		-9857792
+	],
+	"bluemsh": [
+		-4790529
+	],
+	"brownmsh": [
+		-13623296
+	],
+	"olplanks": [
+		-23552
+	],
+	"olstonebricks": [
+		-10443157
+	],
+	"olstonebricksaede": [
+		-9123711
+	],
+	"olstonebricksmossy": [
+		-8666482
+	],
+	"olstonebrickscracked": [
+		-12166073
+	],
+	"owplate": [
+		-11122888
+	],
+	"owpplate": [
+		-23552
+	],
+	"owsplate": [
+		-10451608
+	],
+	"olstonebricksplate": [
+		-10443157
+	],
+	"olcarvedstonebricksplate": [
+		-9123711
+	],
+	"platestonebrickscracked": [
+		-12166073
+	],
+	"platestonebricksmossy": [
+		-8666482
+	],
+	"olbookshelf": [
+		-23552
+	],
+	"oljukebox": [
+		-6540032
+	],
+	"olrubyore": [
+		-10451608
+	],
+	"olwoodmossy": [
+		-11122888
+	],
+	"olwoodmossy0": [
+		-10990279
+	],
+	"olfurnace": [
+		-10451608,
+		-10451608,
+		-10451608,
+		-10451608
+	],
+	"olglass": [
+		-1769563,
+		-1769563,
+		-1769563,
+		-1769563
+	],
+	"olglow": [
+		-4079361,
+		-4079361,
+		-4079361,
+		-4079361
+	],
+	"f1": [
+		-5983744
+	],
+	"f2": [
+		-5000704
+	],
+	"f3": [
+		-3735353
+	],
+	"producer": [
+		-9349067
+	],
+	"mutatron": [
+		-9414861
+	],
+	"indApiary": [
+		-9414609
+	],
+	"humus": [
+		-14544894
+	],
+	"bog": [
+		-14542057
+	],
+	"blockPeat": [
+		-16054781
+	],
+	"oreApatite": [
+		-7368817
+	],
+	"blockCharcoal": [
+		-14015457
+	],
+	"blockAsh": [
+		-6579301
+	],
+	"ashBricks": [
+		-10329502
+	],
+	"blockBronze": [
+		-208746
+	],
+	"blockApatite": [
+		-5708304
+	],
+	"apiaristChest": [
+		-15198959,
+		-15198959,
+		-15198959,
+		-15198959
+	],
+	"apiary": [
+		-5271976
+	],
+	"beeHouse": [
+		-10005709
+	],
+	"blockWax": [
+		-2171456
+	],
+	"blockComb": [
+		-5412060,
+		-2697728,
+		-2312894,
+		-3938843,
+		-2961314,
+		-6899900,
+		-3367978,
+		-2568953,
+		-2368549,
+		-3418624,
+		-2705365,
+		-4017587,
+		-1710661,
+		-3090944
+	],
+	"beehiveForestry": [
+		-986656,
+		-7327474,
+		-2970359,
+		-11451115,
+		-2556676,
+		-13089002,
+		-15727853
+	],
+	"alveary": [
+		-2124769
+	],
+	"alvearyFan": [
+		-4881868
+	],
+	"alvearyHeater": [
+		-4881868
+	],
+	"alvearyHygroregulator": [
+		-4881868
+	],
+	"alveary_misc": [
+		-4750798
+	],
+	"alveary_misc_center": [
+		-4881868
+	],
+	"alvearyStabiliser": [
+		-4881868
+	],
+	"carpenter": [
+		-13164530,
+		-13164530,
+		-13164530,
+		-13164530
+	],
+	"centrifuge": [
+		-13162224,
+		-13162224,
+		-13162224,
+		-13162224
+	],
+	"fabricator": [
+		-3554139,
+		-3554139,
+		-3554139,
+		-3554139
+	],
+	"fermenter": [
+		-13164530,
+		-13164530,
+		-13164530,
+		-13164530
+	],
+	"moistener": [
+		-13363961,
+		-13363961,
+		-13363961,
+		-13363961
+	],
+	"squeezer": [
+		-13162224,
+		-13162224,
+		-13162224,
+		-13162224
+	],
+	"still": [
+		-11843007,
+		-11843007,
+		-11843007,
+		-11843007
+	],
+	"rainmaker": [
+		-2039584
+	],
+	"engineBiogas": [
+		-13032687
+	],
+	"biogenerator": [
+		-4473925,
+		-4473925,
+		-4473925,
+		-4473925
+	],
+	"engineClockwork": [
+		-12830449
+	],
+	"enginePeat": [
+		-13691896
+	],
+	"pc_1": [
+		-12829636,
+		-12829636,
+		-12829636,
+		-12829636
+	],
+	"pc_2": [
+		-12829636,
+		-12829636,
+		-12829636,
+		-12829636
+	],
+	"pc_3": [
+		-12829636,
+		-12829636,
+		-12829636,
+		-12829636
+	],
+	"pc_4": [
+		-12829636,
+		-12829636,
+		-12829636,
+		-12829636
+	],
+	"pc_5": [
+		-14277082,
+		-14277082,
+		-14277082,
+		-14277082
+	],
+	"tcon_grout": [
+		-6315605
+	],
+	"elevator": [
+		-1447447
+	],
+	"megadiamond": [
+		-2228225
+	],
+	"devilBlock": [
+		-5560302
+	],
+	"soulOre": [
+		-3211233
+	],
+	"vinetrap": [
+		-15321337
+	],
+	"jazzium_ore": [
+		-11002081
+	],
+	"jazzium_block": [
+		-2009706
+	],
+	"flamed_jazzium_block": [
+		-2934420
+	],
+	"matrix_tel": [
+		-13553355
+	],
+	"matrix_dish": [
+		-13553355
+	],
+	"matrix_pc": [
+		-13553355
+	],
+	"QEconduct": [
+		-16766686
+	],
+	"EUconduct": [
+		-15592941
+	],
+	"armorImplantationTable": [
+		-4472125,
+		-4472125,
+		-4472125,
+		-4472125
+	],
+	"labBlock": [
+		-3682609,
+		-3682609,
+		-3682609,
+		-3682609
+	],
+	"matterReenactor": [
+		-3353131,
+		-3353131,
+		-3353131,
+		-3353131
+	],
+	"molecularConverter": [
+		-3353131,
+		-3353131,
+		-3353131,
+		-3353131
+	],
+	"molecularGenerator": [
+		-3616559,
+		-3616559,
+		-3616559,
+		-3616559
+	],
+	"molecularSealant": [
+		-3616559,
+		-3616559,
+		-3616559,
+		-3616559
+	],
+	"naniteCollector": [
+		-3353131,
+		-3353131,
+		-3353131,
+		-3353131
+	],
+	"naniteTrainingNode": [
+		-5393998,
+		-5393998,
+		-5393998,
+		-5393998
+	],
+	"solarPanelLeadstone": [
+		-15264460
+	],
+	"solarPanelHardent": [
+		-15001292
+	],
+	"solarPanelRedstone": [
+		-15725268
+	],
+	"solarPanelResonant": [
+		-15657937
+	],
+	"solarPanelAdvanced": [
+		-15725011
+	],
+	"solarPanelUltimate": [
+		-15725011
+	],
+	"woodIncubator": [
+		-4799806,
+		-4799806,
+		-4799806,
+		-4799806
+	],
+	"oreAdamantite": [
+		-7633273
+	],
+	"blockAdamantite": [
+		-1894114
+	],
+	"oreLavarite": [
+		-10541787
+	],
+	"blockLavarite": [
+		-964050
+	],
+	"oreLeotite": [
+		-543973
+	],
+	"blockLeotite": [
+		-6265592
+	],
+	"oreMalachite": [
+		-6529701
+	],
+	"blockMalachite": [
+		-10956420
+	],
+	"oreMionite": [
+		-2235737
+	],
+	"blockMionite": [
+		-11006084
+	],
+	"oreSapphire": [
+		-6513755
+	],
+	"blockSapphire": [
+		-16380567
+	],
+	"infinitychest": [
+		-16711423,
+		-16711423,
+		-16711423,
+		-16711423
+	],
+	"coconutBlock": [
+		-15594489,
+		-16381950,
+		-15134197
+	],
+	"palmLeaves": [
+		-13906382,
+		-13906382,
+		-13906382
+	],
+	"palmTreeSapling": [
+		-16509952
+	],
+	"palmLog": [
+		-9148084
+	],
+	"palmLogFruitful": [
+		-9148084
+	],
+	"basic_machine_block": [
+		-10793153
+	],
+	"souldsGlass": [
+		-16055040
+	],
+	"altar": [
+		-9777701,
+		-6381922,
+		-6381922,
+		-6381922
+	],
+	"CookingRack": [
+		-6250336,
+		-6250336,
+		-6250336,
+		-6250336
+	],
+	"windmillNapo": [
+		-5921371,
+		-5921371,
+		-5921371,
+		-5921371
+	],
+	"cloneAltar": [
+		-6250336,
+		-6250336,
+		-6250336,
+		-6250336
+	],
+	"druidicAltar": [
+		-5987164,
+		-5987164,
+		-5987164,
+		-5987164
+	],
+	"druidicAltarController": [
+		-5987164,
+		-5987164,
+		-5987164,
+		-5987164
+	],
+	"adamentiteBlock": [
+		-8519680
+	],
+	"amethystBlock": [
+		-2930945
+	],
+	"coboltBlock": [
+		-16761857
+	],
+	"nephriteBlock": [
+		-16728064
+	],
+	"rubyBlock": [
+		-2808025
+	],
+	"saphireBlock": [
+		-16731649
+	],
+	"silverBlock": [
+		-262935
+	],
+	"trueadamantiteBlock": [
+		-2699411
+	],
+	"packedKronite": [
+		-13957320
+	],
+	"kroniteOre": [
+		-9212554
+	],
+	"ebonyOre": [
+		-10066330
+	],
+	"kroniteBlock": [
+		-11070104
+	],
+	"WoodPickOre": [
+		-7895161
+	],
+	"PickaxeOre": [
+		-7960954
+	],
+	"IronPickOre": [
+		-6381922
+	],
+	"GoldPickaxeOre": [
+		-7895161
+	],
+	"DiamondPickaxeOre": [
+		-11657186
+	],
+	"NetheritePickaxeOre": [
+		-11131609
+	],
+	"ApparatOne": [
+		-7202785,
+		-7202785,
+		-7202785,
+		-7202785
+	],
+	"SneckOne": [
+		-10581983,
+		-10581983,
+		-10581983,
+		-10581983
+	],
+	"SneckTwo": [
+		-10581983,
+		-10581983,
+		-10581983,
+		-10581983
+	],
+	"pipeLiquidWood": [
+		-14606321
+	],
+	"pipeLiquidEmerald": [
+		-16249082
+	],
+	"pipeLiquidStone": [
+		-16249082
+	],
+	"pipeLiquidCobblestone": [
+		-15789043
+	],
+	"pipeLiquidSandstone": [
+		-16249082
+	],
+	"pipeLiquidGold": [
+		-16249082
+	],
+	"pipeLiquidIron": [
+		-16249082
+	],
+	"groundStick": [
+		-5140392
+	],
+	"groundStone": [
+		-7368817
+	],
+	"plantStrawBlock": [
+		-7968733
+	],
+	"plantStrawBlockDense": [
+		-4350896
+	],
+	"oreSalt": [
+		-8947849
+	],
+	"blockSalt": [
+		-4797508
+	],
+	"sieve": [
+		-9010816,
+		-9010816,
+		-9010816,
+		-9010816
+	],
+	"kiln": [
+		-5731738,
+		-5731738,
+		-5731738,
+		-5731738
+	],
+	"bellows": [
+		-10070209,
+		-10070209,
+		-10070209,
+		-10070209
+	],
+	"furnaceBlast": [
+		-11513775,
+		-11513775,
+		-11513775,
+		-11513775
+	],
+	"luckyBlock1": [
+		-2135285
+	],
+	"luckyBlock2": [
+		-16735512
+	],
+	"luckyBlock3": [
+		-13158601
+	],
+	"luckyIc": [
+		-5395027
+	],
+	"ASP": [
+		-3943981
+	],
+	"HSP": [
+		-3943981
+	],
+	"USP": [
+		-3943981
+	],
+	"QSP": [
+		-6711650
+	],
+	"molecularTransformer": [
+		-15526892
+	],
+	"luckyCube": [
+		-7936
+	],
+	"magicPedestal": [
+		-15791592
+	],
+	"magicTable": [
+		-9499367
+	],
+	"lvsa": [
+		-6578271
+	],
+	"mvsa": [
+		-6578271
+	],
+	"hvsa": [
+		-6578271
+	],
+	"coffeeworkshop$bqlm0": [
+		-10269394
+	],
+	"coffeeworkshop$bqlm1": [
+		-10269394
+	],
+	"coffeeworkshop$bqlm2": [
+		-10269394
+	],
+	"coffeeworkshop$bqlm3": [
+		-10269394
+	],
+	"kapok_block": [
+		-1446676,
+		-1216754,
+		-4373325,
+		-12931111,
+		-473817,
+		-9521384,
+		-1936487,
+		-12696505,
+		-8092549,
+		-15369334,
+		-9296475,
+		-13289059,
+		-9419225,
+		-11310309,
+		-6281438,
+		-15461095
+	],
+	"amethystOre": [
+		-7370095
+	],
+	"bauxiteOre": [
+		-7960954
+	],
+	"chromateOre": [
+		-7236459
+	],
+	"copperOre": [
+		-7237750
+	],
+	"fluoriteOre": [
+		-7367535
+	],
+	"jadeOre": [
+		-7960954
+	],
+	"leadOre": [
+		-7302763
+	],
+	"opalOre": [
+		-7368046
+	],
+	"platinumOre": [
+		-7302764
+	],
+	"silverOre": [
+		-6250336
+	],
+	"tinOre": [
+		-6645351
+	],
+	"bauxiteBlock": [
+		-624619
+	],
+	"bronzeBlock": [
+		-3628435
+	],
+	"chromateBlock": [
+		-8937816
+	],
+	"fluoriteBlock": [
+		-13835400
+	],
+	"jadeBlock": [
+		-14628064
+	],
+	"leadBlock": [
+		-5921371
+	],
+	"opalBlock": [
+		-13771914
+	],
+	"platinumBlock": [
+		-11963684
+	],
+	"blueberrybush": [
+		-12152006,
+		-12152006,
+		-12152006,
+		-12152006
+	],
+	"blackberrybush": [
+		-9333893,
+		-9333893,
+		-9333893,
+		-9333893
+	],
+	"raspberrybush": [
+		-7165342,
+		-7165342,
+		-7165342,
+		-7165342
+	],
+	"strawberrybush": [
+		-13419756,
+		-13419756,
+		-13419756,
+		-13419756
+	],
+	"seaweedbl": [
+		-16449527,
+		-16449527,
+		-16449527,
+		-16449527
+	],
+	"plutoniumore": [
+		-9609101
+	],
+	"meuroditeore": [
+		-10330261
+	],
+	"toriteore": [
+		-9078922
+	],
+	"sunstoneore": [
+		-9408400
+	],
+	"radiantore": [
+		-8947849
+	],
+	"blaziumore": [
+		-4960208
+	],
+	"blockMeurodite": [
+		-15789248
+	],
+	"blockTorite": [
+		-8428436
+	],
+	"blockSunstone": [
+		-2439529
+	],
+	"blockBlazium": [
+		-1270256
+	],
+	"crate": [
+		-5337513,
+		-5337513,
+		-5337513,
+		-5337513
+	],
+	"carpentersbench": [
+		-9812191,
+		-9812191,
+		-9812191,
+		-9812191
+	],
+	"alloyfurnace1": [
+		-9408400,
+		-9408400,
+		-9408400,
+		-9408400
+	],
+	"pepperCrop": [
+		-16777216,
+		-16777216,
+		-16777216
+	],
+	"cabbagecrop": [
+		-16777216,
+		-16777216,
+		-16777216
+	],
+	"celerycrop": [
+		-16777216,
+		-16777216,
+		-16777216
+	],
+	"tomatocrop": [
+		-16777216,
+		-16777216,
+		-16777216
+	],
+	"onioncrop": [
+		-16777216,
+		-16777216,
+		-16777216
+	],
+	"lettucecrop": [
+		-16777216,
+		-16777216,
+		-16777216
+	],
+	"corncrop": [
+		-16777216,
+		-16777216,
+		-16777216
+	],
+	"peanutscrop": [
+		-16777216,
+		-16777216,
+		-16777216
+	],
+	"ricecrop": [
+		-16777216,
+		-16777216,
+		-16777216
+	],
+	"mcrusher": [
+		-11645362,
+		-11645362,
+		-11645362,
+		-11645362
+	],
+	"cobbleBreaker": [
+		-11451614,
+		-11451614,
+		-11451614,
+		-11451614
+	],
+	"paladium_crusher": [
+		-11645362,
+		-11645362,
+		-11645362,
+		-11645362
+	],
+	"amethyst_portal_block": [
+		-5593956
+	],
+	"titane_portal_block": [
+		-12641772
+	],
+	"paladium_portal_block": [
+		-12774899
+	],
+	"endium_portal_block": [
+		-12578034
+	],
+	"endium_portal_block2": [
+		-5659493
+	],
+	"gold_tank": [
+		-2169856
+	],
+	"amethyst_tank": [
+		-7798532
+	],
+	"titane_tank": [
+		-6645094
+	],
+	"paladium_tank": [
+		-2490368
+	],
+	"AlchemyCreator": [
+		-10526881
+	],
+	"SlimePad": [
+		-16726196
+	],
+	"paladium_block": [
+		-4175031
+	],
+	"amethyst_block": [
+		-6336807
+	],
+	"titane_block": [
+		-6250336
+	],
+	"paladium_ore": [
+		-8947849
+	],
+	"NoteCraft$ore_note": [
+		-14728051
+	],
+	"NoteCraft$ore_tone_green": [
+		-15155902
+	],
+	"NoteCraft$ore_tone_purple": [
+		-14793843
+	],
+	"NoteCraft$ore_tone_red": [
+		-4383994
+	],
+	"NoteCraft$ore_tone_silver": [
+		-2302756
+	],
+	"NoteCraft$ore_tone_gold": [
+		-668361
+	],
+	"NoteCraft$ore_tone_blue": [
+		-11605791
+	],
+	"oneDollarStack": [
+		-5263710
+	],
+	"twoDollarStack": [
+		-5329504
+	],
+	"fiveDollarStack": [
+		-5135456
+	],
+	"tenDollarStack": [
+		-4413549
+	],
+	"twentyDollarStack": [
+		-4673628
+	],
+	"fiftyDollarStack": [
+		-5004644
+	],
+	"oneHandredDollarStack": [
+		-6249571
+	],
+	"bitcoin": [
+		-1281763
+	],
+	"wondercoin": [
+		-2894893
+	],
+	"ethereum": [
+		-9920820
+	],
+	"arkcoin": [
+		-9895936
+	],
+	"cosmocash": [
+		-16513783
+	],
+	"augur": [
+		-10026838
+	],
+	"lisk": [
+		-14272622
+	],
+	"firecoin": [
+		-1690594
+	],
+	"zerocash": [
+		-2951433
+	],
+	"dashcoin": [
+		-16735512
+	],
+	"monero": [
+		-1748984
+	],
+	"ripple": [
+		-16205089
+	],
+	"windcoin": [
+		-15962503
+	],
+	"litecoin": [
+		-12139753
+	],
+	"dogecoin": [
+		-7708672
+	],
+	"peercoin": [
+		-14145496
+	],
+	"concoin": [
+		-1491968
+	],
+	"buzcoin": [
+		-11337646
+	],
+	"mooncoin": [
+		-10524806
+	],
+	"marscoin": [
+		-4239846
+	],
+	"turfMoon": [
+		-5987170
+	],
+	"stoneMoon": [
+		-10527139
+	],
+	"dirtMoon": [
+		-7105650
+	],
+	"yeneriumblock": [
+		-1572607
+	],
+	"yeneriumore": [
+		-9539986
+	],
+	"moonRock": [
+		-8288883
+	],
+	"moonDirt": [
+		-5787197
+	],
+	"moonTurf": [
+		-9274741
+	],
+	"meteorite": [
+		-14871539,
+		-14871539,
+		-14871539,
+		-14871539
+	],
+	"ironBricks": [
+		-3881788
+	],
+	"cockpit": [
+		-2368549
+	],
+	"dis_oxygenGenerator": [
+		-3223858
+	],
+	"oxygenGenerator": [
+		-3223858
+	],
+	"cropHarvester": [
+		-4406588,
+		-1973534,
+		-1973534,
+		-1973534
+	],
+	"harvesterPump": [
+		-1973534
+	],
+	"lavaGen": [
+		-5609412,
+		-5609412,
+		-5609412,
+		-5609412
+	],
+	"bigFur": [
+		-5797530,
+		-5797530,
+		-5797530,
+		-5797530
+	],
+	"furBrick": [
+		-5731738,
+		-5731738,
+		-5731738,
+		-5731738
+	],
+	"infusiblock": [
+		-5805505,
+		-5805505,
+		-5805505,
+		-5805505
+	],
+	"harderenCasingBlock": [
+		-5739710,
+		-5739710,
+		-5739710,
+		-5739710
+	],
+	"metalCasingBlock": [
+		-5215170,
+		-5215170,
+		-5215170,
+		-5215170
+	],
+	"bigChest": [
+		-9414348,
+		-9414348,
+		-9414348,
+		-9414348
+	],
+	"grinder": [
+		-7077888,
+		-7077888,
+		-7077888,
+		-7077888
+	],
+	"mobSpawn": [
+		-5215170,
+		-5215170,
+		-5215170,
+		-5215170
+	],
+	"vacHopvacHop": [
+		-5412291,
+		-5412291,
+		-5412291,
+		-5412291
+	],
+	"tpBlockA": [
+		-2525387,
+		-2525387,
+		-2525387,
+		-2525387
+	],
+	"netherrackFurnace": [
+		-6269356,
+		-6269356,
+		-6269356,
+		-6269356
+	],
+	"ironFurnace": [
+		-1907998,
+		-1907998,
+		-1907998,
+		-1907998
+	],
+	"goldFurnace": [
+		-398259,
+		-398259,
+		-398259,
+		-398259
+	],
+	"diamondFurnace": [
+		-16742540,
+		-16742540,
+		-16742540,
+		-16742540
+	],
+	"obsidianFurnace": [
+		-15461859,
+		-15461859,
+		-15461859,
+		-15461859
+	],
+	"silvestryBerry_crop": [
+		-16772863,
+		-16636924,
+		-16564984
+	],
+	"silvestryBlueBerry_crop": [
+		-16772863,
+		-16636924,
+		-16564984
+	],
+	"SilvestryPrechBerry_crop": [
+		-16772863,
+		-16636924,
+		-16564984
+	],
+	"SilvestryBlackBerry_crop": [
+		-16772863,
+		-16636924,
+		-16564984
+	],
+	"silvestryBerry": [
+		-14472682,
+		-13946602,
+		-14276074
+	],
+	"silvestryBlueBerry": [
+		-14861805,
+		-14664677,
+		-14795757
+	],
+	"SilvestryPrechBerry": [
+		-13747197,
+		-13419002,
+		-13418236
+	],
+	"SilvestryBlackBerry": [
+		-15517155,
+		-15189212,
+		-15516643
+	],
+	"bamboCrop": [
+		-16645376,
+		-16185088,
+		-15132925
+	],
+	"bean_crop": [
+		-16776960,
+		-16710400,
+		-16250368
+	],
+	"eggplant_crop": [
+		-16711168,
+		-16579583,
+		-16183804
+	],
+	"cucumber_crop": [
+		-16645376,
+		-15987966,
+		-15262968
+	],
+	"tomato_crop": [
+		-16776960,
+		-16644351,
+		-16512255
+	],
+	"wintersquash_crop": [
+		-16711680,
+		-16054784,
+		-16054783
+	],
+	"zucchini_crop": [
+		-16579840,
+		-15922686,
+		-15001081
+	],
+	"okra_crop": [
+		-16579327,
+		-16447486,
+		-16381694
+	],
+	"pineapple_crop": [
+		-16644608,
+		-16246272,
+		-14538491
+	],
+	"cauliflower_crop": [
+		-16512765,
+		-16116728,
+		-16248570
+	],
+	"ganderBlock1": [
+		-14603228
+	],
+	"ganderBlock2": [
+		-15986426
+	],
+	"ganderBlock3": [
+		-15853565
+	],
+	"gooseBerryFruit": [
+		-16183806,
+		-16315903,
+		-16315903
+	],
+	"appleBlock": [
+		-16447230,
+		-15859200,
+		-15334143
+	],
+	"apricotBlock": [
+		-16579839,
+		-16579839,
+		-16513790
+	],
+	"cherryBlock": [
+		-16315902,
+		-16052990,
+		-15071743
+	],
+	"bananaBlock": [
+		-3349858,
+		-3546984,
+		-16711680
+	],
+	"almondBlock": [
+		-11298514,
+		-12350700,
+		-16645888
+	],
+	"avocadoBlock": [
+		-15921401,
+		-15328756,
+		-14867952
+	],
+	"cashewBlock": [
+		-16447741,
+		-16317182,
+		-15726331
+	],
+	"orangeBlock": [
+		-16645375,
+		-16447998,
+		-16119036
+	],
+	"dragonfruitBlock": [
+		-9003454,
+		-6832796,
+		-2203538
+	],
+	"dateBlock": [
+		-16711424,
+		-16711167,
+		-16579326
+	],
+	"lemonBlock": [
+		-3296209,
+		-3165642,
+		-2572998
+	],
+	"mangoBlock": [
+		-16711424,
+		-16711168,
+		-16645888
+	],
+	"papayaBlock": [
+		-16711424,
+		-16645376,
+		-16579584
+	],
+	"starfruitBlock": [
+		-2428500,
+		-2625367,
+		-4528535
+	],
+	"appleSapling": [
+		-15657981
+	],
+	"gooseberrySapling": [
+		-15657981
+	],
+	"apricotSapling": [
+		-15657981
+	],
+	"coconutSapling": [
+		-15263738
+	],
+	"cherrySapling": [
+		-15330300
+	],
+	"bananaSapling": [
+		-15591933
+	],
+	"almondSapling": [
+		-15461117
+	],
+	"avocadoSapling": [
+		-15723773
+	],
+	"cashewSapling": [
+		-15723773
+	],
+	"orangeSapling": [
+		-15657981
+	],
+	"dragonfruitSapling": [
+		-15723773
+	],
+	"dateSapling": [
+		-15591933
+	],
+	"lemonSapling": [
+		-15657981
+	],
+	"mangoSapling": [
+		-15657981
+	],
+	"papayaSapling": [
+		-15723773
+	],
+	"starfruitSapling": [
+		-15591933
+	],
+	"quartzore": [
+		-6053218
+	],
+	"nethercoalore": [
+		-11262683
+	],
+	"netherironore": [
+		-6269357
+	],
+	"nethergoldore": [
+		-6269357
+	],
+	"netherredstoneore": [
+		-5753806
+	],
+	"netherlapisore": [
+		-6138027
+	],
+	"netherdiamondore": [
+		-6269357
+	],
+	"netheremeraldore": [
+		-6269357
+	],
+	"endcoalore": [
+		-2170458
+	],
+	"endironore": [
+		-2303068
+	],
+	"endgoldore": [
+		-2038871
+	],
+	"endredstoneore": [
+		-2170458
+	],
+	"endlapisore": [
+		-2170714
+	],
+	"enddiamondore": [
+		-2235732
+	],
+	"endemeraldore": [
+		-2170199
+	],
+	"LVPad": [
+		-11518168
+	],
+	"blockAlchemicalFuel": [
+		-11141117
+	],
+	"blockMobiusFuel": [
+		-10747900
+	],
+	"blockAstralFuel": [
+		-10263709
+	],
+	"dmBlock": [
+		-15724528
+	],
+	"rmBlock": [
+		-12451069
+	],
+	"transmutationTablet": [
+		-14739949
+	],
+	"energyCollector1": [
+		-2379944,
+		-2379944,
+		-2379944,
+		-2379944
+	],
+	"energyCollector2": [
+		-2186159,
+		-2186159,
+		-2186159,
+		-2186159
+	],
+	"energyCollector3": [
+		-2186159,
+		-2186159,
+		-2186159,
+		-2186159
+	],
+	"antimatterRelay1": [
+		-12961736,
+		-12961736,
+		-12961736,
+		-12961736
+	],
+	"antimatterRelay2": [
+		-13750738,
+		-13750738,
+		-13750738,
+		-13750738
+	],
+	"antimatterRelay3": [
+		-12246494,
+		-12246494,
+		-12246494,
+		-12246494
+	],
+	"alchChest": [
+		-13619152,
+		-13619152,
+		-13619152,
+		-13619152
+	],
+	"energyCondenser1": [
+		-15460072,
+		-15460072,
+		-15460072,
+		-15460072
+	],
+	"energyCondenser2": [
+		-15460072,
+		-15460072,
+		-15460072,
+		-15460072
+	],
+	"pedestalMatter": [
+		-15724528
+	],
+	"explosive1": [
+		-8250368
+	],
+	"explosive2": [
+		-8250368
+	],
+	"coal_nugget_ore": [
+		-7960954
+	],
+	"diamond_nugget_ore": [
+		-7828597
+	],
+	"emerald_nugget_ore": [
+		-7763064
+	],
+	"gold_nugget_ore": [
+		-7960954
+	],
+	"iron_nugget_ore": [
+		-8947849
+	],
+	"opsore": [
+		-15265262
+	],
+	"opsblock": [
+		-15853808
+	],
+	"medrive": [
+		-13489376,
+		-13489376,
+		-13489376,
+		-13489376
+	],
+	"meCable": [
+		-16447468
+	],
+	"certusore": [
+		-8947849
+	],
+	"amethyst_ore": [
+		-8947849
+	],
+	"black_opal_ore": [
+		-9342856
+	],
+	"black_opal_block": [
+		-14679965
+	],
+	"multiblock": [
+		-15132391
+	],
+	"multiore": [
+		-8947849
+	],
+	"multiFurnace": [
+		-15458015,
+		-15458015,
+		-15458015,
+		-15458015
+	],
+	"machineAlchemicalCrucible": [
+		-14869219
+	],
+	"machineRuneEnchanter": [
+		-14145764
+	],
+	"machineStaffEnchanter": [
+		-14473695
+	],
+	"machineAltar": [
+		-12829636
+	],
+	"runeAir": [
+		-12960451
+	],
+	"runeBlood": [
+		-12634827
+	],
+	"runeEarth": [
+		-13025731
+	],
+	"runeEssence": [
+		-12765128
+	],
+	"runeFire": [
+		-12895429
+	],
+	"runeMana": [
+		-12895429
+	],
+	"runeSpace": [
+		-12829638
+	],
+	"runeWater": [
+		-12895429
+	],
+	"runeEmpty": [
+		-12829636
+	],
+	"blockPlatinum": [
+		-3478538
+	],
+	"blockMithril": [
+		-6563334
+	],
+	"blockOryhalk": [
+		-7829368
+	],
+	"blockAdamantium": [
+		-16030187
+	],
+	"adamantiumFurnace": [
+		-12713727,
+		-12713727,
+		-12713727,
+		-12713727
+	],
+	"mithrilFurnace": [
+		-13679329,
+		-13679329,
+		-13679329,
+		-13679329
+	],
+	"oryhalkFurnace": [
+		-11796404,
+		-11796404,
+		-11796404,
+		-11796404
+	],
+	"titaniumFurnace": [
+		-11842741,
+		-11842741,
+		-11842741,
+		-11842741
+	],
+	"oreAdamantium": [
+		-7960954
+	],
+	"oreOryhalk": [
+		-65281
+	],
+	"oreMithril": [
+		-9013385
+	],
+	"orePlatinum": [
+		-9013385
+	],
+	"oreSilver": [
+		-6250336
+	],
+	"SynolOre": [
+		-11711155
+	],
+	"dirtAether": [
+		-9336688
+	],
+	"grassblockAether": [
+		-9131898
+	],
+	"theraAether": [
+		-11976906
+	],
+	"grasstheraAether": [
+		-11767988
+	],
+	"nestSkyroot": [
+		-11842772
+	],
+	"quickSkyroot": [
+		-3554959
+	],
+	"Holystone": [
+		-6250336
+	],
+	"brickHolystone": [
+		-5987164
+	],
+	"brickHolystoneS": [
+		-5987164
+	],
+	"stairsHolystone": [
+		-5987164
+	],
+	"fbrickHolystone": [
+		-6776680
+	],
+	"fbrickHolystoneS": [
+		-6776680
+	],
+	"fstairsHolystone": [
+		-6776680
+	],
+	"Agiosite": [
+		-13422268
+	],
+	"brickAgiosite": [
+		-13553855
+	],
+	"brickAgiositeS": [
+		-13553855
+	],
+	"stairsAgiosite": [
+		-13553855
+	],
+	"Zanite": [
+		-13954725
+	],
+	"Gravitite": [
+		-6316129
+	],
+	"enGravitite": [
+		-5724761
+	],
+	"coldAercloud": [
+		-789517
+	],
+	"AcoldAercloud": [
+		-855310
+	],
+	"blueAercloud": [
+		-7551238
+	],
+	"goldenAercloud": [
+		-1386875
+	],
+	"greenAercloud": [
+		-5183124
+	],
+	"stormAercloud": [
+		-12164721
+	],
+	"purpuleAercloud": [
+		-4553229
+	],
+	"grassblockFrostpine": [
+		-10390118
+	],
+	"Ferro": [
+		-9145744
+	],
+	"rFerro": [
+		-10135469
+	],
+	"sandFiosite": [
+		-12236449
+	],
+	"coldFire": [
+		-14428455
+	],
+	"pIce": [
+		-3810073
+	],
+	"aetherGell": [
+		-14440705
+	],
+	"iceS": [
+		-4736562
+	],
+	"bS": [
+		-10589045
+	],
+	"bSS": [
+		-10589045
+	],
+	"stairsSS": [
+		-10589045
+	],
+	"oreAmbrosium": [
+		-6316131
+	],
+	"oreIcestone": [
+		-6249817
+	],
+	"oreZanite": [
+		-6250590
+	],
+	"oreArkenium": [
+		-6381922
+	],
+	"oreGravitite": [
+		-6119519
+	],
+	"oreContinuum": [
+		-6381924
+	],
+	"cloudWool": [
+		-3093062
+	],
+	"ambrosiumTorch": [
+		-1118873
+	],
+	"boockselfAether": [
+		-11119040,
+		-11119040,
+		-11119040,
+		-11119040
+	],
+	"presentAether": [
+		-13194977,
+		-13194977,
+		-13194977,
+		-13194977
+	],
+	"pillarHolystone": [
+		-10526881
+	],
+	"fenceHolystone": [
+		-6250336
+	],
+	"basebricksHolystone": [
+		-6184543
+	],
+	"basebricksHolystoneS": [
+		-6184543
+	],
+	"stairsbasebricksH": [
+		-6184543
+	],
+	"basepillarHolystone": [
+		-10526881
+	],
+	"capstonebricksHolystone": [
+		-6184286
+	],
+	"capstonebricksHolystoneS": [
+		-6184286
+	],
+	"stairscapstonebricksH": [
+		-6184286
+	],
+	"capstonepillarHolystone": [
+		-10526881
+	],
+	"flagstonebricksHolystone": [
+		-5987164
+	],
+	"flagstonebricksHolystoneS": [
+		-5987164
+	],
+	"stairsflagstonebricksH": [
+		-10592674
+	],
+	"headstoneHolystone": [
+		-10592674
+	],
+	"headstoneHolystoneS": [
+		-10592674
+	],
+	"pillarIcestone": [
+		-13287339
+	],
+	"basebricksIcestone": [
+		-6903602
+	],
+	"basebricksIcestoneS": [
+		-6903602
+	],
+	"stairsbasebricksIce": [
+		-6903602
+	],
+	"basepillarIcestone": [
+		-13287339
+	],
+	"capstonebricksIcestone": [
+		-13089958
+	],
+	"capstonebricksIcestoneS": [
+		-13089958
+	],
+	"stairscapstonebricksIce": [
+		-13089958
+	],
+	"capstonepillarIcestone": [
+		-13287339
+	],
+	"pillarSkyroot": [
+		-12763861
+	],
+	"baseplanksSkyroot": [
+		-11711177
+	],
+	"baseplanksSkyrootS": [
+		-11711177
+	],
+	"stairsbaseSkyroot": [
+		-11711176
+	],
+	"basepillarSkyroot": [
+		-12763861
+	],
+	"floorboardsSkyroot": [
+		-11974347
+	],
+	"floorboardsSkyrooS": [
+		-11974347
+	],
+	"recycler_lbag": [
+		-7033265
+	],
+	"opener_lbag": [
+		-7238159
+	],
+	"MagicStorage": [
+		-2695969
+	],
+	"paradise_board": [
+		-16758455
+	],
+	"paradise_cobblestone": [
+		-16759740
+	],
+	"paradise_stone": [
+		-16759740
+	],
+	"end_cobblestone": [
+		-10002882
+	],
+	"nether_cobblestone": [
+		-12582912
+	],
+	"nether_stone": [
+		-12320768
+	],
+	"brick2": [
+		-14251113
+	],
+	"brickNoyDestroy": [
+		-14251113
+	],
+	"vase": [
+		-117
+	],
+	"werep": [
+		-7368817
+	],
+	"glass2": [
+		-16643830
+	],
+	"Breastya": [
+		-16293011,
+		-16293011,
+		-16293011,
+		-16293011
+	],
+	"Foliage": [
+		-13063523
+	],
+	"sap": [
+		-15592947
+	],
+	"trava": [
+		-16574437
+	],
+	"board": [
+		-15509150
+	],
+	"boardNoyDestroy": [
+		-15509150
+	],
+	"a0": [
+		-16567757
+	],
+	"a1": [
+		-16568785
+	],
+	"altar1": [
+		-9777701
+	],
+	"altar3": [
+		-10730410
+	],
+	"dirt2": [
+		-9336688
+	],
+	"stone2": [
+		-6250336
+	],
+	"grass2": [
+		-9131898
+	],
+	"ore": [
+		-8947849
+	],
+	"blockmetal": [
+		-13750739
+	],
+	"block1": [
+		-13813961
+	],
+	"kristalFire": [
+		-11125716
+	],
+	"kristaldirt": [
+		-11125716
+	],
+	"kristalLight": [
+		-11125716
+	],
+	"kristalwind": [
+		-11125716
+	],
+	"rityal1": [
+		-526342
+	],
+	"brickkey": [
+		-16775158
+	],
+	"brick3": [
+		-16775158
+	],
+	"manaStorage": [
+		-14251113
+	],
+	"statua": [
+		-14547185
+	],
+	"ritualGL": [
+		-12763843
+	],
+	"gubok1": [
+		-2695969
+	],
+	"gubok2": [
+		-2695969
+	],
+	"beverageTable": [
+		-12508395
+	],
+	"beverageBarrel": [
+		-13493229
+	],
+	"beverageCup": [
+		-12508395
+	],
+	"beverageDrain": [
+		-6403546
+	],
+	"infusedObsidian": [
+		-14608863
+	],
+	"chaosCrystal": [
+		-15658735
+	],
+	"draconiumOre": [
+		-8944777
+	],
+	"draconiumOreNether": [
+		-6333348
+	],
+	"draconiumOreEnd": [
+		-2235985
+	],
+	"draconiumBlock": [
+		-11068055
+	],
+	"draconiumBlockCharged": [
+		-9891271
+	],
+	"ressuractionStone": [
+		-13297855
+	],
+	"dragonHeart": [
+		-1296631
+	],
+	"awakedBlock": [
+		-6473188
+	],
+	"draconicGenerator": [
+		-11513776,
+		-11513776,
+		-11513776,
+		-11513776
+	],
+	"energyInfuser": [
+		-11513776,
+		-11513776,
+		-11513776,
+		-11513776
+	],
+	"sunDial": [
+		-11513776,
+		-11513776,
+		-11513776,
+		-11513776
+	],
+	"weatherController": [
+		-11513776,
+		-11513776,
+		-11513776,
+		-11513776
+	],
+	"regenerator": [
+		-12637380
+	],
+	"draconicSolarPanel": [
+		-12833989
+	],
+	"flax": [
+		-16776448,
+		-16643328,
+		-16510463,
+		-16442622,
+		-16310269,
+		-16442622
+	],
+	"rp_basalt": [
+		-13026502
+	],
+	"basaltCobble": [
+		-13684945
+	],
+	"basaltBrick": [
+		-13223881,
+		-13289674
+	],
+	"basaltPaver": [
+		-13158088
+	],
+	"rp_marble": [
+		-2831426
+	],
+	"marbleBrick": [
+		-3028805
+	],
+	"basaltSlab": [
+		-13026502,
+		-13684945,
+		-13223881,
+		-13158088,
+		-13026502,
+		-13026502,
+		-13026502,
+		-13026502,
+		-13026502,
+		-13684945,
+		-13223881,
+		-13158088
+	],
+	"doubleBasaltSlab": [
+		-13026502,
+		-13684945,
+		-13223881,
+		-13158088
+	],
+	"marbleSlab": [
+		-2831426,
+		-3028805,
+		-2831426,
+		-2831426,
+		-2831426,
+		-2831426,
+		-2831426,
+		-2831426,
+		-2831426,
+		-3028805
+	],
+	"doubleMarbleSlab": [
+		-2831426,
+		-3028805
+	],
+	"basaltStairs": [
+		-13026502
+	],
+	"basaltCobbleStairs": [
+		-13684945
+	],
+	"basaltBrickStairs": [
+		-13223881
+	],
+	"marbleStairs": [
+		-2831426
+	],
+	"marbleBrickStairs": [
+		-3028805
+	],
+	"oreTungsten": [
+		-7368817
+	],
+	"oreNikolite": [
+		-7368817
+	],
+	"oreGreenSapphire": [
+		-6576742
+	],
+	"blockNikolite": [
+		-15708014
+	],
+	"blockRuby": [
+		-9961206
+	],
+	"blockGreenSapphire": [
+		-16356827
+	],
+	"rp_lamp": [
+		-9934744,
+		-9934744,
+		-9934744,
+		-9934744,
+		-9934744,
+		-9934744,
+		-9934744,
+		-11513776,
+		-9342607,
+		-11439246,
+		-9934744,
+		-9934744,
+		-11713735,
+		-11308207,
+		-9869722,
+		-13882324
+	],
+	"rp_lamp_inverted": [
+		-9934744,
+		-9934744,
+		-9934744,
+		-9934744,
+		-9934744,
+		-9934744,
+		-9934744,
+		-11513776,
+		-9342607,
+		-15109262,
+		-9934744,
+		-9934744,
+		-11718121,
+		-14781671,
+		-9870751,
+		-13882324
+	],
+	"blueWire": [
+		-15790584
+	],
+	"rp_smelter": [
+		-11914708
+	],
+	"rp_solar": [
+		-15067301
+	],
+	"rp_thermopile": [
+		-14079701,
+		-14079701,
+		-14079701,
+		-14079701,
+		-14079701,
+		-14079701
+	],
+	"bt_furnace": [
+		-11057355
+	],
+	"bt_smelter": [
+		-11913683
+	],
+	"rp_batbox": [
+		-11059428,
+		-11059428,
+		-11059428,
+		-11059428,
+		-11059428,
+		-11059428,
+		-11059428,
+		-11059428,
+		-11059428
+	],
+	"bt_transformer": [
+		-13756139
+	],
+	"rp_block_breaker": [
+		-11447983,
+		-12829636,
+		-11711930,
+		-11711930,
+		-11711930,
+		-11711930,
+		-11447983,
+		-12698050,
+		-11777723,
+		-11777723,
+		-11777723,
+		-11777723
+	],
+	"rp_deployer": [
+		-11119018,
+		-12438756,
+		-11646138,
+		-11646138,
+		-11646138,
+		-11646138,
+		-11119018,
+		-13621994,
+		-11646138,
+		-11646138,
+		-11646138,
+		-11646138
+	],
+	"rp_igniter": [
+		-11119018,
+		-13101803,
+		-11846596,
+		-11846596,
+		-11846596,
+		-11846596,
+		-11119018,
+		-12379109,
+		-11846596,
+		-11846596,
+		-11846596,
+		-11846596
+	],
+	"aeriteore": [
+		-16715009
+	],
+	"aquatiteore": [
+		-2239068
+	],
+	"ignisusore": [
+		-8947849
+	],
+	"ignisusnetherore": [
+		-4645348
+	],
+	"territeore": [
+		-8947849
+	],
+	"cloud": [
+		-1644825
+	],
+	"cometiteore": [
+		-3328
+	],
+	"steb": [
+		-16727040
+	],
+	"ship": [
+		-11241898
+	],
+	"rose": [
+		-16580096
+	],
+	"heartblock": [
+		-15649
+	],
+	"heartore": [
+		-8947849
+	],
+	"astralore": [
+		-54109
+	],
+	"chaosore": [
+		-6140084
+	],
+	"floriteore": [
+		-14179565
+	],
+	"goldyore": [
+		-65874
+	],
+	"azatotmateria": [
+		-13492139
+	],
+	"azatotbricks": [
+		-6184249
+	],
+	"azatotaltar": [
+		-15856103
+	],
+	"azatotaltaractivated": [
+		-15922157
+	],
+	"azatotaltaroff": [
+		-16053486
+	],
+	"purslane": [
+		-15327482,
+		-15327482,
+		-15327482,
+		-15327482
+	],
+	"apolbush": [
+		-16361958
+	],
+	"apolbushb": [
+		-16165607
+	],
+	"ambifor": [
+		-11316397
+	],
+	"krucher": [
+		-11711155
+	],
+	"staker": [
+		-10463415
+	],
+	"soou": [
+		-11579569
+	],
+	"interdiction_torch": [
+		-16711166,
+		-16710910
+	],
+	"dmfurnace": [
+		-15724528,
+		-15724528,
+		-15724528,
+		-15724528,
+		-15724528,
+		-15724528,
+		-15724528,
+		-15724528
+	],
+	"rmfurnace": [
+		-12451069,
+		-12451069,
+		-12451069,
+		-12451069,
+		-12451069,
+		-12451069,
+		-12451069,
+		-12451069
+	],
+	"quarryCasing": [
+		-11914165
+	],
+	"quarry": [
+		-12175789
+	],
+	"bonsaiPot": [
+		-2763307
+	],
+	"hoppingBonsaiPot": [
+		-2894893
+	],
+	"Portalslab": [
+		-11467076
+	],
+	"Oldchest": [
+		-13554912,
+		-13554912,
+		-13554912,
+		-13554912
+	],
+	"OldBuildAllow": [
+		-10463415
+	],
+	"OldBuildDeny": [
+		-10592674
+	],
+	"oldrose": [
+		-16580096
+	],
+	"Ruby_ore": [
+		-9408400
+	],
+	"oldgrass": [
+		-9852866
+	],
+	"oldgravel": [
+		-10199973
+	],
+	"cyan_flower": [
+		-16711168
+	],
+	"oldbrick": [
+		-3850729
+	],
+	"lapisobsidian": [
+		-14739409
+	],
+	"oldcobblestone": [
+		-6118750
+	],
+	"Paeonia": [
+		-16512763
+	],
+	"RubyBlock": [
+		-2613216
+	],
+	"lavaplate": [
+		-3386609
+	],
+	"pilar1": [
+		-4868683
+	],
+	"pilar2": [
+		-4868683
+	],
+	"pilar3": [
+		-4868683
+	],
+	"pilar4": [
+		-4868683
+	],
+	"pilar5": [
+		-4868683
+	],
+	"Reactor1": [
+		-7303024
+	],
+	"Reactor2": [
+		-12050402
+	],
+	"Reactor3": [
+		-15987683
+	],
+	"FullStoneSlab": [
+		-8816263
+	],
+	"FullSandstoneSlab": [
+		-2436450
+	],
+	"fullquartz_slab": [
+		-1579813
+	],
+	"Dirtslab": [
+		-4618916
+	],
+	"marblebrick": [
+		-4605511
+	],
+	"marble": [
+		-4342339,
+		-4342339,
+		-4342339,
+		-4342339
+	],
+	"marbleclassicpanel": [
+		-4671304
+	],
+	"rubyblock": [
+		-2808025
+	],
+	"hardenedrubyblock": [
+		-9175040
+	],
+	"rubyFurnace": [
+		-12582912,
+		-12582912,
+		-12582912,
+		-12582912
+	],
+	"xeon_ore": [
+		-8947849
+	],
+	"axel_ore": [
+		-10329502
+	],
+	"axel": [
+		-16777216
+	],
+	"xeon": [
+		-16776961
+	],
+	"lapadin_ore": [
+		-9408400
+	],
+	"headphone": [
+		-1317410
+	],
+	"rydastali": [
+		-9145228
+	],
+	"uranruda": [
+		-10389403
+	],
+	"cust": [
+		-6691504
+	],
+	"pechka": [
+		-9781712,
+		-9781712,
+		-9781712,
+		-9781712
+	],
+	"wetstone": [
+		-7237483,
+		-7303277,
+		-9271299,
+		-7106155
+	],
+	"magmastone": [
+		-7172206,
+		-7172206,
+		-2927344,
+		-7106157
+	],
+	"whiteDischolder": [
+		-5140392,
+		-5140392
+	],
+	"orangeDischolder": [
+		-5140392,
+		-5140392
+	],
+	"magentaDischolder": [
+		-5140392,
+		-5140392
+	],
+	"lightblueDischolder": [
+		-5140392,
+		-5140392
+	],
+	"yellowDischolder": [
+		-5140392,
+		-5140392
+	],
+	"limeDischolder": [
+		-5140392,
+		-5140392
+	],
+	"pinkDischolder": [
+		-5140392,
+		-5140392
+	],
+	"grayDischolder": [
+		-5140392,
+		-5140392
+	],
+	"lightgrayDischolder": [
+		-5140392,
+		-5140392
+	],
+	"cyanDischolder": [
+		-5140392,
+		-5140392
+	],
+	"purpleDischolder": [
+		-5140392,
+		-5140392
+	],
+	"blueDischolder": [
+		-5140392,
+		-5140392
+	],
+	"brownDischolder": [
+		-5140392,
+		-5140392
+	],
+	"greenDischolder": [
+		-5140392,
+		-5140392
+	],
+	"redDischolder": [
+		-5140392,
+		-5140392
+	],
+	"blackDischolder": [
+		-5140392,
+		-5140392
+	],
+	"respherite_ore": [
+		-9145228
+	],
+	"Hellite_ore": [
+		-9145228
+	],
+	"ruby_ore": [
+		-7500917
+	],
+	"mishril_ore": [
+		-1972822
+	],
+	"yellow_stone": [
+		-6656
+	],
+	"slimeore": [
+		-9539737
+	],
+	"soulSandstone": [
+		-11388115
+	],
+	"soulSandstoneglassed": [
+		-10861771
+	],
+	"soulSandstonechiseled": [
+		-10861771
+	],
+	"deco_block": [
+		-10920866
+	],
+	"block_aluminum": [
+		-8746860
+	],
+	"block_tin": [
+		-7239299
+	],
+	"block_copper": [
+		-8693946
+	],
+	"ore_tin_moon": [
+		-10987433
+	],
+	"ore_copper_moon": [
+		-10987949
+	],
+	"moonore_cheese": [
+		-10592675
+	],
+	"tinted_glass_pane_pink": [
+		-14408668
+	],
+	"tinted_glass_pane_lime": [
+		-14408668
+	],
+	"tinted_glass_pane_blue": [
+		-14408668
+	],
+	"tinted_glass_pane_brown": [
+		-11980253
+	],
+	"tinted_glass_pane_red": [
+		-14408668
+	],
+	"tinted_glass_pane_cyan": [
+		-14408668
+	],
+	"tinted_glass_pane_orange": [
+		-14408668
+	],
+	"tinted_glass_pane_green": [
+		-13681635
+	],
+	"tinted_glass_pane_magenta": [
+		-14408668
+	],
+	"tinted_glass_pane_light_blue": [
+		-14408668
+	],
+	"tinted_glass_pane_black": [
+		-15198955
+	],
+	"tinted_glass_pane_yellow": [
+		-14408668
+	],
+	"tinted_glass_pane_silver": [
+		-14408668
+	],
+	"tinted_glass_pane_purple": [
+		-14408668
+	],
+	"tinted_glass_pane_gray": [
+		-12632257
+	],
+	"tinted_glass_pane_white": [
+		-16185079
+	],
+	"ore_silicon": [
+		-9803410
+	],
+	"ore_copper": [
+		-8947849
+	],
+	"ore_tin": [
+		-8947849
+	],
+	"ore_aluminum": [
+		-8947849
+	],
+	"venus_quartz": [
+		-10859192
+	],
+	"ore_aluminum_venus": [
+		-11319741
+	],
+	"brick": [
+		-13086953
+	],
+	"moonore_sapphire": [
+		-11381675
+	],
+	"ore_tin_venus": [
+		-11319741
+	],
+	"ore_copper_venus": [
+		-11319741
+	],
+	"ore_silicon_venus": [
+		-11779517
+	],
+	"ore_galena": [
+		-11319741
+	],
+	"ore_iron_asteroids": [
+		-13751512
+	],
+	"ore_ilmenite": [
+		-13882323
+	],
+	"ore_aluminum_asteroids": [
+		-13751512
+	],
+	"venus_rock_2": [
+		-11649479
+	],
+	"dungeon_brick_venus_1": [
+		-11593950
+	],
+	"dungeon_brick_venus_2": [
+		-10016000
+	],
+	"moon_top_side": [
+		-5987170
+	],
+	"middle": [
+		-7105650
+	],
+	"lunar_stone": [
+		-10066330
+	],
+	"decoration_desh": [
+		-13158601
+	],
+	"deco_block_2": [
+		-6449007
+	],
+	"ore_solar": [
+		-11319741
+	],
+	"block_titanium": [
+		-13287071
+	],
+	"cobblestone_mars": [
+		-11593215
+	],
+	"dense_ice": [
+		-8934913
+	],
+	"mars_stone": [
+		-10472416
+	],
+	"block_lead": [
+		-10854557
+	],
+	"desh": [
+		-12312302
+	],
+	"ore_tin_mars": [
+		-12118528
+	],
+	"ore_copper_mars": [
+		-12118527
+	],
+	"ore_iron_mars": [
+		-12118528
+	],
+	"block_iron_steel": [
+		-14737633
+	],
+	"iron_steel_block": [
+		-2565928
+	],
+	"coiper_stone": [
+		-11648963
+	],
+	"coiper_grunt": [
+		-11385793
+	],
+	"coldgravetite_block": [
+		-7549993
+	],
+	"gravetite_block": [
+		-11704459
+	],
+	"gravetite_ore": [
+		-11582398
+	],
+	"coldgravetite_ore": [
+		-11582398
+	],
+	"arkanite_ore": [
+		-11583427
+	],
+	"arkanite_block": [
+		-3525631
+	],
+	"coiper_ore": [
+		-12700361
+	],
+	"coiper_block": [
+		-13683898
+	],
+	"volcanic_cooled_rock": [
+		-11517380
+	],
+	"oxygen_compressor": [
+		-4671561,
+		-4671561,
+		-4671561,
+		-4671561
+	],
+	"compressed_drill": [
+		-14406318,
+		-14406318,
+		-14406318,
+		-14406318
+	],
+	"workbench_rocket": [
+		-13158601
+	],
+	"workbench_nasa": [
+		-1
+	],
+	"ImprovedAluminumWire": [
+		-15724528
+	],
+	"ImprovedAluminumWireLightBlue": [
+		-15724528
+	],
+	"ImprovedAluminumWireDarkLime": [
+		-15724528
+	],
+	"ImprovedAluminumWireMagenta": [
+		-15724528
+	],
+	"ImprovedAluminumWireOrange": [
+		-15724528
+	],
+	"ImprovedAluminumWireGray": [
+		-15724528
+	],
+	"ImprovedAluminumWireDarkGrey": [
+		-15658735
+	],
+	"ImprovedAluminumWireRed": [
+		-15724528
+	],
+	"ImprovedAluminumWirePink": [
+		-15724528
+	],
+	"ImprovedAluminumWireBlue": [
+		-15724528
+	],
+	"ImprovedAluminumWireYellow": [
+		-15724528
+	],
+	"ImprovedAluminumWireBlack": [
+		-15724528
+	],
+	"ImprovedAluminumWireWhite": [
+		-15724528
+	],
+	"ImprovedAluminumWireDarkBlue": [
+		-15724528
+	],
+	"ImprovedAluminumWireGreen": [
+		-15724528
+	],
+	"ImprovedAluminumWireDarkGreen": [
+		-15724272
+	],
+	"AluminumWire": [
+		-16185079
+	],
+	"AluminumWireBlue": [
+		-16185079
+	],
+	"AluminumWireWhite": [
+		-16185079
+	],
+	"AluminumWireBlack": [
+		-16185079
+	],
+	"ImprovedCopperWire": [
+		-16053752
+	],
+	"CopperWire": [
+		-16119544
+	],
+	"PipeOxygenWhite": [
+		-16645630
+	],
+	"PipeOxygenGray": [
+		-16514044
+	],
+	"PipeOxygenLime": [
+		-16645630
+	],
+	"PipeOxygenOrange": [
+		-16645630
+	],
+	"PipeOxygenSilver": [
+		-16645630
+	],
+	"PipeOxygenRed": [
+		-16514558
+	],
+	"PipeOxygenBrown": [
+		-16580094
+	],
+	"PipeOxygenBlue": [
+		-16645628
+	],
+	"PipeOxygenBlack": [
+		-16645630
+	],
+	"PipeOxygenPink": [
+		-16645630
+	],
+	"PipeOxygenYellow": [
+		-16645630
+	],
+	"PipeOxygenGreen": [
+		-16645374
+	],
+	"PipeOxygenLightBlue": [
+		-16645630
+	],
+	"PipeOxygenCyan": [
+		-16645372
+	],
+	"PipeOxygenMagenta": [
+		-16645630
+	],
+	"PipeOxygenPurple": [
+		-16645630
+	],
+	"cobbleChest": [
+		-12106429,
+		-12106429,
+		-12106429,
+		-12106429
+	],
+	"stoneChest": [
+		-11053741,
+		-11053741,
+		-11053741,
+		-11053741
+	],
+	"graniteChest": [
+		-12174797,
+		-12174797,
+		-12174797,
+		-12174797
+	],
+	"dioriteChest": [
+		-13093583,
+		-13093583,
+		-13093583,
+		-13093583
+	],
+	"andesiteChest": [
+		-11843257,
+		-11843257,
+		-11843257,
+		-11843257
+	],
+	"pili_spawner": [
+		-14406082
+	],
+	"pili_spawner1": [
+		-1
+	],
+	"pili_spawner2": [
+		-256
+	],
+	"pili_spawner3": [
+		-16711681
+	],
+	"pili_spawner4": [
+		-16711936
+	],
+	"mob_grinder": [
+		-10994890
+	],
+	"manaPool": [
+		-3290441
+	],
+	"petalApothecary": [
+		-10197916
+	],
+	"puredaisy": [
+		-16777216
+	],
+	"manasteel_block": [
+		-11886880
+	],
+	"manaPowder_block": [
+		-16721155
+	],
+	"manaDiamond_block": [
+		-10955828
+	],
+	"terrasteel_block": [
+		-11811294
+	],
+	"livingwood": [
+		-13035512,
+		-13229302
+	],
+	"livingwoodPlanks": [
+		-13430010,
+		-13689333,
+		-13495545,
+		-13626874
+	],
+	"livingrock": [
+		-3290441,
+		-3553354,
+		-3684178,
+		-3948111,
+		-3487559
+	],
+	"manaSpreader": [
+		-13035512
+	],
+	"flowerBlack": [
+		-16777216
+	],
+	"flowerBlue": [
+		-16777216
+	],
+	"flowerBrown": [
+		-16777216
+	],
+	"flowerCyan": [
+		-16777216
+	],
+	"flowerGreen": [
+		-16777216
+	],
+	"flowerGrey": [
+		-16777216
+	],
+	"flowerLightBlue": [
+		-16777216
+	],
+	"flowerLightGrey": [
+		-16777216
+	],
+	"flowerLime": [
+		-16777216
+	],
+	"flowerMagenta": [
+		-16777216
+	],
+	"flowerOrange": [
+		-16777216
+	],
+	"flowerPink": [
+		-16777216
+	],
+	"flowerPurple": [
+		-16777216
+	],
+	"flowerRed": [
+		-16777216
+	],
+	"flowerWhite": [
+		-16777216
+	],
+	"flowerYellow": [
+		-16777216
+	],
+	"daybloom": [
+		-16777216
+	],
+	"hydroangeas": [
+		-16777216
+	],
+	"fleshblock": [
+		-1861220
+	],
+	"melore": [
+		-9539986
+	],
+	"solomonkey": [
+		-9603961
+	],
+	"silverore": [
+		-9539986
+	],
+	"mithrilore": [
+		-9999002
+	],
+	"stonemet": [
+		-14671840
+	],
+	"aedestone": [
+		-6974059
+	],
+	"silblock": [
+		-1184275
+	],
+	"motherplate": [
+		-7680
+	],
+	"redice": [
+		-41635
+	],
+	"chamite": [
+		-1,
+		-1,
+		-1,
+		-1
+	],
+	"amethystore": [
+		-9542802
+	],
+	"aquamarineore": [
+		-8947849
+	],
+	"Lilithium": [
+		-9539986
+	],
+	"nenicore": [
+		-4342339
+	],
+	"poceidonijore": [
+		-6908326
+	],
+	"saphireore": [
+		-10987405
+	],
+	"topazore": [
+		-8947849
+	],
+	"copperblockr": [
+		-10672896
+	],
+	"copperblockre": [
+		-7128576
+	],
+	"rainbow": [
+		-319709
+	],
+	"bunkerblock": [
+		-12434878
+	],
+	"inoplanetblock": [
+		-9342607
+	],
+	"pentagram": [
+		-15138816
+	],
+	"summon_satan": [
+		-15269631
+	],
+	"hearse": [
+		-5140392
+	],
+	"lilithsamael": [
+		-16448251
+	],
+	"mitsob": [
+		-16717568
+	],
+	"alchemyfurnace": [
+		-10658724
+	],
+	"angeliz": [
+		-749654
+	],
+	"tipettulpa": [
+		-16514043
+	],
+	"reaper": [
+		-5858917
+	],
+	"limbdoors": [
+		-16645887
+	],
+	"Soul": [
+		-13159375
+	],
+	"plesen": [
+		-14795502
+	],
+	"bloody": [
+		-1245184
+	],
+	"deathbloody": [
+		-4718592
+	],
+	"demonbloody": [
+		-786432
+	],
+	"enderbloody": [
+		-1113873
+	],
+	"sprutbloody": [
+		-16776987
+	],
+	"ripdustblock": [
+		-14277082
+	],
+	"saltblock": [
+		-723724
+	],
+	"angelallo": [
+		-5003913
+	],
+	"kres": [
+		-5271976
+	],
+	"vampirebloody": [
+		-9764864
+	],
+	"amethistblock": [
+		-2293539
+	],
+	"aquamarineblock": [
+		-10851184
+	],
+	"Silverblock": [
+		-1842205
+	],
+	"mithrilblock": [
+		-11633861
+	],
+	"nenicblock": [
+		-10921639
+	],
+	"lilithiumblock": [
+		-12566464
+	],
+	"poceidonijblock": [
+		-16717849
+	],
+	"saphirreblock": [
+		-16776994
+	],
+	"melblock": [
+		-263173
+	],
+	"topazblock": [
+		-6917888
+	],
+	"beladonna": [
+		-16711936
+	],
+	"mandragora": [
+		-16775168
+	],
+	"fourclever": [
+		-16774656
+	],
+	"iceium": [
+		-16513015
+	],
+	"stoneflower": [
+		-16119286
+	],
+	"bedrockflower": [
+		-16514044
+	],
+	"blackbookshelf": [
+		-5271976
+	],
+	"ancientbloody": [
+		-13561088
+	],
+	"fiveclever": [
+		-16720384
+	],
+	"clever": [
+		-53761
+	],
+	"pit": [
+		-16777216
+	],
+	"filstonebl": [
+		-94720
+	],
+	"destroystonebl": [
+		-3735333
+	],
+	"erosionstonebl": [
+		-2317056
+	],
+	"firecrystalblock": [
+		-27904
+	],
+	"aethercrystalblock": [
+		-529920
+	],
+	"earthcrystalblock": [
+		-16718592
+	],
+	"watercrystalblock": [
+		-16747777
+	],
+	"aircrystalblock": [
+		-16718081
+	],
+	"tabak": [
+		-851968
+	],
+	"bluetabak": [
+		-16776985
+	],
+	"waterstone": [
+		-6842473
+	],
+	"magicwall": [
+		-456275
+	],
+	"SPL": [
+		-15461581,
+		-12103577
+	],
+	"SPR": [
+		-15922644,
+		-13092551
+	],
+	"SP": [
+		-15789777,
+		-14793660,
+		-9736850
+	],
+	"SPA": [
+		-15922388,
+		-13091780
+	],
+	"SPU": [
+		-15922644,
+		-13092292
+	],
+	"lead_ore": [
+		-9013385
+	],
+	"temtatiteOre": [
+		-9013900
+	],
+	"machineFrameBasic": [
+		-11579312
+	],
+	"oreIridium": [
+		-6842467
+	],
+	"oreNickel": [
+		-7566196
+	],
+	"fluxductLeadstone": [
+		-14348271
+	],
+	"dynamoMagmatic": [
+		-13158601
+	],
+	"dynamoSteam": [
+		-13290444
+	],
+	"pulverizer": [
+		-13092551,
+		-13092551,
+		-13092551,
+		-13092551
+	],
+	"redFurnace": [
+		-13092551,
+		-13092551,
+		-13092551,
+		-13092551
+	],
+	"magmaCrucible": [
+		-13092551,
+		-13092551,
+		-13092551,
+		-13092551
+	],
+	"sawmill": [
+		-13092551,
+		-13092551,
+		-13092551,
+		-13092551
+	],
+	"olovo": [
+		-9013642
+	],
+	"med": [
+		-9013642
+	],
+	"platina": [
+		-9013642
+	],
+	"volifram": [
+		-9013642
+	],
+	"uranium": [
+		-10328737
+	],
+	"titan": [
+		-9411227
+	],
+	"lit": [
+		-9737365
+	],
+	"dl": [
+		-11974327
+	],
+	"ds": [
+		-16318393
+	],
+	"sch": [
+		-16711693
+	],
+	"dsb": [
+		-16777047
+	],
+	"mci": [
+		-3750202,
+		-3750202,
+		-3750202,
+		-3750202
+	],
+	"smc": [
+		-3421237,
+		-3421237,
+		-3421237,
+		-3421237
+	],
+	"uv": [
+		-9618174,
+		-9618174,
+		-9618174,
+		-9618174
+	],
+	"ironbarrel": [
+		-3026480,
+		-3026480,
+		-3026480,
+		-3026480
+	],
+	"goldbarrel": [
+		-1192398,
+		-1192398,
+		-1192398,
+		-1192398
+	],
+	"diamondbarrel": [
+		-11869736,
+		-11869736,
+		-11869736,
+		-11869736
+	],
+	"obsidianbarrel": [
+		-15922922,
+		-15922922,
+		-15922922,
+		-15922922
+	],
+	"crystalbarrel": [
+		-11801625,
+		-11801625,
+		-11801625,
+		-11801625
+	],
+	"concrete_plant": [
+		-12763818
+	],
+	"neons": [
+		-5316115
+	],
+	"lutiums": [
+		-16645630
+	],
+	"bioteriums": [
+		-16769536
+	],
+	"glowlites": [
+		-204114
+	],
+	"retiums": [
+		-1169111
+	],
+	"kq": [
+		-5053458
+	],
+	"kw": [
+		-11979243
+	],
+	"ke": [
+		-16448251
+	],
+	"kr": [
+		-4144960
+	],
+	"kt": [
+		-16766720
+	],
+	"ky": [
+		-16775424
+	],
+	"ku": [
+		-138319
+	],
+	"ki": [
+		-137545
+	],
+	"ko": [
+		-1497562
+	],
+	"kp": [
+		-971989
+	],
+	"bq": [
+		-5183504
+	],
+	"bw": [
+		-3947581
+	],
+	"be": [
+		-16729600
+	],
+	"br": [
+		-2049729
+	],
+	"bt": [
+		-19533
+	],
+	"sq": [
+		-9125696
+	],
+	"sw": [
+		-5526613
+	],
+	"se": [
+		-16734720
+	],
+	"sr": [
+		-2569722
+	],
+	"st": [
+		-115652
+	],
+	"steelblock1": [
+		-12303292,
+		-12303292,
+		-12303292,
+		-12303292
+	],
+	"ultimateOre": [
+		-9079435
+	],
+	"rubberTreeLeaves": [
+		-14141668,
+		-14141668,
+		-14141668
+	],
+	"rubberTreeLog": [
+		-14344168,
+		-14214381,
+		-14214381
+	],
+	"rubberTreeLogLatex": [
+		-14344168,
+		-14344168,
+		-14344168,
+		-14344168,
+		-14344168,
+		-14344168,
+		-14344168,
+		-14344168
+	],
+	"rubberTreeSapling": [
+		-15461109
+	],
+	"machineBlockAdvanced": [
+		-4208440
+	],
+	"reinforcedStone": [
+		-10461613
+	],
+	"reinforcedGlass": [
+		-14869223
+	],
+	"cableTin0": [
+		-3881788
+	],
+	"cableTin1": [
+		-14935008,
+		-14869216,
+		-14803168,
+		-14672352,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14803166,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216
+	],
+	"cableCopper0": [
+		-5938127
+	],
+	"cableCopper1": [
+		-14935008,
+		-14869216,
+		-14803168,
+		-14672352,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14803166,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216
+	],
+	"cableGold0": [
+		-657845
+	],
+	"cableGold1": [
+		-14935008,
+		-14869216,
+		-14803168,
+		-14672352,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14803166,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216
+	],
+	"cableGold2": [
+		-14935008,
+		-14869216,
+		-14803168,
+		-14672352,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14803166,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216
+	],
+	"cableIron0": [
+		-7495770
+	],
+	"cableIron1": [
+		-14935008,
+		-14869216,
+		-14803168,
+		-14672352,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14803166,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216
+	],
+	"cableIron2": [
+		-14935008,
+		-14869216,
+		-14803168,
+		-14672352,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14803166,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216
+	],
+	"cableIron3": [
+		-14935008,
+		-14869216,
+		-14803168,
+		-14672352,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14803166,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216,
+		-14869216
+	],
+	"cableOptic": [
+		-3150608,
+		-3019793,
+		-16645375,
+		-16580095,
+		-3019793,
+		-3019793,
+		-3019793,
+		-3349272,
+		-16645630,
+		-3019793,
+		-3019793,
+		-3019793,
+		-3480339,
+		-3019793,
+		-3019793,
+		-2823185
+	],
+	"miningPipe": [
+		-9737365,
+		-10724260
+	],
+	"crop": [
+		-16317182
+	],
+	"primalGenerator": [
+		-4340795
+	],
+	"geothermalGenerator": [
+		-4340795
+	],
+	"semifluidGenerator": [
+		-4340795
+	],
+	"solarPanel": [
+		-6644064
+	],
+	"genWindmill": [
+		-4340795
+	],
+	"genWatermill": [
+		-4340795
+	],
+	"rtGenerator": [
+		-5196104
+	],
+	"stirlingGenerator": [
+		-4340795
+	],
+	"electricHeatGenerator": [
+		-3748402
+	],
+	"fluidHeatGenerator": [
+		-4340795
+	],
+	"rtHeatGenerator": [
+		-5196104
+	],
+	"solidHeatGenerator": [
+		-4340795
+	],
+	"nuclearReactor": [
+		-4932932
+	],
+	"reactorChamber": [
+		-4340795
+	],
+	"storageBatBox": [
+		-12635098
+	],
+	"storageCESU": [
+		-8968960
+	],
+	"storageMFE": [
+		-4340795
+	],
+	"storageMFSU": [
+		-3748660
+	],
+	"electricFurnace": [
+		-4340795
+	],
+	"inductionFurnace": [
+		-4208440
+	],
+	"macerator": [
+		-4472381
+	],
+	"compressor": [
+		-4340795
+	],
+	"extractor": [
+		-4340795
+	],
+	"solidCanner": [
+		-5590348
+	],
+	"canner": [
+		-5590348
+	],
+	"recycler": [
+		-4472381
+	],
+	"metalFormer": [
+		-4801090
+	],
+	"oreWasher": [
+		-4340795
+	],
+	"thermalCentrifuge": [
+		-4142904
+	],
+	"blastFurnace": [
+		-12706027
+	],
+	"icFermenter": [
+		-4340795
+	],
+	"massFabricator": [
+		-4208440
+	],
+	"pump": [
+		-4340795
+	],
+	"fluidDistributor": [
+		-4472125
+	],
+	"tank": [
+		-4340795
+	],
+	"miner": [
+		-4340795
+	],
+	"advancedMiner": [
+		-4208440
+	],
+	"cropMatron": [
+		-4406588
+	],
+	"luminator": [
+		-3882559,
+		-3882559,
+		-3882559,
+		-3882559,
+		-3882559,
+		-3882559
+	],
+	"luminator_on": [
+		-1711390,
+		-1711390,
+		-1711390,
+		-1711390,
+		-1711390,
+		-1711390
+	],
+	"nuke": [
+		-5097707
+	],
+	"teleporter": [
+		-4405819
+	],
+	"teslaCoil": [
+		-12039091
+	],
+	"ex_autosieve": [
+		-15856114
+	],
+	"ex_autoheavysieve": [
+		-12763843
+	],
+	"ex_autohammer": [
+		-15856114
+	],
+	"ex_autocompressor": [
+		-13224394
+	],
+	"ex_autocompressedhammer": [
+		-12763843
+	],
+	"ex_Coppergravel": [
+		-6983840
+	],
+	"ex_netherCoppergravel": [
+		-11786714
+	],
+	"ex_enderCoppergravel": [
+		-3355493
+	],
+	"ex_Coppersand": [
+		-2984363
+	],
+	"ex_Copperdust": [
+		-3251393
+	],
+	"ex_Tingravel": [
+		-8290690
+	],
+	"ex_netherTingravel": [
+		-11786714
+	],
+	"ex_enderTingravel": [
+		-3748960
+	],
+	"ex_Tinsand": [
+		-6576225
+	],
+	"ex_Tindust": [
+		-6313053
+	],
+	"ex_Leadgravel": [
+		-8290690
+	],
+	"ex_netherLeadgravel": [
+		-11917266
+	],
+	"ex_enderLeadgravel": [
+		-3355493
+	],
+	"ex_Leadsand": [
+		-10330505
+	],
+	"ex_Leaddust": [
+		-10067076
+	],
+	"ex_Silvergravel": [
+		-8290690
+	],
+	"ex_netherSilvergravel": [
+		-11786714
+	],
+	"ex_enderSilvergravel": [
+		-3617371
+	],
+	"ex_Silversand": [
+		-6638647
+	],
+	"ex_Silverdust": [
+		-7099455
+	],
+	"rubberTreeSaplingPrototype": [
+		-15461109
+	],
+	"ironfurnace": [
+		-2302756,
+		-2302756,
+		-2302756,
+		-2302756
+	],
+	"runicstone": [
+		-9737365,
+		-9737365,
+		-9737365,
+		-9737365
+	],
+	"mashinebase": [
+		-8096934,
+		-8096934,
+		-8096934,
+		-8096934
+	],
+	"flushmashine": [
+		-8096934,
+		-8096934,
+		-8096934,
+		-8096934
+	],
+	"wither": [
+		-13312,
+		-13312,
+		-13312,
+		-13312
+	],
+	"sbarmor": [
+		-15658741,
+		-15658741,
+		-15658741,
+		-15658741
+	],
+	"sbtools": [
+		-15658741,
+		-15658741,
+		-15658741,
+		-15658741
+	],
+	"reader": [
+		-5140392,
+		-5140392,
+		-5140392,
+		-5140392
+	],
+	"vibraniumore": [
+		-8947849
+	],
+	"kryptoniteore": [
+		-8947849
+	],
+	"XPStorage": [
+		-3945524
+	],
+	"worldClock": [
+		-3879992
+	],
+	"itemCollector": [
+		-4274232
+	],
+	"utilsWire": [
+		-15066598
+	],
+	"utilsItemGetter": [
+		-7368817,
+		-7368817,
+		-7368817,
+		-7368817,
+		-7368817,
+		-7368817
+	],
+	"XPFarm_core": [
+		-639744
+	],
+	"XPFarm_block": [
+		-3945781
+	],
+	"id": [
+		-15592942
+	],
+	"id1": [
+		-13882324
+	],
+	"testBlock1": [
+		-9078920
+	],
+	"testBlock2": [
+		-8950166
+	],
+	"testBlock3": [
+		-14408398
+	],
+	"testBlock4": [
+		-13948117
+	],
+	"testBlock5": [
+		-13948117
+	],
+	"testBlock6": [
+		-8947849
+	],
+	"enderChest": [
+		-16514039,
+		-16514039,
+		-16514039,
+		-16514039
+	],
+	"DB0": [
+		-5789785
+	],
+	"DB1": [
+		-7631989,
+		-6052957,
+		-4225182,
+		-5738578,
+		-7891019,
+		-5200055,
+		-10639019,
+		-4549218,
+		-10987432,
+		-7302767,
+		-11238763,
+		-7708755,
+		-11775339,
+		-11386312,
+		-11510211,
+		-6598580,
+		-13225165
+	],
+	"DB2": [
+		-7303024,
+		-6184543,
+		-4159389,
+		-5804371,
+		-7825226,
+		-5265848,
+		-10704812,
+		-4615011,
+		-11053225,
+		-7171181,
+		-11238763,
+		-7708754,
+		-11841132,
+		-11452105,
+		-11576004,
+		-6664373,
+		-13290958
+	],
+	"DB3": [
+		-7434610,
+		-6118750,
+		-4159389,
+		-5804371,
+		-7825226,
+		-5265848,
+		-10704812,
+		-4615011,
+		-11053225,
+		-7236974,
+		-11238763,
+		-7708754,
+		-11841132,
+		-11452105,
+		-11576004,
+		-6664373,
+		-13290958
+	],
+	"DB4": [
+		-10987432,
+		-6381922,
+		-5212077,
+		-6001750,
+		-8877914,
+		-5463227,
+		-10902191,
+		-4812390,
+		-11250604,
+		-9276557,
+		-12094072,
+		-7708754,
+		-12038511,
+		-11649484,
+		-11773383,
+		-6861752,
+		-13488337
+	],
+	"DB5": [
+		-7500403,
+		-6118750,
+		-4159389,
+		-5804371,
+		-7825226,
+		-5265848,
+		-10704812,
+		-4615011,
+		-11053225,
+		-7236974,
+		-11238763,
+		-7708754,
+		-11841132,
+		-11452105,
+		-11576004,
+		-6664373,
+		-13290958
+	],
+	"DB6": [
+		-7434610,
+		-6118750,
+		-4159389,
+		-5804371,
+		-7825226,
+		-5265848,
+		-10704812,
+		-4615011,
+		-11053225,
+		-7236974,
+		-11238763,
+		-7708754,
+		-11841132,
+		-11452105,
+		-11576004,
+		-6664373,
+		-13290958
+	],
+	"DB7": [
+		-7500403,
+		-6118750,
+		-4290975,
+		-5804371,
+		-7956812,
+		-5265848,
+		-10704812,
+		-4615011,
+		-11053225,
+		-7434353,
+		-11238763,
+		-7774547,
+		-11841132,
+		-11452105,
+		-11576004,
+		-6664373,
+		-13290958
+	],
+	"DB8": [
+		-7697782,
+		-6052957,
+		-4225182,
+		-5738578,
+		-7891019,
+		-5200055,
+		-10639019,
+		-4549218,
+		-10987432,
+		-7302767,
+		-11238763,
+		-7708754,
+		-11775339,
+		-11386312,
+		-11510211,
+		-6598580,
+		-13225165
+	],
+	"DB9": [
+		-7303024,
+		-6184543,
+		-4159389,
+		-5804371,
+		-7825226,
+		-5265848,
+		-10704812,
+		-4615011,
+		-11053225,
+		-7171181,
+		-11238763,
+		-7708754,
+		-11841132,
+		-11452105,
+		-11576004,
+		-6664373,
+		-13290958
+	],
+	"DB10": [
+		-7105645,
+		-6250336,
+		-4093596,
+		-5870164,
+		-7759433,
+		-5331641,
+		-10770605,
+		-4680804,
+		-11119018,
+		-7105388,
+		-11238763,
+		-7708754,
+		-11906925,
+		-11517898,
+		-11641797,
+		-6730166,
+		-13356751
+	],
+	"LampST1": [
+		-6383473,
+		-10329502
+	],
+	"Lamp1": [
+		-5658974,
+		-3830174,
+		-5738578,
+		-7168590,
+		-4741044,
+		-10639019,
+		-4286051,
+		-10921899,
+		-6580077,
+		-11238763,
+		-7774547,
+		-11775339,
+		-11320521,
+		-11379396,
+		-6598069,
+		-13028046
+	],
+	"testBlock": [
+		-9869466,
+		-9869466,
+		-9869466,
+		-9869466
+	],
+	"luckyCubeLC": [
+		-4915536
+	],
+	"calc1": [
+		-15527149,
+		-15527149,
+		-15527149,
+		-15527149
+	],
+	"calc2": [
+		-14211545,
+		-14211545,
+		-14211545,
+		-14211545
+	],
+	"ore_crystal": [
+		-7498340
+	],
+	"spell_shelf": [
+		-5271976
+	],
+	"gun_craft_table": [
+		-5920599
+	],
+	"copperChest": [
+		-3501983,
+		-3501983,
+		-3501983,
+		-3501983
+	],
+	"ironChest": [
+		-2627609,
+		-2627609,
+		-2627609,
+		-2627609
+	],
+	"silverChest": [
+		-4143680,
+		-4143680,
+		-4143680,
+		-4143680
+	],
+	"goldChest": [
+		-12828928,
+		-12828928,
+		-12828928,
+		-12828928
+	],
+	"diamondChest": [
+		-13973009,
+		-13973009,
+		-13973009,
+		-13973009
+	],
+	"obsidianChest": [
+		-16185584,
+		-16185584,
+		-16185584,
+		-16185584
+	],
+	"crystalChest": [
+		-16538394,
+		-16538394,
+		-16538394,
+		-16538394
+	],
+	"bzombie": [
+		-13050568
+	],
+	"bskelet": [
+		-3026479
+	],
+	"bspider": [
+		-65536
+	],
+	"bcreeper": [
+		-15809522
+	],
+	"bsprut": [
+		-14667458
+	],
+	"bslime": [
+		-8010905
+	],
+	"bocelot": [
+		-12898523
+	],
+	"bblaze": [
+		-666856
+	],
+	"bend": [
+		-65281
+	],
+	"MobsFurnace": [
+		-2892303,
+		-2892303,
+		-2892303,
+		-2892303
+	],
+	"TradeRED": [
+		-2892303,
+		-2892303,
+		-2892303,
+		-2892303
+	],
+	"TradeGREEN": [
+		-2892303,
+		-2892303,
+		-2892303,
+		-2892303
+	],
+	"TradeBLUE": [
+		-2892303,
+		-2892303,
+		-2892303,
+		-2892303
+	],
+	"TradeYELLOW": [
+		-2892303,
+		-2892303,
+		-2892303,
+		-2892303
+	],
+	"coreoriteOre": [
+		-9211017
+	],
+	"finoriteOre": [
+		-9078925
+	],
+	"xenoriteOre": [
+		-7960954
+	],
+	"coreoriteBlock": [
+		-13027242
+	],
+	"finoriteBlock": [
+		-16723960
+	],
+	"xenoriteBlock": [
+		-2606586
+	],
+	"OS": [
+		-15725033
+	],
+	"blastBrick": [
+		-12706027
+	],
+	"blastBrickReinforced": [
+		-11979215
+	],
+	"blastFurnaceOff": [
+		-13427948
+	],
+	"blastFurnaceOn": [
+		-12706283
+	],
+	"cokeBrick": [
+		-12105913
+	],
+	"cokeOven1": [
+		-12370628
+	],
+	"cokeOven2": [
+		-12105913
+	],
+	"cokeOven3": [
+		-12370629
+	],
+	"cokeOven0": [
+		-12105913
+	],
+	"storageCopper": [
+		-11626889
+	],
+	"storageSilver": [
+		-8809067
+	],
+	"storageElectrum": [
+		-2312335
+	],
+	"storageSteel": [
+		-11382190
+	],
+	"storageLead": [
+		-12302502
+	],
+	"iMod_radio": [
+		-8559299,
+		-8559299,
+		-8559299,
+		-8559299
+	],
+	"iMod_dungeon_block": [
+		-7313369
+	],
+	"iMod_easter_dungeon_block": [
+		-7313369
+	],
+	"iMod_radio_tower": [
+		-10790053
+	],
+	"stalBlock": [
+		-11908534,
+		-11908534,
+		-11908534,
+		-11908534
+	],
+	"wild_carrot_bush": [
+		-16508927,
+		-16508927,
+		-16508927,
+		-16508927
+	],
+	"wild_wheat_bush": [
+		-14669309,
+		-14669309,
+		-14669309,
+		-14669309
+	],
+	"Saww": [
+		-5337513
+	],
+	"andesite_brick": [
+		-7171437,
+		-7171437,
+		-7171437,
+		-7171437
+	],
+	"diorite_brick": [
+		-4013371,
+		-4013371,
+		-4013371,
+		-4013371
+	],
+	"granite_brick": [
+		-3498100,
+		-3498100,
+		-3498100,
+		-3498100
+	],
+	"black_stone": [
+		-13487566,
+		-13487566,
+		-13487566,
+		-13487566
+	],
+	"black_stone_bricks": [
+		-13290187,
+		-13290187,
+		-13290187,
+		-13290187
+	],
+	"black_stone_smallbricks": [
+		-13816531,
+		-13816531,
+		-13816531,
+		-13816531
+	],
+	"mobdropblock": [
+		-7172206
+	],
+	"dayredblock": [
+		-5526782,
+		-5526782,
+		-5526782,
+		-5526782
+	],
+	"nighttime": [
+		-14935034,
+		-14935034,
+		-14935034,
+		-14935034
+	],
+	"weatherrain": [
+		-16579323,
+		-16579323,
+		-16579323,
+		-16579323
+	],
+	"weatherclear": [
+		-663524,
+		-663524,
+		-663524,
+		-663524
+	],
+	"applebb": [
+		-14735077
+	],
+	"applebbb": [
+		-13688811
+	],
+	"mobSpawners": [
+		-14542795,
+		-14542795,
+		-14542795,
+		-14542795
+	],
+	"blockOnyx": [
+		-14013910
+	],
+	"oreOnyx": [
+		-6269100
+	],
+	"blockThyrium": [
+		-14656436
+	],
+	"blockSinisite": [
+		-16777145
+	],
+	"blockArgonite": [
+		-12377002
+	],
+	"oreArgonite": [
+		-6529701
+	],
+	"blockAshstone": [
+		-10263709
+	],
+	"oreAshstone": [
+		-6529701
+	],
+	"blockIllumenite": [
+		-68244
+	],
+	"oreIllumenite": [
+		-3296937
+	],
+	"blockDragonstone": [
+		-8912894
+	],
+	"oreDragonstone": [
+		-6400685
+	],
+	"blockFyrite": [
+		-233979
+	],
+	"oreFyrite": [
+		-4894654
+	],
+	"fusion": [
+		-10142671
+	],
+	"Anvil": [
+		-16777216
+	]
+}

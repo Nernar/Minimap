@@ -55,7 +55,7 @@ let reportError = (function(what) {
 		what(error);
 	};
 })(function(error) {
-	Logger.Log("Retention: " + error, "WARNING");
+	Logger.Log("Retention: " + error + (error ? " *" + error.lineNumber : ""), "WARNING");
 });
 
 EXPORT("reportError", reportError);

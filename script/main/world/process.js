@@ -12,12 +12,12 @@ function scheduleChunk(xChunk, zChunk, delay) {
 				}
 				return;
 			}
-			let ix = 16,
-				iz = 16,
-				x = xChunk + 16,
-				z = zChunk - 1,
-				mapDotArray = [],
-				type = settings.mapType;
+			let ix = 16;
+			let iz = 16;
+			let x = xChunk + 16;
+			let z = zChunk - 1;
+			let mapDotArray = [];
+			let type = settings.mapType;
 			if (!World.isChunkLoaded((x - 16) / 16, (z + 16) / 16)) {
 				if (map_state) {
 					scheduleChunk(xChunk, zChunk, 10);

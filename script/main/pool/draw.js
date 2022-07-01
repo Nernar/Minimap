@@ -88,7 +88,6 @@ var redraw = false,
 					} else {
 						X = xNew;
 						Z = zNew;
-						chests = [];
 						bmpSrc.eraseColor(0);
 						scheduleChunk(xChunkNew, zChunkNew, 0);
 						for (i = 16; i <= settings.radius * 16; i += 16) {
@@ -135,14 +134,6 @@ var redraw = false,
 					canvas.clipPath(pathBorder, android.graphics.Region.Op.REPLACE);
 				}
 				canvas.drawBitmap(bmpSrc, matrixMap, bmpPaint);
-				if (settings.indicatorTile) {
-					i = chests.length;
-					while (i--) {
-						matrixPointer.setTranslate((z0 - chests[i][1]) * zoom, (chests[i][0] - x0) * zoom);
-						matrixPointer.preConcat(pointer[3].matrix);
-						canvas.drawBitmap(pointer[3].bmp, matrixPointer, null);
-					}
-				}
 				if (settings.indicatorPassive || settings.indicatorHostile || settings.indicatorPlayer) {
 					redraw = true;
 					i = entities.length;

@@ -5,21 +5,32 @@
     "button_size":40
   },
   "runtime":{
-    
+    "rotation":true,
+    "zoom":55,
+    "type":0
   },
   "indicator":{
-    
+    "tile":false,
+    "only_surface":false
   },
   "location":{
-    
+    "raw_size":60,
+    "raw_position":2,
+    "gravity":53,
+    "offset":70
   },
   "stylesheet":{
-    
+    "border":1,
+    "shape":1
   },
   "performance":{
-    
+    "delay":1,
+    "thread":1,
+    "radius":7,
+    "priority":0
   },
   "development":{
-    
+    "show_process":false,
+    "location":true
   }
 }

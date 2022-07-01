@@ -1,39 +1,7 @@
-let chests = [];
-
-let mapDot = [
-	function basicSurfaceMap(ix, iz) {
-		let iy = 130,
-			deltaY = 10,
-			colors = {
-				1: -8487298,
-				3: -7970749,
-				4: -8487298,
-				8: -14000385,
-				9: -14000385,
-				10: -637952,
-				11: -637952,
-				12: -2370656,
-				13: -8618884,
-				17: -10005725,
-				18: -13534192,
-				24: -3817840,
-				48: -10193052,
-				78: -984069,
-				79: -5255937,
-				82: -6314831,
-				98: -8487298,
-				99: -7509421,
-				100: -4774107,
-				109: -8487298,
-				110: -9542807,
-				128: -3817840,
-				159: -2968927,
-				161: -8028101,
-				162: -13293288,
-				172: -6857405,
-				174: -5255937,
-				243: -10797283
-			};
+const mapDot = [
+	function monochromaticColormap(ix, iz) {
+		let iy = 130;
+		let deltaY = 10;
 		do {
 			let block = World.getBlockID(ix, iy - 10, iz);
 			if (block != 0) {
@@ -41,16 +9,16 @@ let mapDot = [
 					deltaY = 1;
 					iy += 10;
 				} else {
-					return colors[block] || -8540361;
+					return (colormap[block] ? colormap[block][World.getBlockData(ix, iy, iz)] : 0) || -1;
 				}
 			}
 		} while (iy -= deltaY);
 		return 0;
 	},
-	function minecraftMap(ix, iz) {
-		let color,
-			iy = 130,
-			deltaY = 10;
+	function surfaceHeightMap(ix, iz) {
+		let color = 0;
+		let iy = 130;
+		let deltaY = 10;
 		do {
 			let block = World.getBlockID(ix, iy, iz);
 			if (block != 0) {
@@ -95,111 +63,30 @@ let mapDot = [
 					case 44:
 						color = [0x6f6f6f, 0xf4e6a1, 0x8d7647, 0x6f6f6f, 0x973232, 0x6f6f6f, 0xfcfcfc, 0x6f0200, 0x6f6f6f, 0xf4e6a1, 0x8d7647, 0x6f6f6f, 0x973232, 0x6f6f6f, 0xfcfcfc, 0x6f0200][World.getBlockData(ix, iy - 10, iz)];
 						break;
-					case 54:
-						chests[chests.length] = [ix + 0.5, iz + 0.5];
 					default:
-						let colors = {
-							2: 0x7db037,
-							3: 0x956c4c,
-							6: 0x007b00,
-							8: 0x3f3ffc,
-							10: 0xfc0000,
-							11: 0xfc0000,
-							17: 0x8d7647,
-							18: 0x007b00,
-							19: 0xe2e232,
-							22: 0x4981fc,
-							24: 0xf4e6a1,
-							30: 0xfcfcfc,
-							31: 0x007b00,
-							32: 0x8d7647,
-							37: 0x007b00,
-							38: 0x007b00,
-							39: 0x007b00,
-							40: 0x007b00,
-							41: 0xf7eb4c,
-							42: 0xa5a5a5,
-							45: 0x973232,
-							46: 0xfc0000,
-							47: 0x8d7647,
-							49: 0x191919,
-							53: 0x8d7647,
-							54: 0x8d7647,
-							57: 0x5bd8d2,
-							59: 0x007b00,
-							60: 0x956c4c,
-							78: 0xfcfcfc,
-							79: 0x9e9efc,
-							80: 0xfcfcfc,
-							81: 0x007b00,
-							82: 0xa2a6b6,
-							83: 0x007b00,
-							86: 0xd57d32,
-							87: 0x6f0200,
-							91: 0xd57d32,
-							99: 0x8d7647,
-							100: 0x973232,
-							103: 0x7dca19,
-							104: 0x007b00,
-							105: 0x007b00,
-							106: 0x007b00,
-							107: 0x8d7647,
-							108: 0x973232,
-							110: 0x7d3eb0,
-							111: 0x007b00,
-							112: 0x6f0200,
-							113: 0x6f0200,
-							114: 0x6f0200,
-							121: 0xf4e6a1,
-							128: 0xf4e6a1,
-							133: 0x00d639,
-							134: 0x7e5430,
-							135: 0xf4e6a1,
-							136: 0x956c4c,
-							141: 0x007b00,
-							142: 0x007b00,
-							152: 0xfc0000,
-							155: 0xfcfcfc,
-							156: 0xfcfcfc,
-							161: 0x007b00,
-							162: 0x8d7647,
-							163: 0xd57d32,
-							164: 0x654b32,
-							170: 0xf7eb4c,
-							172: 0xd57d32,
-							174: 0x9e9efc,
-							175: 0x007b00,
-							183: 0x7e5430,
-							184: 0xf4e6a1,
-							185: 0x956c4c,
-							187: 0xd57d32,
-							186: 0x654b32,
-							243: 0x7e5430,
-							244: 0x007b00
-						};
-						color = colors[block] || 0x6f6f6f;
+						color = (colormap[block] ? -colormap[block][World.getBlockData(ix, iy, iz)] : 0) || 1;
 				}
 				if (World.getBlockID(ix - 1, iy - 2, iz)) {
-					return reflectColorRgb(android.graphics.Color.red(color) * (180 / 255), android.graphics.Color.green(color) * (180 / 255), android.graphics.Color.blue(color) * (180 / 255));
+					return reflectColorRgb(android.graphics.Color.red(color) * 0.703125, android.graphics.Color.green(color) * 0.703125, android.graphics.Color.blue(color) * 0.703125);
 				}
 				if (World.getBlockID(ix - 1, iy - 1, iz)) {
-					return reflectColorRgb(android.graphics.Color.red(color) * (220 / 255), android.graphics.Color.green(color) * (220 / 255), android.graphics.Color.blue(color) * (220 / 255));
+					return reflectColorRgb(android.graphics.Color.red(color) * 0.859375, android.graphics.Color.green(color) * 0.859375, android.graphics.Color.blue(color) * 0.859375);
 				}
 				return reflectColorRgb(android.graphics.Color.red(color), android.graphics.Color.green(color), android.graphics.Color.blue(color));
 			}
 		} while (iy -= deltaY);
 		return 0;
 	},
-	function caveMap(ix, iz) {
-		let count = 0,
-			block = 1,
-			blockNew,
-			iy = 62,
-			y,
-			r,
-			g,
-			b,
-			increment = 3;
+	function undergroundMap(ix, iz) {
+		let count = 0;
+		let block = 1;
+		let blockNew;
+		let iy = 62;
+		let y = 0;
+		let r = 0;
+		let g = 0;
+		let b = 0;
+		let increment = 3;
 		do {
 			blockNew = World.getBlockID(ix, iy - 3, iz);
 			switch (blockNew) {
@@ -254,8 +141,6 @@ let mapDot = [
 						b = b || 255;
 					}
 					break;
-				case 54:
-					chests[chests.length] = [ix + 0.5, iz + 0.5];
 				default:
 					blockNew = 2;
 			}
@@ -272,12 +157,17 @@ let mapDot = [
 				r = r || 150;
 				g = g || 255;
 				b = b || 0;
-				return android.graphics.Color.rgb(r * (0.8 * (y / 127) + 0.2), g * (0.9 * (y / 127) + 0.1), b * (0.9 * (y / 127) + 0.1));
+				return reflectColorRgb(r * (0.8 * (y / 127) + 0.2), g * (0.9 * (y / 127) + 0.1), b * (0.9 * (y / 127) + 0.1));
 			}
 			block = blockNew;
+			if (iy < 0 || iy > 127) {
+				break;
+			}
 		} while (iy -= increment);
 		y = y || 127;
-		r = 255; g = 255; b = 255;
-		return android.graphics.Color.rgb(r * (0.8 * (y / 127) + 0.2), g * (0.8 * (y / 127) + 0.2), b * (0.8 * (y / 127) + 0.2));
+		r = 255;
+		g = 255;
+		b = 255;
+		return reflectColorRgb(r * (0.8 * (y / 127) + 0.2), g * (0.8 * (y / 127) + 0.2), b * (0.8 * (y / 127) + 0.2));
 	}
 ];
