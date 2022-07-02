@@ -6,7 +6,7 @@
   },
   "runtime":{
     "rotation":true,
-    "zoom":32,
+    "zoom":17,
     "type":0,
     "translucent":75
   },
@@ -29,7 +29,7 @@
   "performance":{
     "delay":40,
     "thread":1,
-    "radius":14,
+    "radius":7,
     "priority":1
   },
   "development":{

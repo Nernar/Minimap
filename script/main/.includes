@@ -10,13 +10,12 @@ visual/config.js
 visual/map.js
 
 terrain/colormap.js
+terrain/dot.js
+terrain/process.js
 
 pool/handle.js
 pool/draw.js
 pool/update.js
-
-world/dot.js
-world/process.js
 
 entities/watcher.js
 entities/pointer.js

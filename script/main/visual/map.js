@@ -68,15 +68,8 @@ let mapWindow = (function() {
 	let mapLp = new android.widget.RelativeLayout.LayoutParams(settings.locationSize, settings.locationSize);
 	mapLp.addRule(android.widget.RelativeLayout.ALIGN_PARENT_TOP);
 	handle(function() {
-		mapView.setOnClickListener(function(v) {
-			changeMapState();
-		});
-		mapView.setOnLongClickListener(function(v) {
-			showConfigDialog();
-			return true;
-		});
 		let mScaleFactor = 1.;
-		let mRequiredStandartAction = false;
+		let mRequiredStandartAction = true;
 		let mScaleGestureDetector = new android.view.ScaleGestureDetector(getContext(), new JavaAdapter(android.view.ScaleGestureDetector.SimpleOnScaleGestureListener, android.view.ScaleGestureDetector.OnScaleGestureListener, {
 			onScale: function(scaleGestureDetector) {
 				mScaleFactor *= scaleGestureDetector.getScaleFactor();
@@ -85,22 +78,35 @@ let mapWindow = (function() {
 				if (mPrescaledZoom != settings.mapZoom) {
 					settings.mapZoom = mPrescaledZoom;
 					settingsChanged("mapZoom");
-					mRequiredStandartAction = true;
+					mRequiredStandartAction = false;
 				}
 				return true;
 			}
 		}));
-		mapView.setOnTouchListener(function(mView, event) {
-			mScaleGestureDetector.onTouchEvent(event)
-			if (event.getAction() == android.view.MotionEvent.ACTION_DOWN) {
-				mRequiredStandartAction = false;
-				return false;
-			} else if (event.getAction() == android.view.MotionEvent.ACTION_UP) {
+		let mGestureDetector = new android.view.GestureDetector(getContext(), new JavaAdapter(android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener, android.view.GestureDetector.OnDoubleTapListener, {
+			onDown: function(event) {
+				mRequiredStandartAction = true;
+			},
+			onSingleTapConfirmed: function(event) {
+				if (mRequiredStandartAction) {
+					changeMapState();
+				}
+				return mRequiredStandartAction;
+			},
+			onLongPress: function(event) {
+				if (mRequiredStandartAction) {
+					showConfigDialog();
+				}
 				return mRequiredStandartAction;
 			}
+		}));
+		mapView.setOnTouchListener(function(mView, event) {
+			mScaleGestureDetector.onTouchEvent(event);
+			mGestureDetector.onTouchEvent(event);
 			return true;
 		});
 	});
+	mapView.setLayerType(android.view.View.LAYER_TYPE_HARDWARE, null);
 	let btnSet = new android.widget.Button(getContext());
 	btnSet.setBackgroundResource(android.R.drawable.ic_menu_mylocation);
 	btnSet.setVisibility(android.view.View.VISIBLE);

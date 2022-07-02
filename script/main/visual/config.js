@@ -162,9 +162,9 @@ const settingsUI = function() {
 	print.setPositiveButton(arguments[0][1], function(dialog, whichButton) {
 		saveSettings();
 	});
-	let dialog = print.create(),
-		popup = dialog.getWindow();
+	print = print.create();
+	let popup = print.getWindow();
 	popup.setLayout(getDisplayPercentWidth(60), android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
 	popup.setGravity(android.view.Gravity.LEFT | android.view.Gravity.BOTTOM);
-	return dialog;
+	return print;
 };
