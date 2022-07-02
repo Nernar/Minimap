@@ -117,11 +117,11 @@ const settingsChanged = function(key) {
 			}
 			break;
 		case "resetConfig":
-			restoreSettings(true);
 			if (setWindow) {
 				setWindow.dismiss();
 				setWindow = null;
 			}
+			restoreSettings(true);
 			break;
 		default:
 			Logger.Log("Minimap: option " + key + " will be changed in future", "MOD");

@@ -65,6 +65,7 @@ const settingsUI = function() {
 				text.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
 				textValue.setTextSize(textSize);
 				textValue.setTextColor(Colors.ACCENT);
+				textValue.setClickable(false);
 				textValue.setId(1);
 				switch (args[1]) {
 					case "multipleChoice":
@@ -107,11 +108,11 @@ const settingsUI = function() {
 							seekBar.setProgress((settings[args[3]] - args[4]) / args[6]);
 							seekBar.setOnSeekBarChangeListener({
 								onProgressChanged: function(seekBar, progress, fromUser) {
-									print.setTitle(args[2] + "  " + (progress * args[6] + args[4]) + args[7]);
+									print.setTitle(args[2] + ": " + (progress * args[6] + args[4]) + args[7]);
 								}
 							});
 							print.setView(seekBar);
-							print.setTitle(args[2] + "  " + settings[args[3]] + args[7]);
+							print.setTitle(args[2] + ": " + settings[args[3]] + args[7]);
 							print.setPositiveButton("Apply", function(dialog, whichButton) {
 								settings[args[3]] = seekBar.getProgress() * args[6] + args[4];
 								textValue.setText(settings[args[3]] + args[7]);

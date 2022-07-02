@@ -68,7 +68,10 @@ let mapWindow = (function() {
 	let mapLp = new android.widget.RelativeLayout.LayoutParams(settings.locationSize, settings.locationSize);
 	mapLp.addRule(android.widget.RelativeLayout.ALIGN_PARENT_TOP);
 	handle(function() {
-		let mScaleFactor = 1.;
+		let mScaleFactor = settings.mapZoom / 100;
+		if (isNaN(mScaleFactor)) {
+			mScaleFactor = 1.;
+		}
 		let mRequiredStandartAction = true;
 		let mScaleGestureDetector = new android.view.ScaleGestureDetector(getContext(), new JavaAdapter(android.view.ScaleGestureDetector.SimpleOnScaleGestureListener, android.view.ScaleGestureDetector.OnScaleGestureListener, {
 			onScale: function(scaleGestureDetector) {
@@ -105,6 +108,15 @@ let mapWindow = (function() {
 			mGestureDetector.onTouchEvent(event);
 			return true;
 		});
+	}, function(e) {
+		mapView.setOnClickListener(function(v) {
+			changeMapState();
+		});
+		mapView.setOnLongClickListener(function(v) {
+			showConfigDialog();
+			return true;
+		});
+		reportError(e);
 	});
 	mapView.setLayerType(android.view.View.LAYER_TYPE_HARDWARE, null);
 	let btnSet = new android.widget.Button(getContext());
@@ -203,18 +215,16 @@ Callback.addCallback("tick", function() {
 });
 
 Callback.addCallback("LevelLeft", function() {
-	tryout(function() {
-		mapWindow.hide();
-		if (map_state) {
-			changeMapState();
-		}
-		pool.shutdownNow();
-		startMapControl = true;
-		X = undefined;
-		while (entities.length > 0) {
-			entities.pop();
-		}
-	});
+	mapWindow.hide();
+	if (map_state) {
+		changeMapState();
+	}
+	pool.shutdownNow();
+	startMapControl = true;
+	X = undefined;
+	while (entities.length > 0) {
+		entities.pop();
+	}
 });
 
 function changeMapState() {
@@ -241,9 +251,6 @@ Callback.addCallback("NativeGuiChanged", function(screenName) {
 			mapWindow.hide();
 			return;
 		}
-		tryout(function() {
-			World = BlockSource.getCurrentWorldGenRegion();
-		});
 	} else {
 		if (screenName != "hud_screen") {
 			mapWindow.hide();

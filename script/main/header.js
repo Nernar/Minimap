@@ -96,9 +96,9 @@ const reflectPaintSetColor = (function() {
 
 const reflectNewLinearGradient = (function() {
 	let clazz = android.graphics.LinearGradient.__javaObject__;
-	let reflect = clazz.getConstructor(java.lang.Float.TYPE, java.lang.Float.TYPE, java.lang.Float.TYPE,
-		java.lang.Float.TYPE, java.lang.Integer.TYPE, java.lang.Integer.TYPE, android.graphics.Shader.TileMode);
-	return function(x0, y0, x1, y1, color0, color1, tile) {
+	let reflect = clazz.getConstructor(java.lang.Float.TYPE, java.lang.Float.TYPE, java.lang.Float.TYPE,
+		java.lang.Float.TYPE, java.lang.Integer.TYPE, java.lang.Integer.TYPE, android.graphics.Shader.TileMode);
+	return function(x0, y0, x1, y1, color0, color1, tile) {
 		return reflect.newInstance(java.lang.Float.valueOf(x0), java.lang.Float.valueOf(y0), java.lang.Float.valueOf(x1),
 			java.lang.Float.valueOf(y1), java.lang.Integer.valueOf(color0), java.lang.Integer.valueOf(color1), tile);
 	};
@@ -111,3 +111,32 @@ const reflectColorRgb = (function() {
 		return method.invoke(null, java.lang.Integer.valueOf(r), java.lang.Integer.valueOf(g), java.lang.Integer.valueOf(b));
 	};
 })();
+
+let source = null;
+
+if (this.isOutdated === undefined) {
+	Callback.addCallback("LevelLoaded", function() {
+		source = BlockSource.getCurrentWorldGenRegion();
+	});
+}
+
+const getBlockId = function(x, y, z) {
+	if (source != null) {
+		return source.getBlockId(x, y, z);
+	}
+	return World.getBlockID(x, y, z);
+};
+
+const getBlockData = function(x, y, z) {
+	if (source != null) {
+		return source.getBlockData(x, y, z);
+	}
+	return World.getBlockData(x, y, z);
+};
+
+const isChunkLoaded = function(x, z) {
+	if (source != null) {
+		return source.isChunkLoaded(x, z);
+	}
+	return World.isChunkLoaded(x, z);
+};

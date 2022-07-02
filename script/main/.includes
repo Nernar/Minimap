@@ -5,8 +5,8 @@ storage/config.js
 storage/restore.js
 storage/space.js
 
-visual/drawable.js
 visual/config.js
+visual/drawable.js
 visual/map.js
 
 terrain/colormap.js

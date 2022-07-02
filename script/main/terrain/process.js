@@ -18,7 +18,7 @@ function scheduleChunk(xChunk, zChunk, delay) {
 			let z = zChunk - 1;
 			let mapDotArray = [];
 			let type = settings.mapType;
-			if (!World.isChunkLoaded((x - 16) / 16, (z + 16) / 16)) {
+			if (!isChunkLoaded((x - 16) / 16, (z + 16) / 16)) {
 				if (map_state) {
 					scheduleChunk(xChunk, zChunk, 10);
 				} else {
