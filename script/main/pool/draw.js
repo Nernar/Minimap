@@ -6,7 +6,11 @@ var redraw = false,
 
 (function() {
 	bmpBorder = drawBorderBmp();
-	pathBorder = createPath(false, true);
+	if (settings.stylesheetBorder != 0) {
+		pathBorder = createPath(false, true);
+	} else {
+		pathBorder = createPath(true, false);
+	}
 	bmpSrc = android.graphics.Bitmap.createBitmap(((settings.radius + 1) * 2 + 1) * 16, ((settings.radius + 1) * 2 + 1) * 16, android.graphics.Bitmap.Config.ARGB_8888);
 	bmpSrcCopy = android.graphics.Bitmap.createBitmap(bmpSrc.getWidth(), bmpSrc.getHeight(), android.graphics.Bitmap.Config.ARGB_8888);
 	canvasBmpSrc.setBitmap(bmpSrc);

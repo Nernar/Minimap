@@ -51,6 +51,7 @@ const settingsChanged = function(key) {
 			redraw = true;
 			break;
 		case "mapType":
+		case "mapSurface":
 			if (pool.getActiveCount() > 0) {
 				createPool();
 			}
@@ -109,13 +110,6 @@ const settingsChanged = function(key) {
 		case "thread":
 			pool.setCorePoolSize(settings.thread);
 			break;
-		case "mapRotation":
-			if (!settings.mapRotation) {
-				handle(function() {
-					mapView.setRotation(0);
-				});
-			}
-			break;
 		case "resetConfig":
 			if (setWindow) {
 				setWindow.dismiss();
@@ -164,6 +158,7 @@ const setConfigOptionIfNeeded = function(proto, name, value) {
 
 const saveSettings = function() {
 	setConfigOptionIfNeeded(protoConfig, "runtime.type", settings.mapType);
+	setConfigOptionIfNeeded(protoConfig, "runtime.surface", settings.mapSurface);
 	setConfigOptionIfNeeded(protoConfig, "runtime.zoom", settings.mapZoom);
 	setConfigOptionIfNeeded(protoConfig, "runtime.translucent", settings.mapAlpha);
 	setConfigOptionIfNeeded(protoConfig, "runtime.rotation", settings.mapRotation);

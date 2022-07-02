@@ -25,6 +25,7 @@ const reloadSettings = function(source) {
 	}
 	settings = {
 		mapType: getProtoNumber(protoConfig, source, "runtime.type"),
+		mapSurface: getProtoNumber(protoConfig, source, "runtime.surface"),
 		mapZoom: getProtoNumber(protoConfig, source, "runtime.zoom"),
 		mapAlpha: getProtoNumber(protoConfig, source, "runtime.translucent"),
 		mapRotation: getProtoBool(protoConfig, source, "runtime.rotation"),
@@ -65,6 +66,7 @@ const reloadSettings = function(source) {
 	protoConfig.checkAndRestore(JSON.stringify({
 		runtime: {
 			type: 0,
+			surface: 1,
 			zoom: 85,
 			translucent: 70,
 			rotation: false
@@ -90,15 +92,13 @@ const reloadSettings = function(source) {
 		},
 		performance: {
 			radius: checkRenderDistance(),
-			priority: 1,
-			delay: 15,
-			thread: 2
+			priority: 0,
+			delay: 20,
+			thread: 1
 		},
 		development: {
 			location: false,
-			zoom_button: false,
-			show_process: false,
-			check_newest_version: true
+			show_process: false
 		}
 	}));
 	reloadSettings();

@@ -14,6 +14,8 @@ let mapWindow = (function() {
 			setWindow = settingsUI([NAME, "Leave",
 				["sectionDivider", "Rendering"],
 					["keyValue", "multipleChoice", "Type", "mapType", ["Monochromatic", "Surface", "Underground"]],
+					["keyValue", "multipleChoice", "Heightmap", "mapSurface", ["Nearest surface", "Optimum", "Nearest delta", "Closest to sky"]],
+					// ["keyValue", "multipleChoice", "Ignore fauna", "mapSkipFauna", ["Enabled", "At most", "Disabled"]],
 					["keyValue", "slider", "Render distance", "radius", 1, 96, 1, " chunks"],
 					["keyValue", "slider", "Zoom", "mapZoom", 10, 100, 1, "%"],
 				["subScreen", "Icons / Indicators", ["Icons / Indicators", "Apply",
@@ -145,7 +147,7 @@ let mapWindow = (function() {
 	try {
 		textInfo.setTypeface(InnerCorePackage.utils.FileTools.getMcTypeface());
 	} catch (e) {
-		Logger.Log("Minimap: unable to set embedded font in Inner Core, default will be used otherwise", "WARNING");
+		Logger.Log("Minimap: unable to set embedded in Inner Core font, default will be used otherwise", "WARNING");
 	}
 	layout.setAlpha((settings.mapAlpha / 100).toFixed(2));
 	layout.addView(btnSet);
@@ -194,26 +196,6 @@ let mapWindow = (function() {
 
 let startMapControl = true;
 
-Callback.addCallback("tick", function() {
-	if (startMapControl) {
-		startMapControl = false;
-		createPool();
-	}
-	if (map_state && settings.mapRotation) {
-		if (settings.stylesheetShape == 1) {
-			handle(function() {
-				if (YAW !== undefined) {
-					mapView.setRotation(-YAW);
-				}
-			});
-		} else {
-			settings.stylesheetShape = 1;
-			settingsChanged("stylesheetShape");
-			saveSettings();
-		}
-	}
-});
-
 Callback.addCallback("LevelLeft", function() {
 	mapWindow.hide();
 	if (map_state) {
@@ -232,8 +214,7 @@ function changeMapState() {
 	mapWindow.resetVisibility();
 	if (map_state) {
 		delayChunksArrLock.acquire();
-		let i = delayChunksArr.length;
-		while (i--) {
+		for (let i = 0; i < delayChunksArr.length; i++) {
 			scheduleChunk(delayChunksArr[i][0], delayChunksArr[i][1], 0);
 		}
 		delayChunksArr = [];
@@ -246,6 +227,9 @@ function changeMapState() {
 }
 
 Callback.addCallback("NativeGuiChanged", function(screenName) {
+	if (screenName == "toast_screen") {
+		return;
+	}
 	if (isHorizon) {
 		if (screenName != "in_game_play_screen") {
 			mapWindow.hide();
@@ -256,6 +240,10 @@ Callback.addCallback("NativeGuiChanged", function(screenName) {
 			mapWindow.hide();
 			return;
 		}
+	}
+	if (startMapControl) {
+		startMapControl = false;
+		createPool();
 	}
 	mapWindow.show();
 });

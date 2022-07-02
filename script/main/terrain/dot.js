@@ -66,89 +66,125 @@ const mapDotFauna = [
 	551 // nether bastion button
 ];
 
-const mapDot = [
-	function monochromaticColormap(ix, iz) {
-		let iy = 256;
-		let deltaY = 10;
-		do {
-			let block = getBlockId(ix, iy - 10, iz);
-			if (block != 0) {
-				if (deltaY == 10) {
-					deltaY = 1;
-					iy += 10;
-				} else {
-					if (mapDotFauna.indexOf(block) == -1) {
-						return (colormap[block] ? colormap[block][getBlockData(ix, iy, iz)] : 0) || -1;
-					}
-				}
-			}
-		} while (iy -= deltaY);
-		return 0;
+const heightmapDot = [
+	function nearestGenerationSurface(ix, iz) {
+		return findSurface(ix, DIMENSION == 1 ? 64 : 256, iz);
 	},
-	function surfaceHeightMap(ix, iz) {
-		let color = 0;
-		let iy = 256;
-		let deltaY = 10;
+	function nearestGenerationOptimumSurface(ix, iz) {
+		let iy = findSurface(ix, DIMENSION == 1 ? 64 : 256, iz);
+		do {
+			let block = getBlockId(ix, iy, iz);
+			if (block == 0 || mapDotFauna.indexOf(block) != -1) {
+				iy -= 1;
+				break;
+			}
+		} while ((iy += 1) <= 256);
+		return iy;
+	},
+	function clearanceDeltaHeight(ix, iz) {
+		let iy = DIMENSION == 1 ? 64 : 256;
+		let delta = 8;
 		do {
 			let block = getBlockId(ix, iy, iz);
 			if (block != 0) {
-				if (deltaY == 10) {
-					deltaY = 1;
-					iy += 10;
+				if (delta == 8) {
+					delta = 1;
+					iy += 8;
+				} else {
+					if (mapDotFauna.indexOf(block) == -1) {
+						return iy;
+					}
 				}
-				switch (block) {
-					case 9:
-						if (getBlockId(ix, iy - 9, iz) == 9) {
-							return -13882190;
-						}
-						if (getBlockId(ix, iy - 6, iz) == 9) {
-							return !(ix % 2) == !((iz + 1) % 2) ? -13882190 : -13224231;
-						}
-						if (getBlockId(ix, iy - 4, iz) == 9) {
-							return -13224231;
-						}
-						if (getBlockId(ix, iy - 2, iz) == 9) {
-							return !(ix % 2) == !((iz + 1) % 2) ? -13224231 : -12632068;
-						}
-						return -12632068;
-					case 12:
-						if (getBlockData(ix, iy, iz)) {
-							color = 0xd57d32;
-						} else {
-							color = 0xf4e6a1;
-						}
-						break;
-					case 35:
-					case 159:
-					case 171:
-						color = [0xfcf9f2, 0xd57d32, 0xb04bd5, 0x6597d5, 0xe2e232, 0x7dca19, 0xef7da3, 0x4b4b4b, 0x979797, 0x4b7d97, 0x7d3eb0, 0x324bb0, 0x654b32, 0x657d32, 0x973232, 0x191919][getBlockData(ix, iy - 10, iz)];
-						break;
-					case 5:
-					case 85:
-					case 157:
-					case 158:
-						color = [0x8d7647, 0x7e5430, 0xf4e6a1, 0x956c4c, 0xd57d32, 0x654b32, 0, 0, 0x8d7647, 0x7e5430, 0xf4e6a1, 0x956c4c, 0xd57d32, 0x654b32, 0, 0][getBlockData(ix, iy - 10, iz)];
-						break;
-					case 43:
-					case 44:
-						color = [0x6f6f6f, 0xf4e6a1, 0x8d7647, 0x6f6f6f, 0x973232, 0x6f6f6f, 0xfcfcfc, 0x6f0200, 0x6f6f6f, 0xf4e6a1, 0x8d7647, 0x6f6f6f, 0x973232, 0x6f6f6f, 0xfcfcfc, 0x6f0200][getBlockData(ix, iy - 10, iz)];
-						break;
-					default:
-						if (mapDotFauna.indexOf(block) != -1) {
-							continue;
-						}
-						color = (colormapHex[block] ? colormapHex[block][getBlockData(ix, iy, iz)] : 0) || 0;
-				}
-				if (getBlockId(ix - 1, iy - 2, iz)) {
-					return reflectColorRgb(android.graphics.Color.red(color) * 0.703125, android.graphics.Color.green(color) * 0.703125, android.graphics.Color.blue(color) * 0.703125);
-				}
-				if (getBlockId(ix - 1, iy - 1, iz)) {
-					return reflectColorRgb(android.graphics.Color.red(color) * 0.859375, android.graphics.Color.green(color) * 0.859375, android.graphics.Color.blue(color) * 0.859375);
-				}
-				return reflectColorRgb(android.graphics.Color.red(color), android.graphics.Color.green(color), android.graphics.Color.blue(color));
 			}
-		} while ((iy -= deltaY) > 0);
+		} while ((iy -= delta) > 0);
 		return 0;
+	},
+	function nearestSurfaceUnderSky(ix, iz) {
+		let iy = 1;
+		let delta = 16;
+		do {
+			if (canSeeSky(ix, iy, iz)) {
+				if (delta == 16) {
+					delta = 1;
+					iy -= 16;
+				} else if (delta == 1) {
+					return iy == 1 ? 0 : iy - 1;
+				}
+			}
+		} while ((iy += delta) <= 256);
+		return 256;
+	}
+];
+
+const mapDot = [
+	function monochromaticColormap(ix, iz) {
+		let iy = heightmapDot[settings.mapSurface](ix, iz);
+		let block = getBlockId(ix, iy, iz);
+		if (block == 0) {
+			return 0;
+		}
+		// if (block == 2) {
+			// return getGrassColor(ix, iz);
+		// }
+		return (colormap[block] ? colormap[block][getBlockData(ix, iy, iz)] : 0) || -1;
+	},
+	function surfaceHeightMap(ix, iz) {
+		let iy = heightmapDot[settings.mapSurface](ix, iz);
+		let block = getBlockId(ix, iy, iz);
+		if (block == 0) {
+			return 0;
+		}
+		let color = 0;
+		switch (block) {
+			// case 2:
+				// color = getGrassColor(ix, iz);
+				// break;
+			case 9:
+				if (getBlockId(ix, iy - 9, iz) == 9) {
+					return -13882190;
+				}
+				if (getBlockId(ix, iy - 6, iz) == 9) {
+					return !(ix % 2) == !((iz + 1) % 2) ? -13882190 : -13224231;
+				}
+				if (getBlockId(ix, iy - 4, iz) == 9) {
+					return -13224231;
+				}
+				if (getBlockId(ix, iy - 2, iz) == 9) {
+					return !(ix % 2) == !((iz + 1) % 2) ? -13224231 : -12632068;
+				}
+				return -12632068;
+			case 12:
+				if (getBlockData(ix, iy, iz)) {
+					color = 0xd57d32;
+				} else {
+					color = 0xf4e6a1;
+				}
+				break;
+			case 35:
+			case 159:
+			case 171:
+				color = [0xfcf9f2, 0xd57d32, 0xb04bd5, 0x6597d5, 0xe2e232, 0x7dca19, 0xef7da3, 0x4b4b4b, 0x979797, 0x4b7d97, 0x7d3eb0, 0x324bb0, 0x654b32, 0x657d32, 0x973232, 0x191919][getBlockData(ix, iy - 10, iz)];
+				break;
+			case 5:
+			case 85:
+			case 157:
+			case 158:
+				color = [0x8d7647, 0x7e5430, 0xf4e6a1, 0x956c4c, 0xd57d32, 0x654b32, 0, 0, 0x8d7647, 0x7e5430, 0xf4e6a1, 0x956c4c, 0xd57d32, 0x654b32, 0, 0][getBlockData(ix, iy - 10, iz)];
+				break;
+			case 43:
+			case 44:
+				color = [0x6f6f6f, 0xf4e6a1, 0x8d7647, 0x6f6f6f, 0x973232, 0x6f6f6f, 0xfcfcfc, 0x6f0200, 0x6f6f6f, 0xf4e6a1, 0x8d7647, 0x6f6f6f, 0x973232, 0x6f6f6f, 0xfcfcfc, 0x6f0200][getBlockData(ix, iy - 10, iz)];
+				break;
+			default:
+				color = (colormap[block] ? colormap[block][getBlockData(ix, iy, iz)] : 0) || 0;
+		}
+		if (getBlockId(ix - 1, iy - 2, iz)) {
+			return reflectColorRgb(((color >> 16) & 0xff) * 0.703125, ((color >> 8) & 0xff) * 0.703125, (color & 0xff) * 0.703125);
+		}
+		if (getBlockId(ix - 1, iy - 1, iz)) {
+			return reflectColorRgb(((color >> 16) & 0xff) * 0.859375, ((color >> 8) & 0xff) * 0.859375, (color & 0xff) * 0.859375);
+		}
+		return reflectColorRgb((color >> 16) & 0xff, (color >> 8) & 0xff, color & 0xff);
 	},
 	function undergroundMap(ix, iz) {
 		let count = 0;
@@ -161,7 +197,7 @@ const mapDot = [
 		let b;
 		let increment = 3;
 		do {
-			blockNew = getBlockId(ix, iy - 3, iz);
+			blockNew = getBlockId(ix, iy, iz);
 			if (mapDotFauna.indexOf(blockNew) == -1) {
 				switch (blockNew) {
 					case 0:
@@ -235,6 +271,6 @@ const mapDot = [
 			block = blockNew;
 		} while ((iy -= increment) > 0);
 		y = y || 127;
-		return reflectColorRgb(255 * (y / 127), 255 * (y / 127), 255 * (y / 127));
+		return reflectColorRgb(255 * (0.9 * (y / 127) + 0.1), 255 * (0.9 * (y / 127) + 0.1), 255 * (0.9 * (y / 127) + 0.1));
 	}
 ];

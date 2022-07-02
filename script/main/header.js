@@ -115,8 +115,9 @@ const reflectColorRgb = (function() {
 let source = null;
 
 if (this.isOutdated === undefined) {
-	Callback.addCallback("LevelLoaded", function() {
-		source = BlockSource.getCurrentWorldGenRegion();
+	Callback.addCallback("LocalPlayerChangedDimension", function(actorUid, currentId, lastId) {
+		source = BlockSource.getDefaultForActor(actorUid);
+		// source = BlockSource.getDefaultForDimension(currentId);
 	});
 }
 
@@ -139,4 +140,41 @@ const isChunkLoaded = function(x, z) {
 		return source.isChunkLoaded(x, z);
 	}
 	return World.isChunkLoaded(x, z);
+};
+
+const getGrassColor = function(x, z) {
+	if (source != null) {
+		return source.getGrassColor(x, z);
+	}
+	return World.getGrassColor(x, z);
+};
+
+const canSeeSky = function(x, y, z) {
+	if (source != null) {
+		return source.canSeeSky(x, y, z);
+	}
+	return World.canSeeSky(x, y, z);
+};
+
+const GenerationUtils_AdaptedScript = ModAPI.requireGlobal("GenerationUtils");
+
+const findSurface = function(x, y, z) {
+	if (GenerationUtils_AdaptedScript === undefined) {
+		return GenerationUtils.findSurface(x, y, z).y;
+	}
+	return GenerationUtils_AdaptedScript.findSurface(x, y, z);
+};
+
+const isTransparentBlock = function(id) {
+	if (GenerationUtils_AdaptedScript === undefined) {
+		return GenerationUtils.isTransparentBlock(id);
+	}
+	return GenerationUtils_AdaptedScript.isTransparentBlock(id);
+};
+
+const isTerrainBlock = function(id) {
+	if (GenerationUtils_AdaptedScript === undefined) {
+		return GenerationUtils.isTerrainBlock(id);
+	}
+	return GenerationUtils_AdaptedScript.isTerrainBlock(id);
 };
