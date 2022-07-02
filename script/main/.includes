@@ -3,19 +3,17 @@ header.js
 storage/explorer.js
 storage/config.js
 storage/restore.js
-storage/space.js
-
-visual/config.js
-visual/drawable.js
-visual/map.js
 
 terrain/colormap.js
 terrain/dot.js
 terrain/process.js
 
-pool/handle.js
-pool/draw.js
-pool/update.js
+visual/config.js
+visual/drawable.js
+visual/map.js
 
 entities/watcher.js
 entities/pointer.js
+
+pool/handle.js
+pool/draw.js

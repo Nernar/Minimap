@@ -68,10 +68,22 @@ const mapDotFauna = [
 
 const heightmapDot = [
 	function nearestGenerationSurface(ix, iz) {
-		return findSurface(ix, DIMENSION == 1 ? 64 : 256, iz);
+		return findSurface(ix, DIMENSION == 1 ? 96 : 256, iz);
 	},
-	function nearestGenerationOptimumSurface(ix, iz) {
-		let iy = findSurface(ix, DIMENSION == 1 ? 64 : 256, iz);
+	function nearestOptimumSurface(ix, iz) {
+		let iy = findSurface(ix, DIMENSION == 1 ? 96 : 256, iz);
+		let delta = 8;
+		do {
+			if (canSeeSky(ix, iy, iz)) {
+				if (delta == 8) {
+					delta = 1;
+					iy -= 8;
+				} else if (delta == 1) {
+					iy--;
+					break;
+				}
+			}
+		} while ((iy += delta) <= 256);
 		do {
 			let block = getBlockId(ix, iy, iz);
 			if (block == 0 || mapDotFauna.indexOf(block) != -1) {
@@ -82,7 +94,7 @@ const heightmapDot = [
 		return iy;
 	},
 	function clearanceDeltaHeight(ix, iz) {
-		let iy = DIMENSION == 1 ? 64 : 256;
+		let iy = DIMENSION == 1 ? 96 : 256;
 		let delta = 8;
 		do {
 			let block = getBlockId(ix, iy, iz);
@@ -108,7 +120,7 @@ const heightmapDot = [
 					delta = 1;
 					iy -= 16;
 				} else if (delta == 1) {
-					return iy == 1 ? 0 : iy - 1;
+					return --iy;
 				}
 			}
 		} while ((iy += delta) <= 256);
@@ -126,7 +138,7 @@ const mapDot = [
 		// if (block == 2) {
 			// return getGrassColor(ix, iz);
 		// }
-		return (colormap[block] ? colormap[block][getBlockData(ix, iy, iz)] : 0) || -1;
+		return colormap[block] ? (colormap[block][getBlockData(ix, iy, iz)] || colormap[block][0]) : -1;
 	},
 	function surfaceHeightMap(ix, iz) {
 		let iy = heightmapDot[settings.mapSurface](ix, iz);
@@ -176,7 +188,7 @@ const mapDot = [
 				color = [0x6f6f6f, 0xf4e6a1, 0x8d7647, 0x6f6f6f, 0x973232, 0x6f6f6f, 0xfcfcfc, 0x6f0200, 0x6f6f6f, 0xf4e6a1, 0x8d7647, 0x6f6f6f, 0x973232, 0x6f6f6f, 0xfcfcfc, 0x6f0200][getBlockData(ix, iy - 10, iz)];
 				break;
 			default:
-				color = (colormap[block] ? colormap[block][getBlockData(ix, iy, iz)] : 0) || 0;
+				color = colormap[block] ? (colormap[block][getBlockData(ix, iy, iz)] || colormap[block][0]) : -1;
 		}
 		if (getBlockId(ix - 1, iy - 2, iz)) {
 			return reflectColorRgb(((color >> 16) & 0xff) * 0.703125, ((color >> 8) & 0xff) * 0.703125, (color & 0xff) * 0.703125);

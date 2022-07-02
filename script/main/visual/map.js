@@ -88,9 +88,17 @@ let mapWindow = (function() {
 				return true;
 			}
 		}));
+		let mIgnoredByDoubleTap = false;
 		let mGestureDetector = new android.view.GestureDetector(getContext(), new JavaAdapter(android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener, android.view.GestureDetector.OnDoubleTapListener, {
 			onDown: function(event) {
-				mRequiredStandartAction = true;
+				if (!mConfirmedDoubleTap) {
+					mRequiredStandartAction = true;
+				}
+				mIgnoredByDoubleTap = false;
+			},
+			onDoubleTap: function(event) {
+				mRequiredStandartAction = false;
+				mIgnoredByDoubleTap = true;
 			},
 			onSingleTapConfirmed: function(event) {
 				if (mRequiredStandartAction) {

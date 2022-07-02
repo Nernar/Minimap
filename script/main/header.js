@@ -44,6 +44,17 @@ const isAcceptableEntity = function(ent) {
 	return true;
 };
 
+const isOutdated = (function() {
+	try {
+		ConfigureMultiplayer({
+			isClientOnly: true
+		});
+	} catch (e) {
+		return true;
+	}
+	return false;
+})();
+
 const NAME = "" + __mod__.getInfoProperty("name");
 const REVISION = parseFloat(__mod__.getInfoProperty("version"));
 
@@ -114,12 +125,13 @@ const reflectColorRgb = (function() {
 
 let source = null;
 
-if (this.isOutdated === undefined) {
+if (isOutdated == false) {
 	Callback.addCallback("LocalPlayerChangedDimension", function(actorUid, currentId, lastId) {
 		source = BlockSource.getDefaultForActor(actorUid);
-		// source = BlockSource.getDefaultForDimension(currentId);
 	});
 }
+
+// carried grass: 0x659a37
 
 const getBlockId = function(x, y, z) {
 	if (source != null) {
@@ -140,13 +152,6 @@ const isChunkLoaded = function(x, z) {
 		return source.isChunkLoaded(x, z);
 	}
 	return World.isChunkLoaded(x, z);
-};
-
-const getGrassColor = function(x, z) {
-	if (source != null) {
-		return source.getGrassColor(x, z);
-	}
-	return World.getGrassColor(x, z);
 };
 
 const canSeeSky = function(x, y, z) {
