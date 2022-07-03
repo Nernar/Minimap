@@ -26,6 +26,7 @@ const reloadSettings = function(source) {
 	settings = {
 		mapType: getProtoNumber(protoConfig, source, "runtime.type"),
 		mapSurface: getProtoNumber(protoConfig, source, "runtime.surface"),
+		mapSmoothing: getProtoNumber(protoConfig, source, "runtime.smoothing"),
 		mapZoom: getProtoNumber(protoConfig, source, "runtime.zoom"),
 		mapAlpha: getProtoNumber(protoConfig, source, "runtime.translucent"),
 		mapRotation: getProtoBool(protoConfig, source, "runtime.rotation"),

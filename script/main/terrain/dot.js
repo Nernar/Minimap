@@ -66,27 +66,48 @@ const mapDotFauna = [
 	551 // nether bastion button
 ];
 
+const smoothingDot = [
+	null,
+	function terrainBlock(id) {
+		if (GenerationUtils_AdaptedScript === undefined) {
+			return GenerationUtils.isTerrainBlock(id);
+		}
+		return GenerationUtils_AdaptedScript.isTerrainBlock(id);
+	},
+	function ignoreTransparent(id) {
+		if (GenerationUtils_AdaptedScript === undefined) {
+			return !GenerationUtils.isTransparentBlock(id);
+		}
+		return !GenerationUtils_AdaptedScript.isTransparentBlock(id);
+	},
+	function ignoreFauna(id) {
+		return mapDotFauna.indexOf(id) == -1;
+	}
+];
+
 const heightmapDot = [
 	function nearestGenerationSurface(ix, iz) {
-		return findSurface(ix, DIMENSION == 1 ? 96 : 256, iz);
+		return findSurface(ix, DIMENSION == 1 ? 80 : 256, iz);
 	},
 	function nearestOptimumSurface(ix, iz) {
-		let iy = findSurface(ix, DIMENSION == 1 ? 96 : 256, iz);
-		let delta = 8;
-		do {
-			if (canSeeSky(ix, iy, iz)) {
-				if (delta == 8) {
-					delta = 1;
-					iy -= 8;
-				} else if (delta == 1) {
-					iy--;
-					break;
+		let iy = findSurface(ix, DIMENSION == 1 ? 80 : 256, iz);
+		if (DIMENSION != 1) {
+			let delta = 8;
+			do {
+				if (canSeeSky(ix, iy, iz)) {
+					if (delta == 8) {
+						delta = 1;
+						iy -= 8;
+					} else if (delta == 1) {
+						iy--;
+						break;
+					}
 				}
-			}
-		} while ((iy += delta) <= 256);
+			} while ((iy += delta) <= 256);
+		}
 		do {
 			let block = getBlockId(ix, iy, iz);
-			if (block == 0 || mapDotFauna.indexOf(block) != -1) {
+			if (block == 0 || !(!settings.mapSmoothing || smoothingDot[settings.mapSmoothing](block))) {
 				iy -= 1;
 				break;
 			}
@@ -94,7 +115,7 @@ const heightmapDot = [
 		return iy;
 	},
 	function clearanceDeltaHeight(ix, iz) {
-		let iy = DIMENSION == 1 ? 96 : 256;
+		let iy = DIMENSION == 1 ? 80 : 256;
 		let delta = 8;
 		do {
 			let block = getBlockId(ix, iy, iz);
@@ -103,7 +124,7 @@ const heightmapDot = [
 					delta = 1;
 					iy += 8;
 				} else {
-					if (mapDotFauna.indexOf(block) == -1) {
+					if (!settings.mapSmoothing || smoothingDot[settings.mapSmoothing](block)) {
 						return iy;
 					}
 				}
@@ -210,7 +231,7 @@ const mapDot = [
 		let increment = 3;
 		do {
 			blockNew = getBlockId(ix, iy, iz);
-			if (mapDotFauna.indexOf(blockNew) == -1) {
+			if (!settings.mapSmoothing || smoothingDot[settings.mapSmoothing](blockNew)) {
 				switch (blockNew) {
 					case 0:
 					case 17:

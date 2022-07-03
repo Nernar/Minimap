@@ -131,8 +131,6 @@ if (isOutdated == false) {
 	});
 }
 
-// carried grass: 0x659a37
-
 const getBlockId = function(x, y, z) {
 	if (source != null) {
 		return source.getBlockId(x, y, z);
@@ -168,18 +166,4 @@ const findSurface = function(x, y, z) {
 		return GenerationUtils.findSurface(x, y, z).y;
 	}
 	return GenerationUtils_AdaptedScript.findSurface(x, y, z);
-};
-
-const isTransparentBlock = function(id) {
-	if (GenerationUtils_AdaptedScript === undefined) {
-		return GenerationUtils.isTransparentBlock(id);
-	}
-	return GenerationUtils_AdaptedScript.isTransparentBlock(id);
-};
-
-const isTerrainBlock = function(id) {
-	if (GenerationUtils_AdaptedScript === undefined) {
-		return GenerationUtils.isTerrainBlock(id);
-	}
-	return GenerationUtils_AdaptedScript.isTerrainBlock(id);
 };

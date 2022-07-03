@@ -52,6 +52,7 @@ const settingsChanged = function(key) {
 			break;
 		case "mapType":
 		case "mapSurface":
+		case "mapSmoothing":
 			if (pool.getActiveCount() > 0) {
 				createPool();
 			}
@@ -159,6 +160,7 @@ const setConfigOptionIfNeeded = function(proto, name, value) {
 const saveSettings = function() {
 	setConfigOptionIfNeeded(protoConfig, "runtime.type", settings.mapType);
 	setConfigOptionIfNeeded(protoConfig, "runtime.surface", settings.mapSurface);
+	setConfigOptionIfNeeded(protoConfig, "runtime.smoothing", settings.mapSmoothing);
 	setConfigOptionIfNeeded(protoConfig, "runtime.zoom", settings.mapZoom);
 	setConfigOptionIfNeeded(protoConfig, "runtime.translucent", settings.mapAlpha);
 	setConfigOptionIfNeeded(protoConfig, "runtime.rotation", settings.mapRotation);

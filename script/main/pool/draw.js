@@ -118,6 +118,9 @@ var redraw = false,
 					x0 = xNew - (settings.locationSize * 0.5 / zoom),
 					z0 = zNew + (settings.locationSize * 0.5 / zoom);
 				matrixMap.setTranslate(settings.locationSize * 0.5 - (bmpSrc.getWidth() * 0.5) - 8 + zNew - zChunkNew, settings.locationSize * 0.5 - (bmpSrc.getHeight() * 0.5) + 8 - xNew + xChunkNew);
+				if (settings.mapRotation) {
+					matrixMap.postRotate(YAW, settings.locationSize * 0.5, settings.locationSize * 0.5);
+				}
 				matrixMap.postScale(zoom, zoom, settings.locationSize * 0.5, settings.locationSize * 0.5);
 				if (settings.mapLocation) {
 					mapWindow.setInfo();

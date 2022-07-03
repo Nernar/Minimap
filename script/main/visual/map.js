@@ -14,8 +14,8 @@ let mapWindow = (function() {
 			setWindow = settingsUI([NAME, "Leave",
 				["sectionDivider", "Rendering"],
 					["keyValue", "multipleChoice", "Type", "mapType", ["Monochromatic", "Surface", "Underground"]],
-					["keyValue", "multipleChoice", "Heightmap", "mapSurface", ["Nearest surface", "Optimum", "Nearest delta", "Closest to sky"]],
-					// ["keyValue", "multipleChoice", "Ignore fauna", "mapSkipFauna", ["Enabled", "At most", "Disabled"]],
+					["keyValue", "multipleChoice", "Heightmap", "mapSurface", ["Nearest surface", "Optimum", "Procedural", "Closest to sky"]],
+					["keyValue", "multipleChoice", "Smoothing", "mapSmoothing", ["Disabled", "At most", "Transparency", "Fauna"]],
 					["keyValue", "slider", "Render distance", "radius", 1, 96, 1, " chunks"],
 					["keyValue", "slider", "Zoom", "mapZoom", 10, 100, 1, "%"],
 				["subScreen", "Icons / Indicators", ["Icons / Indicators", "Apply",
@@ -91,7 +91,7 @@ let mapWindow = (function() {
 		let mIgnoredByDoubleTap = false;
 		let mGestureDetector = new android.view.GestureDetector(getContext(), new JavaAdapter(android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener, android.view.GestureDetector.OnDoubleTapListener, {
 			onDown: function(event) {
-				if (!mConfirmedDoubleTap) {
+				if (!mIgnoredByDoubleTap) {
 					mRequiredStandartAction = true;
 				}
 				mIgnoredByDoubleTap = false;

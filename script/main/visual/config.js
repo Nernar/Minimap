@@ -129,7 +129,7 @@ const settingsUI = function() {
 						break;
 					default:
 						textValue.setText("" + args[3]);
-						layoutElement.setOnClickListener(function(v) {
+						text.setOnClickListener(function(v) {
 						    if (args[4]) {
 						    	settingsChanged(args[4]);
 						    	print.dismiss();
