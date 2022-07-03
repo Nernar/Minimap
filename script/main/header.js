@@ -62,21 +62,21 @@ IMPORT("Retention");
 
 const InnerCorePackage = isHorizon ? Packages.com.zhekasmirnov.innercore : Packages.zhekasmirnov.launcher;
 
-const buttonSize = tryout(function() {
+const buttonSize = (function() {
 	if (__config__.get("initialization.button_size") == null) {
 		__config__.set("initialization.button_size", 40);
 		__config__.save();
 	}
 	return __config__.getNumber("initialization.button_size");
-}, 40);
+})();
 
-const legacyEntities = tryout(function() {
+const legacyEntities = (function() {
 	if (__config__.get("initialization.use_legacy_entities") == null) {
 		__config__.set("initialization.use_legacy_entities", false);
 		__config__.save();
 	}
 	return __config__.getBool("initialization.use_legacy_entities");
-}, false);
+})();
 
 let bmpSrc,
 	bmpSrcCopy,

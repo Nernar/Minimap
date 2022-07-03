@@ -5,7 +5,11 @@
     "button_size":40
   },
   "runtime":{
-    
+    "smoothing":3,
+    "rotation":true,
+    "type":1,
+    "translucent":100,
+    "surface":2
   },
   "indicator":{
     
@@ -14,7 +18,8 @@
     
   },
   "stylesheet":{
-    
+    "pointer":1,
+    "shape":0
   },
   "performance":{
     

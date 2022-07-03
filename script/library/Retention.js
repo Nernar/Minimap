@@ -26,10 +26,11 @@ LIBRARY({
 let launchTime = Date.now();
 EXPORT("launchTime", launchTime);
 
-EXPORT("isHorizon", (function() {
+let isHorizon = (function() {
 	let version = MCSystem.getInnerCoreVersion();
 	return parseInt(version.toString()[0]) >= 2;
-})());
+})();
+EXPORT("isHorizon", isHorizon);
 
 EXPORT("minecraftVersion", (function() {
 	let version = MCSystem.getMinecraftVersion();
@@ -52,13 +53,39 @@ let reportError = (function(what) {
 		what = when;
 	});
 	return function(error) {
-		what(error);
+		if (what) {
+			what(error);
+		}
 	};
 })(function(error) {
-	Logger.Log("Retention: " + error + (error ? " *" + error.lineNumber : ""), "WARNING");
+	if (isHorizon) {
+		Packages.com.zhekasmirnov.innercore.api.log.ICLog.i("WARNING", Packages.com.zhekasmirnov.innercore.api.log.ICLog.getStackTrace(error));
+	} else {
+		Packages.zhekasmirnov.launcher.api.log.ICLog.i("WARNING", Packages.zhekasmirnov.launcher.api.log.ICLog.getStackTrace(error));
+	}
 });
 
 EXPORT("reportError", reportError);
+
+/**
+ * Displays a log window for user whether it is
+ * needed or not. On latest versions, number of such
+ * windows on screen is limited for performance reasons.
+ * @param {string} message additional information
+ * @param {string} title e.g. mod name
+ * @param {function} [fallback] when too much dialogs
+ */
+EXPORT("openReportDialog", function(message, title, fallback) {
+	if (isHorizon) {
+		try {
+			Packages.com.zhekasmirnov.innercore.api.log.DialogHelper.openFormattedDialog("" + message, "" + title, fallback || null);
+		} catch (e) {
+			Packages.com.zhekasmirnov.innercore.api.log.DialogHelper.openFormattedDialog("" + message, "" + title);
+		}
+	} else {
+		Packages.zhekasmirnov.launcher.api.log.DialogHelper.openFormattedDialog("" + message, "" + title);
+	}
+});
 
 /**
  * invoke(what, when => (th)): any
@@ -89,101 +116,65 @@ EXPORT("resolveThrowable", (function() {
 })());
 
 /**
- * Tries to just call action or returns
- * [[basic]] value. Equivalent to try-catch.
- * @param {function} action action
- * @param {function} [report] action when error
- * @param {any} [basic] default value
- * @returns {any} action result or nothing
- */
-let tryout = function(action, report, basic) {
-	try {
-		if (typeof action == "function") {
-			return action.call(this);
-		}
-	} catch (e) {
-		if (typeof report == "function") {
-			let result = report.call(this, e);
-			if (result !== undefined) return result;
-		} else {
-			reportError(e);
-			if (report !== undefined) {
-				return report;
-			}
-		}
-	}
-	return basic;
-};
-
-EXPORT("tryout", tryout);
-
-/**
- * Tries to just call action or always returns
- * [[basic]] value. Equivalent to try-catch.
- * @param {function} action action
- * @param {function} [report] action when error
- * @param {any} [basic] default value
- * @returns {any} action result or default
- */
-EXPORT("require", function(action, report, basic) {
-	let result = tryout.call(this, action, report);
-	if (basic === undefined) basic = report;
-	return result !== undefined ? result : basic;
-});
-
-/**
  * Delays the action in the interface
  * thread for the required time.
  * @param {function} action action
  * @param {number} [time] expectation
- * @param {function} [report] action when error
  */
-EXPORT("handle", function(action, time, report) {
+EXPORT("handle", function(action, time) {
 	let self = this;
 	getContext().runOnUiThread(function() {
 		new android.os.Handler().postDelayed(function() {
-			if (action !== undefined) tryout.call(self, action, report);
+			try {
+				if (action) {
+					action.call(self);
+				}
+			} catch (e) {
+				reportError(e);
+			}
 		}, time >= 0 ? time : 0);
 	});
 });
 
 /**
- * @async
  * Delays the action in the interface and
  * async waiting it in current thread.
  * @param {function} action action
- * @param {function} [report] action when error
- * @param {any} [basic] default value
+ * @param {any} [fallback] default value
  * @returns {any} action result or default
  */
-EXPORT("acquire", function(action, report, basic) {
+EXPORT("acquire", function(action, fallback) {
 	let self = this;
 	let completed = false;
 	getContext().runOnUiThread(function() {
-		if (action !== undefined) {
-			let value = tryout.call(self, action, report);
-			if (value !== undefined) {
-				basic = value;
+		try {
+			if (action) {
+				let value = action.call(self);
+				if (value !== undefined) {
+					fallback = value;
+				}
 			}
+		} catch (e) {
+			reportError(e);
 		}
 		completed = true;
 	});
 	while (!completed) {
 		java.lang.Thread.yield();
 	}
-	return basic;
+	return fallback;
 });
 
 /**
  * Processes some action, that can be
  * completed in foreground or background.
  * @param {function} action action
- * @param {number} priority number between 1-10
+ * @param {number} [priority] number between 1-10
  * @returns {java.lang.Thread} thread
  */
 EXPORT("handleThread", (function() {
 	let stack = [];
-	EXPORT("interruptAllThreads", function() {
+	EXPORT("interruptThreads", function() {
 		while (stack.length > 0) {
 			let thread = stack.shift();
 			if (!thread.isInterrupted()) {
@@ -191,10 +182,16 @@ EXPORT("handleThread", (function() {
 			}
 		}
 	});
-	return function(action, report, priority) {
+	return function(action, priority) {
 		let self = this;
 		let thread = new java.lang.Thread(function() {
-			if (action !== undefined) tryout.call(self, action, report);
+			try {
+				if (action) {
+					action.call(self);
+				}
+			} catch (e) {
+				reportError(e);
+			}
 			let index = stack.indexOf(thread);
 			if (index != -1) stack.splice(index, 1);
 		});
@@ -238,7 +235,7 @@ EXPORT("getTime", function() {
  */
 EXPORT("translateCounter", (function() {
 	let translate = function(str, args) {
-		return tryout(function() {
+		try {
 			str = Translation.translate(str);
 			if (args !== undefined) {
 				if (!Array.isArray(args)) {
@@ -250,7 +247,9 @@ EXPORT("translateCounter", (function() {
 				str = java.lang.String.format(str, args);
 			}
 			return "" + str;
-		}, "" + str);
+		} catch (e) {
+			return "" + str;
+		}
 	};
 	EXPORT("translate", translate);
 	let isNumeralVerb = function(count) {
@@ -264,7 +263,7 @@ EXPORT("translateCounter", (function() {
 	};
 	EXPORT("isNumeralMany", isNumeralMany);
 	return function(count, whenZero, whenVerb, whenLittle, whenMany, args) {
-		return tryout(function() {
+		try {
 			if (args !== undefined) {
 				if (!Array.isArray(args)) {
 					args = [args];
@@ -280,8 +279,12 @@ EXPORT("translateCounter", (function() {
 					return value;
 				});
 			}
-			return translate(count == 0 ? whenZero : isNumeralVerb(count) ? whenVerb : isNumeralMany(count) ? whenMany : whenLittle, args);
-		}, translate(whenZero, args));
+			return translate(count == 0 ? whenZero : isNumeralVerb(count) ? whenVerb :
+				isNumeralMany(count) ? whenMany : whenLittle, args);
+		} catch (e) {
+			reportError(e);
+		}
+		return translate(whenZero, args);
 	};
 })());
 

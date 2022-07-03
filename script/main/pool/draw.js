@@ -19,7 +19,7 @@ var redraw = false,
 	absZoom = (100 / settings.mapZoom) * minZoom;
 	poolTick = java.util.concurrent.Executors.newSingleThreadScheduledExecutor();
 	runnableUpdateMap = new java.lang.Runnable(function() {
-		tryout(function() {
+		try {
 			if (settings.priority == 0) {
 				android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
 			} else if (settings.priority == 1) {
@@ -205,6 +205,8 @@ var redraw = false,
 				canvas.restore();
 				mapView.unlockCanvasAndPost(canvas);
 			}
-		});
+		} catch (e) {
+			reportError(e);
+		}
 	});
 }());

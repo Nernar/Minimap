@@ -223,7 +223,7 @@ const mapDot = [
 		let count = 0;
 		let block = 1;
 		let blockNew;
-		let iy = 128;
+		let iy = 63;
 		let y = iy;
 		let r;
 		let g;
