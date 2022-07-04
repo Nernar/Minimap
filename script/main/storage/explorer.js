@@ -18,12 +18,3 @@ const load = function(path, filename) {
 	}
 	return "";
 };
-
-const readUrl = function(url) {
-	try {
-		return "" + InnerCorePackage.api.mod.adaptedscript.PreferencesWindowAPI.Network.getURLContents(url);
-	} catch (e) {
-		reportError(e);
-	}
-	return "";
-};

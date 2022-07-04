@@ -15,5 +15,4 @@ visual/map.js
 entities/watcher.js
 entities/pointer.js
 
-pool/handle.js
 pool/draw.js

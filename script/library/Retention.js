@@ -75,7 +75,7 @@ EXPORT("reportError", reportError);
  * @param {string} title e.g. mod name
  * @param {function} [fallback] when too much dialogs
  */
-EXPORT("openReportDialog", function(message, title, fallback) {
+EXPORT("showReportDialog", function(message, title, fallback) {
 	if (isHorizon) {
 		try {
 			Packages.com.zhekasmirnov.innercore.api.log.DialogHelper.openFormattedDialog("" + message, "" + title, fallback || null);

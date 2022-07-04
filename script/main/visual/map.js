@@ -52,7 +52,7 @@ let bmpPaint = new android.graphics.Paint(),
 bmpPaint.setAntiAlias(false);
 bmpPaint.setFilterBitmap(false);
 
-let map_state = false;
+let mapState = false;
 let windowManager = getContext().getSystemService(android.content.Context.WINDOW_SERVICE);
 
 let showConfigDialog = function() {
@@ -176,7 +176,7 @@ let mapWindow = (function() {
 		},
 		resetVisibility: function() {
 			handle(function() {
-				if (map_state) {
+				if (mapState) {
 					btnSet.setVisibility(android.view.View.GONE);
 					mapView.setVisibility(android.view.View.VISIBLE);
 					textInfo.setVisibility(settings.mapLocation ?
@@ -209,7 +209,7 @@ let startMapControl = true;
 
 Callback.addCallback("LevelLeft", function() {
 	mapWindow.hide();
-	if (map_state) {
+	if (mapState) {
 		changeMapState();
 	}
 	pool.shutdownNow();
@@ -221,9 +221,9 @@ Callback.addCallback("LevelLeft", function() {
 });
 
 function changeMapState() {
-	map_state = !map_state;
+	mapState = !mapState;
 	mapWindow.resetVisibility();
-	if (map_state) {
+	if (mapState) {
 		delayChunksArrLock.acquire();
 		while (delayChunksArr.length > 0) {
 			let chunk = delayChunksArr.shift();
@@ -252,9 +252,12 @@ Callback.addCallback("NativeGuiChanged", function(screenName) {
 			return;
 		}
 	}
+	mapWindow.show();
+});
+
+Callback.addCallback(isHorizon ? "LevelDisplayed" : "LevelLoaded", function() {
 	if (startMapControl) {
 		startMapControl = false;
 		createPool();
 	}
-	mapWindow.show();
 });

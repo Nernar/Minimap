@@ -28,22 +28,6 @@ const ENTITY_UNACCEPTABLE = [61, 63, 64, 65, 66, 67, 68, 69, 70,
 	71, 72, 73, 76, 77, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
 	90, 91, 93, 94, 95, 96, 97, 98, 100, 101, 103, 117];
 
-let policyShowMultiplayerPlayer = true;
-
-const isAcceptableEntity = function(ent) {
-	let type = Entity.getType(ent);
-	if (type == 1) {
-		return policyShowMultiplayerPlayer;
-	}
-	if (type < ENTITY_IDENTIFIER_RANGE[0] || type > ENTITY_IDENTIFIER_RANGE[1]) {
-		return false;
-	}
-	if (ENTITY_UNACCEPTABLE.indexOf(type) >= 0) {
-		return false;
-	}
-	return true;
-};
-
 const isOutdated = (function() {
 	try {
 		ConfigureMultiplayer({

@@ -20,7 +20,7 @@ const Minimap = {
 		if (widthNew > widthOld) {
 			for (let i = (widthOld - 16) / 2; i <= settings.radius * 16; i += 16) {
 				for (let j = 0; j < i; j += 16) {
-					if (map_state) {
+					if (mapState) {
 						scheduleChunk(xChunk + j + 16, zChunk + i, 0);
 						scheduleChunk(xChunk + j, zChunk - i, 0);
 						scheduleChunk(xChunk - j, zChunk + i, 0);
@@ -52,7 +52,7 @@ const Minimap = {
 		params.height = settings.locationSize;
 		params.width = settings.locationSize;
 		mapView.setLayoutParams(params);
-		bmpBorder = drawBorderBmp();
+		bmpBorder = drawBorderBitmap();
 		if (settings.stylesheetBorder != 0) {
 			pathBorder = createPath(false, true);
 		} else {
@@ -68,7 +68,7 @@ const Minimap = {
 		} else {
 			pathBorder = createPath(true, false);
 		}
-		bmpBorder = drawBorderBmp();
+		bmpBorder = drawBorderBitmap();
 		redraw = true;
 	},
 	onChangeRefreshDelay: function() {
