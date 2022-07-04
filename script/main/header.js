@@ -86,8 +86,7 @@ let bmpSrc,
 	runnableUpdateMap,
 	scheduledFutureUpdateMap,
 	bmpBorder,
-	pathBorder,
-	protoConfig;
+	pathBorder;
 
 let canvasBmpSrc = new android.graphics.Canvas(),
 	canvasBmpSrcCopy = new android.graphics.Canvas(),

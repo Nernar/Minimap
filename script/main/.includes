@@ -1,8 +1,8 @@
 header.js
 
 storage/explorer.js
+storage/watcher.js
 storage/config.js
-storage/restore.js
 
 terrain/colormap.js
 terrain/dot.js

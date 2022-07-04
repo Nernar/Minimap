@@ -1,149 +1,22 @@
-let settings = {};
-
-const settingsChanged = function(key) {
-	switch (key) {
-		case "radius":
-		case "forceRefresh":
-			let widthOld = bmpSrc.getWidth(),
-				widthNew = ((settings.radius + 1) * 2 + 1) * 16,
-				xChunk = Math.floor(X / 16) * 16,
-				zChunk = Math.floor(Z / 16) * 16;
-			try {
-				bmpSrcLock.acquire();
-				bmpSrcCopy = android.graphics.Bitmap.createBitmap(widthNew, widthNew, android.graphics.Bitmap.Config.ARGB_8888);
-				canvasBmpSrcCopy.setBitmap(bmpSrcCopy);
-				canvasBmpSrcCopy.drawBitmap(bmpSrc, (widthNew - widthOld) / 2, (widthNew - widthOld) / 2, null);
-				bmpSrc = android.graphics.Bitmap.createBitmap(widthNew, widthNew, android.graphics.Bitmap.Config.ARGB_8888);
-				canvasBmpSrc.setBitmap(bmpSrc);
-				canvasBmpSrc.drawBitmap(bmpSrcCopy, 0, 0, null);
-			} finally {
-				bmpSrcLock.release();
-			}
-			minZoom = settings.locationSize / (settings.radius * 2 * 16);
-			absZoom = (100 / settings.mapZoom) * minZoom;
-			if (widthNew > widthOld) {
-				for (let i = (widthOld - 16) / 2; i <= settings.radius * 16; i += 16) {
-					for (let j = 0; j < i; j += 16) {
-						if (map_state) {
-							scheduleChunk(xChunk + j + 16, zChunk + i, 0);
-							scheduleChunk(xChunk + j, zChunk - i, 0);
-							scheduleChunk(xChunk - j, zChunk + i, 0);
-							scheduleChunk(xChunk - j - 16, zChunk - i, 0);
-							scheduleChunk(xChunk + i, zChunk + j, 0);
-							scheduleChunk(xChunk + i, zChunk - j - 16, 0);
-							scheduleChunk(xChunk - i, zChunk + j + 16, 0);
-							scheduleChunk(xChunk - i, zChunk - j, 0);
-						} else {
-							delayChunksArrLock.acquire();
-							delayChunksArr[delayChunksArr.length] = [xChunk + j + 16, zChunk + i];
-							delayChunksArr[delayChunksArr.length] = [xChunk + j, zChunk - i];
-							delayChunksArr[delayChunksArr.length] = [xChunk - j, zChunk + i];
-							delayChunksArr[delayChunksArr.length] = [xChunk - j - 16, zChunk - i];
-							delayChunksArr[delayChunksArr.length] = [xChunk + i, zChunk + j];
-							delayChunksArr[delayChunksArr.length] = [xChunk + i, zChunk - j - 16];
-							delayChunksArr[delayChunksArr.length] = [xChunk - i, zChunk + j + 16];
-							delayChunksArr[delayChunksArr.length] = [xChunk - i, zChunk - j];
-							delayChunksArrLock.release();
-						}
-					}
-				}
-			}
-			redraw = true;
-			break;
-		case "mapType":
-		case "mapSurface":
-		case "mapSmoothing":
-			if (pool.getActiveCount() > 0) {
-				createPool();
-			}
-			X = undefined;
-			break;
-		case "mapZoom":
-			absZoom = (100 / settings.mapZoom) * minZoom;
-			redraw = true;
-			break;
-		case "mapAlpha":
-			mapWindow.getLayout().setAlpha((settings.mapAlpha / 100).toFixed(2));
-			break;
-		case "locationRawSize":
-			settings.locationSize = settings.locationRawSize / 100 * getDisplayHeight();
-			let lp = mapView.getLayoutParams();
-			lp.height = settings.locationSize;
-			lp.width = settings.locationSize;
-			mapView.setLayoutParams(lp);
-			redraw = true;
-			bmpBorder = drawBorderBmp();
-			if (settings.stylesheetBorder != 0) {
-				pathBorder = createPath(false, true);
-			} else {
-				pathBorder = createPath(true, false);
-			}
-			redraw = true;
-			minZoom = settings.locationSize / (settings.radius * 2 * 16);
-			absZoom = (100 / settings.mapZoom) * minZoom;
-			break;
-		case "locationRawPosition":
-			mapWindow.hide();
-			mapWindow.show();
-			break;
-		case "stylesheetShape":
-		case "stylesheetBorder":
-			if (settings.stylesheetBorder != 0) {
-				pathBorder = createPath(false, true);
-			} else {
-				pathBorder = createPath(true, false);
-			}
-			bmpBorder = drawBorderBmp();
-			redraw = true;
-			break;
-		case "stylesheetPointer":
-			redraw = true;
-			break;
-		case "mapLocation":
-			mapWindow.resetVisibility();
-			break;
-		case "delay":
-			if (scheduledFutureUpdateMap) {
-				scheduledFutureUpdateMap.cancel(false);
-				scheduledFutureUpdateMap = poolTick.scheduleWithFixedDelay(runnableUpdateMap, 1000, Math.round(1000 / settings.delay), java.util.concurrent.TimeUnit.MILLISECONDS);
-			}
-			break;
-		case "thread":
-			pool.setCorePoolSize(settings.thread);
-			break;
-		case "resetConfig":
-			if (setWindow) {
-				setWindow.dismiss();
-				setWindow = null;
-			}
-			restoreSettings(true);
-			break;
-		default:
-			Logger.Log("Minimap: option " + key + " will be changed in future", "MOD");
+const getProtoString = function(proto, source, name) {
+	if (source && source.get(name) != null) {
+		return source.getString(name);
 	}
+	return proto.getString(name);
 };
 
-const checkRenderDistance = function() {
-	let options = load(android.os.Environment.getExternalStorageDirectory() + "/games/com.mojang/minecraftpe/", "options.txt");
-	if (options != "") {
-		options = options.split("\n");
-		if (!options) {
-			return;
-		}
-		for (let i = 0; i < options.length; i += 1) {
-			options[i] = options[i].split(":");
-			if (isHorizon) {
-				if (options[i][0] == "gfx_viewdistance") {
-					return Math.round(parseInt(options[i][1], 10) / 16);
-				}
-			} else {
-				if (options[i][0] == "gfx_renderdistance_new") {
-					return Math.round(parseInt(options[i][1], 10) / 16);
-				}
-			}
-		}
+const getProtoNumber = function(proto, source, name) {
+	if (source && source.get(name) != null) {
+		return source.getNumber(name);
 	}
-	return 6;
+	return proto.getNumber(name);
+};
+
+const getProtoBool = function(proto, source, name) {
+	if (source && source.get(name) != null) {
+		return source.getBool(name);
+	}
+	return proto.getBool(name);
 };
 
 const setConfigOptionIfNeeded = function(proto, name, value) {
@@ -156,6 +29,100 @@ const setConfigOptionIfNeeded = function(proto, name, value) {
 	}
 	return false;
 };
+
+const protoConfig = (function() {
+	let config = new Config(__dir__ + "config.proto.json");
+	if (config.getNumber("version") < REVISION) {
+		let file = new java.io.File(__dir__ + "config.proto.json");
+		if (file.exists()) {
+			file.delete();
+			config = new Config(file);
+		}
+		config.set("version", REVISION);
+	}
+	config.checkAndRestore(JSON.stringify({
+		runtime: {
+			type: 0,
+			surface: 1,
+			zoom: 85,
+			translucent: 70,
+			rotation: false
+		},
+		indicator: {
+			passive: true,
+			hostile: true,
+			local: true,
+			player: true,
+			tile: false,
+			only_surface: true
+		},
+		location: {
+			raw_size: 40,
+			raw_position: 2,
+			gravity: 53,
+			offset: 40 * getDisplayDensity()
+		},
+		stylesheet: {
+			border: 0,
+			pointer: 3,
+			shape: 1
+		},
+		performance: {
+			radius: checkRenderDistance(),
+			priority: 0,
+			delay: 20,
+			thread: 1
+		},
+		development: {
+			location: false,
+			show_process: false
+		}
+	}));
+	return config;
+})();
+
+let settings = {};
+
+const reloadSettings = function(source) {
+	if (source === undefined) {
+		source = __config__;
+	}
+	settings = {
+		mapType: getProtoNumber(protoConfig, source, "runtime.type"),
+		mapSurface: getProtoNumber(protoConfig, source, "runtime.surface"),
+		mapSmoothing: getProtoNumber(protoConfig, source, "runtime.smoothing"),
+		mapZoom: getProtoNumber(protoConfig, source, "runtime.zoom"),
+		mapAlpha: getProtoNumber(protoConfig, source, "runtime.translucent"),
+		mapRotation: getProtoBool(protoConfig, source, "runtime.rotation"),
+		indicatorPassive: getProtoBool(protoConfig, source, "indicator.passive"),
+		indicatorHostile: getProtoBool(protoConfig, source, "indicator.hostile"),
+		indicatorLocal: getProtoBool(protoConfig, source, "indicator.local"),
+		indicatorPlayer: getProtoBool(protoConfig, source, "indicator.player"),
+		indicatorTile: getProtoBool(protoConfig, source, "indicator.tile"),
+		indicatorOnlySurface: getProtoBool(protoConfig, source, "indicator.only_surface"),
+		locationRawSize: getProtoNumber(protoConfig, source, "location.raw_size"),
+		locationRawPosition: getProtoNumber(protoConfig, source, "location.raw_position"),
+		locationGravity: getProtoNumber(protoConfig, source, "location.gravity"),
+		locationOffset: getProtoNumber(protoConfig, source, "location.offset"),
+		stylesheetBorder: getProtoNumber(protoConfig, source, "stylesheet.border"),
+		stylesheetPointer: getProtoNumber(protoConfig, source, "stylesheet.pointer"),
+		stylesheetShape: getProtoNumber(protoConfig, source, "stylesheet.shape"),
+		mapLocation: getProtoBool(protoConfig, source, "development.location"),
+		mapZoomButton: getProtoBool(protoConfig, source, "development.zoom_button"),
+		developmentVisualize: getProtoBool(protoConfig, source, "development.show_process"),
+		radius: getProtoNumber(protoConfig, source, "performance.radius"),
+		priority: getProtoNumber(protoConfig, source, "performance.priority"),
+		delay: getProtoNumber(protoConfig, source, "performance.delay"),
+		thread: getProtoNumber(protoConfig, source, "performance.thread")
+	};
+	settings.locationSize = settings.locationRawSize / 100 * getDisplayHeight();
+};
+
+try {
+	reloadSettings();
+} catch (e) {
+	reportError(e);
+}
 
 const saveSettings = function() {
 	setConfigOptionIfNeeded(protoConfig, "runtime.type", settings.mapType);
@@ -184,4 +151,14 @@ const saveSettings = function() {
 	setConfigOptionIfNeeded(protoConfig, "performance.delay", settings.delay);
 	setConfigOptionIfNeeded(protoConfig, "performance.thread", settings.thread);
 	__config__.save();
+};
+
+const restoreSettings = function(notifyEverything) {
+	reloadSettings(protoConfig);
+	if (notifyEverything) {
+		for (let element in settings) {
+			settingsChanged(element);
+		}
+	}
+	saveSettings();
 };
