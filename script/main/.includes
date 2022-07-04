@@ -1,4 +1,5 @@
 header.js
+translation.js
 
 storage/explorer.js
 storage/watcher.js

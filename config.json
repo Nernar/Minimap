@@ -5,28 +5,21 @@
     "button_size":40
   },
   "runtime":{
-    "smoothing":3,
-    "rotation":false,
-    "type":1,
-    "translucent":100,
-    "surface":0,
-    "zoom":34
+    
   },
   "indicator":{
-    "only_surface":false
+    
   },
   "location":{
-    "raw_size":40
+    
   },
   "stylesheet":{
-    "pointer":3,
-    "shape":1,
-    "border":0
+    
   },
   "performance":{
-    "radius":16
+    
   },
   "development":{
-    "location":true
+    
   }
 }

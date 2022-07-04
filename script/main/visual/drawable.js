@@ -40,6 +40,7 @@ const createPath = function(outer, inner) {
 		}
 		if (outer) {
 			path.addCircle(settings.locationSize / 2, settings.locationSize / 2,
+				settings.locationSize / 2, android.graphics.Path.Direction.CW);
 		}
 		return path;
 	}

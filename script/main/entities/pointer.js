@@ -88,20 +88,20 @@ let pointer = [
 ];
 
 let heads = (function() {
-	let founded = {},
+	let bitmapAssociation = {},
 		directory = new java.io.File(__dir__ + "assets/" + (legacyEntities ? "entities-legacy" : "entities"));
 	if (!directory.exists() || !directory.isDirectory()) {
 		Logger.Log("Minimap: not found entities indicators in " + directory.getName() + "/", "WARNING");
-		return founded;
+		return bitmapAssociation;
 	}
 	let entities = directory.listFiles();
 	for (let i = 0; i < entities.length; i++) {
 		let file = entities[i];
 		if (!file.isFile()) continue;
 		let bitmap = android.graphics.BitmapFactory.decodeFile(file.getPath());
-		founded[file.getName()] = bitmap;
+		bitmapAssociation[file.getName()] = bitmap;
 	}
-	return founded;
+	return bitmapAssociation;
 })();
 
 if (heads[0] === undefined || heads[0] === null) {

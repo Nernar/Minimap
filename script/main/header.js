@@ -39,7 +39,6 @@ const isOutdated = (function() {
 	return false;
 })();
 
-const NAME = "" + __mod__.getInfoProperty("name");
 const REVISION = parseFloat(__mod__.getInfoProperty("version"));
 
 IMPORT("Retention");

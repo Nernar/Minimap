@@ -7,7 +7,7 @@ const OptionPreset = {
 			textLp = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
 		text.setTextColor(Colors.LTGRAY);
 		text.setTextSize(17);
-		text.setText(args[2]);
+		checkBtn.setText(translate(args[2]));
 		checkBtn.setId(1);
 		checkBtn.setChecked(!!settings[args[1]]);
 		checkBtn.setOnCheckedChangeListener(function(buttonView, isChecked) {
@@ -27,7 +27,7 @@ const OptionPreset = {
 	subScreen: function(when, args) {
 		let text = new android.widget.TextView(getContext());
 		text.setTextSize(17);
-		text.setText(args[1]);
+		text.setText(translate(args[1]));
 		text.setTextColor(Colors.LTGRAY);
 		text.setPadding(10 * getDisplayDensity(), 10 * getDisplayDensity(), 10 * getDisplayDensity(), 10 * getDisplayDensity());
 		text.setOnClickListener(function(v) {
@@ -38,7 +38,7 @@ const OptionPreset = {
 	sectionDivider: function(when, args) {
 		let text = new android.widget.TextView(getContext());
 		text.setTextSize(15);
-		text.setText(args[1]);
+		text.setText(translate(args[1]));
 		text.setTextColor(Colors.WHITE);
 		text.setBackgroundDrawable(new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.LEFT_RIGHT, [Colors.PRIMARY, Colors.ACCENT, Colors.PRIMARY]));
 		text.setPadding(10 * getDisplayDensity(), 0, 10 * getDisplayDensity(), 0);
@@ -52,7 +52,7 @@ const OptionPreset = {
 			textValueLp = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
 		text.setTextSize(17);
 		text.setTextColor(Colors.LTGRAY);
-		text.setText(android.text.Html.fromHtml(args[2]));
+		text.setText(android.text.Html.fromHtml(translate(args[2])));
 		text.setMovementMethod(android.text.method.LinkMovementMethod.getInstance());
 		textValue.setTextSize(17);
 		textValue.setTextColor(Colors.ACCENT);
@@ -63,21 +63,24 @@ const OptionPreset = {
 				if (args[4].length <= settings[args[3]]) {
 					settings[args[3]] = 0;
 				}
-				textValue.setText(args[4][settings[args[3]]]);
+				let variants = args[4].slice().map(function(what) {
+					return translate(what);
+				});
+				textValue.setText(variants[settings[args[3]]]);
 				layoutElement.setOnClickListener(function(v) {
 					let print = new android.app.AlertDialog.Builder(getContext(),
 							android.R.style.Theme_DeviceDefault_Dialog);
-					print.setSingleChoiceItems(args[4], settings[args[3]], function(parent, position, id) {
+					print.setSingleChoiceItems(variants, settings[args[3]], function(parent, position, id) {
 						settings[args[3]] = position;
 						for (let i = 5; i < args.length; i += 2) {
 							settings[args[i]] = args[i + 1][position];
 						}
-						textValue.setText(args[4][position]);
+						textValue.setText(variants[position]);
 						settingsChanged(args[3]);
 						print.dismiss();
 					});
-					print.setTitle(args[2]);
-					print.setNegativeButton("Cancel", function(dialog, whichButton) {
+					print.setTitle(translate(args[2]));
+					print.setNegativeButton(translate("Cancel"), function(dialog, whichButton) {
 						print.dismiss();
 					});
 					print = print.create();
@@ -90,7 +93,7 @@ const OptionPreset = {
 				});
 				break;
 			case "slider":
-				textValue.setText(settings[args[3]] + args[7]);
+				textValue.setText(translate("%s" + args[7], settings[args[3]]));
 				layoutElement.setOnClickListener(function(v) {
 					let print = new android.app.AlertDialog.Builder(getContext(),
 							android.R.style.Theme_DeviceDefault_Dialog),
@@ -99,18 +102,18 @@ const OptionPreset = {
 					seekBar.setProgress((settings[args[3]] - args[4]) / args[6]);
 					seekBar.setOnSeekBarChangeListener({
 						onProgressChanged: function(seekBar, progress, fromUser) {
-							print.setTitle(args[2] + ": " + (progress * args[6] + args[4]) + args[7]);
+							print.setTitle(translate(args[2]) + ": " + translate("%s" + args[7], (progress * args[6] + args[4])));
 						}
 					});
 					print.setView(seekBar);
-					print.setTitle(args[2] + ": " + settings[args[3]] + args[7]);
-					print.setPositiveButton("Apply", function(dialog, whichButton) {
+					print.setTitle(translate(args[2]) + ": " + translate("%s" + args[7], settings[args[3]]));
+					print.setPositiveButton(translate("Apply"), function(dialog, whichButton) {
 						settings[args[3]] = seekBar.getProgress() * args[6] + args[4];
-						textValue.setText(settings[args[3]] + args[7]);
+						textValue.setText(translate("%s" + args[7], settings[args[3]]));
 						settingsChanged(args[3]);
 						print.dismiss();
 					});
-					print.setNegativeButton("Cancel", function(dialog, whichButton) {
+					print.setNegativeButton(translate("Cancel"), function(dialog, whichButton) {
 						print.dismiss();
 					});
 					print = print.create();
@@ -119,7 +122,7 @@ const OptionPreset = {
 				});
 				break;
 			case "text":
-				textValue.setText("" + args[3]);
+				textValue.setText(translate(args[3]));
 				text.setOnClickListener(function(v) {
 				    if (args[4]) {
 				    	settingsChanged(args[4]);
@@ -159,8 +162,8 @@ const createConfigDialog = function() {
 	}
 	scroll.addView(layout);
 	print.setView(scroll);
-	print.setTitle(arguments[0][0]);
-	print.setPositiveButton(arguments[0][1], function(dialog, whichButton) {
+	print.setTitle(translate(arguments[0][0]));
+	print.setPositiveButton(translate(arguments[0][1]), function(dialog, whichButton) {
 		saveSettings();
 	});
 	print = print.create();
