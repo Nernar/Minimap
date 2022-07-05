@@ -36,9 +36,8 @@ Minimap.processChunk = function(xChunk, zChunk, delay) {
 		bmpSrc.setPixels(mapDotArray, 0, 16, ((Math.floor(Z / 16) + settings.radius + 1) * 16) - zChunk, xChunk - ((Math.floor(X / 16) - settings.radius - 1) * 16), 16, 16);
 	} finally {
 		bmpSrcLock.release();
-		redraw = true;
 	}
-	return true;
+	return (redraw = true);
 };
 
 const scheduleChunk = function(xChunk, zChunk, delay) {

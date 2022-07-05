@@ -2,9 +2,9 @@ const OptionPreset = {
 	checkBox: function(when, args) {
 		let layoutElement = new android.widget.RelativeLayout(getContext()),
 			checkBtn = new android.widget.CheckBox(getContext()),
-			checkBtnLp = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT),
+			checkBtnParams = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT),
 			text = new android.widget.TextView(getContext()),
-			textLp = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
+			textParams = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
 		text.setTextColor(Colors.LTGRAY);
 		text.setTextSize(17);
 		text.setText(translate(args[2]));
@@ -14,13 +14,13 @@ const OptionPreset = {
 			settings[args[1]] = !!isChecked;
 			settingsChanged(args[1]);
 		});
-		checkBtnLp.addRule(android.widget.RelativeLayout.ALIGN_PARENT_RIGHT);
-		checkBtnLp.addRule(android.widget.RelativeLayout.CENTER_VERTICAL);
-		textLp.addRule(android.widget.RelativeLayout.ALIGN_PARENT_LEFT);
-		textLp.addRule(android.widget.RelativeLayout.CENTER_VERTICAL);
-		textLp.addRule(android.widget.RelativeLayout.LEFT_OF, 1);
-		layoutElement.addView(checkBtn, checkBtnLp);
-		layoutElement.addView(text, textLp);
+		checkBtnParams.addRule(android.widget.RelativeLayout.ALIGN_PARENT_RIGHT);
+		checkBtnParams.addRule(android.widget.RelativeLayout.CENTER_VERTICAL);
+		textParams.addRule(android.widget.RelativeLayout.ALIGN_PARENT_LEFT);
+		textParams.addRule(android.widget.RelativeLayout.CENTER_VERTICAL);
+		textParams.addRule(android.widget.RelativeLayout.LEFT_OF, 1);
+		layoutElement.addView(checkBtn, checkBtnParams);
+		layoutElement.addView(text, textParams);
 		layoutElement.setPadding(10 * getDisplayDensity(), 5 * getDisplayDensity(), 10 * getDisplayDensity(), 5 * getDisplayDensity());
 		return layoutElement;
 	},
@@ -47,9 +47,9 @@ const OptionPreset = {
 	keyValue: function(when, args) {
 		let layoutElement = new android.widget.RelativeLayout(getContext()),
 			text = new android.widget.TextView(getContext()),
-			textLp = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT),
+			textParams = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT),
 			textValue = new android.widget.TextView(getContext()),
-			textValueLp = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
+			textValueParams = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
 		text.setTextSize(17);
 		text.setTextColor(Colors.LTGRAY);
 		text.setText(android.text.Html.fromHtml(translate(args[2])));
@@ -130,13 +130,13 @@ const OptionPreset = {
 				    }
 				});
 		}
-		textLp.addRule(android.widget.RelativeLayout.ALIGN_PARENT_LEFT);
-		textLp.addRule(android.widget.RelativeLayout.CENTER_VERTICAL);
-		textLp.addRule(android.widget.RelativeLayout.LEFT_OF, 1);
-		textValueLp.addRule(android.widget.RelativeLayout.ALIGN_PARENT_RIGHT);
-		textValueLp.addRule(android.widget.RelativeLayout.CENTER_VERTICAL);
-		layoutElement.addView(textValue, textValueLp);
-		layoutElement.addView(text, textLp);
+		textParams.addRule(android.widget.RelativeLayout.ALIGN_PARENT_LEFT);
+		textParams.addRule(android.widget.RelativeLayout.CENTER_VERTICAL);
+		textParams.addRule(android.widget.RelativeLayout.LEFT_OF, 1);
+		textValueParams.addRule(android.widget.RelativeLayout.ALIGN_PARENT_RIGHT);
+		textValueParams.addRule(android.widget.RelativeLayout.CENTER_VERTICAL);
+		layoutElement.addView(textValue, textValueParams);
+		layoutElement.addView(text, textParams);
 		layoutElement.setPadding(10 * getDisplayDensity(), 10 * getDisplayDensity(), 10 * getDisplayDensity(), 10 * getDisplayDensity());
 		return layoutElement;
 	}
@@ -147,7 +147,7 @@ const createConfigDialog = function() {
 		android.R.style.Theme_DeviceDefault_DialogWhenLarge);
 	let scroll = new android.widget.ScrollView(getContext()),
 		layout = new android.widget.LinearLayout(getContext()),
-		rulerLp = new android.view.ViewGroup.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT, 2);
+		rulerParams = new android.view.ViewGroup.LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT, 2);
 	layout.setOrientation(android.widget.LinearLayout.VERTICAL);
 	layout.setPadding(10 * getDisplayDensity(), 0, 10 * getDisplayDensity(), 0);
 	for (let i = 2; i < arguments[0].length; i += 1) {
@@ -157,7 +157,7 @@ const createConfigDialog = function() {
 		if (i + 1 < arguments[0].length) {
 			let ruler = new android.view.View(getContext());
 			ruler.setBackgroundDrawable(new android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.LEFT_RIGHT, [Colors.PRIMARY, Colors.ACCENT, Colors.PRIMARY]));
-			layout.addView(ruler, rulerLp);
+			layout.addView(ruler, rulerParams);
 		}
 	}
 	scroll.addView(layout);

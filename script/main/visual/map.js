@@ -1,37 +1,38 @@
 const ConfigDescriptor = [__mod__.getInfoProperty("name"), "Leave",
+	["keyValue", "multipleChoice", "Type", "mapType", ["Monochromatic", "Surface", "Underground"]],
+	["keyValue", "multipleChoice", "Heightmap", "mapSurface", ["Nearest surface", "Optimum", "Procedural", "Closest to sky"]],
+	["keyValue", "multipleChoice", "Smoothing", "mapSmoothing", ["Disabled", "At most", "Transparency", "Fauna"]],
 	["sectionDivider", "Rendering"],
-		["keyValue", "multipleChoice", "Type", "mapType", ["Monochromatic", "Surface", "Underground"]],
-		["keyValue", "multipleChoice", "Heightmap", "mapSurface", ["Nearest surface", "Optimum", "Procedural", "Closest to sky"]],
-		["keyValue", "multipleChoice", "Smoothing", "mapSmoothing", ["Disabled", "At most", "Transparency", "Fauna"]],
 		["keyValue", "slider", "Distance", "radius", 1, 96, 1, " chunks"],
 		["subScreen", "Icons / Indicators", ["Icons / Indicators", "Apply",
+			["keyValue", "multipleChoice", "Pointer", "stylesheetLocalPointer", ["Crosshair", "Arrow", "Map", "Head"]],
+			["checkBox", "indicatorLocal", "Yourself"],
 			["sectionDivider", "Entities"],
 				["keyValue", "multipleChoice", "Pointer", "stylesheetPointer", ["Crosshair", "Arrow", "Map", "Head"]],
-				["checkBox", "indicatorOnlySurface", "Hide below sea level"],
-				["checkBox", "indicatorLocal", "Yourself"],
-				["checkBox", "indicatorPlayer", "Multiplayer"],
 				["checkBox", "indicatorPassive", "Passive / Friendly"],
 				["checkBox", "indicatorHostile", "Hostile"],
+				["checkBox", "indicatorOnlySurface", "Hide below sea level"],
 			["sectionDivider", "Marks"],
+				["checkBox", "indicatorPlayer", "Show players"],
 				["checkBox", "indicatorTile", "Containers"],
 				["checkBox", "indicatorWaypoint", "Waypoints"]]],
-	["sectionDivider", "Window"],
-		["keyValue", "multipleChoice", "Position", "locationRawPosition", ["Top left", "Top left (offset)", "Top right", "Bottom left", "Bottom right"], "locationGravity", [51, 51, 53, 83, 85], "locationOffset", [0, 40 * getDisplayDensity(), 40 * getDisplayDensity(), 0, 0]],
-		// ["keyValue", "text", "Location", "", "changeLocation"],
-		["keyValue", "slider", "Scale", "locationRawSize", 20, 100, 5, "%%"],
-		["keyValue", "slider", "Opacity", "mapAlpha", 20, 100, 1, "%%"],
-		["keyValue", "slider", "Zoom", "mapZoom", 10, 100, 1, "%%"],
-		["checkBox", "mapLocation", "Show coordinates"],
-		["checkBox", "mapRotation", "Turn behind yourself"],
-	["sectionDivider", "Stylesheet"],
-		["keyValue", "multipleChoice", "Border", "stylesheetBorder", ["Disabled", "Simple", "Colourful"]],
-		["keyValue", "multipleChoice", "Shape", "stylesheetShape", ["Square", "Circle"]],
-	["sectionDivider", "Other"],
 		["subScreen", "Advanced", ["Advanced", "Apply",
 			["keyValue", "multipleChoice", "Thread optimization", "priority", ["Background", "Foreground", "Disabled"]],
 			["keyValue", "slider", "Max frequency", "delay", 1, 40, 1, " fps"],
 			["keyValue", "slider", "Number of threads", "thread", 1, 12, 1, ""],
 			["checkBox", "debug", "Debug various processes"]]],
+		["checkBox", "mapRotation", "Turn behind yourself"],
+	["sectionDivider", "Stylesheet"],
+		["keyValue", "multipleChoice", "Border", "stylesheetBorder", ["Disabled", "Simple", "Colourful"]],
+		["keyValue", "multipleChoice", "Shape", "stylesheetShape", ["Square", "Circle"]],
+	["sectionDivider", "Window"],
+		["keyValue", "multipleChoice", "Location", "locationRawPosition", ["<-", "<+", "+>", "<*", "*>"], "locationGravity", [51, 51, 53, 83, 85], "locationOffset", [0, 40 * getDisplayDensity(), 40 * getDisplayDensity(), 0, 0]],
+		// ["keyValue", "text", "Location", "", "changeLocation"],
+		["keyValue", "slider", "Scale", "locationRawSize", 20, 100, 5, "%%"],
+		["keyValue", "slider", "Opacity", "mapAlpha", 20, 100, 1, "%%"],
+		["keyValue", "slider", "Zoom", "mapZoom", 10, 100, 1, "%%"],
+		["checkBox", "mapLocation", "Show coordinates"],
+	["sectionDivider", "Other"],
 		["keyValue", "text", "Refresh canvas", "", "forceRefresh"],
 		["subScreen", "Reset to defaults", ["Reset to defaults", "I don't like this",
 			["keyValue", "text", "You are about to RESET minimap, all memories and user information will be erased.", ""],
@@ -42,15 +43,7 @@ const ConfigDescriptor = [__mod__.getInfoProperty("name"), "Leave",
 			["keyValue", "text", "Developed by ", "Nernar"],
 			["keyValue", "text", "Inspired by ", "MxGoldo"],
 			["keyValue", "text", "Located in ", new java.io.File(__dir__).getName() + "/"],
-			["keyValue", "text", "<a href=https://t.me/ntInsideChat>t.me</a> development channel", ""]]]]
-
-let bmpPaint = new android.graphics.Paint();
-bmpPaint.setAntiAlias(false);
-bmpPaint.setFilterBitmap(false);
-bmpPaint.setXfermode(new android.graphics.PorterDuffXfermode(android.graphics.PorterDuff.Mode.SRC));
-
-let mapState = false;
-let windowManager = getContext().getSystemService(android.content.Context.WINDOW_SERVICE);
+			["keyValue", "text", "<a href=https://t.me/ntInsideChat>t.me</a> development channel", ""]]]];
 
 (function() {
 	let dialog;
@@ -65,6 +58,11 @@ let windowManager = getContext().getSystemService(android.content.Context.WINDOW
 		dialog = undefined;
 	};
 })();
+
+let bmpPaint = new android.graphics.Paint();
+bmpPaint.setAntiAlias(false);
+bmpPaint.setFilterBitmap(false);
+bmpPaint.setXfermode(new android.graphics.PorterDuffXfermode(android.graphics.PorterDuff.Mode.SRC));
 
 let mapView = (function() {
 	let layout = new android.widget.RelativeLayout(getContext());
@@ -188,12 +186,13 @@ let mapView = (function() {
 		});
 	};
 	Minimap.resetVisibility();
+	let manager = getContext().getSystemService(android.content.Context.WINDOW_SERVICE);
 	Minimap.showInternal = function() {
 		popup.showAtLocation(getDecorView(), settings.locationGravity, 0, settings.locationOffset);
 		let container = popup.getContentView().getRootView();
 		let params = container.getLayoutParams();
 		params.flags |= android.view.WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED;
-		windowManager.updateViewLayout(container, params);
+		manager.updateViewLayout(container, params);
 	};
 	Minimap.show = function() {
 		getContext().runOnUiThread(function() {
@@ -234,7 +233,9 @@ Callback.addCallback("LevelLeft", function() {
 	}
 });
 
-function changeMapState() {
+let mapState = false;
+
+const changeMapState = function() {
 	mapState = !mapState;
 	Minimap.resetVisibility();
 	if (mapState) {
@@ -249,7 +250,7 @@ function changeMapState() {
 	} else {
 		scheduledFutureUpdateMap.cancel(false);
 	}
-}
+};
 
 Callback.addCallback("NativeGuiChanged", function(screenName) {
 	if (screenName == "toast_screen") {

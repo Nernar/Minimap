@@ -31,11 +31,7 @@ Translation.addTranslation("I don't like this", {
 	uk: ""
 });
 
-// Rendering option section
-Translation.addTranslation("Rendering", {
-	ru: "Отрисовка",
-	uk: ""
-});
+// Minimap option section
 Translation.addTranslation("Type", {
 	ru: "Вид",
 	uk: ""
@@ -81,11 +77,17 @@ Translation.addTranslation("At most", {
 	uk: ""
 });
 Translation.addTranslation("Transparency", {
-	ru: "Прозрачность",
+	ru: "Прозрачное",
 	uk: ""
 });
 Translation.addTranslation("Fauna", {
 	ru: "Растительность",
+	uk: ""
+});
+
+// Rendering option section
+Translation.addTranslation("Rendering", {
+	ru: "Отрисовка",
 	uk: ""
 });
 Translation.addTranslation("Distance", {
@@ -188,6 +190,68 @@ Translation.addTranslation("Waypoints", {
 	ru: "Ключевые точки",
 	uk: ""
 });
+Translation.addTranslation("Advanced", {
+	ru: "Продвинутое",
+	uk: ""
+});
+Translation.addTranslation("Thread optimization", {
+	ru: "Приоритет потока",
+	uk: ""
+});
+Translation.addTranslation("Background", {
+	ru: "Кеширование",
+	uk: ""
+});
+Translation.addTranslation("Foreground",  {
+	ru: "Незамедлительно",
+	uk: ""
+});
+Translation.addTranslation("Max frequency", {
+	ru: "Максимальная частота",
+	uk: ""
+});
+Translation.addTranslation("%s fps", {
+	ru: "%s кадров",
+	uk: ""
+});
+Translation.addTranslation("Number of threads", {
+	ru: "Количество потоков",
+	uk: ""
+});
+Translation.addTranslation("Debug various processes", {
+	ru: "Отладка различных процессов",
+	uk: ""
+});
+
+// Stylesheet option section
+Translation.addTranslation("Stylesheet", {
+	ru: "Кастомизация",
+	uk: ""
+});
+Translation.addTranslation("Border", {
+	ru: "Рамка",
+	uk: ""
+});
+Translation.addTranslation("Simple", {
+	ru: "Стандартная",
+	uk: ""
+});
+Translation.addTranslation("Colourful", {
+	ru: "Красочная",
+	uk: ""
+});
+Translation.addTranslation("Shape", {
+	ru: "Форма",
+	uk: ""
+});
+Translation.addTranslation("Square", {
+	ru: "Квадрат",
+	uk: ""
+});
+Translation.addTranslation("Circle", {
+	ru: "Окружность",
+	uk: ""
+});
 
 // Window option section
 Translation.addTranslation("Window", {
@@ -219,71 +283,9 @@ Translation.addTranslation("Turn behind yourself", {
 	uk: ""
 });
 
-// Stylesheet option section
-Translation.addTranslation("Stylesheet", {
-	ru: "Кастомизация",
-	uk: ""
-});
-Translation.addTranslation("Border", {
-	ru: "Граница",
-	uk: ""
-});
-Translation.addTranslation("Simple", {
-	ru: "Стандартная",
-	uk: ""
-});
-Translation.addTranslation("Colourful", {
-	ru: "Красочная",
-	uk: ""
-});
-Translation.addTranslation("Shape", {
-	ru: "Форма",
-	uk: ""
-});
-Translation.addTranslation("Square", {
-	ru: "Квадрат",
-	uk: ""
-});
-Translation.addTranslation("Circle", {
-	ru: "Окружность",
-	uk: ""
-});
-
 // Other option section
 Translation.addTranslation("Other", {
 	ru: "Остальное",
-	uk: ""
-});
-Translation.addTranslation("Advanced", {
-	ru: "Продвинутое",
-	uk: ""
-});
-Translation.addTranslation("Thread optimization", {
-	ru: "Приоритет потока",
-	uk: ""
-});
-Translation.addTranslation("Background", {
-	ru: "Кеширование",
-	uk: ""
-});
-Translation.addTranslation("Foreground",  {
-	ru: "Незамедлительно",
-	uk: ""
-});
-Translation.addTranslation("Max frequency", {
-	ru: "Максимальная частота",
-	uk: ""
-});
-Translation.addTranslation("%s fps", {
-	ru: "%s кадров",
-	uk: ""
-});
-Translation.addTranslation("Number of threads", {
-	ru: "Количество потоков",
-	uk: ""
-});
-Translation.addTranslation("Debug various processes", {
-	ru: "Отладка различных процессов",
 	uk: ""
 });
 Translation.addTranslation("Refresh canvas", {

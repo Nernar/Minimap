@@ -9,4 +9,4 @@ Find your way around in Minecraft.
 
 ## Customization
 
-You can put your own head into `assets/entities/63.png`, it will be used as local player crosshair. Recommended size is 16x16 or 32x32.
+You can put your own head into `assets/entities/63`, it will be used as local player crosshair. Recommended (.png) size is 16x16 or 32x32.

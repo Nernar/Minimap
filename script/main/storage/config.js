@@ -67,6 +67,7 @@ const protoConfig = (function() {
 		stylesheet: {
 			border: 0,
 			pointer: 3,
+			local_pointer: 2,
 			shape: 1
 		},
 		performance: {
@@ -109,6 +110,7 @@ const reloadSettings = function(source) {
 		locationOffset: getProtoNumber(protoConfig, source, "location.offset"),
 		stylesheetBorder: getProtoNumber(protoConfig, source, "stylesheet.border"),
 		stylesheetPointer: getProtoNumber(protoConfig, source, "stylesheet.pointer"),
+		stylesheetLocalPointer: getProtoNumber(protoConfig, source, "stylesheet.local_pointer"),
 		stylesheetShape: getProtoNumber(protoConfig, source, "stylesheet.shape"),
 		mapLocation: getProtoBool(protoConfig, source, "development.location"),
 		debug: getProtoBool(protoConfig, source, "development.show_process"),
@@ -147,6 +149,7 @@ const saveSettings = function() {
 	setConfigOptionIfNeeded(protoConfig, "location.offset", settings.locationOffset);
 	setConfigOptionIfNeeded(protoConfig, "stylesheet.border", settings.stylesheetBorder);
 	setConfigOptionIfNeeded(protoConfig, "stylesheet.pointer", settings.stylesheetPointer);
+	setConfigOptionIfNeeded(protoConfig, "stylesheet.local_pointer", settings.stylesheetLocalPointer);
 	setConfigOptionIfNeeded(protoConfig, "stylesheet.shape", settings.stylesheetShape);
 	setConfigOptionIfNeeded(protoConfig, "development.location", settings.mapLocation);
 	setConfigOptionIfNeeded(protoConfig, "development.show_process", settings.debug);

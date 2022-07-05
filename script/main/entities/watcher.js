@@ -34,11 +34,15 @@ Callback.addCallback("EntityAdded", function(entity) {
 
 Callback.addCallback(isOutdated ? "DimensionLoaded" : "LocalPlayerChangedDimension", function(actorUid, currentId, lastId) {
 	if (isOutdated) {
+		dimensionNew = actorUid;
 		if (actorUid == currentId) {
 			return;
 		}
-	} else if (currentId == lastId) {
-		return;
+	} else {
+		dimensionNew = currentId;
+		if (currentId == lastId) {
+			return;
+		}
 	}
 	while (entities.length > 0) {
 		entities.pop();

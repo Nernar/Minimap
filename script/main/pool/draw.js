@@ -2,6 +2,8 @@ let redraw = false,
 	X,
 	Z,
 	YAW,
+	DIMENSION,
+	dimensionNew,
 	pool;
 
 const createPool = function() {
@@ -24,15 +26,15 @@ const drawMinimapWhenDirty = function() {
 		let position = Player.getPosition(),
 			yawNew = Entity.getLookAngle(Player.get()).yaw / Math.PI * 180 - 90,
 			radius = settings.radius * 16;
-		if (position.x != X || position.z != Z || yawNew != YAW || redraw) {
+		if (position.x != X || position.z != Z || yawNew != YAW || redraw || dimensionNew != DIMENSION) {
 			redraw = false;
 			
 			let xChunkNew = Math.floor(position.x / 16) * 16,
 				zChunkNew = Math.floor(position.z / 16) * 16,
 				xChunkOld = Math.floor(X / 16) * 16,
 				zChunkOld = Math.floor(Z / 16) * 16;
-			if (xChunkNew != xChunkOld || zChunkNew != zChunkOld) {
-				if (Math.abs(xChunkNew - xChunkOld) <= radius * 2 && Math.abs(zChunkNew - zChunkOld) <= radius * 2) {
+			if (xChunkNew != xChunkOld || zChunkNew != zChunkOld || dimensionNew != DIMENSION) {
+				if (Math.abs(xChunkNew - xChunkOld) <= radius * 2 && Math.abs(zChunkNew - zChunkOld) <= radius * 2 && dimensionNew == DIMENSION) {
 					try {
 						bmpSrcLock.acquire();
 						bmpSrcCopy.eraseColor(0);
@@ -102,6 +104,7 @@ const drawMinimapWhenDirty = function() {
 			}
 			
 			YAW = yawNew;
+			DIMENSION = dimensionNew;
 			let x0 = position.x - (settings.locationSize * 0.5 / absZoom),
 				z0 = position.z + (settings.locationSize * 0.5 / absZoom);
 			matrixMap.setTranslate(settings.locationSize * 0.5 - (bmpSrc.getWidth() * 0.5) - 8 + position.z - zChunkNew,
@@ -191,14 +194,14 @@ const drawMinimapWhenDirty = function() {
 			}
 			
 			if (settings.indicatorLocal) {
-				if (settings.stylesheetPointer != 3) {
+				if (settings.stylesheetLocalPointer != 3) {
 					matrixPointer.reset();
-					if (!settings.mapRotation && pointer[settings.stylesheetPointer].rotate) {
+					if (!settings.mapRotation && pointer[settings.stylesheetLocalPointer].rotate) {
 						matrixPointer.postRotate(yawNew);
 					}
 					matrixPointer.postTranslate(settings.locationSize * 0.5, settings.locationSize * 0.5);
-					matrixPointer.preConcat(pointer[settings.stylesheetPointer].matrix);
-					canvas.drawBitmap(pointer[settings.stylesheetPointer].bitmap, matrixPointer, null)
+					matrixPointer.preConcat(pointer[settings.stylesheetLocalPointer].matrix);
+					canvas.drawBitmap(pointer[settings.stylesheetLocalPointer].bitmap, matrixPointer, null)
 				} else {
 					matrixPointer.reset();
 					if (!settings.mapRotation) {
