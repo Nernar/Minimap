@@ -6,7 +6,7 @@ const ConfigDescriptor = [__mod__.getInfoProperty("name"), "Leave",
 		["keyValue", "slider", "Distance", "radius", 1, 96, 1, " chunks"],
 		["subScreen", "Icons / Indicators", ["Icons / Indicators", "Apply",
 			["sectionDivider", "Entities"],
-				["keyValue", "multipleChoice", "Pointer style", "stylesheetPointer", ["Crosshair", "Arrow", "Map", "Head"]],
+				["keyValue", "multipleChoice", "Pointer", "stylesheetPointer", ["Crosshair", "Arrow", "Map", "Head"]],
 				["checkBox", "indicatorOnlySurface", "Hide below sea level"],
 				["checkBox", "indicatorLocal", "Yourself"],
 				["checkBox", "indicatorPlayer", "Multiplayer"],
@@ -31,7 +31,7 @@ const ConfigDescriptor = [__mod__.getInfoProperty("name"), "Leave",
 			["keyValue", "multipleChoice", "Thread optimization", "priority", ["Background", "Foreground", "Disabled"]],
 			["keyValue", "slider", "Max frequency", "delay", 1, 40, 1, " fps"],
 			["keyValue", "slider", "Number of threads", "thread", 1, 12, 1, ""],
-			["checkBox", "developmentVisualize", "Debug various processes"]]],
+			["checkBox", "debug", "Debug various processes"]]],
 		["keyValue", "text", "Refresh canvas", "", "forceRefresh"],
 		["subScreen", "Reset to defaults", ["Reset to defaults", "I don't like this",
 			["keyValue", "text", "You are about to RESET minimap, all memories and user information will be erased.", ""],
@@ -44,37 +44,39 @@ const ConfigDescriptor = [__mod__.getInfoProperty("name"), "Leave",
 			["keyValue", "text", "Located in ", new java.io.File(__dir__).getName() + "/"],
 			["keyValue", "text", "<a href=https://t.me/ntInsideChat>t.me</a> development channel", ""]]]]
 
-let bmpPaint = new android.graphics.Paint(),
-	mapView = new android.view.TextureView(getContext()),
-	setWindow;
-
+let bmpPaint = new android.graphics.Paint();
 bmpPaint.setAntiAlias(false);
 bmpPaint.setFilterBitmap(false);
+bmpPaint.setXfermode(new android.graphics.PorterDuffXfermode(android.graphics.PorterDuff.Mode.SRC));
 
 let mapState = false;
 let windowManager = getContext().getSystemService(android.content.Context.WINDOW_SERVICE);
 
-let showConfigDialog = function() {
-	if (!setWindow) {
-		setWindow = createConfigDialog(ConfigDescriptor);
-	}
-	setWindow.show();
-};
+(function() {
+	let dialog;
+	Minimap.showConfigDialog = function() {
+		if (!dialog) {
+			dialog = createConfigDialog(ConfigDescriptor);
+		}
+		dialog.show();
+	};
+	Minimap.dismissConfigDialog = function() {
+		dialog.dismiss();
+		dialog = undefined;
+	};
+})();
 
-let mapWindow = (function() {
+let mapView = (function() {
 	let layout = new android.widget.RelativeLayout(getContext());
-	let popup = new android.widget.PopupWindow(layout, android.view.ViewGroup.LayoutParams.WRAP_CONTENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
-	bmpPaint.setXfermode(new android.graphics.PorterDuffXfermode(android.graphics.PorterDuff.Mode.SRC));
-	mapView.setId(1);
-	mapView.setVisibility(android.view.View.GONE);
-	let mapLp = new android.widget.RelativeLayout.LayoutParams(settings.locationSize, settings.locationSize);
-	mapLp.addRule(android.widget.RelativeLayout.ALIGN_PARENT_TOP);
-	handle(function() {
+	let popup = new android.widget.PopupWindow(layout,
+		android.view.ViewGroup.LayoutParams.WRAP_CONTENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+	let texture = new android.view.TextureView(getContext());
+	texture.setLayerType(android.view.View.LAYER_TYPE_HARDWARE, null);
+	texture.setId(1);
+	
+	getContext().runOnUiThread(function() {
 		try {
-			let mScaleFactor = settings.mapZoom / 100;
-			if (isNaN(mScaleFactor)) {
-				mScaleFactor = 1.;
-			}
+			let mScaleFactor = settings.mapZoom / 10;
 			let mRequiredStandartAction = true;
 			let mScaleGestureDetector = new android.view.ScaleGestureDetector(getContext(), new JavaAdapter(android.view.ScaleGestureDetector.SimpleOnScaleGestureListener, android.view.ScaleGestureDetector.OnScaleGestureListener, {
 				onScale: function(scaleGestureDetector) {
@@ -109,105 +111,118 @@ let mapWindow = (function() {
 				},
 				onLongPress: function(event) {
 					if (mRequiredStandartAction) {
-						showConfigDialog();
+						Minimap.showConfigDialog();
 					}
 					return mRequiredStandartAction;
 				}
 			}));
-			mapView.setOnTouchListener(function(mView, event) {
+			texture.setOnTouchListener(function(mView, event) {
 				mScaleGestureDetector.onTouchEvent(event);
 				mGestureDetector.onTouchEvent(event);
 				return true;
 			});
 		} catch (e) {
-			mapView.setOnClickListener(function(v) {
+			texture.setOnClickListener(function(v) {
 				changeMapState();
 			});
-			mapView.setOnLongClickListener(function(v) {
-				showConfigDialog();
+			texture.setOnLongClickListener(function(v) {
+				Minimap.showConfigDialog();
 				return true;
 			});
 			reportError(e);
 		}
 	});
-	mapView.setLayerType(android.view.View.LAYER_TYPE_HARDWARE, null);
-	let btnSet = new android.widget.Button(getContext());
-	btnSet.setBackgroundResource(android.R.drawable.ic_menu_mylocation);
-	btnSet.setVisibility(android.view.View.VISIBLE);
-	btnSet.setLayoutParams(new android.widget.LinearLayout.LayoutParams(buttonSize * getDisplayDensity(), buttonSize * getDisplayDensity()));
-	btnSet.setOnClickListener(function(v) {
+	
+	let button = new android.widget.Button(getContext());
+	button.setBackgroundResource(android.R.drawable.ic_menu_mylocation);
+	button.setLayoutParams(new android.widget.LinearLayout.LayoutParams(buttonSize * getDisplayDensity(), buttonSize * getDisplayDensity()));
+	button.setOnClickListener(function(v) {
 		changeMapState();
 	});
-	btnSet.setOnLongClickListener(function(v) {
-		showConfigDialog();
+	button.setOnLongClickListener(function(v) {
+		Minimap.showConfigDialog();
 		return true;
 	});
-	let textInfo = new android.widget.TextView(getContext());
-	textInfo.setId(2);
-	textInfo.setVisibility(android.view.View.GONE);
-	textInfo.setGravity(android.view.Gravity.CENTER);
-	let textInfoLp = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
-	textInfoLp.addRule(android.widget.RelativeLayout.BELOW, 1);
-	textInfoLp.addRule(android.widget.RelativeLayout.ALIGN_LEFT, 1);
-	textInfoLp.addRule(android.widget.RelativeLayout.ALIGN_RIGHT, 1);
-	textInfo.setTextSize(14);
-	textInfo.setPadding(0, 6 * getDisplayDensity(), 0, 0);
-	textInfo.setTextColor(Colors.WHITE);
-	textInfo.setShadowLayer(1, 4, 4, Colors.BLACK);
+	
+	let location = new android.widget.TextView(getContext());
+	location.setGravity(android.view.Gravity.CENTER);
+	location.setTextSize(14);
+	location.setPadding(0, 6 * getDisplayDensity(), 0, 0);
+	location.setTextColor(Colors.WHITE);
+	location.setShadowLayer(1, 4, 4, Colors.BLACK);
+	location.setId(2);
 	try {
-		textInfo.setTypeface(InnerCorePackage.utils.FileTools.getMcTypeface());
+		location.setTypeface(InnerCorePackage.utils.FileTools.getMcTypeface());
 	} catch (e) {
 		Logger.Log("Minimap: unable to set embedded in Inner Core font, default will be used otherwise", "WARNING");
 	}
-	layout.setAlpha((settings.mapAlpha / 100).toFixed(2));
-	layout.addView(btnSet);
-	layout.addView(mapView, mapLp);
-	layout.addView(textInfo, textInfoLp);
-	return {
-		getLayout: function() {
-			return layout;
-		},
-		setInfo: function() {
-			let position = Player.getPosition();
-			handle(function() {
-				textInfo.setText(Math.floor(position.x) + ", " + Math.floor(position.y - 2) + ", " + Math.floor(position.z));
-			});
-		},
-		resetVisibility: function() {
-			handle(function() {
-				if (mapState) {
-					btnSet.setVisibility(android.view.View.GONE);
-					mapView.setVisibility(android.view.View.VISIBLE);
-					textInfo.setVisibility(settings.mapLocation ?
-						android.view.View.VISIBLE : android.view.View.GONE);
-				} else {
-					btnSet.setVisibility(android.view.View.VISIBLE);
-					mapView.setVisibility(android.view.View.GONE);
-					textInfo.setVisibility(android.view.View.GONE);
-				}
-			});
-		},
-		show: function() {
-			handle(function() {
-				popup.showAtLocation(getDecorView(), settings.locationGravity, 0, settings.locationOffset);
-				let container = popup.getContentView().getRootView();
-				let params = container.getLayoutParams();
-				params.flags |= android.view.WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED;
-				windowManager.updateViewLayout(container, params);
-			});
-		},
-		hide: function() {
-			handle(function() {
-				popup.dismiss();
-			});
-		}
+	
+	layout.addView(button);
+	let textureParams = new android.widget.RelativeLayout.LayoutParams
+		(settings.locationSize, settings.locationSize);
+	textureParams.addRule(android.widget.RelativeLayout.ALIGN_PARENT_TOP);
+	layout.addView(texture, textureParams);
+	let locationParams = new android.widget.RelativeLayout.LayoutParams
+		(android.view.ViewGroup.LayoutParams.WRAP_CONTENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+	locationParams.addRule(android.widget.RelativeLayout.BELOW, 1);
+	locationParams.addRule(android.widget.RelativeLayout.ALIGN_LEFT, 1);
+	locationParams.addRule(android.widget.RelativeLayout.ALIGN_RIGHT, 1);
+	layout.addView(location, locationParams);
+	
+	Minimap.onChangeOpacity = function() {
+		layout.setAlpha(settings.mapAlpha / 100);
 	};
+	Minimap.onChangeOpacity();
+	Minimap.resetVisibility = function() {
+		getContext().runOnUiThread(function() {
+			if (mapState) {
+				button.setVisibility(android.view.View.GONE);
+				texture.setVisibility(android.view.View.VISIBLE);
+				location.setVisibility(settings.mapLocation ?
+					android.view.View.VISIBLE : android.view.View.GONE);
+			} else {
+				button.setVisibility(android.view.View.VISIBLE);
+				texture.setVisibility(android.view.View.GONE);
+				location.setVisibility(android.view.View.GONE);
+			}
+		});
+	};
+	Minimap.resetVisibility();
+	Minimap.showInternal = function() {
+		popup.showAtLocation(getDecorView(), settings.locationGravity, 0, settings.locationOffset);
+		let container = popup.getContentView().getRootView();
+		let params = container.getLayoutParams();
+		params.flags |= android.view.WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED;
+		windowManager.updateViewLayout(container, params);
+	};
+	Minimap.show = function() {
+		getContext().runOnUiThread(function() {
+			Minimap.showInternal();
+		});
+	};
+	Minimap.dismissInternal = function() {
+		popup.dismiss();
+	};
+	Minimap.dismiss = function() {
+		getContext().runOnUiThread(function() {
+			Minimap.dismissInternal();
+		});
+	};
+	Minimap.updateLocation = function(position) {
+		if (position === undefined || position === null) {
+			position = Player.getPosition();
+		}
+		handle(function() {
+			location.setText(Math.floor(position.x) + ", " + Math.floor(position.y - 2) + ", " + Math.floor(position.z));
+		});
+	};
+	return texture;
 })();
 
 let startMapControl = true;
 
 Callback.addCallback("LevelLeft", function() {
-	mapWindow.hide();
+	Minimap.dismiss();
 	if (mapState) {
 		changeMapState();
 	}
@@ -221,7 +236,7 @@ Callback.addCallback("LevelLeft", function() {
 
 function changeMapState() {
 	mapState = !mapState;
-	mapWindow.resetVisibility();
+	Minimap.resetVisibility();
 	if (mapState) {
 		delayChunksArrLock.acquire();
 		while (delayChunksArr.length > 0) {
@@ -242,27 +257,21 @@ Callback.addCallback("NativeGuiChanged", function(screenName) {
 	}
 	if (isHorizon) {
 		if (screenName != "in_game_play_screen") {
-			mapWindow.hide();
+			Minimap.dismiss();
 			return;
 		}
 	} else {
 		if (screenName != "hud_screen") {
-			mapWindow.hide();
+			Minimap.dismiss();
 			return;
 		}
 	}
-	mapWindow.show();
+	Minimap.show();
 });
 
 Callback.addCallback(isHorizon ? "LevelDisplayed" : "LevelLoaded", function() {
 	if (startMapControl) {
 		startMapControl = false;
 		createPool();
-		try {
-			Minimap.onChangeRenderer();
-			Minimap.onChangeRadius();
-		} catch (e) {
-			reportError(e);
-		}
 	}
 });

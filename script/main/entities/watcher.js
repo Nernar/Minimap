@@ -14,7 +14,7 @@ const isAcceptableEntity = function(ent) {
 	return true;
 };
 
-let entities = [];
+const entities = [];
 
 Callback.addCallback("EntityRemoved", function(entity) {
 	if (isAcceptableEntity(entity)) {
@@ -43,4 +43,5 @@ Callback.addCallback(isOutdated ? "DimensionLoaded" : "LocalPlayerChangedDimensi
 	while (entities.length > 0) {
 		entities.pop();
 	}
+	redraw = true;
 });

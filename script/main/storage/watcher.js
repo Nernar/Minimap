@@ -1,4 +1,5 @@
 const Minimap = {
+	REVISION: REVISION,
 	onChangeRadius: function() {
 		let widthOld = bmpSrc.getWidth(),
 			widthNew = ((settings.radius + 1) * 2 + 1) * 16,
@@ -52,15 +53,9 @@ const Minimap = {
 		params.height = settings.locationSize;
 		params.width = settings.locationSize;
 		mapView.setLayoutParams(params);
-		bmpBorder = drawBorderBitmap();
-		if (settings.stylesheetBorder != 0) {
-			pathBorder = createPath(false, true);
-		} else {
-			pathBorder = createPath(true, false);
-		}
-		redraw = true;
+		Minimap.onChangeStylesheet();
 		minZoom = settings.locationSize / (settings.radius * 2 * 16);
-		absZoom = (100 / settings.mapZoom) * minZoom;
+		Minimap.onChangeZoom();
 	},
 	onChangeStylesheet: function() {
 		if (settings.stylesheetBorder != 0) {
@@ -83,9 +78,6 @@ const Minimap = {
 		}
 		X = undefined;
 	},
-	onChangeTranslucency: function() {
-		mapWindow.getLayout().setAlpha(settings.mapAlpha / 100);
-	},
 	onChangeZoom: function() {
 		absZoom = (100 / settings.mapZoom) * minZoom;
 		redraw = true;
@@ -94,10 +86,7 @@ const Minimap = {
 		pool.setCorePoolSize(settings.thread);
 	},
 	restoreConfig: function() {
-		if (setWindow) {
-			setWindow.dismiss();
-			setWindow = null;
-		}
+		Minimap.dismissConfigDialog();
 		restoreSettings(true);
 	}
 };
@@ -117,14 +106,14 @@ const settingsChanged = function(key) {
 			Minimap.onChangeZoom();
 			break;
 		case "mapAlpha":
-			Minimap.onChangeTranslucency();
+			Minimap.onChangeOpacity();
 			break;
 		case "locationRawSize":
 			Minimap.onChangeLocation();
 			break;
 		case "locationRawPosition":
-			mapWindow.hide();
-			mapWindow.show();
+			Minimap.dismissInternal();
+			Minimap.showInternal();
 			break;
 		case "stylesheetShape":
 		case "stylesheetBorder":
@@ -134,7 +123,7 @@ const settingsChanged = function(key) {
 			redraw = true;
 			break;
 		case "mapLocation":
-			mapWindow.resetVisibility();
+			Minimap.resetVisibility();
 			break;
 		case "delay":
 			Minimap.onChangeRefreshDelay();

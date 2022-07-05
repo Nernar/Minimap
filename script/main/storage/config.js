@@ -1,22 +1,22 @@
 const getProtoString = function(proto, source, name) {
 	if (source && source.get(name) != null) {
-		return source.getString(name);
+		return "" + source.getString(name);
 	}
-	return proto.getString(name);
+	return "" + proto.getString(name);
 };
 
 const getProtoNumber = function(proto, source, name) {
 	if (source && source.get(name) != null) {
-		return source.getNumber(name);
+		return source.getNumber(name) - 0;
 	}
-	return proto.getNumber(name);
+	return proto.getNumber(name) - 0;
 };
 
 const getProtoBool = function(proto, source, name) {
 	if (source && source.get(name) != null) {
-		return source.getBool(name);
+		return !!source.getBool(name);
 	}
-	return proto.getBool(name);
+	return !!proto.getBool(name);
 };
 
 const setConfigOptionIfNeeded = function(proto, name, value) {
@@ -25,7 +25,7 @@ const setConfigOptionIfNeeded = function(proto, name, value) {
 	}
 	let current = __config__.get(name);
 	if (current != null || (current == null && value != proto.get(name))) {
-		return __config__.set(name, value);
+		return !!__config__.set(name, value);
 	}
 	return false;
 };
@@ -42,10 +42,11 @@ const protoConfig = (function() {
 	}
 	config.checkAndRestore(JSON.stringify({
 		runtime: {
-			type: 0,
+			type: 1,
 			surface: 1,
+			smoothing: 3,
 			zoom: 85,
-			translucent: 70,
+			translucent: 80,
 			rotation: false
 		},
 		indicator: {
@@ -54,7 +55,8 @@ const protoConfig = (function() {
 			local: true,
 			player: true,
 			tile: false,
-			only_surface: true
+			waypoint: true,
+			only_surface: false
 		},
 		location: {
 			raw_size: 40,
@@ -99,6 +101,7 @@ const reloadSettings = function(source) {
 		indicatorLocal: getProtoBool(protoConfig, source, "indicator.local"),
 		indicatorPlayer: getProtoBool(protoConfig, source, "indicator.player"),
 		indicatorTile: getProtoBool(protoConfig, source, "indicator.tile"),
+		indicatorWaypoint: getProtoBool(protoConfig, source, "indicator.waypoint"),
 		indicatorOnlySurface: getProtoBool(protoConfig, source, "indicator.only_surface"),
 		locationRawSize: getProtoNumber(protoConfig, source, "location.raw_size"),
 		locationRawPosition: getProtoNumber(protoConfig, source, "location.raw_position"),
@@ -108,8 +111,7 @@ const reloadSettings = function(source) {
 		stylesheetPointer: getProtoNumber(protoConfig, source, "stylesheet.pointer"),
 		stylesheetShape: getProtoNumber(protoConfig, source, "stylesheet.shape"),
 		mapLocation: getProtoBool(protoConfig, source, "development.location"),
-		mapZoomButton: getProtoBool(protoConfig, source, "development.zoom_button"),
-		developmentVisualize: getProtoBool(protoConfig, source, "development.show_process"),
+		debug: getProtoBool(protoConfig, source, "development.show_process"),
 		radius: getProtoNumber(protoConfig, source, "performance.radius"),
 		priority: getProtoNumber(protoConfig, source, "performance.priority"),
 		delay: getProtoNumber(protoConfig, source, "performance.delay"),
@@ -117,6 +119,7 @@ const reloadSettings = function(source) {
 	};
 	settings.locationSize = settings.locationRawSize / 100 * getDisplayHeight();
 };
+
 
 try {
 	reloadSettings();
@@ -136,6 +139,7 @@ const saveSettings = function() {
 	setConfigOptionIfNeeded(protoConfig, "indicator.local", settings.indicatorLocal);
 	setConfigOptionIfNeeded(protoConfig, "indicator.player", settings.indicatorPlayer);
 	setConfigOptionIfNeeded(protoConfig, "indicator.tile", settings.indicatorTile);
+	setConfigOptionIfNeeded(protoConfig, "indicator.waypoint", settings.indicatorTile);
 	setConfigOptionIfNeeded(protoConfig, "indicator.only_surface", settings.indicatorOnlySurface);
 	setConfigOptionIfNeeded(protoConfig, "location.raw_size", settings.locationRawSize);
 	setConfigOptionIfNeeded(protoConfig, "location.raw_position", settings.locationRawPosition);
@@ -145,7 +149,7 @@ const saveSettings = function() {
 	setConfigOptionIfNeeded(protoConfig, "stylesheet.pointer", settings.stylesheetPointer);
 	setConfigOptionIfNeeded(protoConfig, "stylesheet.shape", settings.stylesheetShape);
 	setConfigOptionIfNeeded(protoConfig, "development.location", settings.mapLocation);
-	setConfigOptionIfNeeded(protoConfig, "development.show_process", settings.developmentVisualize);
+	setConfigOptionIfNeeded(protoConfig, "development.show_process", settings.debug);
 	setConfigOptionIfNeeded(protoConfig, "performance.radius", settings.radius);
 	setConfigOptionIfNeeded(protoConfig, "performance.priority", settings.priority);
 	setConfigOptionIfNeeded(protoConfig, "performance.delay", settings.delay);

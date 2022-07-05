@@ -7,7 +7,7 @@ const OptionPreset = {
 			textLp = new android.widget.RelativeLayout.LayoutParams(android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT, android.widget.RelativeLayout.LayoutParams.WRAP_CONTENT);
 		text.setTextColor(Colors.LTGRAY);
 		text.setTextSize(17);
-		checkBtn.setText(translate(args[2]));
+		text.setText(translate(args[2]));
 		checkBtn.setId(1);
 		checkBtn.setChecked(!!settings[args[1]]);
 		checkBtn.setOnCheckedChangeListener(function(buttonView, isChecked) {

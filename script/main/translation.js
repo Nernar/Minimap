@@ -1,268 +1,358 @@
 Translation.addTranslation("Minimap", {
-	ru: "Миникарта"
+	ru: "Миникарта",
+	uk: "Мінікарта"
 });
 Translation.addTranslation("Minimap " + __mod__.getInfoProperty("version"), {
-	ru: "Миникарта, " + __mod__.getInfoProperty("version")
+	ru: "Миникарта, " + __mod__.getInfoProperty("version"),
+	uk: "Мінікарта, " + __mod__.getInfoProperty("version")
 });
 Translation.addTranslation("Understood", {
-	ru: "Понятно"
+	ru: "Понятно",
+	uk: ""
 });
 Translation.addTranslation("Apply", {
-	ru: "Применить"
+	ru: "Применить",
+	uk: ""
 });
 Translation.addTranslation("Cancel", {
-	ru: "Отмена"
+	ru: "Отмена",
+	uk: ""
 });
 Translation.addTranslation("Leave", {
-	ru: "Выход"
+	ru: "Выход",
+	uk: ""
 });
 Translation.addTranslation("Disabled", {
-	ru: "Отключено"
+	ru: "Отключено",
+	uk: ""
 });
 Translation.addTranslation("I don't like this", {
-	ru: "Мне не нравится это"
+	ru: "Мне не нравится это",
+	uk: ""
 });
 
 // Rendering option section
 Translation.addTranslation("Rendering", {
-	ru: "Отрисовка"
+	ru: "Отрисовка",
+	uk: ""
 });
 Translation.addTranslation("Type", {
-	ru: "Вид"
+	ru: "Вид",
+	uk: ""
 });
 Translation.addTranslation("Monochromatic", {
-	ru: "Монохроматический"
+	ru: "Монохроматический",
+	uk: ""
 });
 Translation.addTranslation("Surface", {
-	ru: "Поверхность"
+	ru: "Поверхность",
+	uk: ""
 });
 Translation.addTranslation("Underground", {
-	ru: "Подземелье"
+	ru: "Подземелье",
+	uk: ""
 });
 Translation.addTranslation("Heightmap", {
-	ru: "Карта высот"
+	ru: "Карта высот",
+	uk: ""
 });
 Translation.addTranslation("Nearest surface", {
-	ru: "Ближайшая поверхность"
+	ru: "Ближайшая поверхность",
+	uk: ""
 });
 Translation.addTranslation("Optimum", {
-	ru: "Оптимальная"
+	ru: "Оптимальная",
+	uk: ""
 });
 Translation.addTranslation("Procedural", {
-	ru: "Процедурная"
+	ru: "Процедурная",
+	uk: ""
 });
 Translation.addTranslation("Closest to sky", {
-	ru: "Ближайшая к небу"
+	ru: "Ближайшая к небу",
+	uk: ""
 });
 Translation.addTranslation("Smoothing", {
-	ru: "Сглаживание"
+	ru: "Сглаживание",
+	uk: ""
 });
 Translation.addTranslation("At most", {
-	ru: "В большинстве"
+	ru: "В большинстве",
+	uk: ""
 });
 Translation.addTranslation("Transparency", {
-	ru: "Прозрачность"
+	ru: "Прозрачность",
+	uk: ""
 });
 Translation.addTranslation("Fauna", {
-	ru: "Фауна"
+	ru: "Растительность",
+	uk: ""
 });
 Translation.addTranslation("Distance", {
-	ru: "Дальность"
+	ru: "Дальность",
+	uk: ""
 });
 Translation.addTranslation("%s chunk", {
-	ru: "%s чанк"
+	ru: "%s чанк",
+	uk: ""
 });
 Translation.addTranslation("%s2 chunks", {
-	ru: "%s2 чанка"
+	ru: "%s2 чанка",
+	uk: ""
 });
 Translation.addTranslation("%s3 chunks", {
-	ru: "%s3 чанка"
+	ru: "%s3 чанка",
+	uk: ""
 });
 Translation.addTranslation("%s4 chunks", {
-	ru: "%s4 чанка"
+	ru: "%s4 чанка",
+	uk: ""
 });
 Translation.addTranslation("%s chunks", {
-	ru: "%s чанков"
+	ru: "%s чанков",
+	uk: ""
 });
 Translation.addTranslation("Icons / Indicators", {
-	ru: "Индикаторы"
+	ru: "Индикаторы",
+	uk: ""
 });
 Translation.addTranslation("Yourself", {
-	ru: "Отображать меня"
+	ru: "Отображать меня",
+	uk: ""
 });
 Translation.addTranslation("Pointer", {
-	ru: "Указатель"
+	ru: "Указатель",
+	uk: ""
 });
 Translation.addTranslation("Crosshair", {
-	ru: "Перекрестие"
+	ru: "Перекрестие",
+	uk: ""
 });
 Translation.addTranslation("Arrow", {
-	ru: "Стрелка"
+	ru: "Стрелка",
+	uk: ""
 });
 Translation.addTranslation("Map", {
-	ru: "Как на картах"
+	ru: "Как на картах",
+	uk: ""
 });
 Translation.addTranslation("Head", {
-	ru: "Голова"
+	ru: "Голова",
+	uk: ""
 });
 Translation.addTranslation("Entities", {
-	ru: "Существа"
+	ru: "Существа",
+	uk: ""
 });
 Translation.addTranslation("Hide below sea level", {
-	ru: "Скрыть ниже уровня моря"
+	ru: "Скрыть ниже уровня моря",
+	uk: ""
 });
 Translation.addTranslation("Passive / Friendly", {
-	ru: "Пассивные и дружелюбные"
+	ru: "Пассивные и дружелюбные",
+	uk: ""
 });
 Translation.addTranslation("Hostile", {
-	ru: "Враждебные"
+	ru: "Враждебные",
+	uk: ""
 });
 Translation.addTranslation("Multiplayer", {
-	ru: "Мультиплеер"
+	ru: "Мультиплеер",
+	uk: ""
 });
 Translation.addTranslation("This section is controlled by server, ask your administrator to change it.", {
-	ru: "Эта секция контролируется администратором, попросите его изменить ее."
+	ru: "Эта секция контролируется администратором, попросите его внести изменения.",
+	uk: ""
 });
 Translation.addTranslation("Show players", {
-	ru: "Показывать игроков"
+	ru: "Показывать игроков",
+	uk: ""
 });
 Translation.addTranslation("In crouch", {
-	ru: "В присяде"
+	ru: "Присевшие в том числе",
+	uk: ""
 });
 Translation.addTranslation("Block for everyone", {
-	ru: "Заблокировать для всех"
+	ru: "Заблокировать для всех",
+	uk: ""
 });
 Translation.addTranslation("Marks", {
-	ru: "Пометки"
+	ru: "Пометки",
+	uk: ""
 });
 Translation.addTranslation("Containers", {
-	ru: "Контейнеры"
+	ru: "Контейнеры",
+	uk: ""
 });
 Translation.addTranslation("Waypoints", {
-	ru: "Ключевые точки"
+	ru: "Ключевые точки",
+	uk: ""
 });
 
 // Window option section
 Translation.addTranslation("Window", {
-	ru: "Окно"
+	ru: "Окно",
+	uk: ""
 });
 Translation.addTranslation("Location", {
-	ru: "Местоположение"
+	ru: "Местоположение",
+	uk: ""
 });
 Translation.addTranslation("Scale", {
-	ru: "Масштаб"
+	ru: "Масштаб",
+	uk: ""
 });
 Translation.addTranslation("Opacity", {
-	ru: "Видимость"
+	ru: "Видимость",
+	uk: ""
 });
 Translation.addTranslation("Zoom", {
-	ru: "Приближение"
+	ru: "Приближение",
+	uk: ""
 });
 Translation.addTranslation("Show coordinates", {
-	ru: "Показывать координаты"
+	ru: "Показывать координаты",
+	uk: ""
 });
 Translation.addTranslation("Turn behind yourself", {
-	ru: "Поворачиваться за игроком"
+	ru: "Поворачиваться за игроком",
+	uk: ""
 });
 
 // Stylesheet option section
 Translation.addTranslation("Stylesheet", {
-	ru: "Кастомизация"
+	ru: "Кастомизация",
+	uk: ""
 });
 Translation.addTranslation("Border", {
-	ru: "Граница"
+	ru: "Граница",
+	uk: ""
 });
 Translation.addTranslation("Simple", {
-	ru: "Незамысловатая"
+	ru: "Стандартная",
+	uk: ""
 });
 Translation.addTranslation("Colourful", {
-	ru: "Красочная"
+	ru: "Красочная",
+	uk: ""
 });
 Translation.addTranslation("Shape", {
-	ru: "Форма"
+	ru: "Форма",
+	uk: ""
 });
 Translation.addTranslation("Square", {
-	ru: "Квадрат"
+	ru: "Квадрат",
+	uk: ""
 });
 Translation.addTranslation("Circle", {
-	ru: "Окружность"
+	ru: "Окружность",
+	uk: ""
 });
 
 // Other option section
 Translation.addTranslation("Other", {
-	ru: "Остальное"
+	ru: "Остальное",
+	uk: ""
 });
 Translation.addTranslation("Advanced", {
-	ru: "Продвинутое"
+	ru: "Продвинутое",
+	uk: ""
 });
 Translation.addTranslation("Thread optimization", {
-	ru: "Приоритет потока"
+	ru: "Приоритет потока",
+	uk: ""
 });
 Translation.addTranslation("Background", {
-	ru: "Кеширование"
+	ru: "Кеширование",
+	uk: ""
 });
 Translation.addTranslation("Foreground",  {
-	ru: "Незамедлительно"
+	ru: "Незамедлительно",
+	uk: ""
 });
 Translation.addTranslation("Max frequency", {
-	ru: "Максимальная частота"
+	ru: "Максимальная частота",
+	uk: ""
 });
 Translation.addTranslation("%s fps", {
-	ru: "%s кадров"
+	ru: "%s кадров",
+	uk: ""
 });
 Translation.addTranslation("Number of threads", {
-	ru: "Количество потоков"
+	ru: "Количество потоков",
+	uk: ""
 });
 Translation.addTranslation("Debug various processes", {
-	ru: "Отладка различных процессов"
+	ru: "Отладка различных процессов",
+	uk: ""
 });
 Translation.addTranslation("Refresh canvas", {
-	ru: "Обновить канву"
+	ru: "Обновить канву",
+	uk: ""
 });
 Translation.addTranslation("Reset to defaults", {
-	ru: "Сбросить настройки"
+	ru: "Сбросить настройки",
+	uk: ""
 });
 Translation.addTranslation("You are about to RESET minimap, all memories and user information will be erased.", {
-	ru: "Вы собираетесь сделать СБРОС миникарты, все воспоминания и информация о пользователе будут удалены."
+	ru: "Вы собираетесь сделать СБРОС миникарты, все воспоминания и информация о пользователе будут удалены.",
+	uk: ""
 });
 Translation.addTranslation("Waypoints are stored in worlds and will not be affected.", {
-	ru: "Ключевые точки хранятся в мире и затронуты не будут."
+	ru: "Ключевые точки хранятся в мире и затронуты не будут.",
+	uk: ""
 });
 Translation.addTranslation("<br/>Yes, I really want to <b><font color=\"red\">RESET</font></b><br/>", {
-	ru: "<br/>Я действительно хочу <b><font color=\"red\">СБРОС</font></b><br/>"
+	ru: "<br/>Я действительно хочу <b><font color=\"red\">СБРОС</font></b><br/>",
+	uk: ""
 });
 Translation.addTranslation("About Minimap", {
-	ru: "Информация"
+	ru: "Информация",
+	uk: ""
 });
 Translation.addTranslation("Revision ", {
-	ru: "Редакция "
+	ru: "Редакция ",
+	uk: ""
 });
 Translation.addTranslation("Developed by ", {
-	ru: "Разработано "
+	ru: "Разработано ",
+	uk: ""
 });
 Translation.addTranslation("Inspired by ", {
-	ru: "Вдохновлено "
+	ru: "Вдохновлено ",
+	uk: ""
 });
 Translation.addTranslation("Located in ", {
-	ru: "Расположение "
+	ru: "Расположение ",
+	uk: ""
 });
 Translation.addTranslation("<a href=https://t.me/ntInsideChat>t.me</a> development channel", {
-	ru: "<a href=https://t.me/ntInsideChat>t.me</a> канал новостей"
+	ru: "<a href=https://t.me/ntInsideChat>t.me</a> новостной канал",
+	uk: ""
 });
 Translation.addTranslation("Also I would like to thank", {
-	ru: "А еще хотелось бы поблагодарить"
+	ru: "А еще хотелось бы поблагодарить",
+	uk: ""
+});
+Translation.addTranslation("Developer", {
+	ru: "Разработчик",
+	uk: ""
 });
 Translation.addTranslation("Interpreter<br/><i>Ukrainian</i>", {
-	ru: "Переводчик<br/><i>Украинский</i>"
+	ru: "Переводчик<br/><i>Украинский</i>",
+	uk: ""
 });
 
 // Terrain rendering debugging
 Translation.addTranslation("Out of range (%s, %s, %sms)", {
-	ru: "Слишком далеко (%s, %s, %sмс)"
+	ru: "Слишком далеко (%s, %s, %sмс)",
+	uk: ""
 });
 Translation.addTranslation("Scheduled (%s, %s, %sms)", {
-	ru: "Отложено (%s, %s, %sмс)"
+	ru: "Отложено (%s, %s, %sмс)",
+	uk: ""
 });
 Translation.addTranslation("Processing (%s, %s, %sms)", {
-	ru: "Обработка (%s, %s, %sмс)"
+	ru: "Обработка (%s, %s, %sмс)",
+	uk: ""
 });

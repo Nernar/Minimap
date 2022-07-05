@@ -2,7 +2,6 @@ let redraw = false,
 	X,
 	Z,
 	YAW,
-	DIMENSION,
 	pool;
 
 const createPool = function() {
@@ -21,25 +20,19 @@ const drawMinimapWhenDirty = function() {
 		} else if (settings.priority == 1) {
 			android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_FOREGROUND);
 		}
-		let xNew = Player.getPosition().x,
-			zNew = Player.getPosition().z,
+		
+		let position = Player.getPosition(),
 			yawNew = Entity.getLookAngle(Player.get()).yaw / Math.PI * 180 - 90,
-			xChunkNew,
-			zChunkNew,
-			xChunkOld,
-			zChunkOld,
-			dimensionNew = Player.getDimension(),
-			i,
-			ix,
 			radius = settings.radius * 16;
-		if (xNew != X || zNew != Z || yawNew != YAW || redraw || dimensionNew != DIMENSION) {
+		if (position.x != X || position.z != Z || yawNew != YAW || redraw) {
 			redraw = false;
-			xChunkNew = Math.floor(xNew / 16) * 16;
-			zChunkNew = Math.floor(zNew / 16) * 16;
-			xChunkOld = Math.floor(X / 16) * 16;
-			zChunkOld = Math.floor(Z / 16) * 16;
-			if (xChunkNew != xChunkOld || zChunkNew != zChunkOld || dimensionNew != DIMENSION) {
-				if (Math.abs(xChunkNew - xChunkOld) <= radius * 2 && Math.abs(zChunkNew - zChunkOld) <= radius * 2 && dimensionNew == DIMENSION) {
+			
+			let xChunkNew = Math.floor(position.x / 16) * 16,
+				zChunkNew = Math.floor(position.z / 16) * 16,
+				xChunkOld = Math.floor(X / 16) * 16,
+				zChunkOld = Math.floor(Z / 16) * 16;
+			if (xChunkNew != xChunkOld || zChunkNew != zChunkOld) {
+				if (Math.abs(xChunkNew - xChunkOld) <= radius * 2 && Math.abs(zChunkNew - zChunkOld) <= radius * 2) {
 					try {
 						bmpSrcLock.acquire();
 						bmpSrcCopy.eraseColor(0);
@@ -47,51 +40,51 @@ const drawMinimapWhenDirty = function() {
 						bmpSrc.eraseColor(0);
 						canvasBmpSrc.drawBitmap(bmpSrcCopy, 0, 0, null);
 					} finally {
-						X = xNew;
-						Z = zNew;
+						X = position.x;
+						Z = position.z;
 						bmpSrcLock.release();
 					}
 					if (xChunkNew > xChunkOld) {
-						for (i = radius + 16 - (xChunkNew - xChunkOld); i <= radius; i += 16) {
+						for (let i = radius + 16 - (xChunkNew - xChunkOld); i <= radius; i += 16) {
 							scheduleChunk(xChunkNew + i, zChunkNew, 0);
-							for (ix = 16; ix <= radius; ix += 16) {
+							for (let ix = 16; ix <= radius; ix += 16) {
 								scheduleChunk(xChunkNew + i, zChunkNew + ix, 0);
 								scheduleChunk(xChunkNew + i, zChunkNew - ix, 0);
 							}
 						}
 					} else if (xChunkOld > xChunkNew) {
-						for (i = radius + 16 - (xChunkOld - xChunkNew); i <= radius; i += 16) {
+						for (let i = radius + 16 - (xChunkOld - xChunkNew); i <= radius; i += 16) {
 							scheduleChunk(xChunkNew - i, zChunkNew, 0);
-							for (ix = 16; ix <= radius; ix += 16) {
+							for (let ix = 16; ix <= radius; ix += 16) {
 								scheduleChunk(xChunkNew - i, zChunkNew + ix, 0);
 								scheduleChunk(xChunkNew - i, zChunkNew - ix, 0);
 							}
 						}
 					}
 					if (zChunkNew > zChunkOld) {
-						for (i = radius + 16 - (zChunkNew - zChunkOld); i <= radius; i += 16) {
+						for (let i = radius + 16 - (zChunkNew - zChunkOld); i <= radius; i += 16) {
 							scheduleChunk(xChunkNew, zChunkNew + i, 0);
-							for (ix = 16; ix <= radius; ix += 16) {
+							for (let ix = 16; ix <= radius; ix += 16) {
 								scheduleChunk(xChunkNew + ix, zChunkNew + i, 0);
 								scheduleChunk(xChunkNew - ix, zChunkNew + i, 0);
 							}
 						}
 					} else if (zChunkOld > zChunkNew) {
-						for (i = radius + 16 - (zChunkOld - zChunkNew); i <= radius; i += 16) {
+						for (let i = radius + 16 - (zChunkOld - zChunkNew); i <= radius; i += 16) {
 							scheduleChunk(xChunkNew, zChunkNew - i, 0);
-							for (ix = 16; ix <= radius; ix += 16) {
+							for (let ix = 16; ix <= radius; ix += 16) {
 								scheduleChunk(xChunkNew + ix, zChunkNew - i, 0);
 								scheduleChunk(xChunkNew - ix, zChunkNew - i, 0);
 							}
 						}
 					}
 				} else {
-					X = xNew;
-					Z = zNew;
+					X = position.x;
+					Z = position.z;
 					bmpSrc.eraseColor(0);
 					scheduleChunk(xChunkNew, zChunkNew, 0);
-					for (i = 16; i <= settings.radius * 16; i += 16) {
-						for (ix = 0; ix < i; ix += 16) {
+					for (let i = 16; i <= settings.radius * 16; i += 16) {
+						for (let ix = 0; ix < i; ix += 16) {
 							scheduleChunk(xChunkNew + ix + 16, zChunkNew + i, 0);
 							scheduleChunk(xChunkNew + ix, zChunkNew - i, 0);
 							scheduleChunk(xChunkNew - ix, zChunkNew + i, 0);
@@ -104,22 +97,21 @@ const drawMinimapWhenDirty = function() {
 					}
 				}
 			} else {
-				X = xNew;
-				Z = zNew;
+				X = position.x;
+				Z = position.z;
 			}
+			
 			YAW = yawNew;
-			DIMENSION = dimensionNew;
-			let zoom = absZoom,
-				style_pointer = settings.stylesheetPointer,
-				x0 = xNew - (settings.locationSize * 0.5 / zoom),
-				z0 = zNew + (settings.locationSize * 0.5 / zoom);
-			matrixMap.setTranslate(settings.locationSize * 0.5 - (bmpSrc.getWidth() * 0.5) - 8 + zNew - zChunkNew, settings.locationSize * 0.5 - (bmpSrc.getHeight() * 0.5) + 8 - xNew + xChunkNew);
+			let x0 = position.x - (settings.locationSize * 0.5 / absZoom),
+				z0 = position.z + (settings.locationSize * 0.5 / absZoom);
+			matrixMap.setTranslate(settings.locationSize * 0.5 - (bmpSrc.getWidth() * 0.5) - 8 + position.z - zChunkNew,
+				settings.locationSize * 0.5 - (bmpSrc.getHeight() * 0.5) + 8 - position.x + xChunkNew);
 			if (settings.mapRotation) {
-				matrixMap.postRotate(YAW, settings.locationSize * 0.5, settings.locationSize * 0.5);
+				matrixMap.postRotate(-YAW, settings.locationSize * 0.5, settings.locationSize * 0.5);
 			}
-			matrixMap.postScale(zoom, zoom, settings.locationSize * 0.5, settings.locationSize * 0.5);
+			matrixMap.postScale(absZoom, absZoom, settings.locationSize * 0.5, settings.locationSize * 0.5);
 			if (settings.mapLocation) {
-				mapWindow.setInfo();
+				Minimap.updateLocation(position);
 			}
 			let canvas = mapView.lockCanvas();
 			if (canvas == null) {
@@ -137,67 +129,87 @@ const drawMinimapWhenDirty = function() {
 				canvas.clipPath(pathBorder, android.graphics.Region.Op.REPLACE);
 			}
 			canvas.drawBitmap(bmpSrc, matrixMap, bmpPaint);
+			
 			if (settings.indicatorPassive || settings.indicatorHostile || settings.indicatorPlayer) {
 				redraw = true;
-				i = entities.length;
-				let id;
-				while (i--) {
-					if (!settings.indicatorOnlySurface || Entity.getPosition(entities[i]).y > 60) {
-						id = Entity.getType(entities[i])
-						let yaw = style_pointer == 3 ? settings.mapRotation ? YAW : 0 : Entity.getLookAngle(entities[i]).yaw / Math.PI * 180 - 90
-						if (style_pointer != 3) {
+				for (let i = 0; i < entities.length; i++) {
+					let position = Entity.getPosition(entities[i]);
+					if (!settings.indicatorOnlySurface || position.y > 60) {
+						let id = Entity.getType(entities[i])
+						let yaw = settings.stylesheetPointer == 3 ? 0 : Entity.getLookAngle(entities[i]).yaw / Math.PI * 180 - 90
+						if (settings.stylesheetPointer != 3) {
 							if (ENTITY_PASSIVE.indexOf(id) >= 0 && settings.indicatorPassive) {
 								matrixPointer.reset();
-								if (pointer[style_pointer].rotate) {
+								if (pointer[settings.stylesheetPointer].rotate) {
 									matrixPointer.postRotate(yaw);
 								}
-								matrixPointer.postTranslate((z0 - Entity.getPosition(entities[i]).z) * zoom, (Entity.getPosition(entities[i]).x - x0) * zoom);
-								matrixPointer.preConcat(pointer[style_pointer].matrix);
-								canvas.drawBitmap(pointer[style_pointer].bitmap, matrixPointer, pointerPaint.GREEN);
+								matrixPointer.postTranslate((z0 - position.z) * absZoom, (position.x - x0) * absZoom);
+								if (settings.mapRotation) {
+									matrixPointer.postRotate(-YAW, settings.locationSize * 0.5, settings.locationSize * 0.5);
+								}
+								matrixPointer.preConcat(pointer[settings.stylesheetPointer].matrix);
+								canvas.drawBitmap(pointer[settings.stylesheetPointer].bitmap, matrixPointer, pointerPaint.GREEN);
 							} else if (ENTITY_HOSTILE.indexOf(id) >= 0 && settings.indicatorHostile) {
 								matrixPointer.reset();
-								if (pointer[style_pointer].rotate) {
+								if (pointer[settings.stylesheetPointer].rotate) {
 									matrixPointer.postRotate(yaw);
 								}
-								matrixPointer.postTranslate((z0 - Entity.getPosition(entities[i]).z) * zoom, (Entity.getPosition(entities[i]).x - x0) * zoom);
-								matrixPointer.preConcat(pointer[style_pointer].matrix);
-								canvas.drawBitmap(pointer[style_pointer].bitmap, matrixPointer, pointerPaint.RED);
+								matrixPointer.postTranslate((z0 - position.z) * absZoom, (position.x - x0) * absZoom);
+								if (settings.mapRotation) {
+									matrixPointer.postRotate(-YAW, settings.locationSize * 0.5, settings.locationSize * 0.5);
+								}
+								matrixPointer.preConcat(pointer[settings.stylesheetPointer].matrix);
+								canvas.drawBitmap(pointer[settings.stylesheetPointer].bitmap, matrixPointer, pointerPaint.RED);
 							} else if (id == 1 && settings.indicatorPlayer) {
 								matrixPointer.reset();
-								if (pointer[style_pointer].rotate) {
+								if (pointer[settings.stylesheetPointer].rotate) {
 									matrixPointer.postRotate(yaw);
 								}
-								matrixPointer.postTranslate((z0 - Entity.getPosition(entities[i]).z) * zoom, (Entity.getPosition(entities[i]).x - x0) * zoom);
-								matrixPointer.preConcat(pointer[style_pointer].matrix);
-								canvas.drawBitmap(pointer[style_pointer].bitmap, matrixPointer, null);
+								matrixPointer.postTranslate((z0 - position.z) * absZoom, (position.x - x0) * absZoom);
+								if (settings.mapRotation) {
+									matrixPointer.postRotate(-YAW, settings.locationSize * 0.5, settings.locationSize * 0.5);
+								}
+								matrixPointer.preConcat(pointer[settings.stylesheetPointer].matrix);
+								canvas.drawBitmap(pointer[settings.stylesheetPointer].bitmap, matrixPointer, null);
 							}
 						} else if ((ENTITY_PASSIVE.indexOf(id) >= 0 && settings.indicatorPassive) || (ENTITY_HOSTILE.indexOf(id) >= 0 && settings.indicatorHostile) || (id == 1 && settings.indicatorPlayer)) {
 							matrixPointer.reset();
-							matrixPointer.postRotate(yaw);
-							matrixPointer.postTranslate((z0 - Entity.getPosition(entities[i]).z) * zoom, (Entity.getPosition(entities[i]).x - x0) * zoom);
-							matrixPointer.preConcat(getIconMatrix(id) || iconMatrix);
+							if (!settings.mapRotation) {
+								matrixPointer.postRotate(yaw);
+							} else {
+								matrixPointer.preRotate(YAW);
+							}
+							matrixPointer.postTranslate((z0 - position.z) * absZoom, (position.x - x0) * absZoom);
+							if (settings.mapRotation) {
+								matrixPointer.postRotate(-YAW, settings.locationSize * 0.5, settings.locationSize * 0.5);
+							}
+							matrixPointer.preConcat(getIconMatrix(id) || getIconMatrix(0));
 							canvas.drawBitmap(heads[id] || heads[0], matrixPointer, null);
 						}
 					}
 				}
 			}
+			
 			if (settings.indicatorLocal) {
-				if (style_pointer != 3) {
+				if (settings.stylesheetPointer != 3) {
 					matrixPointer.reset();
-					if (pointer[style_pointer].rotate) {
+					if (!settings.mapRotation && pointer[settings.stylesheetPointer].rotate) {
 						matrixPointer.postRotate(yawNew);
 					}
 					matrixPointer.postTranslate(settings.locationSize * 0.5, settings.locationSize * 0.5);
-					matrixPointer.preConcat(pointer[style_pointer].matrix);
-					canvas.drawBitmap(pointer[style_pointer].bitmap, matrixPointer, null)
+					matrixPointer.preConcat(pointer[settings.stylesheetPointer].matrix);
+					canvas.drawBitmap(pointer[settings.stylesheetPointer].bitmap, matrixPointer, null)
 				} else {
 					matrixPointer.reset();
-					matrixPointer.postRotate(yawNew);
+					if (!settings.mapRotation) {
+						matrixPointer.postRotate(yawNew);
+					}
 					matrixPointer.postTranslate(settings.locationSize * 0.5, settings.locationSize * 0.5);
-					matrixPointer.preConcat(getIconMatrix(63) || getIconMatrix(1) || iconMatrix);
+					matrixPointer.preConcat(getIconMatrix(63) || getIconMatrix(1) || getIconMatrix(0));
 					canvas.drawBitmap(heads[63] || heads[1] || heads[0], matrixPointer, null)
 				}
 			}
+			
 			canvas.restore();
 			mapView.unlockCanvasAndPost(canvas);
 		}
@@ -207,18 +219,13 @@ const drawMinimapWhenDirty = function() {
 };
 
 (function() {
-	bmpBorder = drawBorderBitmap();
-	if (settings.stylesheetBorder != 0) {
-		pathBorder = createPath(false, true);
-	} else {
-		pathBorder = createPath(true, false);
-	}
+	Minimap.onChangeStylesheet();
 	bmpSrc = android.graphics.Bitmap.createBitmap(((settings.radius + 1) * 2 + 1) * 16, ((settings.radius + 1) * 2 + 1) * 16, android.graphics.Bitmap.Config.ARGB_8888);
 	bmpSrcCopy = android.graphics.Bitmap.createBitmap(bmpSrc.getWidth(), bmpSrc.getHeight(), android.graphics.Bitmap.Config.ARGB_8888);
 	canvasBmpSrc.setBitmap(bmpSrc);
 	canvasBmpSrcCopy.setBitmap(bmpSrcCopy);
 	minZoom = settings.locationSize / (settings.radius * 2 * 16);
-	absZoom = (100 / settings.mapZoom) * minZoom;
+	Minimap.onChangeZoom();
 	poolTick = java.util.concurrent.Executors.newSingleThreadScheduledExecutor();
 	runnableUpdateMap = new java.lang.Runnable(drawMinimapWhenDirty);
 }());
