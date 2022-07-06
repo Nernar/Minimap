@@ -221,14 +221,5 @@ const drawMinimapWhenDirty = function() {
 	}
 };
 
-(function() {
-	Minimap.onChangeStylesheet();
-	bmpSrc = android.graphics.Bitmap.createBitmap(((settings.radius + 1) * 2 + 1) * 16, ((settings.radius + 1) * 2 + 1) * 16, android.graphics.Bitmap.Config.ARGB_8888);
-	bmpSrcCopy = android.graphics.Bitmap.createBitmap(bmpSrc.getWidth(), bmpSrc.getHeight(), android.graphics.Bitmap.Config.ARGB_8888);
-	canvasBmpSrc.setBitmap(bmpSrc);
-	canvasBmpSrcCopy.setBitmap(bmpSrcCopy);
-	minZoom = settings.locationSize / (settings.radius * 2 * 16);
-	Minimap.onChangeZoom();
-	poolTick = java.util.concurrent.Executors.newSingleThreadScheduledExecutor();
-	runnableUpdateMap = new java.lang.Runnable(drawMinimapWhenDirty);
-}());
+poolTick = java.util.concurrent.Executors.newSingleThreadScheduledExecutor();
+runnableUpdateMap = new java.lang.Runnable(drawMinimapWhenDirty);

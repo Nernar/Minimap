@@ -45,6 +45,7 @@ const Minimap = {
 				}
 			}
 		}
+		Minimap.resetVisibility();
 		redraw = true;
 	},
 	onChangeLocation: function() {
@@ -113,6 +114,7 @@ const settingsChanged = function(key) {
 			break;
 		case "locationRawPosition":
 			Minimap.dismissInternal();
+			Minimap.dismissResearch();
 			Minimap.showInternal();
 			break;
 		case "stylesheetShape":

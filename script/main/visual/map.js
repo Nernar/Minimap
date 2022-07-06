@@ -13,9 +13,9 @@ const ConfigDescriptor = [__mod__.getInfoProperty("name"), "Leave",
 				["checkBox", "indicatorHostile", "Hostile"],
 				["checkBox", "indicatorOnlySurface", "Hide below sea level"],
 			["sectionDivider", "Marks"],
-				["checkBox", "indicatorPlayer", "Show players"],
-				["checkBox", "indicatorTile", "Containers"],
-				["checkBox", "indicatorWaypoint", "Waypoints"]]],
+				// ["checkBox", "indicatorTile", "Containers"],
+				// ["checkBox", "indicatorWaypoint", "Waypoints"],
+				["checkBox", "indicatorPlayer", "Show players"]]],
 		["subScreen", "Advanced", ["Advanced", "Apply",
 			["keyValue", "multipleChoice", "Thread optimization", "priority", ["Background", "Foreground", "Disabled"]],
 			["keyValue", "slider", "Max frequency", "delay", 1, 40, 1, " fps"],
@@ -63,6 +63,13 @@ let bmpPaint = new android.graphics.Paint();
 bmpPaint.setAntiAlias(false);
 bmpPaint.setFilterBitmap(false);
 bmpPaint.setXfermode(new android.graphics.PorterDuffXfermode(android.graphics.PorterDuff.Mode.SRC));
+Minimap.onChangeStylesheet();
+bmpSrc = android.graphics.Bitmap.createBitmap(((settings.radius + 1) * 2 + 1) * 16, ((settings.radius + 1) * 2 + 1) * 16, android.graphics.Bitmap.Config.ARGB_8888);
+bmpSrcCopy = android.graphics.Bitmap.createBitmap(bmpSrc.getWidth(), bmpSrc.getHeight(), android.graphics.Bitmap.Config.ARGB_8888);
+canvasBmpSrc.setBitmap(bmpSrc);
+canvasBmpSrcCopy.setBitmap(bmpSrcCopy);
+minZoom = settings.locationSize / (settings.radius * 2 * 16);
+Minimap.onChangeZoom();
 
 let mapView = (function() {
 	let layout = new android.widget.RelativeLayout(getContext());
@@ -74,13 +81,13 @@ let mapView = (function() {
 	
 	getContext().runOnUiThread(function() {
 		try {
-			let mScaleFactor = settings.mapZoom / 10;
+			let mScaleFactor = settings.mapZoom / 10.;
 			let mRequiredStandartAction = true;
 			let mScaleGestureDetector = new android.view.ScaleGestureDetector(getContext(), new JavaAdapter(android.view.ScaleGestureDetector.SimpleOnScaleGestureListener, android.view.ScaleGestureDetector.OnScaleGestureListener, {
 				onScale: function(scaleGestureDetector) {
 					mScaleFactor *= scaleGestureDetector.getScaleFactor();
-					mScaleFactor = Math.max(1.0, Math.min(mScaleFactor, 10.0));
-					let mPrescaledZoom = Math.round(mScaleFactor * 10);
+					mScaleFactor = Math.max(1., Math.min(mScaleFactor, 10.));
+					let mPrescaledZoom = Math.round(mScaleFactor * 10.);
 					if (mPrescaledZoom != settings.mapZoom) {
 						settings.mapZoom = mPrescaledZoom;
 						settingsChanged("mapZoom");
@@ -103,13 +110,23 @@ let mapView = (function() {
 				},
 				onSingleTapConfirmed: function(event) {
 					if (mRequiredStandartAction) {
-						changeMapState();
+						Minimap.showResearchInternal();
+						Minimap.dismissInternal();
 					}
 					return mRequiredStandartAction;
 				},
 				onLongPress: function(event) {
 					if (mRequiredStandartAction) {
 						Minimap.showConfigDialog();
+					}
+					return mRequiredStandartAction;
+				},
+				onFling: function(event1, event2, velocityX, velocityY) {
+					if (mRequiredStandartAction) {
+						if (velocityX > 48) {
+							changeMapState();
+							return false;
+						}
 					}
 					return mRequiredStandartAction;
 				}
@@ -186,6 +203,7 @@ let mapView = (function() {
 		});
 	};
 	Minimap.resetVisibility();
+	
 	let manager = getContext().getSystemService(android.content.Context.WINDOW_SERVICE);
 	Minimap.showInternal = function() {
 		popup.showAtLocation(getDecorView(), settings.locationGravity, 0, settings.locationOffset);
@@ -213,6 +231,98 @@ let mapView = (function() {
 		}
 		handle(function() {
 			location.setText(Math.floor(position.x) + ", " + Math.floor(position.y - 2) + ", " + Math.floor(position.z));
+		});
+	};
+	
+	let researchWindowParams = new android.view.WindowManager.LayoutParams
+		(android.view.ViewGroup.LayoutParams.MATCH_PARENT, android.view.ViewGroup.LayoutParams.MATCH_PARENT, 0, 0, 1000, 256, -3);
+	let research = new android.widget.ImageView(getContext());
+	research.setMinimumWidth(getDisplayWidth());
+	research.setMinimumHeight(getDisplayHeight());
+	let drawable = new android.graphics.drawable.BitmapDrawable(bmpSrc);
+	drawable.setFilterBitmap(false);
+	drawable.setAntiAlias(false);
+	research.setImageDrawable(drawable);
+	research.setOnTouchListener((function() {
+		let mOutside = false;
+		let mMode = 0;
+		let mTargetSpacing = 1.;
+		let deltaX;
+		let deltaY;
+		let distanceBetween = function(event) {
+			let x = event.getX(0) - event.getX(1);
+			let y = event.getY(0) - event.getY(1);
+			return Math.sqrt(x * x + y * y);
+		};
+		return function(view, event) {
+			switch (event.getAction() & android.view.MotionEvent.ACTION_MASK) {
+				case android.view.MotionEvent.ACTION_DOWN:
+					deltaX = view.getX() - event.getRawX();
+					deltaY = view.getY() - event.getRawY();
+					mOutside = false;
+					mMode = 1;
+					break;
+				case android.view.MotionEvent.ACTION_POINTER_DOWN:
+					mTargetSpacing = distanceBetween(event);
+					if (mTargetSpacing > 10.) {
+						mMode = 2;
+					}
+					break;
+				case android.view.MotionEvent.ACTION_UP:
+					mOutside = true;
+				case android.view.MotionEvent.ACTION_POINTER_UP:
+					mMode = 0;
+					break;
+				case android.view.MotionEvent.ACTION_MOVE:
+					if (!mOutside) {
+						if (mMode == 1) {
+							view.animate().x(event.getRawX() + deltaX).y(event.getRawY() + deltaY).setDuration(0).start();
+						}
+						if (mMode == 2 && event.getPointerCount() == 2) {
+							let outgoingSpacing = distanceBetween(event);
+							if (outgoingSpacing > 10.) {
+								let scale = outgoingSpacing / mTargetSpacing * Math.sqrt(view.getScaleX());
+								if (scale > 24.) {
+									Minimap.showInternal();
+									Minimap.dismissResearchInternal();
+								} else {
+									view.setScaleX(scale);
+									view.setScaleY(scale);
+								}
+							}
+						}
+					}
+					break;
+			}
+			return true;
+		};
+	})());
+	
+	let mResearchWindowAttached = false;
+	Minimap.showResearchInternal = function() {
+		drawable.setBitmap(bmpSrc);
+		let modifier = getDisplayWidth() / getDisplayHeight();
+		research.setScaleX(modifier);
+		research.setScaleY(modifier);
+		if (!mResearchWindowAttached) {
+			mResearchWindowAttached = true;
+			manager.addView(research, researchWindowParams);
+		}
+	};
+	Minimap.showResearch = function() {
+		getContext().runOnUiThread(function() {
+			Minimap.showResearchInternal();
+		});
+	};
+	Minimap.dismissResearchInternal = function() {
+		if (mResearchWindowAttached) {
+			mResearchWindowAttached = false;
+			manager.removeView(research);
+		}
+	};
+	Minimap.dismissResearch = function() {
+		getContext().runOnUiThread(function() {
+			Minimap.dismissResearchInternal();
 		});
 	};
 	return texture;
@@ -259,14 +369,17 @@ Callback.addCallback("NativeGuiChanged", function(screenName) {
 	if (isHorizon) {
 		if (screenName != "in_game_play_screen") {
 			Minimap.dismiss();
+			Minimap.dismissResearch();
 			return;
 		}
 	} else {
 		if (screenName != "hud_screen") {
 			Minimap.dismiss();
+			Minimap.dismissResearch();
 			return;
 		}
 	}
+	Minimap.dismissResearch();
 	Minimap.show();
 });
 
