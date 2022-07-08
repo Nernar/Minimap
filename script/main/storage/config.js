@@ -86,7 +86,7 @@ const protoConfig = (function() {
 
 let settings = {};
 
-const reloadSettings = function(source) {
+Minimap.loadConfig = function(source) {
 	if (source === undefined) {
 		source = __config__;
 	}
@@ -124,12 +124,12 @@ const reloadSettings = function(source) {
 
 
 try {
-	reloadSettings();
+	Minimap.loadConfig();
 } catch (e) {
 	reportError(e);
 }
 
-const saveSettings = function() {
+Minimap.saveConfig = function() {
 	setConfigOptionIfNeeded(protoConfig, "runtime.type", settings.mapType);
 	setConfigOptionIfNeeded(protoConfig, "runtime.surface", settings.mapSurface);
 	setConfigOptionIfNeeded(protoConfig, "runtime.smoothing", settings.mapSmoothing);
@@ -160,12 +160,12 @@ const saveSettings = function() {
 	__config__.save();
 };
 
-const restoreSettings = function(notifyEverything) {
-	reloadSettings(protoConfig);
+const restoreConfigDirectly = function(notifyEverything) {
+	Minimap.loadConfig(protoConfig);
 	if (notifyEverything) {
 		for (let element in settings) {
 			settingsChanged(element);
 		}
 	}
-	saveSettings();
+	Minimap.saveConfig();
 };

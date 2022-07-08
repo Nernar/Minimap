@@ -8,7 +8,7 @@
     
   },
   "indicator":{
-    
+    "waypoint":false
   },
   "location":{
     
@@ -20,6 +20,6 @@
     
   },
   "development":{
-    
+    "location":true
   }
 }

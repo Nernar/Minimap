@@ -1,4 +1,4 @@
-const mapDotFauna = [
+Minimap.SMOOTHING_FAUNA = [
 	6, // saplings
 	20, // glass
 	31, // grass
@@ -81,9 +81,11 @@ const smoothingDot = [
 		return !GenerationUtils_AdaptedScript.isTransparentBlock(id);
 	},
 	function ignoreFauna(id) {
-		return mapDotFauna.indexOf(id) == -1;
+		return Minimap.SMOOTHING_FAUNA.indexOf(id) == -1;
 	}
 ];
+
+Minimap.SMOOTHING_DOT = smoothingDot;
 
 const heightmapDot = [
 	function nearestGenerationSurface(ix, iz) {
@@ -148,6 +150,8 @@ const heightmapDot = [
 		return 256;
 	}
 ];
+
+Minimap.HEIGHTMAP_DOT = heightmapDot;
 
 const mapDot = [
 	function monochromaticColormap(ix, iz) {
@@ -307,3 +311,5 @@ const mapDot = [
 		return reflectColorRgb(255 * (0.9 * (y / 127) + 0.1), 255 * (0.9 * (y / 127) + 0.1), 255 * (0.9 * (y / 127) + 0.1));
 	}
 ];
+
+Minimap.COLORMAP_DOT = mapDot;

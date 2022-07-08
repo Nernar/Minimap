@@ -6,7 +6,7 @@ let redraw = false,
 	dimensionNew,
 	pool;
 
-const createPool = function() {
+Minimap.shutdownAndSchedulePool = function() {
 	if (pool != null) {
 		pool.shutdownNow();
 	}
@@ -15,7 +15,7 @@ const createPool = function() {
 	pool.allowCoreThreadTimeOut(true);
 };
 
-const drawMinimapWhenDirty = function() {
+Minimap.drawMinimapWhenDirty = function() {
 	try {
 		if (settings.priority == 0) {
 			android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
@@ -48,35 +48,35 @@ const drawMinimapWhenDirty = function() {
 					}
 					if (xChunkNew > xChunkOld) {
 						for (let i = radius + 16 - (xChunkNew - xChunkOld); i <= radius; i += 16) {
-							scheduleChunk(xChunkNew + i, zChunkNew, 0);
+							Minimap.scheduleChunk(xChunkNew + i, zChunkNew, 0);
 							for (let ix = 16; ix <= radius; ix += 16) {
-								scheduleChunk(xChunkNew + i, zChunkNew + ix, 0);
-								scheduleChunk(xChunkNew + i, zChunkNew - ix, 0);
+								Minimap.scheduleChunk(xChunkNew + i, zChunkNew + ix, 0);
+								Minimap.scheduleChunk(xChunkNew + i, zChunkNew - ix, 0);
 							}
 						}
 					} else if (xChunkOld > xChunkNew) {
 						for (let i = radius + 16 - (xChunkOld - xChunkNew); i <= radius; i += 16) {
-							scheduleChunk(xChunkNew - i, zChunkNew, 0);
+							Minimap.scheduleChunk(xChunkNew - i, zChunkNew, 0);
 							for (let ix = 16; ix <= radius; ix += 16) {
-								scheduleChunk(xChunkNew - i, zChunkNew + ix, 0);
-								scheduleChunk(xChunkNew - i, zChunkNew - ix, 0);
+								Minimap.scheduleChunk(xChunkNew - i, zChunkNew + ix, 0);
+								Minimap.scheduleChunk(xChunkNew - i, zChunkNew - ix, 0);
 							}
 						}
 					}
 					if (zChunkNew > zChunkOld) {
 						for (let i = radius + 16 - (zChunkNew - zChunkOld); i <= radius; i += 16) {
-							scheduleChunk(xChunkNew, zChunkNew + i, 0);
+							Minimap.scheduleChunk(xChunkNew, zChunkNew + i, 0);
 							for (let ix = 16; ix <= radius; ix += 16) {
-								scheduleChunk(xChunkNew + ix, zChunkNew + i, 0);
-								scheduleChunk(xChunkNew - ix, zChunkNew + i, 0);
+								Minimap.scheduleChunk(xChunkNew + ix, zChunkNew + i, 0);
+								Minimap.scheduleChunk(xChunkNew - ix, zChunkNew + i, 0);
 							}
 						}
 					} else if (zChunkOld > zChunkNew) {
 						for (let i = radius + 16 - (zChunkOld - zChunkNew); i <= radius; i += 16) {
-							scheduleChunk(xChunkNew, zChunkNew - i, 0);
+							Minimap.scheduleChunk(xChunkNew, zChunkNew - i, 0);
 							for (let ix = 16; ix <= radius; ix += 16) {
-								scheduleChunk(xChunkNew + ix, zChunkNew - i, 0);
-								scheduleChunk(xChunkNew - ix, zChunkNew - i, 0);
+								Minimap.scheduleChunk(xChunkNew + ix, zChunkNew - i, 0);
+								Minimap.scheduleChunk(xChunkNew - ix, zChunkNew - i, 0);
 							}
 						}
 					}
@@ -84,17 +84,17 @@ const drawMinimapWhenDirty = function() {
 					X = position.x;
 					Z = position.z;
 					bmpSrc.eraseColor(0);
-					scheduleChunk(xChunkNew, zChunkNew, 0);
+					Minimap.scheduleChunk(xChunkNew, zChunkNew, 0);
 					for (let i = 16; i <= settings.radius * 16; i += 16) {
 						for (let ix = 0; ix < i; ix += 16) {
-							scheduleChunk(xChunkNew + ix + 16, zChunkNew + i, 0);
-							scheduleChunk(xChunkNew + ix, zChunkNew - i, 0);
-							scheduleChunk(xChunkNew - ix, zChunkNew + i, 0);
-							scheduleChunk(xChunkNew - ix - 16, zChunkNew - i, 0);
-							scheduleChunk(xChunkNew + i, zChunkNew + ix, 0);
-							scheduleChunk(xChunkNew + i, zChunkNew - ix - 16, 0);
-							scheduleChunk(xChunkNew - i, zChunkNew + ix + 16, 0);
-							scheduleChunk(xChunkNew - i, zChunkNew - ix, 0);
+							Minimap.scheduleChunk(xChunkNew + ix + 16, zChunkNew + i, 0);
+							Minimap.scheduleChunk(xChunkNew + ix, zChunkNew - i, 0);
+							Minimap.scheduleChunk(xChunkNew - ix, zChunkNew + i, 0);
+							Minimap.scheduleChunk(xChunkNew - ix - 16, zChunkNew - i, 0);
+							Minimap.scheduleChunk(xChunkNew + i, zChunkNew + ix, 0);
+							Minimap.scheduleChunk(xChunkNew + i, zChunkNew - ix - 16, 0);
+							Minimap.scheduleChunk(xChunkNew - i, zChunkNew + ix + 16, 0);
+							Minimap.scheduleChunk(xChunkNew - i, zChunkNew - ix, 0);
 						}
 					}
 				}
@@ -222,4 +222,4 @@ const drawMinimapWhenDirty = function() {
 };
 
 poolTick = java.util.concurrent.Executors.newSingleThreadScheduledExecutor();
-runnableUpdateMap = new java.lang.Runnable(drawMinimapWhenDirty);
+runnableUpdateMap = new java.lang.Runnable(Minimap.drawMinimapWhenDirty);

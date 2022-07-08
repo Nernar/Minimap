@@ -1,4 +1,4 @@
-const OptionPreset = {
+Minimap.OptionPreset = {
 	checkBox: function(when, args) {
 		let layoutElement = new android.widget.RelativeLayout(getContext()),
 			checkBtn = new android.widget.CheckBox(getContext()),
@@ -12,7 +12,7 @@ const OptionPreset = {
 		checkBtn.setChecked(!!settings[args[1]]);
 		checkBtn.setOnCheckedChangeListener(function(buttonView, isChecked) {
 			settings[args[1]] = !!isChecked;
-			settingsChanged(args[1]);
+			notifyConfigChanged(args[1]);
 		});
 		checkBtnParams.addRule(android.widget.RelativeLayout.ALIGN_PARENT_RIGHT);
 		checkBtnParams.addRule(android.widget.RelativeLayout.CENTER_VERTICAL);
@@ -31,7 +31,7 @@ const OptionPreset = {
 		text.setTextColor(Colors.LTGRAY);
 		text.setPadding(10 * getDisplayDensity(), 10 * getDisplayDensity(), 10 * getDisplayDensity(), 10 * getDisplayDensity());
 		text.setOnClickListener(function(v) {
-			createConfigDialog(args[2]).show();
+			Minimap.createConfigDialog(args[2]).show();
 		});
 		return text;
 	},
@@ -76,7 +76,7 @@ const OptionPreset = {
 							settings[args[i]] = args[i + 1][position];
 						}
 						textValue.setText(variants[position]);
-						settingsChanged(args[3]);
+						notifyConfigChanged(args[3]);
 						print.dismiss();
 					});
 					print.setTitle(translate(args[2]));
@@ -110,7 +110,7 @@ const OptionPreset = {
 					print.setPositiveButton(translate("Apply"), function(dialog, whichButton) {
 						settings[args[3]] = seekBar.getProgress() * args[6] + args[4];
 						textValue.setText(translate("%s" + args[7], settings[args[3]]));
-						settingsChanged(args[3]);
+						notifyConfigChanged(args[3]);
 						print.dismiss();
 					});
 					print.setNegativeButton(translate("Cancel"), function(dialog, whichButton) {
@@ -125,7 +125,7 @@ const OptionPreset = {
 				textValue.setText(translate(args[3]));
 				text.setOnClickListener(function(v) {
 				    if (args[4]) {
-				    	settingsChanged(args[4]);
+				    	notifyConfigChanged(args[4]);
 				    	when();
 				    }
 				});
@@ -142,7 +142,7 @@ const OptionPreset = {
 	}
 };
 
-const createConfigDialog = function() {
+Minimap.createConfigDialog = function() {
 	let print = new android.app.AlertDialog.Builder(getContext(),
 		android.R.style.Theme_DeviceDefault_DialogWhenLarge);
 	let scroll = new android.widget.ScrollView(getContext()),
@@ -151,7 +151,7 @@ const createConfigDialog = function() {
 	layout.setOrientation(android.widget.LinearLayout.VERTICAL);
 	layout.setPadding(10 * getDisplayDensity(), 0, 10 * getDisplayDensity(), 0);
 	for (let i = 2; i < arguments[0].length; i += 1) {
-		layout.addView(OptionPreset[arguments[0][i][0]](function() {
+		layout.addView(Minimap.OptionPreset[arguments[0][i][0]](function() {
 			print.dismiss();
 		}, arguments[0][i]));
 		if (i + 1 < arguments[0].length) {
@@ -164,7 +164,7 @@ const createConfigDialog = function() {
 	print.setView(scroll);
 	print.setTitle(translate(arguments[0][0]));
 	print.setPositiveButton(translate(arguments[0][1]), function(dialog, whichButton) {
-		saveSettings();
+		Minimap.saveConfig();
 	});
 	print = print.create();
 	let popup = print.getWindow();

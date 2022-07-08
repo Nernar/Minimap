@@ -15,20 +15,20 @@ const pointerPaint = {
 	})()
 };
 
-const Pointer = function(bitmap, matrix, rotate) {
+Minimap.Pointer = function(bitmap, matrix, rotate) {
 	this.bitmap = bitmap;
 	this.matrix = matrix;
 	this.rotate = rotate;
 };
 
-const MatrixPointer = function(bitmap, matrix, rotate) {
-	Pointer.call(this, bitmap, matrix(bitmap), rotate);
+Minimap.MatrixPointer = function(bitmap, matrix, rotate) {
+	Minimap.Pointer.call(this, bitmap, matrix(bitmap), rotate);
 };
 
-MatrixPointer.prototype = new Pointer;
+Minimap.MatrixPointer.prototype = new Minimap.Pointer;
 
 const pointer = [
-	new Pointer(
+	new Minimap.Pointer(
 		(function() {
 			let paint = new android.graphics.Paint(),
 				bitmap = android.graphics.Bitmap.createBitmap(getDisplayHeight() * 0.1, getDisplayHeight() * 0.1, android.graphics.Bitmap.Config.ARGB_8888),
@@ -46,7 +46,7 @@ const pointer = [
 		})(),
 		false
 	),
-	new Pointer(
+	new Minimap.Pointer(
 		(function() {
 			let path = new android.graphics.Path(),
 				paint = new android.graphics.Paint(),
@@ -73,7 +73,7 @@ const pointer = [
 		})(),
 		true
 	),
-	new MatrixPointer(
+	new Minimap.MatrixPointer(
 		android.graphics.BitmapFactory.decodeFile(__dir__ + "assets/arrow.png"),
 		function(bitmap) {
 			let dx = bitmap.getWidth() / 5,
@@ -103,7 +103,7 @@ const heads = (function(bitmapAssociation) {
 })({});
 
 if (heads[0] === undefined || heads[0] === null) {
-	heads[0] = decodeBase64Bitmap("iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4ggLFSgULUPHpQAAARlJREFUKM+dz7FrEwEcxfHP3eVyiVJTQZoOBfsf+A9IRxE6tnuHgA7+CdLORXFxcfEvsJQO7aAOGdz8FyykTRvUDCVQEsO1dxeHg9tzb/nB7/Helxc821xBVkAjCJHmGbIsRxiGiBsRFgsILalG2V0qWxR42Gqi0wyQi3AzTZEv8lqE8rx/s4ckbqLdeoT57BaiEJO/v3F48rUOIfiy/woPkgT/0hRRlGByO8HT7hqGl7+qwPIbyu7ttx+xs/UOva1B1f3prIvjHx9wdPC61obPvRform+gkazitN+v7N2XzzG6OsdgfFNrw/Q+x91ogOH1DCthXNnfvv/E+kYbgbgW4eLPGEVR4MnjTmWk93doJy1M53n1WZrwHwiMVs+tK7U4AAAAAElFTkSuQmCC");
+	heads[0] = Minimap.decodeBase64Bitmap("iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4ggLFSgULUPHpQAAARlJREFUKM+dz7FrEwEcxfHP3eVyiVJTQZoOBfsf+A9IRxE6tnuHgA7+CdLORXFxcfEvsJQO7aAOGdz8FyykTRvUDCVQEsO1dxeHg9tzb/nB7/Helxc821xBVkAjCJHmGbIsRxiGiBsRFgsILalG2V0qWxR42Gqi0wyQi3AzTZEv8lqE8rx/s4ckbqLdeoT57BaiEJO/v3F48rUOIfiy/woPkgT/0hRRlGByO8HT7hqGl7+qwPIbyu7ttx+xs/UOva1B1f3prIvjHx9wdPC61obPvRform+gkazitN+v7N2XzzG6OsdgfFNrw/Q+x91ogOH1DCthXNnfvv/E+kYbgbgW4eLPGEVR4MnjTmWk93doJy1M53n1WZrwHwiMVs+tK7U4AAAAAElFTkSuQmCC");
 }
 
 const getIconMatrix = function(head) {

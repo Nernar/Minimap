@@ -1,4 +1,4 @@
-const decodeBase64Bitmap = function(string) {
+Minimap.decodeBase64Bitmap = function(string) {
 	if (android.os.Build.VERSION.SDK_INT >= 26) {
 		string = java.util.Base64.getDecoder().decode(new java.lang.String(base64).getBytes());
 	} else {
@@ -7,7 +7,7 @@ const decodeBase64Bitmap = function(string) {
 	return android.graphics.BitmapFactory.decodeByteArray(string, 0, string.length);
 };
 
-const drawBorderBitmap = function() {
+Minimap.drawBorderBitmap = function() {
 	let bitmap = android.graphics.Bitmap.createBitmap(settings.locationSize,
 			settings.locationSize, android.graphics.Bitmap.Config.ARGB_8888),
 		canvas = new android.graphics.Canvas(bitmap),
@@ -26,11 +26,11 @@ const drawBorderBitmap = function() {
 		default:
 			return null;
 	}
-	canvas.drawPath(createPath(true, true), paint);
+	canvas.drawPath(Minimap.createHardcodedPath(true, true), paint);
 	return bitmap;
 };
 
-const createPath = function(outer, inner) {
+Minimap.createHardcodedPath = function(outer, inner) {
 	let path = new android.graphics.Path();
 	path.setFillType(android.graphics.Path.FillType.EVEN_ODD);
 	if (settings.stylesheetShape == 1) {

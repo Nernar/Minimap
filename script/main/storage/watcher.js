@@ -1,5 +1,8 @@
 const Minimap = {
 	REVISION: REVISION,
+	getVersionCode: function() {
+		return 1;
+	},
 	onChangeRadius: function() {
 		let widthOld = bmpSrc.getWidth(),
 			widthNew = ((settings.radius + 1) * 2 + 1) * 16,
@@ -22,14 +25,14 @@ const Minimap = {
 			for (let i = (widthOld - 16) / 2; i <= settings.radius * 16; i += 16) {
 				for (let j = 0; j < i; j += 16) {
 					if (mapState) {
-						scheduleChunk(xChunk + j + 16, zChunk + i, 0);
-						scheduleChunk(xChunk + j, zChunk - i, 0);
-						scheduleChunk(xChunk - j, zChunk + i, 0);
-						scheduleChunk(xChunk - j - 16, zChunk - i, 0);
-						scheduleChunk(xChunk + i, zChunk + j, 0);
-						scheduleChunk(xChunk + i, zChunk - j - 16, 0);
-						scheduleChunk(xChunk - i, zChunk + j + 16, 0);
-						scheduleChunk(xChunk - i, zChunk - j, 0);
+						Minimap.scheduleChunk(xChunk + j + 16, zChunk + i, 0);
+						Minimap.scheduleChunk(xChunk + j, zChunk - i, 0);
+						Minimap.scheduleChunk(xChunk - j, zChunk + i, 0);
+						Minimap.scheduleChunk(xChunk - j - 16, zChunk - i, 0);
+						Minimap.scheduleChunk(xChunk + i, zChunk + j, 0);
+						Minimap.scheduleChunk(xChunk + i, zChunk - j - 16, 0);
+						Minimap.scheduleChunk(xChunk - i, zChunk + j + 16, 0);
+						Minimap.scheduleChunk(xChunk - i, zChunk - j, 0);
 					} else {
 						delayChunksArrLock.acquire();
 						delayChunksArr[delayChunksArr.length] = [xChunk + j + 16, zChunk + i];
@@ -60,11 +63,11 @@ const Minimap = {
 	},
 	onChangeStylesheet: function() {
 		if (settings.stylesheetBorder != 0) {
-			pathBorder = createPath(false, true);
+			pathBorder = Minimap.createHardcodedPath(false, true);
 		} else {
-			pathBorder = createPath(true, false);
+			pathBorder = Minimap.createHardcodedPath(true, false);
 		}
-		bmpBorder = drawBorderBitmap();
+		bmpBorder = Minimap.drawBorderBitmap();
 		redraw = true;
 	},
 	onChangeRefreshDelay: function() {
@@ -75,7 +78,7 @@ const Minimap = {
 	},
 	onChangeRenderer: function() {
 		if (pool.getActiveCount() > 0) {
-			createPool();
+			Minimap.shutdownAndSchedulePool();
 		}
 		X = undefined;
 	},
@@ -88,11 +91,11 @@ const Minimap = {
 	},
 	restoreConfig: function() {
 		Minimap.dismissConfigDialog();
-		restoreSettings(true);
+		restoreConfigDirectly(true);
 	}
 };
 
-const settingsChanged = function(key) {
+const notifyConfigChanged = function(key) {
 	switch (key) {
 		case "radius":
 		case "forceRefresh":

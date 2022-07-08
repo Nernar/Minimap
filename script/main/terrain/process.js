@@ -40,7 +40,7 @@ Minimap.processChunk = function(xChunk, zChunk, delay) {
 	return (redraw = true);
 };
 
-const scheduleChunk = function(xChunk, zChunk, delay) {
+Minimap.scheduleChunk = function(xChunk, zChunk, delay) {
 	pool.schedule(new java.lang.Runnable(function() {
 		try {
 			if (settings.priority == 0) {
@@ -50,7 +50,7 @@ const scheduleChunk = function(xChunk, zChunk, delay) {
 			}
 			if (!Minimap.processChunk(xChunk, zChunk, delay)) {
 				if (mapState) {
-					scheduleChunk(xChunk, zChunk, 10);
+					Minimap.scheduleChunk(xChunk, zChunk, 10);
 				} else {
 					delayChunksArrLock.acquire();
 					delayChunksArr[delayChunksArr.length] = [xChunk, zChunk];

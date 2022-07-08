@@ -1,6 +1,6 @@
 let policyShowMultiplayerPlayer = true;
 
-const isAcceptableEntity = function(ent) {
+Minimap.isAcceptableEntity = function(ent) {
 	let type = Entity.getType(ent);
 	if (type == 1) {
 		return policyShowMultiplayerPlayer;
@@ -17,7 +17,7 @@ const isAcceptableEntity = function(ent) {
 const entities = [];
 
 Callback.addCallback("EntityRemoved", function(entity) {
-	if (isAcceptableEntity(entity)) {
+	if (Minimap.isAcceptableEntity(entity)) {
 		let index = entities.indexOf(entity);
 		if (index > -1) {
 			entities.splice(index, 1);
@@ -26,7 +26,7 @@ Callback.addCallback("EntityRemoved", function(entity) {
 });
 
 Callback.addCallback("EntityAdded", function(entity) {
-	if (isAcceptableEntity(entity)) {
+	if (Minimap.isAcceptableEntity(entity)) {
 		// Entity uid may be added only once
 		entities[entities.length] = entity;
 	}

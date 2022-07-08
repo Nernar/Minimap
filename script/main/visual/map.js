@@ -1,4 +1,4 @@
-const ConfigDescriptor = [__mod__.getInfoProperty("name"), "Leave",
+Minimap.ConfigDescriptor = [__mod__.getInfoProperty("name"), "Leave",
 	["keyValue", "multipleChoice", "Type", "mapType", ["Monochromatic", "Surface", "Underground"]],
 	["keyValue", "multipleChoice", "Heightmap", "mapSurface", ["Nearest surface", "Optimum", "Procedural", "Closest to sky"]],
 	["keyValue", "multipleChoice", "Smoothing", "mapSmoothing", ["Disabled", "At most", "Transparency", "Fauna"]],
@@ -49,7 +49,7 @@ const ConfigDescriptor = [__mod__.getInfoProperty("name"), "Leave",
 	let dialog;
 	Minimap.showConfigDialog = function() {
 		if (!dialog) {
-			dialog = createConfigDialog(ConfigDescriptor);
+			dialog = Minimap.createConfigDialog(Minimap.ConfigDescriptor);
 		}
 		dialog.show();
 	};
@@ -89,9 +89,9 @@ let mapView = (function() {
 					mScaleFactor = Math.max(1., Math.min(mScaleFactor, 10.));
 					let mPrescaledZoom = Math.round(mScaleFactor * 10.);
 					if (mPrescaledZoom != settings.mapZoom) {
-						settings.mapZoom = mPrescaledZoom;
-						settingsChanged("mapZoom");
 						mRequiredStandartAction = false;
+						settings.mapZoom = mPrescaledZoom;
+						Minimap.onChangeZoom();
 					}
 					return true;
 				}
@@ -123,8 +123,8 @@ let mapView = (function() {
 				},
 				onFling: function(event1, event2, velocityX, velocityY) {
 					if (mRequiredStandartAction) {
-						if (velocityX > 48) {
-							changeMapState();
+						if (velocityX > 32 * getDisplayDensity()) {
+							Minimap.changeState();
 							return false;
 						}
 					}
@@ -153,7 +153,7 @@ let mapView = (function() {
 	button.setBackgroundResource(android.R.drawable.ic_menu_mylocation);
 	button.setLayoutParams(new android.widget.LinearLayout.LayoutParams(buttonSize * getDisplayDensity(), buttonSize * getDisplayDensity()));
 	button.setOnClickListener(function(v) {
-		changeMapState();
+		Minimap.changeState();
 	});
 	button.setOnLongClickListener(function(v) {
 		Minimap.showConfigDialog();
@@ -162,8 +162,7 @@ let mapView = (function() {
 	
 	let location = new android.widget.TextView(getContext());
 	location.setGravity(android.view.Gravity.CENTER);
-	location.setTextSize(14);
-	location.setPadding(0, 6 * getDisplayDensity(), 0, 0);
+	location.setTextSize(toComplexUnitSp(12));
 	location.setTextColor(Colors.WHITE);
 	location.setShadowLayer(1, 4, 4, Colors.BLACK);
 	location.setId(2);
@@ -180,9 +179,10 @@ let mapView = (function() {
 	layout.addView(texture, textureParams);
 	let locationParams = new android.widget.RelativeLayout.LayoutParams
 		(android.view.ViewGroup.LayoutParams.WRAP_CONTENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
-	locationParams.addRule(android.widget.RelativeLayout.BELOW, 1);
 	locationParams.addRule(android.widget.RelativeLayout.ALIGN_LEFT, 1);
 	locationParams.addRule(android.widget.RelativeLayout.ALIGN_RIGHT, 1);
+	locationParams.addRule(android.widget.RelativeLayout.BELOW, 1);
+	locationParams.setMargins(0, toComplexUnitDip(4), 0, 0);
 	layout.addView(location, locationParams);
 	
 	Minimap.onChangeOpacity = function() {
@@ -234,16 +234,19 @@ let mapView = (function() {
 			location.setText(Math.floor(position.x) + ", " + Math.floor(position.y - 2) + ", " + Math.floor(position.z));
 		});
 	};
-	
-	let researchWindowParams = new android.view.WindowManager.LayoutParams
+	return texture;
+})();
+
+let researchView = (function() {
+	let layout = new android.widget.RelativeLayout(getContext());
+	let researchParams = new android.view.WindowManager.LayoutParams
 		(android.view.ViewGroup.LayoutParams.MATCH_PARENT, android.view.ViewGroup.LayoutParams.MATCH_PARENT, 0, 0, 1000, 256, -3);
 	let research = new android.widget.ImageView(getContext());
-	research.setMinimumWidth(getDisplayWidth());
-	research.setMinimumHeight(getDisplayHeight());
 	let drawable = new android.graphics.drawable.BitmapDrawable(bmpSrc);
 	drawable.setFilterBitmap(false);
 	drawable.setAntiAlias(false);
 	research.setImageDrawable(drawable);
+	
 	getContext().runOnUiThread(function() {
 		try {
 			let mScaleFactor = 1.;
@@ -278,12 +281,12 @@ let mapView = (function() {
 					}
 					return mRequiredStandartAction;
 				},
-				onLongPress: function(event) {
-					if (mRequiredStandartAction) {
-						Minimap.showConfigDialog();
-					}
-					return mRequiredStandartAction;
-				},
+				// onLongPress: function(event) {
+					// if (mRequiredStandartAction) {
+						// TODO: Required chunk allocation action
+					// }
+					// return mRequiredStandartAction;
+				// },
 				onScroll: function(event1, event2, distanceX, distanceY) {
 					if (mRequiredStandartAction) {
 						research.setX(research.getX() - distanceX);
@@ -306,6 +309,28 @@ let mapView = (function() {
 		}
 	});
 	
+	// let location = new android.widget.TextView(getContext());
+	// location.setGravity(android.view.Gravity.CENTER);
+	// location.setTextSize(toComplexUnitSp(8));
+	// location.setTextColor(Colors.WHITE);
+	// location.setShadowLayer(1, 4, 4, Colors.BLACK);
+	// location.setId(2);
+	// try {
+		// location.setTypeface(InnerCorePackage.utils.FileTools.getMcTypeface());
+	// } catch (e) {
+		// Logger.Log("Minimap: unable to set embedded in Inner Core font, default will be used otherwise", "WARNING");
+	// }
+	
+	layout.addView(research, new android.widget.RelativeLayout.LayoutParams
+		(android.view.ViewGroup.LayoutParams.MATCH_PARENT, android.view.ViewGroup.LayoutParams.MATCH_PARENT));
+	// let locationParams = new android.widget.RelativeLayout.LayoutParams
+		// (android.view.ViewGroup.LayoutParams.WRAP_CONTENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+	// locationParams.setMargins(toComplexUnitDip(12), 0, 0, toComplexUnitDip(12));
+	// locationParams.addRule(android.widget.RelativeLayout.ALIGN_PARENT_LEFT);
+	// locationParams.addRule(android.widget.RelativeLayout.ALIGN_PARENT_BOTTOM);
+	// layout.addView(location, locationParams);
+	
+	let manager = getContext().getSystemService(android.content.Context.WINDOW_SERVICE);
 	Minimap.resetResearchLocation = function() {
 		drawable.setBitmap(bmpSrc);
 		research.setX(0);
@@ -319,7 +344,7 @@ let mapView = (function() {
 		Minimap.resetResearchLocation();
 		if (!mResearchWindowAttached) {
 			mResearchWindowAttached = true;
-			manager.addView(research, researchWindowParams);
+			manager.addView(layout, researchParams);
 		}
 	};
 	Minimap.showResearch = function() {
@@ -330,7 +355,7 @@ let mapView = (function() {
 	Minimap.dismissResearchInternal = function() {
 		if (mResearchWindowAttached) {
 			mResearchWindowAttached = false;
-			manager.removeView(research);
+			manager.removeView(layout);
 		}
 	};
 	Minimap.dismissResearch = function() {
@@ -338,7 +363,7 @@ let mapView = (function() {
 			Minimap.dismissResearchInternal();
 		});
 	};
-	return texture;
+	return research;
 })();
 
 let startMapControl = true;
@@ -346,7 +371,7 @@ let startMapControl = true;
 Callback.addCallback("LevelLeft", function() {
 	Minimap.dismiss();
 	if (mapState) {
-		changeMapState();
+		Minimap.changeState();
 	}
 	pool.shutdownNow();
 	startMapControl = true;
@@ -358,18 +383,18 @@ Callback.addCallback("LevelLeft", function() {
 
 let mapState = false;
 
-const changeMapState = function() {
+Minimap.changeState = function() {
 	mapState = !mapState;
 	Minimap.resetVisibility();
 	if (mapState) {
 		delayChunksArrLock.acquire();
 		while (delayChunksArr.length > 0) {
 			let chunk = delayChunksArr.shift();
-			scheduleChunk(chunk[0], chunk[1], 0);
+			Minimap.scheduleChunk(chunk[0], chunk[1], 0);
 		}
 		delayChunksArrLock.release();
 		scheduledFutureUpdateMap = poolTick.scheduleWithFixedDelay(runnableUpdateMap, 1000, Math.round(1000 / settings.delay), java.util.concurrent.TimeUnit.MILLISECONDS);
-		scheduleChunk(Math.floor(X / 16) * 16, Math.floor(Z / 16) * 16, 0);
+		Minimap.scheduleChunk(Math.floor(X / 16) * 16, Math.floor(Z / 16) * 16, 0);
 	} else {
 		scheduledFutureUpdateMap.cancel(false);
 	}
@@ -399,6 +424,6 @@ Callback.addCallback("NativeGuiChanged", function(screenName) {
 Callback.addCallback(isHorizon ? "LevelDisplayed" : "LevelLoaded", function() {
 	if (startMapControl) {
 		startMapControl = false;
-		createPool();
+		Minimap.shutdownAndSchedulePool();
 	}
 });
