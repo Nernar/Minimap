@@ -55,8 +55,8 @@ const protoConfig = (function() {
 			local: true,
 			player: true,
 			tile: false,
-			waypoint: true,
-			only_surface: false
+			waypoint: false,
+			only_surface: true
 		},
 		location: {
 			raw_size: 40,

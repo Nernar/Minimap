@@ -138,7 +138,8 @@ let mapView = (function() {
 			});
 		} catch (e) {
 			texture.setOnClickListener(function(v) {
-				changeMapState();
+				Minimap.showResearchInternal();
+				Minimap.dismissInternal();
 			});
 			texture.setOnLongClickListener(function(v) {
 				Minimap.showConfigDialog();
@@ -243,67 +244,79 @@ let mapView = (function() {
 	drawable.setFilterBitmap(false);
 	drawable.setAntiAlias(false);
 	research.setImageDrawable(drawable);
-	research.setOnTouchListener((function() {
-		let mOutside = false;
-		let mMode = 0;
-		let mTargetSpacing = 1.;
-		let deltaX;
-		let deltaY;
-		let distanceBetween = function(event) {
-			let x = event.getX(0) - event.getX(1);
-			let y = event.getY(0) - event.getY(1);
-			return Math.sqrt(x * x + y * y);
-		};
-		return function(view, event) {
-			switch (event.getAction() & android.view.MotionEvent.ACTION_MASK) {
-				case android.view.MotionEvent.ACTION_DOWN:
-					deltaX = view.getX() - event.getRawX();
-					deltaY = view.getY() - event.getRawY();
-					mOutside = false;
-					mMode = 1;
-					break;
-				case android.view.MotionEvent.ACTION_POINTER_DOWN:
-					mTargetSpacing = distanceBetween(event);
-					if (mTargetSpacing > 10.) {
-						mMode = 2;
+	getContext().runOnUiThread(function() {
+		try {
+			let mScaleFactor = 1.;
+			let mRequiredStandartAction = true;
+			let mScaleGestureDetector = new android.view.ScaleGestureDetector(getContext(), new JavaAdapter(android.view.ScaleGestureDetector.SimpleOnScaleGestureListener, android.view.ScaleGestureDetector.OnScaleGestureListener, {
+				onScale: function(scaleGestureDetector) {
+					mScaleFactor *= scaleGestureDetector.getScaleFactor();
+					mScaleFactor = Math.max(1., Math.min(mScaleFactor, 20.));
+					research.setScaleX(mScaleFactor);
+					research.setScaleY(mScaleFactor);
+					mRequiredStandartAction = false;
+					return true;
+				}
+			}));
+			let mIgnoredByDoubleTap = false;
+			let mGestureDetector = new android.view.GestureDetector(getContext(), new JavaAdapter(android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener, android.view.GestureDetector.OnDoubleTapListener, {
+				onDown: function(event) {
+					if (!mIgnoredByDoubleTap) {
+						mRequiredStandartAction = true;
 					}
-					break;
-				case android.view.MotionEvent.ACTION_UP:
-					mOutside = true;
-				case android.view.MotionEvent.ACTION_POINTER_UP:
-					mMode = 0;
-					break;
-				case android.view.MotionEvent.ACTION_MOVE:
-					if (!mOutside) {
-						if (mMode == 1) {
-							view.animate().x(event.getRawX() + deltaX).y(event.getRawY() + deltaY).setDuration(0).start();
-						}
-						if (mMode == 2 && event.getPointerCount() == 2) {
-							let outgoingSpacing = distanceBetween(event);
-							if (outgoingSpacing > 10.) {
-								let scale = outgoingSpacing / mTargetSpacing * Math.sqrt(view.getScaleX());
-								if (scale > 24.) {
-									Minimap.showInternal();
-									Minimap.dismissResearchInternal();
-								} else {
-									view.setScaleX(scale);
-									view.setScaleY(scale);
-								}
-							}
-						}
+					mScaleFactor = research.getScaleX();
+					mIgnoredByDoubleTap = false;
+				},
+				onDoubleTap: function(event) {
+					mRequiredStandartAction = false;
+					mIgnoredByDoubleTap = true;
+				},
+				onSingleTapConfirmed: function(event) {
+					if (mRequiredStandartAction) {
+						Minimap.showInternal();
+						Minimap.dismissResearchInternal();
 					}
-					break;
-			}
-			return true;
-		};
-	})());
+					return mRequiredStandartAction;
+				},
+				onLongPress: function(event) {
+					if (mRequiredStandartAction) {
+						Minimap.showConfigDialog();
+					}
+					return mRequiredStandartAction;
+				},
+				onScroll: function(event1, event2, distanceX, distanceY) {
+					if (mRequiredStandartAction) {
+						research.setX(research.getX() - distanceX);
+						research.setY(research.getY() - distanceY);
+					}
+					return mRequiredStandartAction;
+				}
+			}));
+			research.setOnTouchListener(function(mView, event) {
+				mScaleGestureDetector.onTouchEvent(event);
+				mGestureDetector.onTouchEvent(event);
+				return true;
+			});
+		} catch (e) {
+			research.setOnClickListener(function(v) {
+				Minimap.showInternal();
+				Minimap.dismissResearchInternal();
+			});
+			reportError(e);
+		}
+	});
 	
-	let mResearchWindowAttached = false;
-	Minimap.showResearchInternal = function() {
+	Minimap.resetResearchLocation = function() {
 		drawable.setBitmap(bmpSrc);
+		research.setX(0);
+		research.setY(0);
 		let modifier = getDisplayWidth() / getDisplayHeight();
 		research.setScaleX(modifier);
 		research.setScaleY(modifier);
+	};
+	let mResearchWindowAttached = false;
+	Minimap.showResearchInternal = function() {
+		Minimap.resetResearchLocation();
 		if (!mResearchWindowAttached) {
 			mResearchWindowAttached = true;
 			manager.addView(research, researchWindowParams);
