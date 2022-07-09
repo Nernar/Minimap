@@ -92,6 +92,33 @@ const Minimap = {
 	restoreConfig: function() {
 		Minimap.dismissConfigDialog();
 		restoreConfigDirectly(true);
+	},
+	exportTerrain: function() {
+		let name = "Minimap_" + formatTimestamp() + ".png";
+		if (android.os.Build.VERSION.SDK_INT >= 29) {
+			let resolver = getContext().getContentResolver();
+			let contentValues = new android.content.ContentValues();
+			contentValues.put(android.provider.MediaStore.MediaColumns.DISPLAY_NAME, name);
+			contentValues.put(android.provider.MediaStore.MediaColumns.MIME_TYPE, "image/png");
+			contentValues.put(android.provider.MediaStore.MediaColumns.RELATIVE_PATH, android.os.Environment.DIRECTORY_PICTURES + "/Horizon");
+			let uri = resolver.insert(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+			try {
+				let stream = resolver.openOutputStream(uri);
+				bmpSrc.compress(android.graphics.Bitmap.CompressFormat.PNG, 100, stream);
+				Logger.Log("Minimap saved into " + uri, "INFO");
+				Game.message(translate("Minimap saved as %s", name));
+				stream.close();
+			} catch (e) {
+				reportError(e);
+			}
+		} else {
+			let path = getBitmapExportFolder() + name;
+			writeFileBitmap(path, bmpSrc);
+			scanMediaFiles([path], function(path, uri) {
+				Logger.Log("Minimap saved into " + uri, "INFO");
+				Game.message(translate("Minimap saved as %s", name));
+			});
+		}
 	}
 };
 
@@ -139,15 +166,18 @@ const notifyConfigChanged = function(key) {
 		case "resetConfig":
 			Minimap.restoreConfig();
 			break;
+		case "exportTerrain":
+			Minimap.exportTerrain();
+			break;
 	}
 };
 
 const checkRenderDistance = function() {
-	let options = load(android.os.Environment.getExternalStorageDirectory() + "/games/com.mojang/minecraftpe/", "options.txt");
+	let options = readFileText(android.os.Environment.getExternalStorageDirectory() + "/games/com.mojang/minecraftpe/options.txt");
 	if (options != "") {
 		options = options.split("\n");
 		if (!options) {
-			return;
+			return 6;
 		}
 		for (let i = 0; i < options.length; i += 1) {
 			options[i] = options[i].split(":");

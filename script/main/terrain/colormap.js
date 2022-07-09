@@ -16,13 +16,13 @@ const mergeColormapWith = function(who, what) {
 };
 
 let colormapRaw = (function() {
-	let proto = JSON.parse(load(__dir__ + "assets/", "colormap_innercore.json"));
-	let vanilla = JSON.parse(load(__dir__ + "assets/", "colormap_vanilla.json"));
-	let chemistry = JSON.parse(load(__dir__ + "assets/", "colormap_chemistry.json"));
+	let proto = JSON.parse(readFileText(__dir__ + "assets/colormap_innercore.json"));
+	let vanilla = JSON.parse(readFileText(__dir__ + "assets/colormap_vanilla.json"));
+	let chemistry = JSON.parse(readFileText(__dir__ + "assets/colormap_chemistry.json"));
 	mergeColormapWith(proto, vanilla, chemistry);
 	if (minecraftVersion >= 16) {
-		let vanilla14 = JSON.parse(load(__dir__ + "assets/", "colormap_vanilla_14.json"));
-		let vanilla16 = JSON.parse(load(__dir__ + "assets/", "colormap_vanilla_16.json"));
+		let vanilla14 = JSON.parse(readFileText(__dir__ + "assets/colormap_vanilla_14.json"));
+		let vanilla16 = JSON.parse(readFileText(__dir__ + "assets/colormap_vanilla_16.json"));
 		mergeColormapWith(proto, vanilla14, vanilla16);
 	}
 	return proto;

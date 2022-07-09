@@ -288,6 +288,18 @@ Translation.addTranslation("Other", {
 	ru: "Остальное",
 	uk: ""
 });
+Translation.addTranslation("Export terrain to file", {
+	ru: "Сохранить местность в файл",
+	uk: ""
+});
+Translation.addTranslation("Minimap saved as %s", {
+	ru: "Миникарта сохранена как %s",
+	uk: ""
+});
+Translation.addTranslation("Failed to scan new media, but files could still be saved", {
+	ru: "Не удается найти новые изображения, однако файлы могли быть сохранены",
+	uk: ""
+});
 Translation.addTranslation("Refresh canvas", {
 	ru: "Обновить канву",
 	uk: ""
