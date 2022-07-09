@@ -74,7 +74,8 @@ const protoConfig = (function() {
 			radius: checkRenderDistance(),
 			priority: 0,
 			delay: 20,
-			thread: 1
+			thread: 1,
+			export_density: 4
 		},
 		development: {
 			location: false,
@@ -117,7 +118,8 @@ Minimap.loadConfig = function(source) {
 		radius: getProtoNumber(protoConfig, source, "performance.radius"),
 		priority: getProtoNumber(protoConfig, source, "performance.priority"),
 		delay: getProtoNumber(protoConfig, source, "performance.delay"),
-		thread: getProtoNumber(protoConfig, source, "performance.thread")
+		thread: getProtoNumber(protoConfig, source, "performance.thread"),
+		exportDensity: getProtoNumber(protoConfig, source, "performance.export_density")
 	};
 	settings.locationSize = settings.locationRawSize / 100 * getDisplayHeight();
 };
@@ -157,6 +159,7 @@ Minimap.saveConfig = function() {
 	setConfigOptionIfNeeded(protoConfig, "performance.priority", settings.priority);
 	setConfigOptionIfNeeded(protoConfig, "performance.delay", settings.delay);
 	setConfigOptionIfNeeded(protoConfig, "performance.thread", settings.thread);
+	setConfigOptionIfNeeded(protoConfig, "performance.export_density", settings.exportDensity);
 	__config__.save();
 };
 

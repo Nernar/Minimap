@@ -93,31 +93,53 @@ const Minimap = {
 		Minimap.dismissConfigDialog();
 		restoreConfigDirectly(true);
 	},
+	getTerrainUpscaledBitmap: function() {
+		try {
+			return android.graphics.Bitmap.createScaledBitmap(bmpSrc,
+				bmpSrc.getWidth() * settings.exportDensity, bmpSrc.getWidth() * settings.exportDensity, false);
+		} catch (e) {
+			if (World.isWorldLoaded()) {
+				Game.tipMessage(translate("Insufficient memory"));
+			}
+			reportError(e);
+		}
+		return bmpSrc;
+	},
+	saveTerrainBitmapLegacy: function(name, bitmap) {
+		let path = getBitmapExportFolder() + name;
+		writeFileBitmap(path, bitmap);
+		scanMediaFiles([path], function(path, uri) {
+			Logger.Log("Minimap saved into " + uri, "INFO");
+			Game.message(translate("Minimap saved as %s", name));
+		});
+	},
+	saveTerrainBitmap: function(name, bitmap) {
+		let resolver = getContext().getContentResolver();
+		let contentValues = new android.content.ContentValues();
+		contentValues.put(android.provider.MediaStore.MediaColumns.DISPLAY_NAME, name);
+		contentValues.put(android.provider.MediaStore.MediaColumns.MIME_TYPE, "image/png");
+		contentValues.put(android.provider.MediaStore.MediaColumns.RELATIVE_PATH, android.os.Environment.DIRECTORY_PICTURES + "/Horizon");
+		let uri = resolver.insert(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+		try {
+			let stream = resolver.openOutputStream(uri);
+			bitmap.compress(android.graphics.Bitmap.CompressFormat.PNG, 100, stream);
+			Logger.Log("Minimap saved into " + uri, "INFO");
+			Game.message(translate("Minimap saved as %s", name));
+			stream.close();
+		} catch (e) {
+			reportError(e);
+		}
+	},
 	exportTerrain: function() {
 		let name = "Minimap_" + formatTimestamp() + ".png";
+		let bitmap = Minimap.getTerrainUpscaledBitmap();
 		if (android.os.Build.VERSION.SDK_INT >= 29) {
-			let resolver = getContext().getContentResolver();
-			let contentValues = new android.content.ContentValues();
-			contentValues.put(android.provider.MediaStore.MediaColumns.DISPLAY_NAME, name);
-			contentValues.put(android.provider.MediaStore.MediaColumns.MIME_TYPE, "image/png");
-			contentValues.put(android.provider.MediaStore.MediaColumns.RELATIVE_PATH, android.os.Environment.DIRECTORY_PICTURES + "/Horizon");
-			let uri = resolver.insert(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
-			try {
-				let stream = resolver.openOutputStream(uri);
-				bmpSrc.compress(android.graphics.Bitmap.CompressFormat.PNG, 100, stream);
-				Logger.Log("Minimap saved into " + uri, "INFO");
-				Game.message(translate("Minimap saved as %s", name));
-				stream.close();
-			} catch (e) {
-				reportError(e);
-			}
+			Minimap.saveTerrainBitmap(name, bitmap);
 		} else {
-			let path = getBitmapExportFolder() + name;
-			writeFileBitmap(path, bmpSrc);
-			scanMediaFiles([path], function(path, uri) {
-				Logger.Log("Minimap saved into " + uri, "INFO");
-				Game.message(translate("Minimap saved as %s", name));
-			});
+			Minimap.saveTerrainBitmapLegacy(name, bitmap);
+		}
+		if (bitmap != bmpSrc) {
+			bitmap.recycle();
 		}
 	}
 };

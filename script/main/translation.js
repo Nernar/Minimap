@@ -30,6 +30,10 @@ Translation.addTranslation("I don't like this", {
 	ru: "Мне не нравится это",
 	uk: ""
 });
+Translation.addTranslation("Insufficient memory", {
+	ru: "Недостаточно памяти",
+	uk: ""
+});
 
 // Minimap option section
 Translation.addTranslation("Type", {
@@ -217,6 +221,13 @@ Translation.addTranslation("%s fps", {
 Translation.addTranslation("Number of threads", {
 	ru: "Количество потоков",
 	uk: ""
+});
+Translation.addTranslation("Pixel density to export", {
+	ru: "Плотность пикселей для экспорта",
+	uk: ""
+});
+Translation.addTranslation("%spx", {
+	ru: "%s пикселей"
 });
 Translation.addTranslation("Debug various processes", {
 	ru: "Отладка различных процессов",
