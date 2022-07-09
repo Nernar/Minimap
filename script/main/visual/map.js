@@ -163,7 +163,7 @@ let mapView = (function() {
 	
 	let location = new android.widget.TextView(getContext());
 	location.setGravity(android.view.Gravity.CENTER);
-	location.setTextSize(toComplexUnitSp(12));
+	location.setTextSize(toComplexUnitSp(7));
 	location.setTextColor(Colors.WHITE);
 	location.setShadowLayer(1, 4, 4, Colors.BLACK);
 	location.setId(2);
@@ -312,7 +312,7 @@ let researchView = (function() {
 	
 	// let location = new android.widget.TextView(getContext());
 	// location.setGravity(android.view.Gravity.CENTER);
-	// location.setTextSize(toComplexUnitSp(8));
+	// location.setTextSize(toComplexUnitSp(7));
 	// location.setTextColor(Colors.WHITE);
 	// location.setShadowLayer(1, 4, 4, Colors.BLACK);
 	// location.setId(2);
