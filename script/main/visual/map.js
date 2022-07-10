@@ -3,7 +3,7 @@ Minimap.ConfigDescriptor = [__mod__.getInfoProperty("name"), "Leave",
 	["keyValue", "multipleChoice", "Heightmap", "mapSurface", ["Nearest surface", "Optimum", "Procedural", "Closest to sky"]],
 	["keyValue", "multipleChoice", "Smoothing", "mapSmoothing", ["Disabled", "At most", "Transparency", "Fauna"]],
 	["sectionDivider", "Rendering"],
-		["keyValue", "slider", "Distance", "radius", 1, 96, 1, " chunks"],
+		["keyValue", "slider", "Distance", "radius", 1, 64, 1, " chunks"],
 		["subScreen", "Icons / Indicators", ["Icons / Indicators", "Apply",
 			["keyValue", "multipleChoice", "Pointer", "stylesheetLocalPointer", ["Crosshair", "Arrow", "Map", "Head"]],
 			["checkBox", "indicatorLocal", "Yourself"],
@@ -230,10 +230,10 @@ let mapView = (function() {
 	};
 	Minimap.updateLocation = function(position) {
 		if (position === undefined || position === null) {
-			position = Player.getPosition();
+			position = getPlayerPosition();
 		}
 		handle(function() {
-			location.setText(Math.floor(position.x) + ", " + Math.floor(position.y - 2) + ", " + Math.floor(position.z));
+			location.setText(Math.floor(position[0]) + ", " + Math.floor(position[1] - 2) + ", " + Math.floor(position[2]));
 		});
 	};
 	return texture;

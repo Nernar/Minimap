@@ -23,14 +23,14 @@ Minimap.drawMinimapWhenDirty = function() {
 			android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_FOREGROUND);
 		}
 		
-		let position = Player.getPosition(),
-			yawNew = Entity.getLookAngle(Player.get()).yaw / Math.PI * 180 - 90,
+		let position = getPlayerPosition(),
+			yawNew = getPlayerYaw() - 90,
 			radius = settings.radius * 16;
-		if (position.x != X || position.z != Z || yawNew != YAW || redraw || dimensionNew != DIMENSION) {
+		if (position[0] != X || position[2] != Z || yawNew != YAW || redraw || dimensionNew != DIMENSION) {
 			redraw = false;
 			
-			let xChunkNew = Math.floor(position.x / 16) * 16,
-				zChunkNew = Math.floor(position.z / 16) * 16,
+			let xChunkNew = Math.floor(position[0] / 16) * 16,
+				zChunkNew = Math.floor(position[2] / 16) * 16,
 				xChunkOld = Math.floor(X / 16) * 16,
 				zChunkOld = Math.floor(Z / 16) * 16;
 			if (xChunkNew != xChunkOld || zChunkNew != zChunkOld || dimensionNew != DIMENSION) {
@@ -42,8 +42,8 @@ Minimap.drawMinimapWhenDirty = function() {
 						bmpSrc.eraseColor(0);
 						canvasBmpSrc.drawBitmap(bmpSrcCopy, 0, 0, null);
 					} finally {
-						X = position.x;
-						Z = position.z;
+						X = position[0];
+						Z = position[2];
 						bmpSrcLock.release();
 					}
 					if (xChunkNew > xChunkOld) {
@@ -81,8 +81,8 @@ Minimap.drawMinimapWhenDirty = function() {
 						}
 					}
 				} else {
-					X = position.x;
-					Z = position.z;
+					X = position[0];
+					Z = position[2];
 					bmpSrc.eraseColor(0);
 					Minimap.scheduleChunk(xChunkNew, zChunkNew, 0);
 					for (let i = 16; i <= settings.radius * 16; i += 16) {
@@ -99,16 +99,16 @@ Minimap.drawMinimapWhenDirty = function() {
 					}
 				}
 			} else {
-				X = position.x;
-				Z = position.z;
+				X = position[0];
+				Z = position[2];
 			}
 			
 			YAW = yawNew;
 			DIMENSION = dimensionNew;
-			let x0 = position.x - (settings.locationSize * 0.5 / absZoom),
-				z0 = position.z + (settings.locationSize * 0.5 / absZoom);
-			matrixMap.setTranslate(settings.locationSize * 0.5 - (bmpSrc.getWidth() * 0.5) - 8 + position.z - zChunkNew,
-				settings.locationSize * 0.5 - (bmpSrc.getHeight() * 0.5) + 8 - position.x + xChunkNew);
+			let x0 = position[0] - (settings.locationSize * 0.5 / absZoom),
+				z0 = position[2] + (settings.locationSize * 0.5 / absZoom);
+			matrixMap.setTranslate(settings.locationSize * 0.5 - (bmpSrc.getWidth() * 0.5) - 8 + position[2] - zChunkNew,
+				settings.locationSize * 0.5 - (bmpSrc.getHeight() * 0.5) + 8 - position[0] + xChunkNew);
 			if (settings.mapRotation) {
 				matrixMap.postRotate(-YAW, settings.locationSize * 0.5, settings.locationSize * 0.5);
 			}
@@ -136,17 +136,17 @@ Minimap.drawMinimapWhenDirty = function() {
 			if (settings.indicatorPassive || settings.indicatorHostile || settings.indicatorPlayer) {
 				redraw = true;
 				for (let i = 0; i < entities.length; i++) {
-					let position = Entity.getPosition(entities[i]);
-					if (!settings.indicatorOnlySurface || position.y > 60) {
-						let id = Entity.getType(entities[i])
-						let yaw = settings.stylesheetPointer == 3 ? 0 : Entity.getLookAngle(entities[i]).yaw / Math.PI * 180 - 90
+					let position = getEntityPosition(entities[i]);
+					if (!settings.indicatorOnlySurface || position[1] > 60) {
+						let id = getEntityType(entities[i])
+						let yaw = settings.stylesheetPointer == 3 ? 0 : getEntityYaw(entities[i]) - 90;
 						if (settings.stylesheetPointer != 3) {
 							if (ENTITY_PASSIVE.indexOf(id) >= 0 && settings.indicatorPassive) {
 								matrixPointer.reset();
 								if (pointer[settings.stylesheetPointer].rotate) {
 									matrixPointer.postRotate(yaw);
 								}
-								matrixPointer.postTranslate((z0 - position.z) * absZoom, (position.x - x0) * absZoom);
+								matrixPointer.postTranslate((z0 - position[2]) * absZoom, (position[0] - x0) * absZoom);
 								if (settings.mapRotation) {
 									matrixPointer.postRotate(-YAW, settings.locationSize * 0.5, settings.locationSize * 0.5);
 								}
@@ -157,7 +157,7 @@ Minimap.drawMinimapWhenDirty = function() {
 								if (pointer[settings.stylesheetPointer].rotate) {
 									matrixPointer.postRotate(yaw);
 								}
-								matrixPointer.postTranslate((z0 - position.z) * absZoom, (position.x - x0) * absZoom);
+								matrixPointer.postTranslate((z0 - position[2]) * absZoom, (position[0] - x0) * absZoom);
 								if (settings.mapRotation) {
 									matrixPointer.postRotate(-YAW, settings.locationSize * 0.5, settings.locationSize * 0.5);
 								}
@@ -168,7 +168,7 @@ Minimap.drawMinimapWhenDirty = function() {
 								if (pointer[settings.stylesheetPointer].rotate) {
 									matrixPointer.postRotate(yaw);
 								}
-								matrixPointer.postTranslate((z0 - position.z) * absZoom, (position.x - x0) * absZoom);
+								matrixPointer.postTranslate((z0 - position[2]) * absZoom, (position[0] - x0) * absZoom);
 								if (settings.mapRotation) {
 									matrixPointer.postRotate(-YAW, settings.locationSize * 0.5, settings.locationSize * 0.5);
 								}
@@ -182,7 +182,7 @@ Minimap.drawMinimapWhenDirty = function() {
 							} else {
 								matrixPointer.preRotate(YAW);
 							}
-							matrixPointer.postTranslate((z0 - position.z) * absZoom, (position.x - x0) * absZoom);
+							matrixPointer.postTranslate((z0 - position[2]) * absZoom, (position[0] - x0) * absZoom);
 							if (settings.mapRotation) {
 								matrixPointer.postRotate(-YAW, settings.locationSize * 0.5, settings.locationSize * 0.5);
 							}

@@ -1,7 +1,7 @@
 let policyShowMultiplayerPlayer = true;
 
 Minimap.isAcceptableEntity = function(ent) {
-	let type = Entity.getType(ent);
+	let type = getEntityType(ent);
 	if (type == 1) {
 		return policyShowMultiplayerPlayer;
 	}

@@ -149,3 +149,65 @@ const findSurface = function(x, y, z) {
 	}
 	return GenerationUtils_AdaptedScript.findSurface(x, y, z);
 };
+
+let actor = null;
+let actorUid = 0;
+
+if (isOutdated == false) {
+	Callback.addCallback("LocalPlayerLoaded", function(__actorUid) {
+		actor = new PlayerActor(__actorUid);
+		actorUid = __actorUid;
+	});
+}
+
+const getPlayerDimension = function() {
+	if (actor != null) {
+		return actor.getDimension();
+	}
+	return Player.getDimension();
+};
+
+const Entity_AdaptedScript = ModAPI.requireGlobal("Entity");
+
+const getEntityPosition = function(entity) {
+	if (Entity_AdaptedScript === undefined) {
+		let position = Entity.getPosition(entity);
+		return [position.x, position.y, position.z];
+	}
+	return Entity_AdaptedScript.getPosition(entity);
+};
+
+const getEntityYaw = function(entity) {
+	if (Entity_AdaptedScript === undefined) {
+		return Entity.getLookAngle(entity).yaw * 180 / Math.PI;
+	}
+	return Entity_AdaptedScript.getYaw(entity);
+};
+
+const getEntityDimension = function(entity) {
+	if (Entity_AdaptedScript === undefined) {
+		return Entity.getDimension(entity);
+	}
+	return Entity_AdaptedScript.getDimension(entity);
+};
+
+const getEntityType = function(entity) {
+	if (Entity_AdaptedScript === undefined) {
+		return Entity.getType(entity);
+	}
+	return Entity_AdaptedScript.getEntityTypeId(entity);
+};
+
+const getPlayerPosition = function() {
+	if (actorUid != 0) {
+		return getEntityPosition(actorUid);
+	}
+	return getEntityPosition(Player.get());
+};
+
+const getPlayerYaw = function() {
+	if (actorUid != 0) {
+		return getEntityYaw(actorUid);
+	}
+	return getEntityYaw(Player.get());
+};
