@@ -3,6 +3,16 @@ const Minimap = {
 	getVersionCode: function() {
 		return 1;
 	},
+	getGravity: function(what) {
+		let gravity = android.view.Gravity.TOP;
+		switch (what) {
+			case 0:
+				return gravity | android.view.Gravity.LEFT;
+			case 2:
+				return gravity | android.view.Gravity.RIGHT;
+		}
+		return gravity | android.view.Gravity.CENTER;
+	},
 	onChangeRadius: function() {
 		let widthOld = bmpSrc.getWidth(),
 			widthNew = ((settings.radius + 1) * 2 + 1) * 16,
@@ -52,10 +62,9 @@ const Minimap = {
 		redraw = true;
 	},
 	onChangeLocation: function() {
-		settings.locationSize = settings.locationRawSize / 100 * getDisplayHeight();
 		let params = mapView.getLayoutParams();
-		params.height = settings.locationSize;
-		params.width = settings.locationSize;
+		params.height = toComplexUnitDip(settings.locationSize);
+		params.width = toComplexUnitDip(settings.locationSize);
 		mapView.setLayoutParams(params);
 		Minimap.onChangeStylesheet();
 		minZoom = settings.locationSize / (settings.radius * 2 * 16);
@@ -80,7 +89,7 @@ const Minimap = {
 		if (pool.getActiveCount() > 0) {
 			Minimap.shutdownAndSchedulePool();
 		}
-		X = undefined;
+		X = Y = undefined;
 	},
 	onChangeZoom: function() {
 		absZoom = (100 / settings.mapZoom) * minZoom;
@@ -147,7 +156,6 @@ const Minimap = {
 const notifyConfigChanged = function(key) {
 	switch (key) {
 		case "radius":
-		case "forceRefresh":
 			Minimap.onChangeRadius();
 			break;
 		case "mapType":
@@ -161,10 +169,9 @@ const notifyConfigChanged = function(key) {
 		case "mapAlpha":
 			Minimap.onChangeOpacity();
 			break;
-		case "locationRawSize":
-			Minimap.onChangeLocation();
-			break;
-		case "locationRawPosition":
+		case "forceRefresh":
+			Minimap.acquireHardwareAccelerate();
+		case "locationGravity":
 			Minimap.dismissInternal();
 			Minimap.dismissResearch();
 			Minimap.showInternal();
@@ -184,6 +191,11 @@ const notifyConfigChanged = function(key) {
 			break;
 		case "thread":
 			Minimap.onChangePoolSize();
+			break;
+		case "changeLocation":
+			Minimap.changeState();
+			inChangeLocationMode = true;
+			Game.tipMessage(translate("Move and pinch map"));
 			break;
 		case "resetConfig":
 			Minimap.restoreConfig();

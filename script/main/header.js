@@ -69,7 +69,8 @@ let bmpSrc,
 	runnableUpdateMap,
 	scheduledFutureUpdateMap,
 	bmpBorder,
-	pathBorder;
+	pathBorder,
+	inChangeLocationMode;
 
 let canvasBmpSrc = new android.graphics.Canvas(),
 	canvasBmpSrcCopy = new android.graphics.Canvas(),

@@ -263,6 +263,22 @@ Translation.addTranslation("Circle", {
 	ru: "Окружность",
 	uk: ""
 });
+Translation.addTranslation("Where am I", {
+	ru: "Куда я попал",
+	uk: ""
+});
+Translation.addTranslation("Tip", {
+	ru: "Подсказка",
+	uk: ""
+});
+Translation.addTranslation("Actionbar", {
+	ru: "Панель действий",
+	uk: ""
+});
+Translation.addTranslation("Title", {
+	ru: "Заголовок",
+	uk: ""
+});
 
 // Window option section
 Translation.addTranslation("Window", {
@@ -273,8 +289,24 @@ Translation.addTranslation("Location", {
 	ru: "Местоположение",
 	uk: ""
 });
-Translation.addTranslation("Scale", {
-	ru: "Масштаб",
+Translation.addTranslation("Move and pinch map", {
+	ru: "Перемещайте и растягивайте карту",
+	uk: ""
+});
+Translation.addTranslation("Gravity", {
+	ru: "Гравитация",
+	uk: ""
+});
+Translation.addTranslation("Left", {
+	ru: "Слева",
+	uk: ""
+});
+Translation.addTranslation("Center", {
+	ru: "По центру",
+	uk: ""
+});
+Translation.addTranslation("Right", {
+	ru: "Справа",
 	uk: ""
 });
 Translation.addTranslation("Opacity", {

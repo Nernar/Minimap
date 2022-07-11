@@ -26,10 +26,10 @@ Minimap.ConfigDescriptor = [__mod__.getInfoProperty("name"), "Leave",
 	["sectionDivider", "Stylesheet"],
 		["keyValue", "multipleChoice", "Border", "stylesheetBorder", ["Disabled", "Simple", "Colourful"]],
 		["keyValue", "multipleChoice", "Shape", "stylesheetShape", ["Square", "Circle"]],
+		// ["keyValue", "multipleChoice", "Where am I", "stylesheetExplore", ["Disabled", "Tip", "Actionbar", "Title"]],
 	["sectionDivider", "Window"],
-		["keyValue", "multipleChoice", "Location", "locationRawPosition", ["<-", "<+", "+>", "<*", "*>"], "locationGravity", [51, 51, 53, 83, 85], "locationOffset", [0, 40 * getDisplayDensity(), 40 * getDisplayDensity(), 0, 0]],
-		// ["keyValue", "text", "Location", "", "changeLocation"],
-		["keyValue", "slider", "Scale", "locationRawSize", 20, 100, 5, "%%"],
+		["keyValue", "text", "Location", "", "changeLocation"],
+		["keyValue", "multipleChoice", "Gravity", "locationGravity", ["Left", "Center", "Right"]],
 		["keyValue", "slider", "Opacity", "mapAlpha", 20, 100, 1, "%%"],
 		["keyValue", "slider", "Zoom", "mapZoom", 10, 100, 1, "%%"],
 		["checkBox", "mapLocation", "Show coordinates"],
@@ -96,6 +96,11 @@ let mapView = (function() {
 						Minimap.onChangeZoom();
 					}
 					return true;
+				},
+				onScaleEnd: function(scaleGestureDetector) {
+					if (!mRequiredStandartAction) {
+						Minimap.saveConfig();
+					}
 				}
 			}));
 			let mIgnoredByDoubleTap = false;
@@ -125,7 +130,7 @@ let mapView = (function() {
 				},
 				onFling: function(event1, event2, velocityX, velocityY) {
 					if (mRequiredStandartAction) {
-						if (velocityX > 32 * getDisplayDensity()) {
+						if (velocityX > toComplexUnitDip(32)) {
 							Minimap.changeState();
 							return false;
 						}
@@ -133,27 +138,87 @@ let mapView = (function() {
 					return mRequiredStandartAction;
 				}
 			}));
+			let mLocationScaleFactor = 1.;
+			let mLocationRequiredStandartAction = true;
+			let mLocationScaleGestureDetector = new android.view.ScaleGestureDetector(getContext(), new JavaAdapter(android.view.ScaleGestureDetector.SimpleOnScaleGestureListener, android.view.ScaleGestureDetector.OnScaleGestureListener, {
+				onScale: function(scaleGestureDetector) {
+					mLocationScaleFactor *= scaleGestureDetector.getScaleFactor();
+					mLocationScaleFactor = Math.max(0., Math.min(mLocationScaleFactor, 5.));
+					let mPrescaledSize = Math.round(mScaleFactor * 100.) + 160;
+					if (mPrescaledSize != settings.locationSize) {
+						mLocationRequiredStandartAction = false;
+						settings.locationSize = mPrescaledSize;
+						Minimap.onChangeLocation();
+					}
+					return true;
+				}
+			}));
+			let mLocationIgnoredByDoubleTap = false;
+			let mLocationGestureDetector = new android.view.GestureDetector(getContext(), new JavaAdapter(android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener, android.view.GestureDetector.OnDoubleTapListener, {
+				onDown: function(event) {
+					if (!mLocationIgnoredByDoubleTap) {
+						mLocationRequiredStandartAction = true;
+					}
+					mLocationScaleFactor = (settings.locationSize - 160) / 100;
+					mLocationIgnoredByDoubleTap = false;
+				},
+				onDoubleTap: function(event) {
+					mLocationRequiredStandartAction = false;
+					mLocationIgnoredByDoubleTap = true;
+				},
+				onSingleTapConfirmed: function(event) {
+					if (mLocationRequiredStandartAction) {
+						inChangeLocationMode = false;
+						Minimap.changeState();
+						settings.locationX = Math.round(settings.locationX);
+						settings.locationY = Math.round(settings.locationY);
+						Minimap.saveConfig();
+					}
+					return mLocationRequiredStandartAction;
+				},
+				onScroll: function(event1, event2, distanceX, distanceY) {
+					if (mLocationRequiredStandartAction) {
+						settings.locationX += distanceX;
+						settings.locationY += distanceY;
+						popup.update(settings.locationX, settings.locationY);
+					}
+					return mLocationRequiredStandartAction;
+				}
+			}));
 			texture.setOnTouchListener(function(mView, event) {
-				mScaleGestureDetector.onTouchEvent(event);
-				mGestureDetector.onTouchEvent(event);
+				if (!inChangeLocationMode) {
+					mScaleGestureDetector.onTouchEvent(event);
+					mGestureDetector.onTouchEvent(event);
+				} else {
+					mLocationScaleGestureDetector.onTouchEvent(event);
+					mLocationGestureDetector.onTouchEvent(event);
+				}
 				return true;
 			});
 		} catch (e) {
 			texture.setOnClickListener(function(v) {
-				Minimap.showResearchInternal();
-				Minimap.dismissInternal();
+				if (!inChangeLocationMode) {
+					Minimap.showResearchInternal();
+					Minimap.dismissInternal();
+				} else {
+					inChangeLocationMode = false;
+					Minimap.changeState();
+				}
 			});
 			texture.setOnLongClickListener(function(v) {
-				Minimap.showConfigDialog();
-				return true;
+				if (!inChangeLocationMode) {
+					Minimap.showConfigDialog();
+				}
+				return !inChangeLocationMode;
 			});
 			reportError(e);
 		}
 	});
 	
 	let button = new android.widget.Button(getContext());
-	button.setBackgroundResource(android.R.drawable.ic_menu_mylocation);
-	button.setLayoutParams(new android.widget.LinearLayout.LayoutParams(buttonSize * getDisplayDensity(), buttonSize * getDisplayDensity()));
+	button.setBackgroundResource(android.R.drawable.ic_menu_mapmode);
+	button.setLayoutParams(new android.widget.LinearLayout.LayoutParams
+		(toComplexUnitDip(buttonSize), toComplexUnitDip(buttonSize)));
 	button.setOnClickListener(function(v) {
 		Minimap.changeState();
 	});
@@ -164,7 +229,7 @@ let mapView = (function() {
 	
 	let location = new android.widget.TextView(getContext());
 	location.setGravity(android.view.Gravity.CENTER);
-	location.setTextSize(toComplexUnitSp(7));
+	location.setTextSize(toComplexUnitSp(9));
 	location.setTextColor(Colors.WHITE);
 	location.setShadowLayer(1, 4, 4, Colors.BLACK);
 	location.setId(2);
@@ -176,7 +241,7 @@ let mapView = (function() {
 	
 	layout.addView(button);
 	let textureParams = new android.widget.RelativeLayout.LayoutParams
-		(settings.locationSize, settings.locationSize);
+		(toComplexUnitDip(settings.locationSize), toComplexUnitDip(settings.locationSize));
 	textureParams.addRule(android.widget.RelativeLayout.ALIGN_PARENT_TOP);
 	layout.addView(texture, textureParams);
 	let locationParams = new android.widget.RelativeLayout.LayoutParams
@@ -208,12 +273,16 @@ let mapView = (function() {
 	Minimap.resetVisibility();
 	
 	let manager = getContext().getSystemService(android.content.Context.WINDOW_SERVICE);
-	Minimap.showInternal = function() {
-		popup.showAtLocation(getDecorView(), settings.locationGravity, 0, settings.locationOffset);
+	Minimap.acquireHardwareAccelerate = function() {
 		let container = popup.getContentView().getRootView();
 		let params = container.getLayoutParams();
 		params.flags |= android.view.WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED;
 		manager.updateViewLayout(container, params);
+	};
+	Minimap.showInternal = function() {
+		popup.showAtLocation(getDecorView(), Minimap.getGravity(settings.locationGravity), settings.locationX, settings.locationY);
+		Minimap.acquireHardwareAccelerate();
+		redraw = true;
 	};
 	Minimap.show = function() {
 		getContext().runOnUiThread(function() {
@@ -291,19 +360,21 @@ let researchView = (function() {
 				// },
 				onScroll: function(event1, event2, distanceX, distanceY) {
 					if (mRequiredStandartAction) {
-						research.setX(research.getX() - distanceX);
-						research.setY(research.getY() - distanceY);
+						research.animate().
+							x(research.getX() - distanceX).
+							y(research.getY() - distanceY).
+							setDuration(0).start();
 					}
 					return mRequiredStandartAction;
 				}
 			}));
-			research.setOnTouchListener(function(mView, event) {
+			layout.setOnTouchListener(function(mView, event) {
 				mScaleGestureDetector.onTouchEvent(event);
 				mGestureDetector.onTouchEvent(event);
 				return true;
 			});
 		} catch (e) {
-			research.setOnClickListener(function(v) {
+			layout.setOnClickListener(function(v) {
 				Minimap.showInternal();
 				Minimap.dismissResearchInternal();
 			});
@@ -313,7 +384,7 @@ let researchView = (function() {
 	
 	// let location = new android.widget.TextView(getContext());
 	// location.setGravity(android.view.Gravity.CENTER);
-	// location.setTextSize(toComplexUnitSp(7));
+	// location.setTextSize(toComplexUnitSp(9));
 	// location.setTextColor(Colors.WHITE);
 	// location.setShadowLayer(1, 4, 4, Colors.BLACK);
 	// location.setId(2);
@@ -377,7 +448,7 @@ Callback.addCallback("LevelLeft", function() {
 	}
 	pool.shutdownNow();
 	startMapControl = true;
-	X = undefined;
+	X = Y = YAW = undefined;
 	while (entities.length > 0) {
 		entities.pop();
 	}
@@ -419,6 +490,7 @@ Callback.addCallback("NativeGuiChanged", function(screenName) {
 			return;
 		}
 	}
+	inChangeLocationMode = false;
 	Minimap.dismissResearch();
 	Minimap.show();
 });
@@ -427,5 +499,8 @@ Callback.addCallback(isHorizon ? "LevelDisplayed" : "LevelLoaded", function() {
 	if (startMapControl) {
 		startMapControl = false;
 		Minimap.shutdownAndSchedulePool();
+		if (!mapState) {
+			Minimap.changeState();
+		}
 	}
 });

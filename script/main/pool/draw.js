@@ -26,6 +26,9 @@ Minimap.drawMinimapWhenDirty = function() {
 		let position = getPlayerPosition(),
 			yawNew = getPlayerYaw() - 90,
 			radius = settings.radius * 16;
+		if (yawNew == -90 && YAW !== undefined) {
+			yawNew = YAW;
+		}
 		if (position[0] != X || position[2] != Z || yawNew != YAW || redraw || dimensionNew != DIMENSION) {
 			redraw = false;
 			

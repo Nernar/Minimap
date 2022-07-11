@@ -59,16 +59,17 @@ const protoConfig = (function() {
 			only_surface: true
 		},
 		location: {
-			raw_size: 40,
-			raw_position: 2,
-			gravity: 53,
-			offset: 40 * getDisplayDensity()
+			x: 0,
+			y: toComplexUnitDip(24),
+			size: toComplexUnitDip(256),
+			gravity: 2
 		},
 		stylesheet: {
 			border: 0,
 			pointer: 3,
 			local_pointer: 2,
-			shape: 1
+			shape: 1,
+			explore: 0
 		},
 		performance: {
 			radius: checkRenderDistance(),
@@ -105,14 +106,15 @@ Minimap.loadConfig = function(source) {
 		indicatorTile: getProtoBool(protoConfig, source, "indicator.tile"),
 		indicatorWaypoint: getProtoBool(protoConfig, source, "indicator.waypoint"),
 		indicatorOnlySurface: getProtoBool(protoConfig, source, "indicator.only_surface"),
-		locationRawSize: getProtoNumber(protoConfig, source, "location.raw_size"),
-		locationRawPosition: getProtoNumber(protoConfig, source, "location.raw_position"),
+		locationX: getProtoNumber(protoConfig, source, "location.x"),
+		locationY: getProtoNumber(protoConfig, source, "location.y"),
+		locationSize: getProtoNumber(protoConfig, source, "location.size"),
 		locationGravity: getProtoNumber(protoConfig, source, "location.gravity"),
-		locationOffset: getProtoNumber(protoConfig, source, "location.offset"),
 		stylesheetBorder: getProtoNumber(protoConfig, source, "stylesheet.border"),
 		stylesheetPointer: getProtoNumber(protoConfig, source, "stylesheet.pointer"),
 		stylesheetLocalPointer: getProtoNumber(protoConfig, source, "stylesheet.local_pointer"),
 		stylesheetShape: getProtoNumber(protoConfig, source, "stylesheet.shape"),
+		stylesheetExplore: getProtoBool(protoConfig, source, "stylesheet.explore"),
 		mapLocation: getProtoBool(protoConfig, source, "development.location"),
 		debug: getProtoBool(protoConfig, source, "development.show_process"),
 		radius: getProtoNumber(protoConfig, source, "performance.radius"),
@@ -121,7 +123,6 @@ Minimap.loadConfig = function(source) {
 		thread: getProtoNumber(protoConfig, source, "performance.thread"),
 		exportDensity: getProtoNumber(protoConfig, source, "performance.export_density")
 	};
-	settings.locationSize = settings.locationRawSize / 100 * getDisplayHeight();
 };
 
 
@@ -145,14 +146,15 @@ Minimap.saveConfig = function() {
 	setConfigOptionIfNeeded(protoConfig, "indicator.tile", settings.indicatorTile);
 	setConfigOptionIfNeeded(protoConfig, "indicator.waypoint", settings.indicatorTile);
 	setConfigOptionIfNeeded(protoConfig, "indicator.only_surface", settings.indicatorOnlySurface);
-	setConfigOptionIfNeeded(protoConfig, "location.raw_size", settings.locationRawSize);
-	setConfigOptionIfNeeded(protoConfig, "location.raw_position", settings.locationRawPosition);
+	setConfigOptionIfNeeded(protoConfig, "location.x", settings.locationX);
+	setConfigOptionIfNeeded(protoConfig, "location.y", settings.locationY);
+	setConfigOptionIfNeeded(protoConfig, "location.size", settings.locationSize);
 	setConfigOptionIfNeeded(protoConfig, "location.gravity", settings.locationGravity);
-	setConfigOptionIfNeeded(protoConfig, "location.offset", settings.locationOffset);
 	setConfigOptionIfNeeded(protoConfig, "stylesheet.border", settings.stylesheetBorder);
 	setConfigOptionIfNeeded(protoConfig, "stylesheet.pointer", settings.stylesheetPointer);
 	setConfigOptionIfNeeded(protoConfig, "stylesheet.local_pointer", settings.stylesheetLocalPointer);
 	setConfigOptionIfNeeded(protoConfig, "stylesheet.shape", settings.stylesheetShape);
+	setConfigOptionIfNeeded(protoConfig, "stylesheet.explore", settings.stylesheetExplore);
 	setConfigOptionIfNeeded(protoConfig, "development.location", settings.mapLocation);
 	setConfigOptionIfNeeded(protoConfig, "development.show_process", settings.debug);
 	setConfigOptionIfNeeded(protoConfig, "performance.radius", settings.radius);

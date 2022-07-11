@@ -5,6 +5,6 @@ typings/
 .ttxfolder
 _gsdata_/
 .todo/
-/script/launcher.js
+/script/script.js
 /config.proto.json
 .placeholder.ico
