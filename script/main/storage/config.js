@@ -60,8 +60,8 @@ const protoConfig = (function() {
 		},
 		location: {
 			x: 0,
-			y: toComplexUnitDip(24),
-			size: toComplexUnitDip(256),
+			y: 5,
+			size: 35,
 			gravity: 2
 		},
 		stylesheet: {
@@ -123,8 +123,8 @@ Minimap.loadConfig = function(source) {
 		thread: getProtoNumber(protoConfig, source, "performance.thread"),
 		exportDensity: getProtoNumber(protoConfig, source, "performance.export_density")
 	};
+	settings.locationRawSize = getDisplayPercentHeight(settings.locationSize);
 };
-
 
 try {
 	Minimap.loadConfig();

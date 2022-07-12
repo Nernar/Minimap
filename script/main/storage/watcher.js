@@ -29,7 +29,7 @@ const Minimap = {
 		} finally {
 			bmpSrcLock.release();
 		}
-		minZoom = settings.locationSize / (settings.radius * 2 * 16);
+		minZoom = settings.locationRawSize / (settings.radius * 2 * 16);
 		absZoom = (100 / settings.mapZoom) * minZoom;
 		if (widthNew > widthOld) {
 			for (let i = (widthOld - 16) / 2; i <= settings.radius * 16; i += 16) {
@@ -61,13 +61,14 @@ const Minimap = {
 		Minimap.resetVisibility();
 		redraw = true;
 	},
-	onChangeLocation: function() {
+	onChangeScale: function() {
 		let params = mapView.getLayoutParams();
-		params.height = toComplexUnitDip(settings.locationSize);
-		params.width = toComplexUnitDip(settings.locationSize);
+		settings.locationRawSize = getDisplayPercentHeight(settings.locationSize);
+		params.height = settings.locationRawSize;
+		params.width = settings.locationRawSize;
 		mapView.setLayoutParams(params);
 		Minimap.onChangeStylesheet();
-		minZoom = settings.locationSize / (settings.radius * 2 * 16);
+		minZoom = settings.locationRawSize / (settings.radius * 2 * 16);
 		Minimap.onChangeZoom();
 	},
 	onChangeStylesheet: function() {
@@ -169,8 +170,17 @@ const notifyConfigChanged = function(key) {
 		case "mapAlpha":
 			Minimap.onChangeOpacity();
 			break;
+		// case "locationX":
+		// case "locationY":
+			// Minimap.onChangeOffset();
+			// break;
+		case "locationSize":
+			Minimap.onChangeScale();
+			break;
 		case "forceRefresh":
 			Minimap.acquireHardwareAccelerate();
+		case "locationX":
+		case "locationY":
 		case "locationGravity":
 			Minimap.dismissInternal();
 			Minimap.dismissResearch();
@@ -191,11 +201,6 @@ const notifyConfigChanged = function(key) {
 			break;
 		case "thread":
 			Minimap.onChangePoolSize();
-			break;
-		case "changeLocation":
-			Minimap.changeState();
-			inChangeLocationMode = true;
-			Game.tipMessage(translate("Move and pinch map"));
 			break;
 		case "resetConfig":
 			Minimap.restoreConfig();

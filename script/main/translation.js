@@ -285,12 +285,16 @@ Translation.addTranslation("Window", {
 	ru: "Окно",
 	uk: ""
 });
-Translation.addTranslation("Location", {
-	ru: "Местоположение",
+Translation.addTranslation("Offset X", {
+	ru: "Отступ по X",
 	uk: ""
 });
-Translation.addTranslation("Move and pinch map", {
-	ru: "Перемещайте и растягивайте карту",
+Translation.addTranslation("Offset Y", {
+	ru: "Отступ по Y",
+	uk: ""
+});
+Translation.addTranslation("Scale", {
+	ru: "Масштаб",
 	uk: ""
 });
 Translation.addTranslation("Gravity", {

@@ -8,8 +8,8 @@ Minimap.decodeBase64Bitmap = function(string) {
 };
 
 Minimap.drawBorderBitmap = function() {
-	let bitmap = android.graphics.Bitmap.createBitmap(settings.locationSize,
-			settings.locationSize, android.graphics.Bitmap.Config.ARGB_8888),
+	let bitmap = android.graphics.Bitmap.createBitmap(settings.locationRawSize,
+			settings.locationRawSize, android.graphics.Bitmap.Config.ARGB_8888),
 		canvas = new android.graphics.Canvas(bitmap),
 		paint = new android.graphics.Paint();
 	paint.setAntiAlias(false);
@@ -20,7 +20,7 @@ Minimap.drawBorderBitmap = function() {
 			paint.setARGB(255, 153, 135, 108);
 			break;
 		case 2:
-			paint.setShader(reflectNewLinearGradient(0, 0, settings.locationSize * 0.5, settings.locationSize,
+			paint.setShader(reflectNewLinearGradient(0, 0, settings.locationRawSize * 0.5, settings.locationRawSize,
 				Colors.PRIMARY, Colors.ACCENT, android.graphics.Shader.TileMode.REPEAT));
 			break;
 		default:
@@ -35,21 +35,21 @@ Minimap.createHardcodedPath = function(outer, inner) {
 	path.setFillType(android.graphics.Path.FillType.EVEN_ODD);
 	if (settings.stylesheetShape == 1) {
 		if (inner) {
-			path.addCircle(settings.locationSize / 2, settings.locationSize / 2,
-				settings.locationSize / 2 - (7 * getDisplayDensity()), android.graphics.Path.Direction.CW);
+			path.addCircle(settings.locationRawSize / 2, settings.locationRawSize / 2,
+				settings.locationRawSize / 2 - (7 * getDisplayDensity()), android.graphics.Path.Direction.CW);
 		}
 		if (outer) {
-			path.addCircle(settings.locationSize / 2, settings.locationSize / 2,
-				settings.locationSize / 2, android.graphics.Path.Direction.CW);
+			path.addCircle(settings.locationRawSize / 2, settings.locationRawSize / 2,
+				settings.locationRawSize / 2, android.graphics.Path.Direction.CW);
 		}
 		return path;
 	}
 	if (inner) {
-		path.addRect(7 * getDisplayDensity(), 7 * getDisplayDensity(), settings.locationSize - (7 * getDisplayDensity()),
-			settings.locationSize - (7 * getDisplayDensity()), android.graphics.Path.Direction.CW);
+		path.addRect(7 * getDisplayDensity(), 7 * getDisplayDensity(), settings.locationRawSize - (7 * getDisplayDensity()),
+			settings.locationRawSize - (7 * getDisplayDensity()), android.graphics.Path.Direction.CW);
 	}
 	if (outer) {
-		path.addRect(0, 0, settings.locationSize, settings.locationSize, android.graphics.Path.Direction.CW);
+		path.addRect(0, 0, settings.locationRawSize, settings.locationRawSize, android.graphics.Path.Direction.CW);
 	}
 	return path;
 };

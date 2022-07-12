@@ -28,7 +28,9 @@ Minimap.ConfigDescriptor = [__mod__.getInfoProperty("name"), "Leave",
 		["keyValue", "multipleChoice", "Shape", "stylesheetShape", ["Square", "Circle"]],
 		// ["keyValue", "multipleChoice", "Where am I", "stylesheetExplore", ["Disabled", "Tip", "Actionbar", "Title"]],
 	["sectionDivider", "Window"],
-		["keyValue", "text", "Location", "", "changeLocation"],
+		["keyValue", "slider", "Offset X", "locationX", 0, 100, 1, "%%"],
+		["keyValue", "slider", "Offset Y", "locationY", 0, 100, 1, "%%"],
+		["keyValue", "slider", "Scale", "locationSize", 0, 75, 1, "%%"],
 		["keyValue", "multipleChoice", "Gravity", "locationGravity", ["Left", "Center", "Right"]],
 		["keyValue", "slider", "Opacity", "mapAlpha", 20, 100, 1, "%%"],
 		["keyValue", "slider", "Zoom", "mapZoom", 10, 100, 1, "%%"],
@@ -70,7 +72,7 @@ bmpSrc = android.graphics.Bitmap.createBitmap(((settings.radius + 1) * 2 + 1) * 
 bmpSrcCopy = android.graphics.Bitmap.createBitmap(bmpSrc.getWidth(), bmpSrc.getHeight(), android.graphics.Bitmap.Config.ARGB_8888);
 canvasBmpSrc.setBitmap(bmpSrc);
 canvasBmpSrcCopy.setBitmap(bmpSrcCopy);
-minZoom = settings.locationSize / (settings.radius * 2 * 16);
+minZoom = settings.locationRawSize / (settings.radius * 2 * 16);
 Minimap.onChangeZoom();
 
 let mapView = (function() {
@@ -138,78 +140,19 @@ let mapView = (function() {
 					return mRequiredStandartAction;
 				}
 			}));
-			let mLocationScaleFactor = 1.;
-			let mLocationRequiredStandartAction = true;
-			let mLocationScaleGestureDetector = new android.view.ScaleGestureDetector(getContext(), new JavaAdapter(android.view.ScaleGestureDetector.SimpleOnScaleGestureListener, android.view.ScaleGestureDetector.OnScaleGestureListener, {
-				onScale: function(scaleGestureDetector) {
-					mLocationScaleFactor *= scaleGestureDetector.getScaleFactor();
-					mLocationScaleFactor = Math.max(0., Math.min(mLocationScaleFactor, 5.));
-					let mPrescaledSize = Math.round(mScaleFactor * 100.) + 160;
-					if (mPrescaledSize != settings.locationSize) {
-						mLocationRequiredStandartAction = false;
-						settings.locationSize = mPrescaledSize;
-						Minimap.onChangeLocation();
-					}
-					return true;
-				}
-			}));
-			let mLocationIgnoredByDoubleTap = false;
-			let mLocationGestureDetector = new android.view.GestureDetector(getContext(), new JavaAdapter(android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener, android.view.GestureDetector.OnDoubleTapListener, {
-				onDown: function(event) {
-					if (!mLocationIgnoredByDoubleTap) {
-						mLocationRequiredStandartAction = true;
-					}
-					mLocationScaleFactor = (settings.locationSize - 160) / 100;
-					mLocationIgnoredByDoubleTap = false;
-				},
-				onDoubleTap: function(event) {
-					mLocationRequiredStandartAction = false;
-					mLocationIgnoredByDoubleTap = true;
-				},
-				onSingleTapConfirmed: function(event) {
-					if (mLocationRequiredStandartAction) {
-						inChangeLocationMode = false;
-						Minimap.changeState();
-						settings.locationX = Math.round(settings.locationX);
-						settings.locationY = Math.round(settings.locationY);
-						Minimap.saveConfig();
-					}
-					return mLocationRequiredStandartAction;
-				},
-				onScroll: function(event1, event2, distanceX, distanceY) {
-					if (mLocationRequiredStandartAction) {
-						settings.locationX += distanceX;
-						settings.locationY += distanceY;
-						popup.update(settings.locationX, settings.locationY);
-					}
-					return mLocationRequiredStandartAction;
-				}
-			}));
 			texture.setOnTouchListener(function(mView, event) {
-				if (!inChangeLocationMode) {
-					mScaleGestureDetector.onTouchEvent(event);
-					mGestureDetector.onTouchEvent(event);
-				} else {
-					mLocationScaleGestureDetector.onTouchEvent(event);
-					mLocationGestureDetector.onTouchEvent(event);
-				}
+				mScaleGestureDetector.onTouchEvent(event);
+				mGestureDetector.onTouchEvent(event);
 				return true;
 			});
 		} catch (e) {
 			texture.setOnClickListener(function(v) {
-				if (!inChangeLocationMode) {
-					Minimap.showResearchInternal();
-					Minimap.dismissInternal();
-				} else {
-					inChangeLocationMode = false;
-					Minimap.changeState();
-				}
+				Minimap.showResearchInternal();
+				Minimap.dismissInternal();
 			});
 			texture.setOnLongClickListener(function(v) {
-				if (!inChangeLocationMode) {
-					Minimap.showConfigDialog();
-				}
-				return !inChangeLocationMode;
+				Minimap.showConfigDialog();
+				return true;
 			});
 			reportError(e);
 		}
@@ -241,7 +184,7 @@ let mapView = (function() {
 	
 	layout.addView(button);
 	let textureParams = new android.widget.RelativeLayout.LayoutParams
-		(toComplexUnitDip(settings.locationSize), toComplexUnitDip(settings.locationSize));
+		(settings.locationRawSize, settings.locationRawSize);
 	textureParams.addRule(android.widget.RelativeLayout.ALIGN_PARENT_TOP);
 	layout.addView(texture, textureParams);
 	let locationParams = new android.widget.RelativeLayout.LayoutParams
@@ -273,6 +216,9 @@ let mapView = (function() {
 	Minimap.resetVisibility();
 	
 	let manager = getContext().getSystemService(android.content.Context.WINDOW_SERVICE);
+	Minimap.onChangeOffset = function() {
+		popup.update(getDisplayPercentWidth(settings.locationX), getDisplayPercentHeight(settings.locationY));
+	};
 	Minimap.acquireHardwareAccelerate = function() {
 		let container = popup.getContentView().getRootView();
 		let params = container.getLayoutParams();
@@ -280,7 +226,8 @@ let mapView = (function() {
 		manager.updateViewLayout(container, params);
 	};
 	Minimap.showInternal = function() {
-		popup.showAtLocation(getDecorView(), Minimap.getGravity(settings.locationGravity), settings.locationX, settings.locationY);
+		popup.showAtLocation(getDecorView(), Minimap.getGravity(settings.locationGravity),
+			getDisplayPercentWidth(settings.locationX), getDisplayPercentHeight(settings.locationY));
 		Minimap.acquireHardwareAccelerate();
 		redraw = true;
 	};
@@ -480,19 +427,26 @@ Callback.addCallback("NativeGuiChanged", function(screenName) {
 	if (isHorizon) {
 		if (screenName != "in_game_play_screen") {
 			Minimap.dismiss();
-			Minimap.dismissResearch();
+			if (mapState) {
+				Minimap.dismissResearch();
+				Minimap.changeState();
+			}
 			return;
 		}
 	} else {
 		if (screenName != "hud_screen") {
 			Minimap.dismiss();
-			Minimap.dismissResearch();
+			if (mapState) {
+				Minimap.dismissResearch();
+				Minimap.changeState();
+			}
 			return;
 		}
 	}
-	inChangeLocationMode = false;
-	Minimap.dismissResearch();
-	Minimap.show();
+	if (!mapState) {
+		Minimap.changeState();
+		Minimap.show();
+	}
 });
 
 Callback.addCallback(isHorizon ? "LevelDisplayed" : "LevelLoaded", function() {
@@ -502,5 +456,6 @@ Callback.addCallback(isHorizon ? "LevelDisplayed" : "LevelLoaded", function() {
 		if (!mapState) {
 			Minimap.changeState();
 		}
+		Minimap.show();
 	}
 });

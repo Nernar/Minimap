@@ -108,14 +108,14 @@ Minimap.drawMinimapWhenDirty = function() {
 			
 			YAW = yawNew;
 			DIMENSION = dimensionNew;
-			let x0 = position[0] - (settings.locationSize * 0.5 / absZoom),
-				z0 = position[2] + (settings.locationSize * 0.5 / absZoom);
-			matrixMap.setTranslate(settings.locationSize * 0.5 - (bmpSrc.getWidth() * 0.5) - 8 + position[2] - zChunkNew,
-				settings.locationSize * 0.5 - (bmpSrc.getHeight() * 0.5) + 8 - position[0] + xChunkNew);
+			let x0 = position[0] - (settings.locationRawSize * 0.5 / absZoom),
+				z0 = position[2] + (settings.locationRawSize * 0.5 / absZoom);
+			matrixMap.setTranslate(settings.locationRawSize * 0.5 - (bmpSrc.getWidth() * 0.5) - 8 + position[2] - zChunkNew,
+				settings.locationRawSize * 0.5 - (bmpSrc.getHeight() * 0.5) + 8 - position[0] + xChunkNew);
 			if (settings.mapRotation) {
-				matrixMap.postRotate(-YAW, settings.locationSize * 0.5, settings.locationSize * 0.5);
+				matrixMap.postRotate(-YAW, settings.locationRawSize * 0.5, settings.locationRawSize * 0.5);
 			}
-			matrixMap.postScale(absZoom, absZoom, settings.locationSize * 0.5, settings.locationSize * 0.5);
+			matrixMap.postScale(absZoom, absZoom, settings.locationRawSize * 0.5, settings.locationRawSize * 0.5);
 			if (settings.mapLocation) {
 				Minimap.updateLocation(position);
 			}
@@ -151,7 +151,7 @@ Minimap.drawMinimapWhenDirty = function() {
 								}
 								matrixPointer.postTranslate((z0 - position[2]) * absZoom, (position[0] - x0) * absZoom);
 								if (settings.mapRotation) {
-									matrixPointer.postRotate(-YAW, settings.locationSize * 0.5, settings.locationSize * 0.5);
+									matrixPointer.postRotate(-YAW, settings.locationRawSize * 0.5, settings.locationRawSize * 0.5);
 								}
 								matrixPointer.preConcat(pointer[settings.stylesheetPointer].matrix);
 								canvas.drawBitmap(pointer[settings.stylesheetPointer].bitmap, matrixPointer, pointerPaint.GREEN);
@@ -162,7 +162,7 @@ Minimap.drawMinimapWhenDirty = function() {
 								}
 								matrixPointer.postTranslate((z0 - position[2]) * absZoom, (position[0] - x0) * absZoom);
 								if (settings.mapRotation) {
-									matrixPointer.postRotate(-YAW, settings.locationSize * 0.5, settings.locationSize * 0.5);
+									matrixPointer.postRotate(-YAW, settings.locationRawSize * 0.5, settings.locationRawSize * 0.5);
 								}
 								matrixPointer.preConcat(pointer[settings.stylesheetPointer].matrix);
 								canvas.drawBitmap(pointer[settings.stylesheetPointer].bitmap, matrixPointer, pointerPaint.RED);
@@ -173,7 +173,7 @@ Minimap.drawMinimapWhenDirty = function() {
 								}
 								matrixPointer.postTranslate((z0 - position[2]) * absZoom, (position[0] - x0) * absZoom);
 								if (settings.mapRotation) {
-									matrixPointer.postRotate(-YAW, settings.locationSize * 0.5, settings.locationSize * 0.5);
+									matrixPointer.postRotate(-YAW, settings.locationRawSize * 0.5, settings.locationRawSize * 0.5);
 								}
 								matrixPointer.preConcat(pointer[settings.stylesheetPointer].matrix);
 								canvas.drawBitmap(pointer[settings.stylesheetPointer].bitmap, matrixPointer, null);
@@ -187,7 +187,7 @@ Minimap.drawMinimapWhenDirty = function() {
 							}
 							matrixPointer.postTranslate((z0 - position[2]) * absZoom, (position[0] - x0) * absZoom);
 							if (settings.mapRotation) {
-								matrixPointer.postRotate(-YAW, settings.locationSize * 0.5, settings.locationSize * 0.5);
+								matrixPointer.postRotate(-YAW, settings.locationRawSize * 0.5, settings.locationRawSize * 0.5);
 							}
 							matrixPointer.preConcat(getIconMatrix(id) || getIconMatrix(0));
 							canvas.drawBitmap(heads[id] || heads[0], matrixPointer, null);
@@ -202,7 +202,7 @@ Minimap.drawMinimapWhenDirty = function() {
 					if (!settings.mapRotation && pointer[settings.stylesheetLocalPointer].rotate) {
 						matrixPointer.postRotate(yawNew);
 					}
-					matrixPointer.postTranslate(settings.locationSize * 0.5, settings.locationSize * 0.5);
+					matrixPointer.postTranslate(settings.locationRawSize * 0.5, settings.locationRawSize * 0.5);
 					matrixPointer.preConcat(pointer[settings.stylesheetLocalPointer].matrix);
 					canvas.drawBitmap(pointer[settings.stylesheetLocalPointer].bitmap, matrixPointer, null)
 				} else {
@@ -210,7 +210,7 @@ Minimap.drawMinimapWhenDirty = function() {
 					if (!settings.mapRotation) {
 						matrixPointer.postRotate(yawNew);
 					}
-					matrixPointer.postTranslate(settings.locationSize * 0.5, settings.locationSize * 0.5);
+					matrixPointer.postTranslate(settings.locationRawSize * 0.5, settings.locationRawSize * 0.5);
 					matrixPointer.preConcat(getIconMatrix(63) || getIconMatrix(1) || getIconMatrix(0));
 					canvas.drawBitmap(heads[63] || heads[1] || heads[0], matrixPointer, null)
 				}
