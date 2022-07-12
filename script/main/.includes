@@ -9,9 +9,9 @@ terrain/colormap.js
 terrain/dot.js
 terrain/process.js
 
-visual/config.js
-visual/drawable.js
-visual/map.js
+window/config.js
+window/drawable.js
+window/map.js
 
 entities/watcher.js
 entities/pointer.js

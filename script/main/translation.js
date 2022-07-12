@@ -220,7 +220,7 @@ Translation.addTranslation("%s fps", {
 });
 Translation.addTranslation("Number of threads", {
 	ru: "Количество потоков",
-	uk: "К-сть потоків"
+	uk: "Кількість потоків"
 });
 Translation.addTranslation("Pixel density to export", {
 	ru: "Плотность пикселей для экспорта",
@@ -233,6 +233,10 @@ Translation.addTranslation("%spx", {
 Translation.addTranslation("Debug various processes", {
 	ru: "Отладка различных процессов",
 	uk: "Налагодження різних процесів"
+});
+Translation.addTranslation("Turn behind yourself", {
+	ru: "Поворачиваться за игроком",
+	uk: "Повертатись за гравцем"
 });
 
 // Stylesheet option section
@@ -280,6 +284,10 @@ Translation.addTranslation("Title", {
 	ru: "Заголовок",
 	uk: "Заголовок"
 });
+Translation.addTranslation("Show coordinates", {
+	ru: "Показывать координаты",
+	uk: "Показати кординати"
+});
 
 // Window option section
 Translation.addTranslation("Window", {
@@ -325,14 +333,6 @@ Translation.addTranslation("Opacity", {
 Translation.addTranslation("Zoom", {
 	ru: "Приближение",
 	uk: "Наближення"
-});
-Translation.addTranslation("Show coordinates", {
-	ru: "Показывать координаты",
-	uk: "Показати кординати"
-});
-Translation.addTranslation("Turn behind yourself", {
-	ru: "Поворачиваться за игроком",
-	uk: "Повертатись за гравцем"
 });
 
 // Other option section
