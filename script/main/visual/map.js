@@ -47,10 +47,9 @@ Minimap.ConfigDescriptor = [__mod__.getInfoProperty("name"), "Leave",
 			["keyValue", "text", "Developed by ", "Nernar"],
 			["keyValue", "text", "Inspired by ", "MxGoldo"],
 			["keyValue", "text", "Located in ", new java.io.File(__dir__).getName() + "/"],
+			["keyValue", "text", "<a href=https://t.me/ntInsideChat>t.me</a> development channel", ""],
 			["sectionDivider", "Also I would like to thank"],
-				["keyValue", "text", "Developer", "MaXFeeD"],
-				["keyValue", "text", "Interpreter<br/><i>Ukrainian</i>", "FOLDIK"],
-				["keyValue", "text", "<a href=https://t.me/ntInsideChat>t.me</a> development channel", ""]]]];
+				["keyValue", "text", "Interpreter<br/><i>Ukrainian</i>", "FOLDIK UA"]]]];
 
 (function() {
 	let dialog;
@@ -462,3 +461,5 @@ Callback.addCallback(isHorizon ? "LevelDisplayed" : "LevelLoaded", function() {
 		Minimap.show();
 	}
 });
+
+

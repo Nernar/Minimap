@@ -32,7 +32,7 @@ Translation.addTranslation("I don't like this", {
 });
 Translation.addTranslation("Insufficient memory", {
 	ru: "Недостаточно памяти",
-	uk: "Недостатньо пам'яті" // ?
+	uk: "Недостатньо пам'яті"
 });
 
 // Minimap option section
@@ -220,15 +220,15 @@ Translation.addTranslation("%s fps", {
 });
 Translation.addTranslation("Number of threads", {
 	ru: "Количество потоков",
-	uk: "Кількість потоків" // ?
+	uk: "К-сть потоків"
 });
 Translation.addTranslation("Pixel density to export", {
 	ru: "Плотность пикселей для экспорта",
-	uk: "Щільність пікселів для експорту" // ?
+	uk: "Щільність пікселів для експорту"
 });
 Translation.addTranslation("%spx", {
 	ru: "%s пикселей",
-	uk: "%s пікселів" // ?
+	uk: "%s пікселів"
 });
 Translation.addTranslation("Debug various processes", {
 	ru: "Отладка различных процессов",
@@ -238,7 +238,7 @@ Translation.addTranslation("Debug various processes", {
 // Stylesheet option section
 Translation.addTranslation("Stylesheet", {
 	ru: "Кастомизация",
-	uk: "Стилізування"
+	uk: "Стилізація"
 });
 Translation.addTranslation("Border", {
 	ru: "Граница",
@@ -266,19 +266,19 @@ Translation.addTranslation("Circle", {
 });
 Translation.addTranslation("Where am I", {
 	ru: "Куда я попал",
-	uk: "Куди я потрапив" // ?
+	uk: "Куди я потрапив"
 });
 Translation.addTranslation("Tip", {
 	ru: "Подсказка",
-	uk: "Порада" // ?
+	uk: "Підказка"
 });
 Translation.addTranslation("Actionbar", {
 	ru: "Панель действий",
-	uk: "Панель дій" // ?
+	uk: "Панель керування"
 });
 Translation.addTranslation("Title", {
 	ru: "Заголовок",
-	uk: "Назва" // ?
+	uk: "Заголовок"
 });
 
 // Window option section
@@ -292,31 +292,31 @@ Translation.addTranslation("Location", {
 });
 Translation.addTranslation("Offset X", {
 	ru: "Отступ по X",
-	uk: "Зсув X" // ?
+	uk: "Зсув по X"
 });
 Translation.addTranslation("Offset Y", {
 	ru: "Отступ по Y",
-	uk: "Зсув Y" // ?
-}); // ?
+	uk: "Зсув по Y"
+});
 Translation.addTranslation("Scale", {
 	ru: "Масштаб",
 	uk: "Масштаб"
 });
 Translation.addTranslation("Gravity", {
 	ru: "Гравитация",
-	uk: "Гравітація" // ?
+	uk: "Гравітація"
 });
 Translation.addTranslation("Left", {
 	ru: "Слева",
-	uk: "Зліва" // ?
+	uk: "Зліва"
 });
 Translation.addTranslation("Center", {
 	ru: "По центру",
-	uk: "До центру" // ?
+	uk: "По центру"
 });
 Translation.addTranslation("Right", {
 	ru: "Справа",
-	uk: "Направо" // ?
+	uk: "Праворуч"
 });
 Translation.addTranslation("Opacity", {
 	ru: "Видимость",
@@ -342,15 +342,15 @@ Translation.addTranslation("Other", {
 });
 Translation.addTranslation("Export terrain to file", {
 	ru: "Сохранить местность в файл",
-	uk: "Експорт рельєфу у файл" // ?
+	uk: "Експортувати місцевість у файл"
 });
 Translation.addTranslation("Minimap saved as %s", {
 	ru: "Миникарта сохранена как %s",
-	uk: "Мінікарту збережено як %s" // ?
+	uk: "Мінікарту збережено як %s"
 });
 Translation.addTranslation("Failed to scan new media, but files could still be saved", {
 	ru: "Не удается найти новые изображения, однако файлы могли быть сохранены",
-	uk: "Не вдалося просканувати новий носій, але файли все одно можна зберегти" // ?
+	uk: "Не вдалося знайти нові медіа, проте файли могли зберегтись"
 });
 Translation.addTranslation("Refresh canvas", {
 	ru: "Обновить канву",
@@ -362,7 +362,7 @@ Translation.addTranslation("Reset to defaults", {
 });
 Translation.addTranslation("You are about to RESET minimap, all memories and user information will be erased.", {
 	ru: "Вы собираетесь сделать СБРОС миникарты, все воспоминания и информация о пользователе будут удалены.",
-	uk: "Ви збираєтесь зробити ЗКИДАННЯ мінікарти, всі спогади і дані про користувача будуть видалені." // ?
+	uk: "Ви збираєтесь зробити ЗКИДАННЯ мінікарти, всі спогади і дані про користувача будуть видалені."
 });
 Translation.addTranslation("Waypoints are stored in worlds and will not be affected.", {
 	ru: "Ключевые точки хранятся в мире и затронуты не будут.",

@@ -18,6 +18,7 @@ Minimap.SMOOTHING_FAUNA = [
 	104, // pumpkin sprout
 	105, // watermelon sprout
 	106, // creeper
+	111, // lilypad
 	127, // cocoa
 	132, // string
 	141, // carrot
@@ -161,9 +162,13 @@ const mapDot = [
 			return 0;
 		}
 		// if (block == 2) {
-			// return getGrassColor(ix, iz);
+			// color = getGrassColor(ix, iz);
 		// }
-		return colormap[block] ? (colormap[block][getBlockData(ix, iy, iz)] || colormap[block][0]) : -1;
+		let color = colormap[block] ? (colormap[block][getBlockData(ix, iy, iz)] || colormap[block][0]) : -1;
+		iy = Math.abs(((iy - 19) % 32) - 15);
+		return reflectColorRgb(((color >> 16) & 0xff) * (iy * 0.018 + 0.73),
+			((color >> 8) & 0xff) * (iy * 0.018 + 0.73),
+			(color & 0xff) * (iy * 0.018 + 0.73));
 	},
 	function surfaceHeightMap(ix, iz) {
 		let iy = heightmapDot[settings.mapSurface](ix, iz);
@@ -215,13 +220,20 @@ const mapDot = [
 			default:
 				color = colormap[block] ? (colormap[block][getBlockData(ix, iy, iz)] || colormap[block][0]) : -1;
 		}
+		let y = Math.abs(((iy - 19) % 32) - 15);
 		if (getBlockId(ix - 1, iy - 2, iz)) {
-			return reflectColorRgb(((color >> 16) & 0xff) * 0.703125, ((color >> 8) & 0xff) * 0.703125, (color & 0xff) * 0.703125);
+			return reflectColorRgb(((color >> 16) & 0xff) * 0.96875 * (y * 0.024 + 0.73),
+				((color >> 8) & 0xff) * 0.96875 * (y * 0.024 + 0.73),
+				(color & 0xff) * 0.96875 * (y * 0.024 + 0.73));
 		}
 		if (getBlockId(ix - 1, iy - 1, iz)) {
-			return reflectColorRgb(((color >> 16) & 0xff) * 0.859375, ((color >> 8) & 0xff) * 0.859375, (color & 0xff) * 0.859375);
+			return reflectColorRgb(((color >> 16) & 0xff) * 0.984375 * (y * 0.021 + 0.73),
+			((color >> 8) & 0xff) * 0.984375 * (y * 0.021 + 0.73),
+			(color & 0xff) * 0.984375 * (y * 0.021 + 0.73));
 		}
-		return reflectColorRgb((color >> 16) & 0xff, (color >> 8) & 0xff, color & 0xff);
+		return reflectColorRgb(((color >> 16) & 0xff) * (y * 0.018 + 0.73),
+			((color >> 8) & 0xff) * (y * 0.018 + 0.73),
+			(color & 0xff) * (y * 0.018 + 0.73));
 	},
 	function undergroundMap(ix, iz) {
 		let count = 0;
