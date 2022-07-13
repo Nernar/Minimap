@@ -1,8 +1,8 @@
 Minimap.decodeBase64Bitmap = function(string) {
 	if (android.os.Build.VERSION.SDK_INT >= 26) {
-		string = java.util.Base64.getDecoder().decode(new java.lang.String(base64).getBytes());
+		string = java.util.Base64.getDecoder().decode(new java.lang.String(string).getBytes());
 	} else {
-		string = android.util.Base64.decode(new java.lang.String(base64).getBytes(), android.util.Base64.NO_WRAP);
+		string = android.util.Base64.decode(new java.lang.String(string).getBytes(), android.util.Base64.NO_WRAP);
 	}
 	return android.graphics.BitmapFactory.decodeByteArray(string, 0, string.length);
 };

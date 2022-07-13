@@ -110,6 +110,9 @@ const heightmapDot = [
 		}
 		do {
 			let block = getBlockId(ix, iy, iz);
+			if (block == 385) {
+				break;
+			}
 			if (block == 0 || !(!settings.mapSmoothing || smoothingDot[settings.mapSmoothing](block))) {
 				iy -= 1;
 				break;
@@ -161,14 +164,17 @@ const mapDot = [
 		if (block == 0) {
 			return 0;
 		}
+		if (block == 385) {
+			block = 9;
+		}
+		let color = colormap[block] ? (colormap[block][getBlockData(ix, iy, iz)] || colormap[block][0]) : -1;
 		// if (block == 2) {
 			// color = getGrassColor(ix, iz);
 		// }
-		let color = colormap[block] ? (colormap[block][getBlockData(ix, iy, iz)] || colormap[block][0]) : -1;
-		iy = Math.abs(((iy - 19) % 32) - 15);
-		return reflectColorRgb(((color >> 16) & 0xff) * (iy * 0.018 + 0.73),
-			((color >> 8) & 0xff) * (iy * 0.018 + 0.73),
-			(color & 0xff) * (iy * 0.018 + 0.73));
+		iy = Math.abs((iy + 1) % 32 - 16);
+		return reflectColorRgb(((color >> 16) & 0xff) * (iy * 0.01875 + 0.7),
+			((color >> 8) & 0xff) * (iy * 0.01875 + 0.7),
+			(color & 0xff) * (iy * 0.01875 + 0.7));
 	},
 	function surfaceHeightMap(ix, iz) {
 		let iy = heightmapDot[settings.mapSurface](ix, iz);
@@ -194,6 +200,7 @@ const mapDot = [
 				if (getBlockId(ix, iy - 2, iz) == 9) {
 					return !(ix % 2) == !((iz + 1) % 2) ? -13224231 : -12632068;
 				}
+			case 385:
 				return -12632068;
 			case 12:
 				if (getBlockData(ix, iy, iz)) {
@@ -220,20 +227,20 @@ const mapDot = [
 			default:
 				color = colormap[block] ? (colormap[block][getBlockData(ix, iy, iz)] || colormap[block][0]) : -1;
 		}
-		let y = Math.abs(((iy - 19) % 32) - 15);
+		let y = Math.abs((iy + 1) % 32 - 16);
 		if (getBlockId(ix - 1, iy - 2, iz)) {
-			return reflectColorRgb(((color >> 16) & 0xff) * 0.96875 * (y * 0.024 + 0.73),
-				((color >> 8) & 0xff) * 0.96875 * (y * 0.024 + 0.73),
-				(color & 0xff) * 0.96875 * (y * 0.024 + 0.73));
+			return reflectColorRgb(((color >> 16) & 0xff) * 0.96875 * (y * 0.020703125 + 0.7),
+				((color >> 8) & 0xff) * 0.96875 * (y * 0.020703125 + 0.7),
+				(color & 0xff) * 0.96875 * (y * 0.020703125 + 0.7));
 		}
 		if (getBlockId(ix - 1, iy - 1, iz)) {
-			return reflectColorRgb(((color >> 16) & 0xff) * 0.984375 * (y * 0.021 + 0.73),
-			((color >> 8) & 0xff) * 0.984375 * (y * 0.021 + 0.73),
-			(color & 0xff) * 0.984375 * (y * 0.021 + 0.73));
+			return reflectColorRgb(((color >> 16) & 0xff) * 0.984375 * (y * 0.0197265625 + 0.7),
+			((color >> 8) & 0xff) * 0.984375 * (y * 0.0197265625 + 0.7),
+			(color & 0xff) * 0.984375 * (y * 0.0197265625 + 0.7));
 		}
-		return reflectColorRgb(((color >> 16) & 0xff) * (y * 0.018 + 0.73),
-			((color >> 8) & 0xff) * (y * 0.018 + 0.73),
-			(color & 0xff) * (y * 0.018 + 0.73));
+		return reflectColorRgb(((color >> 16) & 0xff) * (y * 0.01875 + 0.7),
+			((color >> 8) & 0xff) * (y * 0.01875 + 0.7),
+			(color & 0xff) * (y * 0.01875 + 0.7));
 	},
 	function undergroundMap(ix, iz) {
 		let count = 0;

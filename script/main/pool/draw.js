@@ -19,12 +19,12 @@ let extendedMarkers = {};
 let inScreenExtendedMarkers = {};
 let extendedMarkerLock = new java.util.concurrent.Semaphore(1, true);
 
-Minimap.registerExtendedMarker = function(who, pointer) {
-	if (pointers.indexOf(pointer) == -1) {
-		Logger.Log("Minimap: registerExtendedMarker(*, pointer) must be already registered by registerPointer(self)", "ERROR");
+Minimap.registerExtendedMarker = function(who, pointerUid) {
+	if (pointerUid >= pointer.length || pointerUid < 0) {
+		Logger.Log("Minimap: registerExtendedMarker(*, pointerUid) must be already registered by registerPointer(self)", "ERROR");
 		return;
 	}
-	extendedMarkers[who] = pointer;
+	extendedMarkers[who] = pointerUid;
 };
 
 Minimap.mark = function(who, x, z, force) {
@@ -38,7 +38,7 @@ Minimap.mark = function(who, x, z, force) {
 	extendedMarkerLock.acquire();
 	if (!force) {
 		for (let i = 0, c = inScreenExtendedMarkers[who].length; i < c; i++) {
-			if (inScreenExtendedMarkers[who][i][0] == x && inScreenExtendedMarkers[who][i][1] == y) {
+			if (inScreenExtendedMarkers[who][i][0] == x && inScreenExtendedMarkers[who][i][1] == z) {
 				return;
 			}
 		}
@@ -54,7 +54,7 @@ Minimap.unmark = function(who, x, z) {
 	}
 	extendedMarkerLock.acquire();
 	for (let i = 0, c = inScreenExtendedMarkers[who].length; i < c; i++) {
-		if (inScreenExtendedMarkers[who][i][0] == x && inScreenExtendedMarkers[who][i][1] == y) {
+		if (inScreenExtendedMarkers[who][i][0] == x && inScreenExtendedMarkers[who][i][1] == z) {
 			inScreenExtendedMarkers[who].splice(i, 1);
 			redraw = true;
 			break;
@@ -71,8 +71,9 @@ Minimap.unmarkType = function(who) {
 		return;
 	}
 	extendedMarkerLock.acquire();
-	delete inScreenExtendedMarkers[who];
-	redraw = true;
+	if (delete inScreenExtendedMarkers[who]) {
+		redraw = true;
+	}
 	extendedMarkerLock.release();
 };
 
@@ -283,14 +284,14 @@ Minimap.drawMinimapWhenDirty = function() {
 				for (let i = 0, c = inScreenExtendedMarkers[element].length; i < c; i++) {
 					let matrix = inScreenExtendedMarkers[element][i];
 					matrixPointer.reset();
-					if (pointers[stylesheet].rotate) {
+					if (pointer[stylesheet].rotate) {
 						matrixPointer.postRotate(yawNew);
 					}
 					matrixPointer.postTranslate((z0 - matrix[1]) * absZoom, (matrix[0] - x0) * absZoom);
 					if (settings.mapRotation) {
 						matrixPointer.postRotate(-YAW, settings.locationRawSize * 0.5, settings.locationRawSize * 0.5);
 					}
-					matrixPointer.preConcat(pointers[stylesheet].matrix);
+					matrixPointer.preConcat(pointer[stylesheet].matrix);
 				}
 			}
 			extendedMarkerLock.release();

@@ -72,5 +72,5 @@ const getBitmapByDescriptor = function(what) {
 	if (!(what instanceof android.graphics.Bitmap)) {
 		return Minimap.decodeBase64Bitmap(what);
 	}
-	return null;
-}; 
+	return what;
+};

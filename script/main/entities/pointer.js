@@ -22,6 +22,7 @@ Minimap.Pointer = function(bitmap, matrix, rotate) {
 };
 
 Minimap.MatrixPointer = function(bitmap, matrix, rotate) {
+	bitmap = getBitmapByDescriptor(bitmap);
 	Minimap.Pointer.call(this, bitmap, matrix(bitmap), rotate);
 };
 
@@ -90,14 +91,14 @@ const pointer = [
 Minimap.registerPointer = function(self) {
 	if (!(self instanceof Minimap.Pointer)) {
 		Logger.Log("Minimap: pointer must be instance of Minimap.Pointer", "ERROR");
-		return;
+		return -1;
 	}
 	let index = pointer.indexOf(self);
 	if (index >= 0) {
 		Logger.Log("Minimap: pointer " + self + " was already registered in " + index, "INFO");
 		return index;
 	}
-	pointer.push(self);
+	return pointer.push(self) - 1;
 };
 
 const heads = (function(bitmapAssociation) {

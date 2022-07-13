@@ -30,18 +30,18 @@ Minimap uses a colormap to render surface topography. Color goes through a contr
 
 To update relief atlas/colormap, you can change color separately
 ```js
-api.registerColor(BlockID.some_staff, 0x00ffaa);
+api.setColor(BlockID.some_staff, 0x00ffaa);
 ```
 or update multiple colors at once (it will be merged with exiting one).
 ```js
-api.registerColormap({
+api.mergeColormap({
 	some_staff: 0x00ffaa,
 	some_another_staff: 0x33ffbb
 });
 ```
 It is desirable to register all variants of block meta, otherwise zero will be used
 ```js
-api.registerColor(BlockID.some_staff, [0x00ffaa, 0x33ffbb]);
+api.setColor(BlockID.some_staff, [0x00ffaa, 0x33ffbb]);
 ```
 
 ### Entity Heads
@@ -79,8 +79,8 @@ api.registerExtendedMarker("itemUseLocal", pointerUid);
 Now you can control marker how and when you want. Note that you need to unload marker when moving too far, to other dimensions, and so on. Otherwise, it will continue to be drawn, taking up space in memory.
 
 ```js
-Callback.addCallback("ItemUseLocal", function(actorUid, item, block, where) {
-	Minimap.mark("itemUseLocal", where.x, where.y);
+Callback.addCallback("ItemUseLocal", function(coords) {
+	Minimap.mark("itemUseLocal", coords.x, coords.y);
 });
 ```
 In this case, we are adding marker, ignoring one more "force" argument. Before adding a marker, a check will be made and if this marker is already located at these coordinates, then a new one will not be added.
@@ -88,11 +88,11 @@ In this case, we are adding marker, ignoring one more "force" argument. Before a
 However, marker does not unload in other dimensions and generally does not react in any way to player moving away.
 
 ```js
-Callback.addCallback("LocalPlayerChangedDimension", function(actorUid, currentId, lastId) {
+Callback.addCallback("LocalPlayerChangedDimension", function() {
 	Minimap.unmarkType("itemUseLocal");
 });
 
-Callback.addCallback("LevelLeft", function() {
+Callback.addCallback("LocalLevelLeft", function() {
 	Minimap.unmarkType("itemUseLocal");
 });
 ```

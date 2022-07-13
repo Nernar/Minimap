@@ -41,7 +41,7 @@ let colormap = (function(what) {
 	return what;
 })({});
 
-Minimap.registerColor = function(who, color) {
+Minimap.setColor = function(who, color) {
 	if (typeof who == "string") {
 		if (isHorizon) {
 			if (VanillaBlockID.hasOwnProperty(who)) {
@@ -70,12 +70,12 @@ Minimap.registerColor = function(who, color) {
 	});
 };
 
-Minimap.registerColormap = function(what) {
+Minimap.mergeColormap = function(what) {
 	if (what == null || typeof what != "object") {
 		return;
 	}
 	for (let element in colormap) {
-		Minimap.registerColor(element, colormap[element]);
+		Minimap.setColor(element, colormap[element]);
 	}
 };
 
