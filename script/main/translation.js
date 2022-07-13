@@ -384,10 +384,6 @@ Translation.addTranslation("Developed by ", {
 	ru: "Разработано ",
 	uk: "Розроблено "
 });
-Translation.addTranslation("Nernar", {
-	ru: "Нернар",
-	uk: "Нернар"
-});
 Translation.addTranslation("Inspired by ", {
 	ru: "Вдохновлено ",
 	uk: "Натхнено "
@@ -407,10 +403,6 @@ Translation.addTranslation("Also I would like to thank", {
 Translation.addTranslation("Interpreter<br/><i>Ukrainian</i>", {
 	ru: "Переводчик<br/><i>Украинский</i>",
 	uk: "Перекладач<br/><i>Український</i>"
-});
-Translation.addTranslation("Foldik UA", {
-	ru: "Фолдик ЮА",
-	uk: "Фолдiк"
 });
 
 // Terrain rendering debugging

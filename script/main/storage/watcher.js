@@ -61,16 +61,6 @@ const Minimap = {
 		Minimap.resetVisibility();
 		redraw = true;
 	},
-	onChangeScale: function() {
-		let params = mapView.getLayoutParams();
-		settings.locationRawSize = getDisplayPercentHeight(settings.locationSize);
-		params.height = settings.locationRawSize;
-		params.width = settings.locationRawSize;
-		mapView.setLayoutParams(params);
-		Minimap.onChangeStylesheet();
-		minZoom = settings.locationRawSize / (settings.radius * 2 * 16);
-		Minimap.onChangeZoom();
-	},
 	onChangeStylesheet: function() {
 		if (settings.stylesheetBorder != 0) {
 			pathBorder = Minimap.createHardcodedPath(false, true);

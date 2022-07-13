@@ -31,7 +31,7 @@ Minimap.ConfigDescriptor = [__mod__.getInfoProperty("name"), "Leave",
 	["sectionDivider", "Window"],
 		["keyValue", "slider", "Offset X", "locationX", 0, 100, 1, "%%"],
 		["keyValue", "slider", "Offset Y", "locationY", 0, 100, 1, "%%"],
-		["keyValue", "slider", "Scale", "locationSize", 0, 75, 1, "%%"],
+		["keyValue", "slider", "Scale", "locationSize", 20, 75, 1, "%%"],
 		["keyValue", "multipleChoice", "Gravity", "locationGravity", ["Left", "Center", "Right"]],
 		["keyValue", "slider", "Opacity", "mapAlpha", 20, 100, 1, "%%"],
 		["keyValue", "slider", "Zoom", "mapZoom", 10, 100, 1, "%%"],
@@ -174,9 +174,7 @@ let mapView = (function() {
 	
 	let location = new android.widget.TextView(getContext());
 	location.setGravity(android.view.Gravity.CENTER);
-	location.setTextSize(toComplexUnitSp(9));
 	location.setTextColor(Colors.WHITE);
-	location.setShadowLayer(1, 4, 4, Colors.BLACK);
 	location.setId(2);
 	try {
 		location.setTypeface(InnerCorePackage.utils.FileTools.getMcTypeface());
@@ -194,7 +192,6 @@ let mapView = (function() {
 	locationParams.addRule(android.widget.RelativeLayout.ALIGN_LEFT, 1);
 	locationParams.addRule(android.widget.RelativeLayout.ALIGN_RIGHT, 1);
 	locationParams.addRule(android.widget.RelativeLayout.BELOW, 1);
-	locationParams.setMargins(0, toComplexUnitDip(4), 0, 0);
 	layout.addView(location, locationParams);
 	
 	Minimap.onChangeOpacity = function() {
@@ -221,6 +218,26 @@ let mapView = (function() {
 	Minimap.onChangeOffset = function() {
 		popup.update(getDisplayPercentWidth(settings.locationX), getDisplayPercentHeight(settings.locationY));
 	};
+	Minimap.onChangeScale = function() {
+		let params = texture.getLayoutParams();
+		settings.locationRawSize = getDisplayPercentHeight(settings.locationSize);
+		params.height = settings.locationRawSize;
+		params.width = settings.locationRawSize;
+		texture.setLayoutParams(params);
+		Minimap.onChangeStylesheet();
+		minZoom = settings.locationRawSize / (settings.radius * 2 * 16);
+		Minimap.onChangeZoom();
+		Minimap.onChangeLayout();
+	};
+	Minimap.onChangeLayout = function() {
+		location.setTextSize(settings.locationRawSize * 0.055);
+		location.setShadowLayer(1, settings.locationRawSize * 0.0135,
+			settings.locationRawSize * 0.0135, Colors.BLACK);
+		let locationParams = location.getLayoutParams();
+		locationParams.topMargin = settings.locationRawSize * 0.027;
+		location.setLayoutParams(locationParams);
+	};
+	Minimap.onChangeLayout();
 	Minimap.acquireHardwareAccelerate = function() {
 		let container = popup.getContentView().getRootView();
 		let params = container.getLayoutParams();
@@ -333,9 +350,7 @@ let researchView = (function() {
 	
 	// let location = new android.widget.TextView(getContext());
 	// location.setGravity(android.view.Gravity.CENTER);
-	// location.setTextSize(toComplexUnitSp(9));
 	// location.setTextColor(Colors.WHITE);
-	// location.setShadowLayer(1, 4, 4, Colors.BLACK);
 	// location.setId(2);
 	// try {
 		// location.setTypeface(InnerCorePackage.utils.FileTools.getMcTypeface());
@@ -347,7 +362,6 @@ let researchView = (function() {
 		(android.view.ViewGroup.LayoutParams.MATCH_PARENT, android.view.ViewGroup.LayoutParams.MATCH_PARENT));
 	// let locationParams = new android.widget.RelativeLayout.LayoutParams
 		// (android.view.ViewGroup.LayoutParams.WRAP_CONTENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
-	// locationParams.setMargins(toComplexUnitDip(12), 0, 0, toComplexUnitDip(12));
 	// locationParams.addRule(android.widget.RelativeLayout.ALIGN_PARENT_LEFT);
 	// locationParams.addRule(android.widget.RelativeLayout.ALIGN_PARENT_BOTTOM);
 	// layout.addView(location, locationParams);
@@ -465,5 +479,3 @@ Callback.addCallback(isHorizon ? "LevelDisplayed" : "LevelLoaded", function() {
 		Minimap.show();
 	}
 });
-
-
