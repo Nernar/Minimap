@@ -192,6 +192,9 @@ const getEntityDimension = function(entity) {
 };
 
 const getEntityType = function(entity) {
+	if (Entity.hasOwnProperty("getTypeUniversal")) {
+		return Entity.getTypeUniversal(entity);
+	}
 	if (Entity_AdaptedScript === undefined) {
 		return Entity.getType(entity);
 	}

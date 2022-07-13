@@ -5,6 +5,12 @@ Minimap.isAcceptableEntity = function(ent) {
 	if (type == 1) {
 		return policyShowMultiplayerPlayer;
 	}
+	if (typeof type == "string") {
+		if (ENTITY_UNACCEPTABLE.indexOf(type) >= 0) {
+			return false;
+		}
+		return true;
+	}
 	if (type < ENTITY_IDENTIFIER_RANGE[0] || type > ENTITY_IDENTIFIER_RANGE[1]) {
 		return false;
 	}
@@ -12,6 +18,13 @@ Minimap.isAcceptableEntity = function(ent) {
 		return false;
 	}
 	return true;
+};
+
+Minimap.markAsUnacceptableEntity = function(type) {
+	if (ENTITY_UNACCEPTABLE.indexOf(type) >= 0) {
+		return;
+	}
+	ENTITY_UNACCEPTABLE.push(type);
 };
 
 const entities = [];

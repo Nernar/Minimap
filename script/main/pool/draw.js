@@ -15,6 +15,67 @@ Minimap.shutdownAndSchedulePool = function() {
 	pool.allowCoreThreadTimeOut(true);
 };
 
+let extendedMarkers = {};
+let inScreenExtendedMarkers = {};
+let extendedMarkerLock = new java.util.concurrent.Semaphore(1, true);
+
+Minimap.registerExtendedMarker = function(who, pointer) {
+	if (pointers.indexOf(pointer) == -1) {
+		Logger.Log("Minimap: registerExtendedMarker(*, pointer) must be already registered by registerPointer(self)", "ERROR");
+		return;
+	}
+	extendedMarkers[who] = pointer;
+};
+
+Minimap.mark = function(who, x, z, force) {
+	if (!inScreenExtendedMarkers.hasOwnProperty(who)) {
+		if (!extendedMarkers.hasOwnProperty(who)) {
+			Logger.Log("Minimap: not found marker " + who + ". Are you sure that registered it?", "WARNING");
+			return;
+		}
+		inScreenExtendedMarkers[who] = [];
+	}
+	extendedMarkerLock.acquire();
+	if (!force) {
+		for (let i = 0, c = inScreenExtendedMarkers[who].length; i < c; i++) {
+			if (inScreenExtendedMarkers[who][i][0] == x && inScreenExtendedMarkers[who][i][1] == y) {
+				return;
+			}
+		}
+	}
+	inScreenExtendedMarkers[who].push([x, z]);
+	redraw = true;
+	extendedMarkerLock.release();
+};
+
+Minimap.unmark = function(who, x, z) {
+	if (!inScreenExtendedMarkers.hasOwnProperty(who)) {
+		return;
+	}
+	extendedMarkerLock.acquire();
+	for (let i = 0, c = inScreenExtendedMarkers[who].length; i < c; i++) {
+		if (inScreenExtendedMarkers[who][i][0] == x && inScreenExtendedMarkers[who][i][1] == y) {
+			inScreenExtendedMarkers[who].splice(i, 1);
+			redraw = true;
+			break;
+		}
+	}
+	if (inScreenExtendedMarkers[who].length == 0) {
+		delete inScreenExtendedMarkers[who];
+	}
+	extendedMarkerLock.release();
+};
+
+Minimap.unmarkType = function(who) {
+	if (!inScreenExtendedMarkers.hasOwnProperty(who)) {
+		return;
+	}
+	extendedMarkerLock.acquire();
+	delete inScreenExtendedMarkers[who];
+	redraw = true;
+	extendedMarkerLock.release();
+};
+
 Minimap.drawMinimapWhenDirty = function() {
 	try {
 		if (settings.priority == 0) {
@@ -215,6 +276,24 @@ Minimap.drawMinimapWhenDirty = function() {
 					canvas.drawBitmap(heads[63] || heads[1] || heads[0], matrixPointer, null)
 				}
 			}
+			
+			extendedMarkerLock.acquire();
+			for (let element in inScreenExtendedMarkers) {
+				let stylesheet = extendedMarkers[element];
+				for (let i = 0, c = inScreenExtendedMarkers[element].length; i < c; i++) {
+					let matrix = inScreenExtendedMarkers[element][i];
+					matrixPointer.reset();
+					if (pointers[stylesheet].rotate) {
+						matrixPointer.postRotate(yawNew);
+					}
+					matrixPointer.postTranslate((z0 - matrix[1]) * absZoom, (matrix[0] - x0) * absZoom);
+					if (settings.mapRotation) {
+						matrixPointer.postRotate(-YAW, settings.locationRawSize * 0.5, settings.locationRawSize * 0.5);
+					}
+					matrixPointer.preConcat(pointers[stylesheet].matrix);
+				}
+			}
+			extendedMarkerLock.release();
 			
 			canvas.restore();
 			mapView.unlockCanvasAndPost(canvas);

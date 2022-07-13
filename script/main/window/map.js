@@ -27,6 +27,7 @@ Minimap.ConfigDescriptor = [__mod__.getInfoProperty("name"), "Leave",
 		["keyValue", "multipleChoice", "Border", "stylesheetBorder", ["Disabled", "Simple", "Colourful"]],
 		["keyValue", "multipleChoice", "Shape", "stylesheetShape", ["Square", "Circle"]],
 		// ["keyValue", "multipleChoice", "Where am I", "stylesheetExplore", ["Disabled", "Tip", "Actionbar", "Title"]],
+		["checkBox", "mapLocation", "Show coordinates"],
 	["sectionDivider", "Window"],
 		["keyValue", "slider", "Offset X", "locationX", 0, 100, 1, "%%"],
 		["keyValue", "slider", "Offset Y", "locationY", 0, 100, 1, "%%"],
@@ -34,7 +35,6 @@ Minimap.ConfigDescriptor = [__mod__.getInfoProperty("name"), "Leave",
 		["keyValue", "multipleChoice", "Gravity", "locationGravity", ["Left", "Center", "Right"]],
 		["keyValue", "slider", "Opacity", "mapAlpha", 20, 100, 1, "%%"],
 		["keyValue", "slider", "Zoom", "mapZoom", 10, 100, 1, "%%"],
-		["checkBox", "mapLocation", "Show coordinates"],
 	["sectionDivider", "Other"],
 		["keyValue", "text", "Export terrain to file", "", "exportTerrain"],
 		["keyValue", "text", "Refresh canvas", "", "forceRefresh"],
@@ -49,7 +49,7 @@ Minimap.ConfigDescriptor = [__mod__.getInfoProperty("name"), "Leave",
 			["keyValue", "text", "Located in ", new java.io.File(__dir__).getName() + "/"],
 			["keyValue", "text", "<a href=https://t.me/ntInsideChat>t.me</a> development channel", ""],
 			["sectionDivider", "Also I would like to thank"],
-				["keyValue", "text", "Interpreter<br/><i>Ukrainian</i>", "FOLDIK UA"]]]];
+				["keyValue", "text", "Interpreter<br/><i>Ukrainian</i>", "Foldik UA"]]]];
 
 (function() {
 	let dialog;
@@ -420,6 +420,10 @@ Minimap.changeState = function() {
 	} else {
 		scheduledFutureUpdateMap.cancel(false);
 	}
+};
+
+Minimap.isActive = function() {
+	return mapState;
 };
 
 Callback.addCallback("NativeGuiChanged", function(screenName) {

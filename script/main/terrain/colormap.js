@@ -41,6 +41,44 @@ let colormap = (function(what) {
 	return what;
 })({});
 
+Minimap.registerColor = function(who, color) {
+	if (typeof who == "string") {
+		if (isHorizon) {
+			if (VanillaBlockID.hasOwnProperty(who)) {
+				who = VanillaBlockID[who];
+			}
+		}
+		if (typeof who == "string") {
+			if (BlockID.hasOwnProperty(who)) {
+				who = BlockID[who];
+			} else {
+				Logger.Log("Minimap: not found block id " + who + ", default color will be used otherwise", "INFO");
+				return;
+			}
+		}
+	}
+	if (!Array.isArray(color)) {
+		color = [color];
+	}
+	colormap[who] = color.map(function(what, index) {
+		let who = parseInt(what);
+		if (who == NaN) {
+			return (colormap[who] ? colormap[who][index] ?
+				colormap[who][index] : colormap[who][0] : 0) || 0;
+		}
+		return who;
+	});
+};
+
+Minimap.registerColormap = function(what) {
+	if (what == null || typeof what != "object") {
+		return;
+	}
+	for (let element in colormap) {
+		Minimap.registerColor(element, colormap[element]);
+	}
+};
+
 Callback.addCallback("BlocksDefined", function() {
 	for (let element in BlockID) {
 		if (colormapRaw.hasOwnProperty(element)) {

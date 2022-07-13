@@ -378,11 +378,15 @@ Translation.addTranslation("About Minimap", {
 });
 Translation.addTranslation("Revision ", {
 	ru: "Редакция ",
-	uk: "Редакція"
+	uk: "Редакція "
 });
 Translation.addTranslation("Developed by ", {
 	ru: "Разработано ",
 	uk: "Розроблено "
+});
+Translation.addTranslation("Nernar", {
+	ru: "Нернар",
+	uk: "Нернар"
 });
 Translation.addTranslation("Inspired by ", {
 	ru: "Вдохновлено ",
@@ -390,7 +394,7 @@ Translation.addTranslation("Inspired by ", {
 });
 Translation.addTranslation("Located in ", {
 	ru: "Расположение ",
-	uk: "Розміщення"
+	uk: "Розміщення "
 });
 Translation.addTranslation("<a href=https://t.me/ntInsideChat>t.me</a> development channel", {
 	ru: "<a href=https://t.me/ntInsideChat>t.me</a> новостной канал",
@@ -400,13 +404,13 @@ Translation.addTranslation("Also I would like to thank", {
 	ru: "А еще хотелось бы поблагодарить",
 	uk: "А ще хотілось би подякувати"
 });
-Translation.addTranslation("Developer", {
-	ru: "Разработчик",
-	uk: "Розробник"
-});
 Translation.addTranslation("Interpreter<br/><i>Ukrainian</i>", {
 	ru: "Переводчик<br/><i>Украинский</i>",
 	uk: "Перекладач<br/><i>Український</i>"
+});
+Translation.addTranslation("Foldik UA", {
+	ru: "Фолдик ЮА",
+	uk: "Фолдiк"
 });
 
 // Terrain rendering debugging

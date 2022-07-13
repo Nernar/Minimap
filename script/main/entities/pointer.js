@@ -16,7 +16,7 @@ const pointerPaint = {
 };
 
 Minimap.Pointer = function(bitmap, matrix, rotate) {
-	this.bitmap = bitmap;
+	this.bitmap = getBitmapByDescriptor(bitmap);
 	this.matrix = matrix;
 	this.rotate = rotate;
 };
@@ -87,6 +87,19 @@ const pointer = [
 	)
 ];
 
+Minimap.registerPointer = function(self) {
+	if (!(self instanceof Minimap.Pointer)) {
+		Logger.Log("Minimap: pointer must be instance of Minimap.Pointer", "ERROR");
+		return;
+	}
+	let index = pointer.indexOf(self);
+	if (index >= 0) {
+		Logger.Log("Minimap: pointer " + self + " was already registered in " + index, "INFO");
+		return index;
+	}
+	pointer.push(self);
+};
+
 const heads = (function(bitmapAssociation) {
 	let directory = new java.io.File(__dir__ + "assets/" + (legacyEntities ? "entities-legacy" : "entities"));
 	if (!directory.exists() || !directory.isDirectory()) {
@@ -105,6 +118,32 @@ const heads = (function(bitmapAssociation) {
 if (heads[0] === undefined || heads[0] === null) {
 	heads[0] = Minimap.decodeBase64Bitmap("iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4ggLFSgULUPHpQAAARlJREFUKM+dz7FrEwEcxfHP3eVyiVJTQZoOBfsf+A9IRxE6tnuHgA7+CdLORXFxcfEvsJQO7aAOGdz8FyykTRvUDCVQEsO1dxeHg9tzb/nB7/Helxc821xBVkAjCJHmGbIsRxiGiBsRFgsILalG2V0qWxR42Gqi0wyQi3AzTZEv8lqE8rx/s4ckbqLdeoT57BaiEJO/v3F48rUOIfiy/woPkgT/0hRRlGByO8HT7hqGl7+qwPIbyu7ttx+xs/UOva1B1f3prIvjHx9wdPC61obPvRform+gkazitN+v7N2XzzG6OsdgfFNrw/Q+x91ogOH1DCthXNnfvv/E+kYbgbgW4eLPGEVR4MnjTmWk93doJy1M53n1WZrwHwiMVs+tK7U4AAAAAElFTkSuQmCC");
 }
+
+Minimap.registerEntityBitmap = function(type, bitmap) {
+	heads[type] = getBitmapByDescriptor(bitmap) || heads[0];
+};
+
+Minimap.registerEntity = function(type, bitmap, caste) {
+	caste %= 2;
+	let source = ENTITY_UNACCEPTABLE;
+	switch (caste) {
+		case Minimap.CASTE_PASSIVE:
+			source = ENTITY_PASSIVE;
+			break;
+		case Minimap.CASTE_HOSTILE:
+			source = ENTITY_HOSTILE;
+			break;
+	}
+	if (source.indexOf(type) >= 0) {
+		Logger.Log("Minimap: entity " + type + " was already registered", "INFO");
+		return;
+	}
+	Minimap.registerEntityBitmap(type, bitmap);
+	source.push(type);
+};
+
+Minimap.CASTE_PASSIVE = 0;
+Minimap.CASTE_HOSTILE = 1;
 
 const getIconMatrix = function(head) {
 	if (!(head instanceof android.graphics.Bitmap)) {

@@ -61,3 +61,16 @@ const scanMediaFiles = function(pathes, when) {
 		reportError(e);
 	}
 };
+
+const getBitmapByDescriptor = function(what) {
+	if (what instanceof java.io.File) {
+		what = android.graphics.BitmapFactory.decodeFile(what);
+	}
+	if (what == null) {
+		return what;
+	}
+	if (!(what instanceof android.graphics.Bitmap)) {
+		return Minimap.decodeBase64Bitmap(what);
+	}
+	return null;
+}; 
