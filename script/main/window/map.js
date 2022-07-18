@@ -49,7 +49,7 @@ Minimap.ConfigDescriptor = [__mod__.getInfoProperty("name"), "Leave",
 			["keyValue", "text", "Located in ", new java.io.File(__dir__).getName() + "/"],
 			["keyValue", "text", "<a href=https://t.me/ntInsideChat>t.me</a> development channel", ""],
 			["sectionDivider", "Also I would like to thank"],
-				["keyValue", "text", "Interpreter<br/><i>Chinese</i>", "weifeng233"],
+				["keyValue", "text", "Interpreter<br/><i>Chinese</i>", "Sugar Breeze"],
 				["keyValue", "text", "Interpreter<br/><i>Ukrainian</i>", "Foldik UA"]]]];
 
 (function() {

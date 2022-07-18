@@ -378,7 +378,8 @@ Translation.addTranslation("Offset X", {
 });
 Translation.addTranslation("Offset Y", {
 	ru: "Отступ по Y",
-	uk: "Y偏移"
+	uk: "Зсув по Y",
+	zh: "Y偏移"
 });
 Translation.addTranslation("Scale", {
 	ru: "Масштаб",
