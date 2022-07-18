@@ -6,7 +6,7 @@ Translation.addTranslation("Minimap", {
 Translation.addTranslation("Minimap " + __mod__.getInfoProperty("version"), {
 	ru: "Миникарта, " + __mod__.getInfoProperty("version"),
 	uk: "Мінікарта, " + __mod__.getInfoProperty("version"),
-	zh: "小地图"
+	zh: "小地图，" + __mod__.getInfoProperty("version")
 });
 Translation.addTranslation("Understood", {
 	ru: "Понятно",
@@ -402,7 +402,8 @@ Translation.addTranslation("Center", {
 });
 Translation.addTranslation("Right", {
 	ru: "Справа",
-	uk: "靠右"
+	uk: "Праворуч",
+	zh: "靠右"
 });
 Translation.addTranslation("Opacity", {
 	ru: "Видимость",
@@ -469,27 +470,27 @@ Translation.addTranslation("About Minimap", {
 Translation.addTranslation("Revision ", {
 	ru: "Редакция ",
 	uk: "Редакція ",
-	zh: "版本"
+	zh: "版本 "
 });
 Translation.addTranslation("Developed by ", {
 	ru: "Разработано ",
 	uk: "Розроблено ",
-	zh: "开发者"
+	zh: "开发者 "
 });
 Translation.addTranslation("Inspired by ", {
 	ru: "Вдохновлено ",
 	uk: "Натхнено ",
-	zh: "启发者"
+	zh: "启发者 "
 });
 Translation.addTranslation("Located in ", {
 	ru: "Расположение ",
 	uk: "Розміщення ",
-	zh: "定位于"
+	zh: "定位于 "
 });
 Translation.addTranslation("<a href=https://t.me/ntInsideChat>t.me</a> development channel", {
 	ru: "<a href=https://t.me/ntInsideChat>t.me</a> новостной канал",
 	uk: "<a href=https://t.me/ntInsideChat>t.me</a> канал новин",
-	zh: "<a href=https://t.me/ntInsideChat>TG</a>开发频道"
+	zh: "<a href=https://t.me/ntInsideChat>t.me</a>开发频道"
 });
 Translation.addTranslation("Also I would like to thank", {
 	ru: "А еще хотелось бы поблагодарить",
@@ -500,6 +501,11 @@ Translation.addTranslation("Interpreter<br/><i>Ukrainian</i>", {
 	ru: "Переводчик<br/><i>Украинский</i>",
 	uk: "Перекладач<br/><i>Український</i>",
 	zh: "翻译<br/><i>乌克兰语</i>"
+});
+Translation.addTranslation("Interpreter<br/><i>Chinese</i>", {
+	ru: "Переводчик<br/><i>Китайский</i>",
+	uk: "Перекладач<br/><i>Китайська</i>",
+	zh: "翻译<br/><i>中文</i>"
 });
 
 // Terrain rendering debugging
