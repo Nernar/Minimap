@@ -167,10 +167,13 @@ const mapDot = [
 		if (block == 385) {
 			block = 9;
 		}
-		let color = colormap[block] ? (colormap[block][getBlockData(ix, iy, iz)] || colormap[block][0]) : -1;
-		// if (block == 2) {
-			// color = getGrassColor(ix, iz);
-		// }
+		let color = 0;
+		if (biomeColormap.hasOwnProperty(block)) {
+			color = biomeColormap[block][getBiome(ix, iz)] || biomeColormap[block][0] || 0;
+		}
+		if (color == 0) {
+			color = colormap[block] ? (colormap[block][getBlockData(ix, iy, iz)] || colormap[block][0]) : -1;
+		}
 		iy = Math.abs((iy + 1) % 32 - 16);
 		return reflectColorRgb(((color >> 16) & 0xff) * (iy * 0.01875 + 0.7),
 			((color >> 8) & 0xff) * (iy * 0.01875 + 0.7),
@@ -183,25 +186,50 @@ const mapDot = [
 			return 0;
 		}
 		let color = 0;
+		if (biomeColormap.hasOwnProperty(block)) {
+			color = biomeColormap[block][getBiome(ix, iz)] || biomeColormap[block][0] || 0;
+		}
 		switch (block) {
-			// case 2:
-				// color = getGrassColor(ix, iz);
-				// break;
 			case 9:
+				if (color == 0) {
+					color = -12632068;
+				}
 				if (getBlockId(ix, iy - 9, iz) == 9) {
-					return -13882190;
+					return reflectColorRgb(((color >> 16) & 0xff) * 0.90625,
+						((color >> 8) & 0xff) * 0.90625,
+						(color & 0xff) * 0.90625);
 				}
 				if (getBlockId(ix, iy - 6, iz) == 9) {
-					return !(ix % 2) == !((iz + 1) % 2) ? -13882190 : -13224231;
+					if (!(ix % 2) == !((iz + 1) % 2)) {
+						return reflectColorRgb(((color >> 16) & 0xff) * 0.90625,
+							((color >> 8) & 0xff) * 0.90625,
+							(color & 0xff) * 0.90625);
+					}
+					return reflectColorRgb(((color >> 16) & 0xff) * 0.9375,
+						((color >> 8) & 0xff) * 0.9375,
+						(color & 0xff) * 0.9375);
 				}
 				if (getBlockId(ix, iy - 4, iz) == 9) {
-					return -13224231;
+					return reflectColorRgb(((color >> 16) & 0xff) * 0.96875,
+						((color >> 8) & 0xff) * 0.96875,
+						(color & 0xff) * 0.96875);
 				}
 				if (getBlockId(ix, iy - 2, iz) == 9) {
-					return !(ix % 2) == !((iz + 1) % 2) ? -13224231 : -12632068;
+					if (!(ix % 2) == !((iz + 1) % 2)) {
+						return reflectColorRgb(((color >> 16) & 0xff) * 0.96875,
+							((color >> 8) & 0xff) * 0.96875,
+							(color & 0xff) * 0.96875);
+					}
+					return reflectColorRgb(((color >> 16) & 0xff) * 0.984375,
+						((color >> 8) & 0xff) * 0.984375,
+						(color & 0xff) * 0.984375);
 				}
+				return color;
 			case 385:
-				return -12632068;
+				if (color == 0) {
+					return -12632068;
+				}
+				return color;
 			case 12:
 				if (getBlockData(ix, iy, iz)) {
 					color = 0xd57d32;
@@ -225,7 +253,9 @@ const mapDot = [
 				color = [0x6f6f6f, 0xf4e6a1, 0x8d7647, 0x6f6f6f, 0x973232, 0x6f6f6f, 0xfcfcfc, 0x6f0200, 0x6f6f6f, 0xf4e6a1, 0x8d7647, 0x6f6f6f, 0x973232, 0x6f6f6f, 0xfcfcfc, 0x6f0200][getBlockData(ix, iy - 10, iz)];
 				break;
 			default:
-				color = colormap[block] ? (colormap[block][getBlockData(ix, iy, iz)] || colormap[block][0]) : -1;
+				if (color == 0) {
+					color = colormap[block] ? (colormap[block][getBlockData(ix, iy, iz)] || colormap[block][0]) : -1;
+				}
 		}
 		let y = Math.abs((iy + 1) % 32 - 16);
 		if (getBlockId(ix - 1, iy - 2, iz)) {

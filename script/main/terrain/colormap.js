@@ -35,7 +35,7 @@ let colormap = (function(what) {
 				what[VanillaBlockID[element]] = colormapRaw[element];
 				continue;
 			}
-			Logger.Log("Minimap: not found color for vanilla block " + element, "INFO");
+			Logger.Log("Minimap: Not found color for vanilla block " + element, "INFO");
 		}
 	}
 	return what;
@@ -52,7 +52,7 @@ Minimap.setColor = function(who, color) {
 			if (BlockID.hasOwnProperty(who)) {
 				who = BlockID[who];
 			} else {
-				Logger.Log("Minimap: not found block id " + who + ", default color will be used otherwise", "INFO");
+				Logger.Log("Minimap: Not found block id " + who + ", default color will be used otherwise", "INFO");
 				return;
 			}
 		}
@@ -74,8 +74,8 @@ Minimap.mergeColormap = function(what) {
 	if (what == null || typeof what != "object") {
 		return;
 	}
-	for (let element in colormap) {
-		Minimap.setColor(element, colormap[element]);
+	for (let element in what) {
+		Minimap.setColor(element, what[element]);
 	}
 };
 
@@ -85,7 +85,7 @@ Callback.addCallback("BlocksDefined", function() {
 			colormap[BlockID[element]] = colormapRaw[element];
 			continue;
 		}
-		Logger.Log("Minimap: not found color for block " + element, "DEBUG");
+		Logger.Log("Minimap: Not found color for block " + element, "DEBUG");
 	}
 });
 
@@ -96,4 +96,81 @@ const Colors = {
 	LTGRAY: android.graphics.Color.LTGRAY,
 	PRIMARY: android.graphics.Color.parseColor("#4151b0"),
 	ACCENT: android.graphics.Color.parseColor("#2895f0")
+};
+
+let biomeColormapRaw = (function() {
+	let proto = JSON.parse(readFileText(__dir__ + "assets/biomes_colormap.json"));
+	if (proto != null && typeof proto == "object") {
+		if (proto.hasOwnProperty("water")) {
+			proto.flowing_water = proto.water;
+		}
+		if (proto.hasOwnProperty("leaves")) {
+			for (let i = 0, s = proto.leaves.length; i < s; i++) {
+				proto.leaves.push(proto.leaves[i]);
+			}
+		}
+		if (proto.hasOwnProperty("leaves2")) {
+			for (let i = 0, s = proto.leaves2.length; i < s; i++) {
+				proto.leaves2.push(proto.leaves2[i]);
+			}
+		}
+	}
+	return proto;
+})();
+
+let biomeColormap = (function(what) {
+	if (isHorizon) {
+		for (let element in biomeColormapRaw) {
+			if (VanillaBlockID.hasOwnProperty(element)) {
+				what[VanillaBlockID[element]] = biomeColormapRaw[element];
+				continue;
+			}
+			Logger.Log("Minimap: Not found vanilla block for biome dependent color " + element, "INFO");
+		}
+	}
+	return what;
+})({});
+
+Minimap.setBiomeDependentColor = function(who, color) {
+	if (typeof who == "string") {
+		if (isHorizon) {
+			if (VanillaBlockID.hasOwnProperty(who)) {
+				who = VanillaBlockID[who];
+			}
+		}
+		if (typeof who == "string") {
+			if (BlockID.hasOwnProperty(who)) {
+				who = BlockID[who];
+			} else {
+				Logger.Log("Minimap: Not found block id " + who + ", default color will be used otherwise", "INFO");
+				return;
+			}
+		}
+	}
+	if (!Array.isArray(color)) {
+		color = [color];
+	}
+	biomeColormap[who] = color.map(function(what, index) {
+		if (what == null || typeof what != "object") {
+			return {};
+		}
+		for (let where in what) {
+			let who = parseInt(what[where]);
+			if (who == NaN) {
+				delete what[where];
+				continue;
+			}
+			what[where] = who;
+		}
+		return what;
+	});
+};
+
+Minimap.mergeBiomeDependentColormap = function(what) {
+	if (what == null || typeof what != "object") {
+		return;
+	}
+	for (let element in what) {
+		Minimap.setBiomeDependentColor(element, what[element]);
+	}
 };

@@ -43,9 +43,9 @@ const REVISION = parseFloat(__mod__.getInfoProperty("version"));
 
 IMPORT("Retention");
 
-const InnerCorePackage = isHorizon ? Packages.com.zhekasmirnov.innercore : Packages.zhekasmirnov.launcher;
+let InnerCorePackage = isHorizon ? Packages.com.zhekasmirnov.innercore : Packages.zhekasmirnov.launcher;
 
-const buttonSize = (function() {
+let buttonSize = (function() {
 	if (__config__.get("initialization.button_size") == null) {
 		__config__.set("initialization.button_size", 40);
 		__config__.save();
@@ -53,7 +53,7 @@ const buttonSize = (function() {
 	return __config__.getNumber("initialization.button_size");
 })();
 
-const legacyEntities = (function() {
+let legacyEntities = (function() {
 	if (__config__.get("initialization.use_legacy_entities") == null) {
 		__config__.set("initialization.use_legacy_entities", false);
 		__config__.save();
@@ -139,6 +139,36 @@ const canSeeSky = function(x, y, z) {
 		return source.canSeeSky(x, y, z);
 	}
 	return World.canSeeSky(x, y, z);
+};
+
+const getBiome = function(x, z) {
+	if (source != null) {
+		return source.getBiome(x, z);
+	}
+	return World.getBiome(x, z);
+};
+
+const getBiomeTemperatureAt = function(x, y, z) {
+	if (source != null) {
+		return source.getBiomeTemperatureAt(x, y, z);
+	}
+	return World.getTemperature(x, y, z);
+};
+
+const getBiomeDownfallAt = function(x, y, z) {
+	if (source != null) {
+		return source.getBiomeDownfallAt(x, y, z);
+	}
+	return 0.5;
+};
+
+const Block_AdaptedScript = ModAPI.requireGlobal("Block");
+
+const getMapColor = function(id) {
+	if (Block_AdaptedScript === undefined) {
+		return Block.getMapColor(id);
+	}
+	return Block_AdaptedScript.getMapColor(id);
 };
 
 const GenerationUtils_AdaptedScript = ModAPI.requireGlobal("GenerationUtils");
