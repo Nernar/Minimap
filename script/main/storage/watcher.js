@@ -1,7 +1,7 @@
 const Minimap = {
 	REVISION: REVISION,
 	getVersionCode: function() {
-		return 1;
+		return 2;
 	},
 	getGravity: function(what) {
 		let gravity = android.view.Gravity.TOP;

@@ -44,6 +44,22 @@ It is desirable to register all variants of block meta, otherwise zero will be u
 api.setColor(BlockID.some_staff, [0x00ffaa, 0x33ffbb]);
 ```
 
+#### Dependent Biome
+
+Additionally, colormaps now can dependent on any biomes. This may be used for foliage colors or grass, but choice dependent on target.
+
+For example, colorize stone (all variations, e.g. granite, diorite) in Mountain Edge to blue
+```js
+api.setBiomeDependentColor("stone", [
+	20: 0x3333ff
+]);
+```
+where 20 is represented as Mountain Edge biome.
+
+Meanwhile, `api.mergeBiomeDependentColormap' do some same stuff, just like ordinary colormap.
+
+You can find vanilla biome ids at [wiki/Biome](https://minecraft.fandom.com/wiki/Biome).
+
 ### Entity Heads
 
 Easiest way to add an indicator is to add your custom mob. You can add entity by caste and bitmap for drawing.

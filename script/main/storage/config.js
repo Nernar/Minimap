@@ -69,7 +69,8 @@ const protoConfig = (function() {
 			pointer: 3,
 			local_pointer: 2,
 			shape: 1,
-			explore: 0
+			explore: 0,
+			vanilla_colormap: false
 		},
 		performance: {
 			radius: checkRenderDistance(),
@@ -115,6 +116,7 @@ Minimap.loadConfig = function(source) {
 		stylesheetLocalPointer: getProtoNumber(protoConfig, source, "stylesheet.local_pointer"),
 		stylesheetShape: getProtoNumber(protoConfig, source, "stylesheet.shape"),
 		stylesheetExplore: getProtoBool(protoConfig, source, "stylesheet.explore"),
+		stylesheetVanillaColormap: getProtoBool(protoConfig, source, "stylesheet.vanilla_colormap"),
 		mapLocation: getProtoBool(protoConfig, source, "development.location"),
 		debug: getProtoBool(protoConfig, source, "development.show_process"),
 		radius: getProtoNumber(protoConfig, source, "performance.radius"),
@@ -155,6 +157,7 @@ Minimap.saveConfig = function() {
 	setConfigOptionIfNeeded(protoConfig, "stylesheet.local_pointer", settings.stylesheetLocalPointer);
 	setConfigOptionIfNeeded(protoConfig, "stylesheet.shape", settings.stylesheetShape);
 	setConfigOptionIfNeeded(protoConfig, "stylesheet.explore", settings.stylesheetExplore);
+	setConfigOptionIfNeeded(protoConfig, "stylesheet.vanilla_colormap", settings.stylesheetVanillaColormap);
 	setConfigOptionIfNeeded(protoConfig, "development.location", settings.mapLocation);
 	setConfigOptionIfNeeded(protoConfig, "development.show_process", settings.debug);
 	setConfigOptionIfNeeded(protoConfig, "performance.radius", settings.radius);

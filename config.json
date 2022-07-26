@@ -5,26 +5,21 @@
     "button_size":40
   },
   "runtime":{
-    "zoom":53,
-    "type":1,
-    "smoothing":3,
-    "surface":2,
-    "rotation":true
+    
   },
   "indicator":{
     
   },
   "location":{
-    "size":40
+    
   },
   "stylesheet":{
-    "shape":0
+    
   },
   "performance":{
     
   },
   "development":{
-    "location":true,
-    "show_process":false
+    
   }
 }

@@ -164,15 +164,27 @@ const mapDot = [
 		if (block == 0) {
 			return 0;
 		}
+		let meta = getBlockData(ix, iy, iz);
 		if (block == 385) {
 			block = 9;
 		}
 		let color = 0;
 		if (biomeColormap.hasOwnProperty(block)) {
-			color = biomeColormap[block][getBiome(ix, iz)] || biomeColormap[block][0] || 0;
+			let biome = getBiome(ix, iz);
+			if (biomeColormap[block][meta]) {
+				color = biomeColormap[block][meta][biome] || biomeColormap[block][meta][0] || 0;
+			}
+			if (color == 0 && biomeColormap[block][0]) {
+				color = biomeColormap[block][0][biome] || biomeColormap[block][0][0] || 0;
+			}
 		}
 		if (color == 0) {
-			color = colormap[block] ? (colormap[block][getBlockData(ix, iy, iz)] || colormap[block][0]) : -1;
+			if (settings.stylesheetVanillaColormap) {
+				color = getMapColor(block);
+			}
+			if (color == 0) {
+				color = colormap[block] ? (colormap[block][meta] || colormap[block][0] || 0) : -1;
+			}
 		}
 		iy = Math.abs((iy + 1) % 32 - 16);
 		return reflectColorRgb(((color >> 16) & 0xff) * (iy * 0.01875 + 0.7),
@@ -185,9 +197,16 @@ const mapDot = [
 		if (block == 0) {
 			return 0;
 		}
+		let meta = getBlockData(ix, iy, iz);
 		let color = 0;
 		if (biomeColormap.hasOwnProperty(block)) {
-			color = biomeColormap[block][getBiome(ix, iz)] || biomeColormap[block][0] || 0;
+			let biome = getBiome(ix, iz);
+			if (biomeColormap[block][meta]) {
+				color = biomeColormap[block][meta][biome] || biomeColormap[block][meta][0] || 0;
+			}
+			if (color == 0 && biomeColormap[block][0]) {
+				color = biomeColormap[block][0][biome] || biomeColormap[block][0][0] || 0;
+			}
 		}
 		switch (block) {
 			case 9:
@@ -231,7 +250,7 @@ const mapDot = [
 				}
 				return color;
 			case 12:
-				if (getBlockData(ix, iy, iz)) {
+				if (meta != 0) {
 					color = 0xd57d32;
 				} else {
 					color = 0xf4e6a1;
@@ -254,7 +273,12 @@ const mapDot = [
 				break;
 			default:
 				if (color == 0) {
-					color = colormap[block] ? (colormap[block][getBlockData(ix, iy, iz)] || colormap[block][0]) : -1;
+					if (settings.stylesheetVanillaColormap) {
+						color = getMapColor(block);
+					}
+					if (color == 0) {
+						color = colormap[block] ? (colormap[block][meta] || colormap[block][0] || 0) : -1;
+					}
 				}
 		}
 		let y = Math.abs((iy + 1) % 32 - 16);

@@ -287,6 +287,9 @@ Translation.addTranslation("%spx", {
 	uk: "%s пікселів",
 	zh: "%s像素"
 });
+Translation.addTranslation("Use vanilla colormap", {
+	ru: "Использовать ванильную карту цветов"
+}); // !
 Translation.addTranslation("Debug various processes", {
 	ru: "Отладка различных процессов",
 	uk: "Налагодження різних процесів",
