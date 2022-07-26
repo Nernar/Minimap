@@ -232,7 +232,7 @@ let mapView = (function() {
 		Minimap.onChangeLayout();
 	};
 	Minimap.onChangeLayout = function() {
-		location.setTextSize(settings.locationRawSize * 0.055);
+		location.setTextSize(settings.locationRawSize * 0.0275);
 		location.setShadowLayer(1, settings.locationRawSize * 0.0135,
 			settings.locationRawSize * 0.0135, Colors.BLACK);
 		let locationParams = location.getLayoutParams();
