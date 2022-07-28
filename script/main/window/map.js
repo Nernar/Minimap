@@ -50,8 +50,8 @@ Minimap.ConfigDescriptor = [__mod__.getInfoProperty("name"), "Leave",
 			["keyValue", "text", "Located in ", new java.io.File(__dir__).getName() + "/"],
 			["keyValue", "text", "<a href=https://t.me/ntInsideChat>t.me</a> development channel", ""],
 			["sectionDivider", "Also I would like to thank"],
-				["keyValue", "text", "Interpreter<br/><i>Chinese</i>", "Sugar Breeze"],
-				["keyValue", "text", "Interpreter<br/><i>Ukrainian</i>", "Foldik UA"]]]];
+				["keyValue", "text", "Adaptation<br/><i>Chinese</i>", "Sugar Breeze"],
+				["keyValue", "text", "Adaptation<br/><i>Ukrainian</i>", "Foldik UA"]]]];
 
 (function() {
 	let dialog;
@@ -181,7 +181,7 @@ let mapView = (function() {
 	try {
 		location.setTypeface(InnerCorePackage.utils.FileTools.getMcTypeface());
 	} catch (e) {
-		Logger.Log("Minimap: unable to set embedded in Inner Core font, default will be used otherwise", "WARNING");
+		Logger.Log("Minimap: Unable to set embedded in Inner Core font, default will be used otherwise", "WARNING");
 	}
 	
 	layout.addView(button);
@@ -337,8 +337,12 @@ let researchView = (function() {
 				}
 			}));
 			layout.setOnTouchListener(function(mView, event) {
-				mScaleGestureDetector.onTouchEvent(event);
-				mGestureDetector.onTouchEvent(event);
+				try {
+					mScaleGestureDetector.onTouchEvent(event);
+					mGestureDetector.onTouchEvent(event);
+				} catch (e) {
+					Logger.Log("Minimap: whenGestureDetected: " + e);
+				}
 				return true;
 			});
 		} catch (e) {
@@ -357,7 +361,7 @@ let researchView = (function() {
 	// try {
 		// location.setTypeface(InnerCorePackage.utils.FileTools.getMcTypeface());
 	// } catch (e) {
-		// Logger.Log("Minimap: unable to set embedded in Inner Core font, default will be used otherwise", "WARNING");
+		// Logger.Log("Minimap: Unable to set embedded in Inner Core font, default will be used otherwise", "WARNING");
 	// }
 	
 	layout.addView(research, new android.widget.RelativeLayout.LayoutParams
@@ -406,7 +410,7 @@ let researchView = (function() {
 
 let startMapControl = true;
 
-Callback.addCallback("LevelLeft", function() {
+Callback.addCallback(isOutdated ? "LevelLeft" : "LocalLevelLeft", function() {
 	Minimap.dismiss();
 	if (mapState) {
 		Minimap.changeState();
@@ -417,6 +421,7 @@ Callback.addCallback("LevelLeft", function() {
 	while (entities.length > 0) {
 		entities.pop();
 	}
+	trigerredByUser = false;
 });
 
 let mapState = false;
@@ -425,6 +430,7 @@ Minimap.changeState = function() {
 	mapState = !mapState;
 	Minimap.resetVisibility();
 	if (mapState) {
+		trigerredByUser = false;
 		delayChunksArrLock.acquire();
 		while (delayChunksArr.length > 0) {
 			let chunk = delayChunksArr.shift();
@@ -442,6 +448,8 @@ Minimap.isActive = function() {
 	return mapState;
 };
 
+let trigerredByUser = false;
+
 Callback.addCallback("NativeGuiChanged", function(screenName) {
 	if (screenName == "toast_screen") {
 		return;
@@ -452,7 +460,9 @@ Callback.addCallback("NativeGuiChanged", function(screenName) {
 			if (mapState) {
 				Minimap.dismissResearch();
 				Minimap.changeState();
+				return;
 			}
+			trigerredByUser = true;
 			return;
 		}
 	} else {
@@ -461,12 +471,16 @@ Callback.addCallback("NativeGuiChanged", function(screenName) {
 			if (mapState) {
 				Minimap.dismissResearch();
 				Minimap.changeState();
+				return;
 			}
+			trigerredByUser = true;
 			return;
 		}
 	}
-	if (!mapState) {
+	if (!(trigerredByUser || mapState)) {
 		Minimap.changeState();
+	}
+	if (!mapState) {
 		Minimap.show();
 	}
 });
