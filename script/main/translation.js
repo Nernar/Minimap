@@ -501,12 +501,12 @@ Translation.addTranslation("Also I would like to thank", {
 	uk: "А ще хотілось би подякувати",
 	zh: "同时我想感谢"
 });
-Translation.addTranslation("Interpreter<br/><i>Ukrainian</i>", {
+Translation.addTranslation("Adaptation<br/><i>Ukrainian</i>", {
 	ru: "Переводчик<br/><i>Украинский</i>",
 	uk: "Перекладач<br/><i>Український</i>",
 	zh: "翻译<br/><i>乌克兰语</i>"
 });
-Translation.addTranslation("Interpreter<br/><i>Chinese</i>", {
+Translation.addTranslation("Adaptation<br/><i>Chinese</i>", {
 	ru: "Переводчик<br/><i>Китайский</i>",
 	uk: "Перекладач<br/><i>Китайська</i>",
 	zh: "翻译<br/><i>中文</i>"

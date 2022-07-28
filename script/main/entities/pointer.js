@@ -90,12 +90,12 @@ const pointer = [
 
 Minimap.registerPointer = function(self) {
 	if (!(self instanceof Minimap.Pointer)) {
-		Logger.Log("Minimap: pointer must be instance of Minimap.Pointer", "ERROR");
+		Logger.Log("Minimap: Pointer must be instance of Minimap.Pointer", "ERROR");
 		return -1;
 	}
 	let index = pointer.indexOf(self);
 	if (index >= 0) {
-		Logger.Log("Minimap: pointer " + self + " was already registered in " + index, "INFO");
+		Logger.Log("Minimap: Pointer " + self + " was already registered in " + index, "INFO");
 		return index;
 	}
 	return pointer.push(self) - 1;
@@ -104,7 +104,7 @@ Minimap.registerPointer = function(self) {
 const heads = (function(bitmapAssociation) {
 	let directory = new java.io.File(__dir__ + "assets/" + (legacyEntities ? "entities-legacy" : "entities"));
 	if (!directory.exists() || !directory.isDirectory()) {
-		Logger.Log("Minimap: not found entities indicators in " + directory.getName() + "/", "WARNING");
+		Logger.Log("Minimap: Not found entities in folder /assets/" + directory.getName() + "/", "WARNING");
 		return bitmapAssociation;
 	}
 	let entities = directory.listFiles();
@@ -136,7 +136,7 @@ Minimap.registerEntity = function(type, bitmap, caste) {
 			break;
 	}
 	if (source.indexOf(type) >= 0) {
-		Logger.Log("Minimap: entity " + type + " was already registered", "INFO");
+		Logger.Log("Minimap: Entity " + type + " was already registered", "INFO");
 		return;
 	}
 	Minimap.registerEntityBitmap(type, bitmap);

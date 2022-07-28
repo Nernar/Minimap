@@ -2,7 +2,7 @@ let policyShowMultiplayerPlayer = true;
 
 Minimap.isAcceptableEntity = function(ent) {
 	let type = getEntityType(ent);
-	if (type == 1) {
+	if (type == 1 || type == 63) {
 		return policyShowMultiplayerPlayer;
 	}
 	if (typeof type == "string") {
@@ -29,7 +29,7 @@ Minimap.markAsUnacceptableEntity = function(type) {
 
 const entities = [];
 
-Callback.addCallback("EntityRemoved", function(entity) {
+Callback.addCallback(isOutdated ? "EntityRemoved" : "EntityRemovedLocal", function(entity) {
 	if (Minimap.isAcceptableEntity(entity)) {
 		let index = entities.indexOf(entity);
 		if (index > -1) {
@@ -38,7 +38,7 @@ Callback.addCallback("EntityRemoved", function(entity) {
 	}
 });
 
-Callback.addCallback("EntityAdded", function(entity) {
+Callback.addCallback(isOutdated ? "EntityAdded" : "EntityAddedLocal", function(entity) {
 	if (Minimap.isAcceptableEntity(entity)) {
 		// Entity uid may be added only once
 		entities[entities.length] = entity;

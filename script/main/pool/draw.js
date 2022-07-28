@@ -30,7 +30,7 @@ Minimap.registerExtendedMarker = function(who, pointerUid) {
 Minimap.mark = function(who, x, z, force) {
 	if (!inScreenExtendedMarkers.hasOwnProperty(who)) {
 		if (!extendedMarkers.hasOwnProperty(who)) {
-			Logger.Log("Minimap: not found marker " + who + ". Are you sure that registered it?", "WARNING");
+			Logger.Log("Minimap: Not found marker " + who + ". Are you sure that registered it?", "WARNING");
 			return;
 		}
 		inScreenExtendedMarkers[who] = [];

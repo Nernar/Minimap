@@ -43,7 +43,7 @@ const REVISION = parseFloat(__mod__.getInfoProperty("version"));
 
 IMPORT("Retention");
 
-let InnerCorePackage = isHorizon ? Packages.com.zhekasmirnov.innercore : Packages.zhekasmirnov.launcher;
+const InnerCorePackage = isHorizon ? Packages.com.zhekasmirnov.innercore : Packages.zhekasmirnov.launcher;
 
 let buttonSize = (function() {
 	if (__config__.get("initialization.button_size") == null) {
@@ -109,7 +109,12 @@ let source = null;
 
 if (isOutdated == false) {
 	Callback.addCallback("LocalPlayerChangedDimension", function(actorUid, currentId, lastId) {
-		source = BlockSource.getDefaultForActor(actorUid);
+		if (!Network.inRemoteWorld()) {
+			if ((source = BlockSource.getDefaultForActor(actorUid)) != null) {
+				return;
+			}
+		}
+		source = BlockSource.getCurrentClientRegion();
 	});
 }
 

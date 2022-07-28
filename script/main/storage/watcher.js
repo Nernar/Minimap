@@ -109,7 +109,7 @@ const Minimap = {
 		let path = getBitmapExportFolder() + name;
 		writeFileBitmap(path, bitmap);
 		scanMediaFiles([path], function(path, uri) {
-			Logger.Log("Minimap saved into " + uri, "INFO");
+			Logger.Log("Minimap: Minimap saved into " + uri, "DEBUG");
 			Game.message(translate("Minimap saved as %s", name));
 		});
 	},
@@ -123,7 +123,7 @@ const Minimap = {
 		try {
 			let stream = resolver.openOutputStream(uri);
 			bitmap.compress(android.graphics.Bitmap.CompressFormat.PNG, 100, stream);
-			Logger.Log("Minimap saved into " + uri, "INFO");
+			Logger.Log("Minimap: Minimap saved into " + uri, "DEBUG");
 			Game.message(translate("Minimap saved as %s", name));
 			stream.close();
 		} catch (e) {
