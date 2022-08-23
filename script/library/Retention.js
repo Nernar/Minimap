@@ -1,4 +1,15 @@
 /*
+BUILD INFO:
+  dir: Retention
+  target: Retention.js
+  files: 2
+*/
+
+
+
+// file: header.js
+
+/*
 
    Copyright 2017-2022 Nernar (github.com/nernar)
 
@@ -20,13 +31,18 @@ LIBRARY({
 	name: "Retention",
 	version: 1,
 	api: "AdaptedScript",
-	shared: false
+	shared: true
 });
 
-let launchTime = Date.now();
+
+
+
+// file: integration.js
+
+launchTime = Date.now();
 EXPORT("launchTime", launchTime);
 
-let isHorizon = (function() {
+isHorizon = (function() {
 	let version = MCSystem.getInnerCoreVersion();
 	return parseInt(version.toString()[0]) >= 2;
 })();
@@ -37,7 +53,7 @@ EXPORT("minecraftVersion", (function() {
 	return parseInt(version.toString().split(".")[1]);
 })());
 
-let getContext = function() {
+getContext = function() {
 	return UI.getContext();
 };
 
@@ -48,7 +64,7 @@ EXPORT("getContext", getContext);
  * useful for visualizing and debugging problems.
  * @param {Object} error fallback exception
  */
-let reportError = (function(what) {
+reportError = (function(what) {
 	EXPORT("registerReportAction", function(when) {
 		what = when;
 	});
@@ -58,10 +74,18 @@ let reportError = (function(what) {
 		}
 	};
 })(function(error) {
-	if (isHorizon) {
-		Packages.com.zhekasmirnov.innercore.api.log.ICLog.i("WARNING", Packages.com.zhekasmirnov.innercore.api.log.ICLog.getStackTrace(error));
-	} else {
-		Packages.zhekasmirnov.launcher.api.log.ICLog.i("WARNING", Packages.zhekasmirnov.launcher.api.log.ICLog.getStackTrace(error));
+	try {
+		if (isHorizon) {
+			Packages.com.zhekasmirnov.innercore.api.log.ICLog.i("WARNING", Packages.com.zhekasmirnov.innercore.api.log.ICLog.getStackTrace(error));
+		} else {
+			Packages.zhekasmirnov.launcher.api.log.ICLog.i("WARNING", Packages.zhekasmirnov.launcher.api.log.ICLog.getStackTrace(error));
+		}
+	} catch (shit) {
+		try {
+			Logger.Log(typeof error == "object" ? error.name + ": " + error.message + "\n" + error.stack : "" + error, "WARNING");
+		} catch (sad) {
+			Logger.Log("" + error, "WARNING");
+		}
 	}
 });
 
@@ -354,3 +378,7 @@ EXPORT("vibrate", (function() {
 		return service.vibrate(ms);
 	};
 })());
+
+
+
+

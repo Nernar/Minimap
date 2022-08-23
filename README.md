@@ -13,8 +13,6 @@ Customization takes place during game, just hold minimap to open config menu.
 
 Swipe to hide minimap in a small button, press to open full-screen mode. Double tap or cross your fingers to change zoom.
 
-You can put your own head into `assets/entities/63`, it will be used as local player crosshair. Recommended (.png) size is 16x16 or 32x32.
-
 ## Integration
 
 Integration is carried out through ModAPI, it is enough to create a callback to wait for Minimap.
