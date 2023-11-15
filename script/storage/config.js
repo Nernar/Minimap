@@ -81,7 +81,8 @@ const protoConfig = (function() {
 		},
 		development: {
 			location: false,
-			show_process: false
+			show_process: false,
+			show_research: false
 		}
 	}));
 	return config;
@@ -119,6 +120,7 @@ Minimap.loadConfig = function(source) {
 		stylesheetVanillaColormap: getProtoBool(protoConfig, source, "stylesheet.vanilla_colormap"),
 		mapLocation: getProtoBool(protoConfig, source, "development.location"),
 		debug: getProtoBool(protoConfig, source, "development.show_process"),
+		showResearch: getProtoBool(protoConfig, source, "development.show_research"),
 		radius: getProtoNumber(protoConfig, source, "performance.radius"),
 		priority: getProtoNumber(protoConfig, source, "performance.priority"),
 		delay: getProtoNumber(protoConfig, source, "performance.delay"),
@@ -160,6 +162,7 @@ Minimap.saveConfig = function() {
 	setConfigOptionIfNeeded(protoConfig, "stylesheet.vanilla_colormap", settings.stylesheetVanillaColormap);
 	setConfigOptionIfNeeded(protoConfig, "development.location", settings.mapLocation);
 	setConfigOptionIfNeeded(protoConfig, "development.show_process", settings.debug);
+	setConfigOptionIfNeeded(protoConfig, "development.show_research", settings.showResearch)
 	setConfigOptionIfNeeded(protoConfig, "performance.radius", settings.radius);
 	setConfigOptionIfNeeded(protoConfig, "performance.priority", settings.priority);
 	setConfigOptionIfNeeded(protoConfig, "performance.delay", settings.delay);

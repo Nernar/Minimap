@@ -1,3 +1,10 @@
+/**
+ * Create a translation into your language, or improve the existing one by correcting the translations with a comment `// !`.
+ * Создайте перевод на свой язык, либо улучшите существующий, исправив переводы с комментарием `// !`.
+ * Перекладіть на вашу мову або вдосконаліть існуючий, виправивши переклади з коментарем `// !`.
+ * 创建一个您语言的翻译，或通过带有注释 `// ！` 的更正来改进现有翻译。
+ */
+
 Translation.addTranslation("Minimap", {
 	ru: "Миникарта",
 	uk: "Мінікарта",
@@ -288,8 +295,15 @@ Translation.addTranslation("%spx", {
 	zh: "%s像素"
 });
 Translation.addTranslation("Use vanilla colormap", {
-	ru: "Использовать ванильную карту цветов"
-}); // !
+	ru: "Использовать ванильную карту цветов",
+	uk: "Використовуйте ванільну палітру кольорів", // !
+	zh: "使用香草色彩图谱" // !
+});
+Translation.addTranslation("Click to full-screen mode (unstable)", {
+	ru: "Нажмите для полноэкранного режима (нестабильно)",
+	uk: "Натисніть для повноекранного режиму (нестабільно)", // !
+	zh: "点击进入全屏模式（不稳定）" // !
+});
 Translation.addTranslation("Debug various processes", {
 	ru: "Отладка различных процессов",
 	uk: "Налагодження різних процесів",

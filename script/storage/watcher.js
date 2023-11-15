@@ -152,6 +152,7 @@ const notifyConfigChanged = function(key) {
 		case "mapType":
 		case "mapSurface":
 		case "mapSmoothing":
+		case "stylesheetVanillaColormap":
 			Minimap.onChangeRenderer();
 			break;
 		case "mapZoom":
@@ -172,6 +173,7 @@ const notifyConfigChanged = function(key) {
 		case "locationX":
 		case "locationY":
 		case "locationGravity":
+		case "showResearch":
 			Minimap.dismissInternal();
 			Minimap.dismissResearch();
 			Minimap.showInternal();

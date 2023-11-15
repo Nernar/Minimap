@@ -22,6 +22,7 @@ Minimap.ConfigDescriptor = [__mod__.getInfoProperty("name"), "Leave",
 			["keyValue", "slider", "Number of threads", "thread", 1, 12, 1, ""],
 			["keyValue", "slider", "Pixel density to export", "exportDensity", 1, 16, 0.5, "px"],
 			["checkBox", "stylesheetVanillaColormap", "Use vanilla colormap"],
+			["checkBox", "showResearch", "Click to full-screen (unstable)"],
 			["checkBox", "debug", "Debug various processes"]]],
 		["checkBox", "mapRotation", "Turn behind yourself"],
 	["sectionDivider", "Stylesheet"],
@@ -122,7 +123,7 @@ let mapView = (function() {
 					mIgnoredByDoubleTap = true;
 				},
 				onSingleTapConfirmed: function(event) {
-					if (mRequiredStandartAction) {
+					if (mRequiredStandartAction && settings.showResearch) {
 						Minimap.showResearchInternal();
 						Minimap.dismissInternal();
 					}
@@ -151,8 +152,10 @@ let mapView = (function() {
 			});
 		} catch (e) {
 			texture.setOnClickListener(function(v) {
-				Minimap.showResearchInternal();
-				Minimap.dismissInternal();
+				if (settings.showResearch) {
+					Minimap.showResearchInternal();
+					Minimap.dismissInternal();
+				}
 			});
 			texture.setOnLongClickListener(function(v) {
 				Minimap.showConfigDialog();
@@ -328,10 +331,10 @@ let researchView = (function() {
 				// },
 				onScroll: function(event1, event2, distanceX, distanceY) {
 					if (mRequiredStandartAction) {
-						research.animate().
-							x(research.getX() - distanceX).
-							y(research.getY() - distanceY).
-							setDuration(0).start();
+						research.animate()
+							.x(research.getX() - distanceX)
+							.y(research.getY() - distanceY)
+							.setDuration(0).start();
 					}
 					return mRequiredStandartAction;
 				}

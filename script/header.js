@@ -1,6 +1,6 @@
 /*
 
-   Copyright 2020-2022 Nernar (github.com/nernar)
+   Copyright 2020-2023 Nernar (github.com/nernar)
    Copyright 2015 MxGoldo (twitter.com/MxGoldo)
 
    Licensed under the Apache License, Version 2.0 (the "License");
