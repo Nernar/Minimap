@@ -1,7 +1,7 @@
 {
 	"info": {
 		"name": "Minimap",
-		"version": "2.0",
+		"version": "2.1",
 		"author": "Nernar",
 		"description": "Find your way around in Minecraft.",
 		"clientOnly": true
@@ -18,7 +18,7 @@
 			"type": "launcher",
 			"language": "javascript",
 			"source": "script",
-			"target": "script/script.js"
+			"target": "script.js"
 		}
 	],
 	"compile": [],
