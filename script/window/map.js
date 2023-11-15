@@ -424,7 +424,7 @@ Callback.addCallback(isOutdated ? "LevelLeft" : "LocalLevelLeft", function() {
 	while (entities.length > 0) {
 		entities.pop();
 	}
-	trigerredByUser = false;
+	beenActiveBefore = false;
 });
 
 let mapState = false;
@@ -433,7 +433,6 @@ Minimap.changeState = function() {
 	mapState = !mapState;
 	Minimap.resetVisibility();
 	if (mapState) {
-		trigerredByUser = false;
 		delayChunksArrLock.acquire();
 		while (delayChunksArr.length > 0) {
 			let chunk = delayChunksArr.shift();
@@ -451,41 +450,29 @@ Minimap.isActive = function() {
 	return mapState;
 };
 
-let trigerredByUser = false;
+let beenActiveBefore = false;
 
 Callback.addCallback("NativeGuiChanged", function(screenName) {
 	if (screenName == "toast_screen") {
 		return;
 	}
-	if (isHorizon) {
-		if (screenName != "in_game_play_screen") {
-			Minimap.dismiss();
-			if (mapState) {
-				Minimap.dismissResearch();
-				Minimap.changeState();
-				return;
-			}
-			trigerredByUser = true;
+	if (screenName != "in_game_play_screen" && screenName != "hud_screen") {
+		Minimap.dismiss();
+		if (beenActiveBefore) {
 			return;
 		}
-	} else {
-		if (screenName != "hud_screen") {
-			Minimap.dismiss();
-			if (mapState) {
-				Minimap.dismissResearch();
-				Minimap.changeState();
-				return;
-			}
-			trigerredByUser = true;
-			return;
+		if (mapState) {
+			beenActiveBefore = true;
+			Minimap.dismissResearch();
+			Minimap.changeState();
 		}
+		return;
 	}
-	if (!(trigerredByUser || mapState)) {
+	if (beenActiveBefore && !mapState) {
 		Minimap.changeState();
 	}
-	if (!mapState) {
-		Minimap.show();
-	}
+	beenActiveBefore = false;
+	Minimap.show();
 });
 
 Callback.addCallback(isHorizon ? "LevelDisplayed" : "LevelLoaded", function() {

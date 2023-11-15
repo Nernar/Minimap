@@ -299,7 +299,7 @@ Translation.addTranslation("Use vanilla colormap", {
 	uk: "Використовуйте ванільну палітру кольорів", // !
 	zh: "使用香草色彩图谱" // !
 });
-Translation.addTranslation("Click to full-screen mode (unstable)", {
+Translation.addTranslation("Click to full-screen (unstable)", {
 	ru: "Нажмите для полноэкранного режима (нестабильно)",
 	uk: "Натисніть для повноекранного режиму (нестабільно)", // !
 	zh: "点击进入全屏模式（不稳定）" // !
