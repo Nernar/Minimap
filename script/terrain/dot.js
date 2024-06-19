@@ -139,18 +139,20 @@ const heightmapDot = [
 		return 0;
 	},
 	function nearestSurfaceUnderSky(ix, iz) {
-		let iy = 1;
-		let delta = 16;
-		do {
-			if (canSeeSky(ix, iy, iz)) {
-				if (delta == 16) {
-					delta = 1;
-					iy -= 16;
-				} else if (delta == 1) {
-					return --iy;
+		let low = 0;
+		let high = 256;
+		while (low <= high) {
+			let mid = Math.floor((low + high) / 2);
+			if (canSeeSky(x, mid, z)) {
+				if (mid === 0 || !canSeeSky(x, mid - 1, z)) {
+					return mid !== 0 ? mid - 1 : 256;
+				} else {
+					high = mid - 1;
 				}
+			} else {
+				low = mid + 1;
 			}
-		} while ((iy += delta) <= 256);
+		}
 		return 256;
 	}
 ];
