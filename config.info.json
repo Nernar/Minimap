@@ -1,0 +1,88 @@
+{
+	"description": {
+		"en": "Most of settings may referred right in-game menu. Just hold on minimap to manage options.",
+		"ru": "Большинство настроек можно получить, используя меню прямо в игре. Просто удерживайте миникарту для управления.",
+		"zh": "大多数选项都在游戏内菜单，只需长按小地图管理选项"
+	},
+	
+	"properties": {
+		"enabled": {
+			"name": {
+				"en": "Launch",
+				"ru": "Запуск",
+				"zh": "启用"
+			},
+			"description": {
+				"en": "Changes launch state of modification; if disabled, mod willn't be launched.",
+				"ru": "Меняет состояния запускаемости мода, если отключено - мод запущен не будет.",
+				"zh": "更改模组的启动状态，如果关闭，则模组不会被启动"
+			},
+			"index": 0
+		},
+		
+		"initialization": {
+			"name": {
+				"en": "Initialization",
+				"ru": "Инициализация",
+				"zh": "初始化"
+			},
+			
+			"index": 1,
+			"collapsible": false
+		},
+		
+		"initialization.use_legacy_entities": {
+			"name": {
+				"en": "Use Legacy Entities",
+				"ru": "Использовать старые указатели",
+				"zh": "使用旧版实体"
+			},
+			"description": {
+				"en": "Behold on use default entities icons, deprecated one stay in use. It's may increase performance, but certain entities indicators no longer can be displayed in map.",
+				"ru": "Вместо стандартных иконок существ будут использоваться устаревшие. Это может снизить потребление памяти, однако приведет к отсутствию индикаторов некоторых существ.",
+				"zh": "使用已被启用的实体图标。可能会提升性能，但部分实体将不会在地图上显示"
+			},
+			"index": 2
+		},
+		
+		"initialization.button_size": {
+			"name": {
+				"en": "Button Size",
+				"ru": "Размер кнопок",
+				"zh": "按键大小"
+			},
+			"description": {
+				"en": "Setups user interface elements scaling during modification initialization.",
+				"ru": "Используется при инициализации интерфейса для указания размеров элементов.",
+				"zh": "在模组初始化期限修改界面缩放"
+			},
+			
+			"type": "SeekBar",
+			"index": 3
+		},
+		
+		"runtime": {
+			"displayIf": false
+		},
+		
+		"indicator": {
+			"displayIf": false
+		},
+		
+		"location": {
+			"displayIf": false
+		},
+		
+		"stylesheet": {
+			"displayIf": false
+		},
+		
+		"performance": {
+			"displayIf": false
+		},
+		
+		"development": {
+			"displayIf": false
+		}
+	}
+}

@@ -1,0 +1,300 @@
+{
+	"lodestone": [
+		-6183766
+	],
+	"crimson_roots": [
+		-15531768
+	],
+	"warped_roots": [
+		-16643575
+	],
+	"crimson_fungus": [
+		-15924478
+	],
+	"warped_fungus": [
+		-16513786
+	],
+	"warped_wart_block": [
+		-15303034
+	],
+	"nether_wart": [
+		-16384000,
+		-14614014,
+		-14614014,
+		-13958141
+	],
+	"nether_wart_block": [
+		-9568256
+	],
+	"crimson_stem": [
+		-10080446
+	],
+	"warped_stem": [
+		-13349552
+	],
+	"stripped_crimson_stem": [
+		-7980200
+	],
+	"stripped_warped_stem": [
+		-13137015
+	],
+	"crimson_hyphae": [
+		-11199969
+	],
+	"warped_hyphae": [
+		-12831413
+	],
+	"stripped_crimson_hyphae": [
+		-7652772
+	],
+	"stripped_warped_hyphae": [
+		-12937067
+	],
+	"shroomlight": [
+		-2466041
+	],
+	"crimson_nylium": [
+		-6871514
+	],
+	"warped_nylium": [
+		-11107501
+	],
+	"vine": [
+		-14145496
+	],
+	"weeping_vines": [
+		-15204086
+	],
+	"twisting_vines": [
+		-16643061
+	],
+	"basalt": [
+		-11579307
+	],
+	"polished_basalt": [
+		-10724514
+	],
+	"soul_soil": [
+		-11847378
+	],
+	"soul_fire": [
+		-15813703
+	],
+	"nether_sprouts": [
+		-15555195
+	],
+	"target": [
+		-1055792
+	],
+	"soul_torch": [
+		-16580095
+	],
+	"soul_lantern": [
+		-15263456
+	],
+	"netherite_block": [
+		-12436161
+	],
+	"nether_gold_ore": [
+		-10410715
+	],
+	"ancient_debris": [
+		-11455958
+	],
+	"warped_standing_sign": [
+		-13203321
+	],
+	"crimson_standing_sign": [
+		-10606016
+	],
+	"warped_wall_sign": [
+		-13203321
+	],
+	"crimson_wall_sign": [
+		-10606016
+	],
+	"crimson_door": [
+		-10276538
+	],
+	"warped_door": [
+		-14261671
+	],
+	"crimson_planks": [
+		-10606016
+	],
+	"warped_planks": [
+		-13203321
+	],
+	"crimson_trapdoor": [
+		-12049357
+	],
+	"warped_trapdoor": [
+		-15122888
+	],
+	"crimson_fence": [
+		-10606016
+	],
+	"warped_fence": [
+		-13203321
+	],
+	"crimson_fence_gate": [
+		-10606016
+	],
+	"warped_fence_gate": [
+		-13203321
+	],
+	"crimson_double_slab": [
+		-10606016
+	],
+	"crimson_slab": [
+		-10606016
+	],
+	"warped_double_slab": [
+		-13203321
+	],
+	"warped_slab": [
+		-13203321
+	],
+	"crimson_stairs": [
+		-10606016
+	],
+	"warped_stairs": [
+		-13203321
+	],
+	"crimson_button": [
+		-10606016
+	],
+	"warped_button": [
+		-13203321
+	],
+	"crimson_pressure_plate": [
+		-10606016
+	],
+	"warped_pressure_plate": [
+		-13203321
+	],
+	"smooth_quartz_stairs": [
+		-1251617
+	],
+	"jigsaw": [
+		-14607580
+	],
+	"soul_sand": [
+		-11452878
+	],
+	"bone_block": [
+		-3027277
+	],
+	"blackstone": [
+		-14344411
+	],
+	"polished_blackstone_bricks": [
+		-13752016
+	],
+	"polished_blackstone_brick_stairs": [
+		-13752016
+	],
+	"nether_brick": [
+		-13888230
+	],
+	"nether_brick_fence": [
+		-13888230
+	],
+	"nether_brick_stairs": [
+		-13888230
+	],
+	"red_nether_brick": [
+		-12253431
+	],
+	"red_nether_brick_stairs": [
+		-12253431
+	],
+	"netherrack": [
+		-10542044
+	],
+	"blackstone_stairs": [
+		-14344925
+	],
+	"blackstone_wall": [
+		-14344925
+	],
+	"polished_blackstone_brick_wall": [
+		-13752016
+	],
+	"chiseled_polished_blackstone": [
+		-13291464
+	],
+	"cracked_polished_blackstone_bricks": [
+		-13949653
+	],
+	"gilded_blackstone": [
+		-13621722
+	],
+	"honey_block": [
+		-280274
+	],
+	"honeycomb_block": [
+		-3248378
+	],
+	"quartz_ore": [
+		-10344409
+	],
+	"respawn_anchor": [
+		-14739920,
+		-13031078,
+		-13031078,
+		-13031078,
+		-13031078
+	],
+	"crying_obsidian": [
+		-15463897
+	],
+	"blackstone_slab": [
+		-14344925
+	],
+	"blackstone_double_slab": [
+		-14344925
+	],
+	"polished_blackstone_brick_slab": [
+		-13752016
+	],
+	"polished_blackstone_brick_double_slab": [
+		-13752016
+	],
+	"chain": [
+		-16447992
+	],
+	"polished_blackstone": [
+		-13291464
+	],
+	"polished_blackstone_stairs": [
+		-13291464
+	],
+	"polished_blackstone_slab": [
+		-13291464
+	],
+	"polished_blackstone_double_slab": [
+		-13291464
+	],
+	"polished_blackstone_pressure_plate": [
+		-13291464
+	],
+	"polished_blackstone_button": [
+		-13291464
+	],
+	"polished_blackstone_wall": [
+		-13291464
+	],
+	"chiseled_nether_bricks": [
+		-13955051
+	],
+	"cracked_nether_bricks": [
+		-14480368
+	],
+	"quartz_bricks": [
+		-1317154
+	],
+	"soul_campfire": [
+		-13187383
+	]
+}

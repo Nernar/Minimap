@@ -1,6 +1,6 @@
-output
 tsconfig.json
 *.log
 *.icmod
 .todo/
 .placeholder.ico
+/script.js
