@@ -125,4 +125,4 @@ Callback.addCallback("LocalLevelLeft", function() {
 
 ## Contribution
 
-Source code is open to anyone and everyone, credit yourself in `script/main/header.js` below all to keep credit.
+Source code is open to anyone and everyone, credit yourself in `script/header.js` below all to keep credit.
