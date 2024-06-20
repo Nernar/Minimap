@@ -3,10 +3,13 @@ let scheduledMutableChunkLock = new java.util.concurrent.Semaphore(1, true);
 
 Minimap.scheduleChunkWhenRedraw = function(x, z, delay) {
 	scheduledMutableChunkLock.acquire();
-	if (!scheduledMutableChunks.hasOwnProperty(x + ":" + z)) {
-		scheduledMutableChunks[x + ":" + z] = [x, z, delay || 0];
+	try {
+		if (!scheduledMutableChunks.hasOwnProperty(x + ":" + z)) {
+			scheduledMutableChunks[x + ":" + z] = [x, z, delay || 0];
+		}
+	} finally {
+		scheduledMutableChunkLock.release();
 	}
-	scheduledMutableChunkLock.release();
 };
 
 Callback.addCallback("DestroyBlock", function(coords, block, actorUid) {
@@ -35,19 +38,24 @@ if (isOutdated == false) {
 	});
 }
 
+let ticks = 0;
+
 Callback.addCallback(isHorizon ? "LocalTick" : "tick", function() {
-	if (Updatable.getSyncTime() % 10 == 0) {
+	if ((ticks++) % 10 == 0) {
 		scheduledMutableChunkLock.acquire();
-		let updatedChunkCount = 0;
-		for (let element in scheduledMutableChunks) {
-			Minimap.scheduleChunk(scheduledMutableChunks[element][0],
-				scheduledMutableChunks[element][1],
-				scheduledMutableChunks[element][2]);
-			delete scheduledMutableChunks[element];
-			if ((++updatedChunkCount) > 2) {
-				break;
+		try {
+			let updatedChunkCount = 0;
+			for (let element in scheduledMutableChunks) {
+				Minimap.scheduleChunk(scheduledMutableChunks[element][0],
+					scheduledMutableChunks[element][1],
+					scheduledMutableChunks[element][2]);
+				delete scheduledMutableChunks[element];
+				if ((++updatedChunkCount) > 2) {
+					break;
+				}
 			}
+		} finally {
+			scheduledMutableChunkLock.release();
 		}
-		scheduledMutableChunkLock.release();
 	}
 });

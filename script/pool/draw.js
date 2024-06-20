@@ -15,9 +15,9 @@ Minimap.shutdownAndSchedulePool = function() {
 	pool.allowCoreThreadTimeOut(true);
 };
 
-let extendedMarkers = {};
-let inScreenExtendedMarkers = {};
-let extendedMarkerLock = new java.util.concurrent.Semaphore(1, true);
+let extendedMarkers = {},
+	inScreenExtendedMarkers = {},
+	extendedMarkerLock = new java.util.concurrent.Semaphore(1, true);
 
 Minimap.registerExtendedMarker = function(who, pointerUid) {
 	if (pointerUid >= pointer.length || pointerUid < 0) {
@@ -31,39 +31,47 @@ Minimap.mark = function(who, x, z, force) {
 	if (!inScreenExtendedMarkers.hasOwnProperty(who)) {
 		if (!extendedMarkers.hasOwnProperty(who)) {
 			Logger.Log("Minimap: Not found marker " + who + ". Are you sure that registered it?", "WARNING");
-			return;
+			return false;
 		}
 		inScreenExtendedMarkers[who] = [];
 	}
 	extendedMarkerLock.acquire();
-	if (!force) {
-		for (let i = 0, c = inScreenExtendedMarkers[who].length; i < c; i++) {
-			if (inScreenExtendedMarkers[who][i][0] == x && inScreenExtendedMarkers[who][i][1] == z) {
-				return;
+	try {
+		if (!force) {
+			for (let i = 0, c = inScreenExtendedMarkers[who].length; i < c; i++) {
+				if (inScreenExtendedMarkers[who][i][0] == x && inScreenExtendedMarkers[who][i][1] == z) {
+					return false;
+				}
 			}
 		}
+		inScreenExtendedMarkers[who].push([x, z]);
+		redraw = true;
+	} finally {
+		extendedMarkerLock.release();
 	}
-	inScreenExtendedMarkers[who].push([x, z]);
-	redraw = true;
-	extendedMarkerLock.release();
+	return true;
 };
 
 Minimap.unmark = function(who, x, z) {
 	if (!inScreenExtendedMarkers.hasOwnProperty(who)) {
-		return;
+		return false;
 	}
 	extendedMarkerLock.acquire();
-	for (let i = 0, c = inScreenExtendedMarkers[who].length; i < c; i++) {
-		if (inScreenExtendedMarkers[who][i][0] == x && inScreenExtendedMarkers[who][i][1] == z) {
-			inScreenExtendedMarkers[who].splice(i, 1);
-			redraw = true;
-			break;
+	try {
+		for (let i = 0, c = inScreenExtendedMarkers[who].length; i < c; i++) {
+			if (inScreenExtendedMarkers[who][i][0] == x && inScreenExtendedMarkers[who][i][1] == z) {
+				inScreenExtendedMarkers[who].splice(i, 1);
+				redraw = true;
+				break;
+			}
 		}
+		if (inScreenExtendedMarkers[who].length == 0) {
+			delete inScreenExtendedMarkers[who];
+		}
+	} finally {
+		extendedMarkerLock.release();
 	}
-	if (inScreenExtendedMarkers[who].length == 0) {
-		delete inScreenExtendedMarkers[who];
-	}
-	extendedMarkerLock.release();
+	return true;
 };
 
 Minimap.unmarkType = function(who) {
@@ -71,13 +79,21 @@ Minimap.unmarkType = function(who) {
 		return;
 	}
 	extendedMarkerLock.acquire();
-	if (delete inScreenExtendedMarkers[who]) {
-		redraw = true;
+	try {
+		if (delete inScreenExtendedMarkers[who]) {
+			redraw = true;
+		}
+	} finally {
+		extendedMarkerLock.release();
 	}
-	extendedMarkerLock.release();
+};
+
+Minimap.remark = function(who, x, z) {
+	return Minimap.mark(who, x, z) || (Minimap.unmark(who, x, z) && false);
 };
 
 Minimap.drawMinimapWhenDirty = function() {
+	mapRefreshingLock.acquire();
 	try {
 		if (settings.priority == 0) {
 			android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
@@ -258,6 +274,26 @@ Minimap.drawMinimapWhenDirty = function() {
 				}
 			}
 			
+			extendedMarkerLock.acquire();
+			for (let element in inScreenExtendedMarkers) {
+				let stylesheet = extendedMarkers[element];
+				for (let i = 0, c = inScreenExtendedMarkers[element].length; i < c; i++) {
+					let matrix = inScreenExtendedMarkers[element][i];
+					Game.tipMessage(element + "::" + i + "=" + matrix[0] + "," + matrix[1]);
+					matrixPointer.reset();
+					if (pointer[stylesheet].rotate) {
+						matrixPointer.postRotate(yawNew);
+					}
+					matrixPointer.postTranslate((z0 - matrix[1]) * absZoom, (matrix[0] - x0) * absZoom);
+					if (settings.mapRotation) {
+						matrixPointer.postRotate(-YAW, settings.locationRawSize * 0.5, settings.locationRawSize * 0.5);
+					}
+					matrixPointer.preConcat(pointer[stylesheet].matrix);
+					canvas.drawBitmap(pointer[stylesheet].bitmap, matrixPointer, null);
+				}
+			}
+			extendedMarkerLock.release();
+			
 			if (settings.indicatorLocal) {
 				if (settings.stylesheetLocalPointer != 3) {
 					matrixPointer.reset();
@@ -278,29 +314,13 @@ Minimap.drawMinimapWhenDirty = function() {
 				}
 			}
 			
-			extendedMarkerLock.acquire();
-			for (let element in inScreenExtendedMarkers) {
-				let stylesheet = extendedMarkers[element];
-				for (let i = 0, c = inScreenExtendedMarkers[element].length; i < c; i++) {
-					let matrix = inScreenExtendedMarkers[element][i];
-					matrixPointer.reset();
-					if (pointer[stylesheet].rotate) {
-						matrixPointer.postRotate(yawNew);
-					}
-					matrixPointer.postTranslate((z0 - matrix[1]) * absZoom, (matrix[0] - x0) * absZoom);
-					if (settings.mapRotation) {
-						matrixPointer.postRotate(-YAW, settings.locationRawSize * 0.5, settings.locationRawSize * 0.5);
-					}
-					matrixPointer.preConcat(pointer[stylesheet].matrix);
-				}
-			}
-			extendedMarkerLock.release();
-			
 			canvas.restore();
 			mapView.unlockCanvasAndPost(canvas);
 		}
 	} catch (e) {
 		reportError(e);
+	} finally {
+		mapRefreshingLock.release();
 	}
 };
 

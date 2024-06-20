@@ -65,7 +65,7 @@ const protoConfig = (function() {
 			gravity: 2
 		},
 		stylesheet: {
-			border: 0,
+			border: 1,
 			pointer: 3,
 			local_pointer: 2,
 			shape: 1,
@@ -175,7 +175,7 @@ const restoreConfigDirectly = function(notifyEverything) {
 	Minimap.loadConfig(protoConfig);
 	if (notifyEverything) {
 		for (let element in settings) {
-			settingsChanged(element);
+			notifyConfigChanged(element);
 		}
 	}
 	Minimap.saveConfig();

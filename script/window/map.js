@@ -1,9 +1,9 @@
 Minimap.ConfigDescriptor = [__mod__.getInfoProperty("name"), "Leave",
 	["keyValue", "multipleChoice", "Type", "mapType", ["Monochromatic", "Surface", "Underground"]],
-	["keyValue", "multipleChoice", "Heightmap", "mapSurface", ["Nearest surface", "Optimum", "Procedural", "Closest to sky"]],
+	["keyValue", "multipleChoice", "Heightmap", "mapSurface", ["Nearest surface", "Optimum", /*"Procedural", */"Closest to sky"]],
 	["keyValue", "multipleChoice", "Smoothing", "mapSmoothing", ["Disabled", "At most", "Transparency", "Fauna"]],
 	["sectionDivider", "Rendering"],
-		["keyValue", "slider", "Distance", "radius", 1, 64, 1, " chunks"],
+		["keyValue", "slider", "Distance", "radius", 1, 32, 1, " chunks"],
 		["subScreen", "Icons / Indicators", ["Icons / Indicators", "Apply",
 			["keyValue", "multipleChoice", "Pointer", "stylesheetLocalPointer", ["Crosshair", "Arrow", "Map", "Head"]],
 			["checkBox", "indicatorLocal", "Yourself"],
@@ -18,8 +18,8 @@ Minimap.ConfigDescriptor = [__mod__.getInfoProperty("name"), "Leave",
 				["checkBox", "indicatorPlayer", "Show players"]]],
 		["subScreen", "Advanced", ["Advanced", "Apply",
 			["keyValue", "multipleChoice", "Thread optimization", "priority", ["Background", "Foreground", "Disabled"]],
-			["keyValue", "slider", "Max frequency", "delay", 1, 40, 1, " fps"],
-			["keyValue", "slider", "Number of threads", "thread", 1, 12, 1, ""],
+			["keyValue", "slider", "Max frequency", "delay", 1, 144, 1, " fps"],
+			// ["keyValue", "slider", "Number of threads", "thread", 1, 12, 1, ""],
 			["keyValue", "slider", "Pixel density to export", "exportDensity", 1, 16, 0.5, "px"],
 			["checkBox", "stylesheetVanillaColormap", "Use vanilla colormap"],
 			["checkBox", "showResearch", "Click to full-screen (unstable)"],
@@ -167,12 +167,10 @@ let mapView = (function() {
 	
 	let button = new android.widget.Button(getContext());
 	button.setBackgroundResource(android.R.drawable.ic_menu_mapmode);
-	button.setLayoutParams(new android.widget.LinearLayout.LayoutParams
-		(toComplexUnitDip(buttonSize), toComplexUnitDip(buttonSize)));
-	button.setOnClickListener(function(v) {
+	button.setOnClickListener(function() {
 		Minimap.changeState();
 	});
-	button.setOnLongClickListener(function(v) {
+	button.setOnLongClickListener(function() {
 		Minimap.showConfigDialog();
 		return true;
 	});
@@ -187,7 +185,9 @@ let mapView = (function() {
 		Logger.Log("Minimap: Unable to set embedded in Inner Core font, default will be used otherwise", "WARNING");
 	}
 	
-	layout.addView(button);
+	let buttonParams = new android.widget.RelativeLayout.LayoutParams
+		(toComplexUnitDip(buttonSize), toComplexUnitDip(buttonSize));
+	layout.addView(button, buttonParams);
 	let textureParams = new android.widget.RelativeLayout.LayoutParams
 		(settings.locationRawSize, settings.locationRawSize);
 	textureParams.addRule(android.widget.RelativeLayout.ALIGN_PARENT_TOP);
@@ -261,7 +261,12 @@ let mapView = (function() {
 		});
 	};
 	Minimap.dismissInternal = function() {
-		popup.dismiss();
+		mapRefreshingLock.acquire();
+		try {
+			popup.dismiss();
+		} finally {
+			mapRefreshingLock.release();
+		}
 	};
 	Minimap.dismiss = function() {
 		getContext().runOnUiThread(function() {
@@ -434,11 +439,14 @@ Minimap.changeState = function() {
 	Minimap.resetVisibility();
 	if (mapState) {
 		delayChunksArrLock.acquire();
-		while (delayChunksArr.length > 0) {
-			let chunk = delayChunksArr.shift();
-			Minimap.scheduleChunk(chunk[0], chunk[1], 0);
+		try {
+			while (delayChunksArr.length > 0) {
+				let chunk = delayChunksArr.shift();
+				Minimap.scheduleChunk(chunk[0], chunk[1], 0);
+			}
+		} finally {
+			delayChunksArrLock.release();
 		}
-		delayChunksArrLock.release();
 		scheduledFutureUpdateMap = poolTick.scheduleWithFixedDelay(runnableUpdateMap, 1000, Math.round(1000 / settings.delay), java.util.concurrent.TimeUnit.MILLISECONDS);
 		Minimap.scheduleChunk(Math.floor(X / 16) * 16, Math.floor(Z / 16) * 16, 0);
 	} else {

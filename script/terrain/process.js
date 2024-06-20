@@ -10,7 +10,7 @@ Minimap.processChunk = function(xChunk, zChunk, delay) {
 	let iz = 16;
 	let x = xChunk + 16;
 	let z = zChunk - 1;
-	if (!isChunkLoaded((x - 16) / 16, (z + 16) / 16)) {
+	if (!World.isChunkLoaded((x - 16) / 16, (z + 16) / 16)) {
 		if (settings.debug) {
 			Game.tipMessage(translate("Scheduled (%s, %s, %sms)", [xChunk / 16, zChunk / 16, delay]));
 		}
@@ -43,19 +43,19 @@ Minimap.processChunk = function(xChunk, zChunk, delay) {
 Minimap.scheduleChunk = function(xChunk, zChunk, delay) {
 	pool.schedule(new java.lang.Runnable(function() {
 		try {
+			if (!mapState) {
+				delayChunksArrLock.acquire();
+				delayChunksArr[delayChunksArr.length] = [xChunk, zChunk];
+				delayChunksArrLock.release();
+				return;
+			}
 			if (settings.priority == 0) {
 				android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_BACKGROUND);
 			} else if (settings.priority == 1) {
 				android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_FOREGROUND);
 			}
 			if (!Minimap.processChunk(xChunk, zChunk, delay)) {
-				if (mapState) {
-					Minimap.scheduleChunk(xChunk, zChunk, 10);
-				} else {
-					delayChunksArrLock.acquire();
-					delayChunksArr[delayChunksArr.length] = [xChunk, zChunk];
-					delayChunksArrLock.release();
-				}
+				Minimap.scheduleChunk(xChunk, zChunk, 10);
 			}
 		} catch (e) {
 			reportError(e);

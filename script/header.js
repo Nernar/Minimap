@@ -1,6 +1,6 @@
 /*
 
-   Copyright 2020-2023 Nernar (github.com/nernar)
+   Copyright 2020-2024 Nernar (github.com/nernar)
    Copyright 2015 MxGoldo (twitter.com/MxGoldo)
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -46,12 +46,14 @@ IMPORT("Retention");
 const InnerCorePackage = isHorizon ? Packages.com.zhekasmirnov.innercore : Packages.zhekasmirnov.launcher;
 
 let buttonSize = (function() {
-	if (__config__.get("initialization.button_size") == null) {
+	if (__config__.get("initialization.button_size") == null || __config__.getNumber("initialization.button_size") <= 0) {
 		__config__.set("initialization.button_size", 40);
 		__config__.save();
 	}
 	return __config__.getNumber("initialization.button_size");
 })();
+
+buttonSize <= 0 && (buttonSize = 40);
 
 let legacyEntities = (function() {
 	if (__config__.get("initialization.use_legacy_entities") == null) {
@@ -75,6 +77,7 @@ let canvasBmpSrc = new android.graphics.Canvas(),
 	canvasBmpSrcCopy = new android.graphics.Canvas(),
 	matrixMap = new android.graphics.Matrix(),
 	matrixPointer = new android.graphics.Matrix(),
+	mapRefreshingLock = new java.util.concurrent.Semaphore(1, true),
 	bmpSrcLock = new java.util.concurrent.Semaphore(1, true),
 	delayChunksArrLock = new java.util.concurrent.Semaphore(1, true),
 	delayChunksArr = [];
@@ -118,41 +121,6 @@ if (isOutdated == false) {
 	});
 }
 
-const getBlockId = function(x, y, z) {
-	if (source != null) {
-		return source.getBlockId(x, y, z);
-	}
-	return World.getBlockID(x, y, z);
-};
-
-const getBlockData = function(x, y, z) {
-	if (source != null) {
-		return source.getBlockData(x, y, z);
-	}
-	return World.getBlockData(x, y, z);
-};
-
-const isChunkLoaded = function(x, z) {
-	if (source != null) {
-		return source.isChunkLoaded(x, z);
-	}
-	return World.isChunkLoaded(x, z);
-};
-
-const canSeeSky = function(x, y, z) {
-	if (source != null) {
-		return source.canSeeSky(x, y, z);
-	}
-	return World.canSeeSky(x, y, z);
-};
-
-const getBiome = function(x, z) {
-	if (source != null) {
-		return source.getBiome(x, z);
-	}
-	return World.getBiome(x, z);
-};
-
 const getBiomeTemperatureAt = function(x, y, z) {
 	if (source != null) {
 		return source.getBiomeTemperatureAt(x, y, z);
@@ -179,28 +147,47 @@ const getMapColor = function(id) {
 const GenerationUtils_AdaptedScript = ModAPI.requireGlobal("GenerationUtils");
 
 const findSurface = function(x, y, z) {
-	if (GenerationUtils_AdaptedScript === undefined) {
-		return GenerationUtils.findSurface(x, y, z).y;
-	}
-	return GenerationUtils_AdaptedScript.findSurface(x, y, z);
+	let delta = 8;
+	do {
+		let block = World.getBlockID(x, y, z);
+		if (block != 0) {
+			if (delta == 8) {
+				delta = 1;
+				y += 8;
+			} else {
+				if (!settings.mapSmoothing || smoothingDot[settings.mapSmoothing](block)) {
+					return y;
+				}
+			}
+		}
+	} while ((y -= delta) > 0);
+	return 0;
 };
 
-let actor = null;
+const findSurfaceUnderSky = function(x, y, z) {
+	let low = 0;
+	while (low <= y) {
+		let mid = Math.floor((low + y) / 2);
+		if (World.canSeeSky(x, mid, z)) {
+			if (mid === 0 || !World.canSeeSky(x, mid - 1, z)) {
+				return mid !== 0 ? mid - 1 : 256;
+			} else {
+				y = mid - 1;
+			}
+		} else {
+			low = mid + 1;
+		}
+	}
+	return 0;
+};
+
 let actorUid = 0;
 
 if (isOutdated == false) {
-	Callback.addCallback("LocalPlayerLoaded", function(__actorUid) {
-		actor = new PlayerActor(__actorUid);
-		actorUid = __actorUid;
+	Callback.addCallback("LocalPlayerLoaded", function(playerUid) {
+		actorUid = playerUid;
 	});
 }
-
-const getPlayerDimension = function() {
-	if (actor != null) {
-		return actor.getDimension();
-	}
-	return Player.getDimension();
-};
 
 const Entity_AdaptedScript = ModAPI.requireGlobal("Entity");
 

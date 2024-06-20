@@ -39,8 +39,8 @@ const readFileBitmap = function(path) {
 const getBitmapExportFolder = function() {
 	let path = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_PICTURES);
 	if (InnerCorePackage.utils.FileTools.assureDir(path)) {
-		if (InnerCorePackage.utils.FileTools.assureDir(path + "/Horizon")) {
-			return path + "/Horizon/";
+		if (InnerCorePackage.utils.FileTools.assureDir(path + "/Minimap")) {
+			return path + "/Minimap/";
 		}
 	}
 	return getContext().getExternalFilesDir(android.os.Environment.DIRECTORY_PICTURES) + "/";
@@ -63,7 +63,7 @@ const scanMediaFiles = function(pathes, when) {
 };
 
 const getBitmapByDescriptor = function(what) {
-	if (what instanceof java.io.File) {
+	if (what != null && what instanceof java.io.File) {
 		what = android.graphics.BitmapFactory.decodeFile(what);
 	}
 	if (what == null) {
