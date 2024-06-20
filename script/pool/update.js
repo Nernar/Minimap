@@ -1,5 +1,5 @@
-let scheduledMutableChunks = {};
-let scheduledMutableChunkLock = new java.util.concurrent.Semaphore(1, true);
+let scheduledMutableChunks = {},
+	scheduledMutableChunkLock = new java.util.concurrent.Semaphore(1, true);
 
 Minimap.scheduleChunkWhenRedraw = function(x, z, delay) {
 	scheduledMutableChunkLock.acquire();

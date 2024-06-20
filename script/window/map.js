@@ -452,14 +452,18 @@ let researchView = (function() {
 
 let startMapControl = true;
 
-Callback.addCallback(isOutdated ? "LevelLeft" : "LocalLevelLeft", function() {
+Callback.addCallback("LevelLeft", function() {
 	Minimap.dismiss();
-	if (mapState) {
-		Minimap.changeState();
-	}
+	mapState && Minimap.changeState();
 	pool.shutdownNow();
 	startMapControl = true;
 	X = Y = YAW = undefined;
+	for (let key in scheduledMutableChunks) {
+		delete scheduledMutableChunks[key];
+	}
+	while (delayChunksArr.length > 0) {
+		delayChunksArr.pop();
+	}
 	while (entities.length > 0) {
 		entities.pop();
 	}

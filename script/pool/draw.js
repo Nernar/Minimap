@@ -115,7 +115,7 @@ Minimap.drawMinimapWhenDirty = function() {
 				xChunkOld = Math.floor(X / 16) * 16,
 				zChunkOld = Math.floor(Z / 16) * 16;
 			if (xChunkNew != xChunkOld || zChunkNew != zChunkOld || dimensionNew != DIMENSION) {
-				if (Math.abs(xChunkNew - xChunkOld) <= radius * 2 && Math.abs(zChunkNew - zChunkOld) <= radius * 2 && dimensionNew == DIMENSION) {
+				if (X != null && Z != null && Math.abs(xChunkNew - xChunkOld) <= radius * 2 && Math.abs(zChunkNew - zChunkOld) <= radius * 2 && dimensionNew == DIMENSION) {
 					try {
 						bmpSrcLock.acquire();
 						bmpSrcCopy.eraseColor(0);
