@@ -121,11 +121,21 @@ if (isOutdated == false) {
 	});
 }
 
+const isChunkLoaded = function(x, z) {
+	if (isHorizon) {
+		return World.isChunkLoaded(x, z);
+	}
+	return World.isChunkLoadedAt(x * 16, 0, z * 16);
+};
+
 const getBiomeTemperatureAt = function(x, y, z) {
 	if (source != null) {
 		return source.getBiomeTemperatureAt(x, y, z);
 	}
-	return World.getTemperature(x, y, z);
+	if (isHorizon) {
+		return World.getTemperature(x, y, z);
+	}
+	return 0.5;
 };
 
 const getBiomeDownfallAt = function(x, y, z) {
@@ -137,11 +147,15 @@ const getBiomeDownfallAt = function(x, y, z) {
 
 const Block_AdaptedScript = ModAPI.requireGlobal("Block");
 
-const getMapColor = function(id) {
-	if (Block_AdaptedScript === undefined) {
-		return Block.getMapColor(id);
+const getMapColor = function(id, data) {
+	try {
+		if (Block_AdaptedScript === undefined) {
+			return Block.getMapColor(id);
+		}
+		return Block_AdaptedScript.getMapColor(id);
+	} catch (e) {
+		return colormap[id] ? (colormap[id][data] || colormap[id][0] || 0) : -1;
 	}
-	return Block_AdaptedScript.getMapColor(id);
 };
 
 const GenerationUtils_AdaptedScript = ModAPI.requireGlobal("GenerationUtils");
@@ -207,10 +221,13 @@ const getEntityYaw = function(entity) {
 };
 
 const getEntityDimension = function(entity) {
-	if (Entity_AdaptedScript === undefined) {
-		return Entity.getDimension(entity);
+	if (isHorizon) {
+		if (Entity_AdaptedScript === undefined) {
+			return Entity.getDimension(entity);
+		}
+		return Entity_AdaptedScript.getDimension(entity);
 	}
-	return Entity_AdaptedScript.getDimension(entity);
+	return dimensionNew != null ? dimensionNew : Player.getDimension();
 };
 
 const getEntityType = function(entity) {

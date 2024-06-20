@@ -135,8 +135,8 @@ const mapDot = [
 			}
 		}
 		if (color == 0) {
-			if (settings.stylesheetVanillaColormap) {
-				color = getMapColor(block);
+			if (isHorizon && settings.stylesheetVanillaColormap) {
+				color = getMapColor(block, meta);
 			}
 			if (color == 0) {
 				color = colormap[block] ? (colormap[block][meta] || colormap[block][0] || 0) : -1;
@@ -229,8 +229,8 @@ const mapDot = [
 				break;
 			default:
 				if (color == 0) {
-					if (settings.stylesheetVanillaColormap) {
-						color = getMapColor(block);
+					if (isHorizon && settings.stylesheetVanillaColormap) {
+						color = getMapColor(block, meta);
 					}
 					if (color == 0) {
 						color = colormap[block] ? (colormap[block][meta] || colormap[block][0] || 0) : -1;

@@ -10,7 +10,7 @@ Minimap.processChunk = function(xChunk, zChunk, delay) {
 	let iz = 16;
 	let x = xChunk + 16;
 	let z = zChunk - 1;
-	if (!World.isChunkLoaded((x - 16) / 16, (z + 16) / 16)) {
+	if (!isChunkLoaded((x - 16) / 16, (z + 16) / 16)) {
 		if (settings.debug) {
 			Game.tipMessage(translate("Scheduled (%s, %s, %sms)", [xChunk / 16, zChunk / 16, delay]));
 		}

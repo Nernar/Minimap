@@ -101,7 +101,7 @@ const Colors = {
 let biomeColormapRaw = (function() {
 	let proto = JSON.parse(readFileText(__dir__ + "assets/biomes_colormap.json"));
 	if (proto != null && typeof proto == "object") {
-		if (proto.hasOwnProperty("water")) {
+		if (isHorizon && proto.hasOwnProperty("water")) {
 			proto.flowing_water = proto.water;
 		}
 		if (proto.hasOwnProperty("leaves")) {
@@ -126,6 +126,19 @@ let biomeColormap = (function(what) {
 				continue;
 			}
 			Logger.Log("Minimap: Not found vanilla block for biome dependent color " + element, "INFO");
+		}
+	} else {
+		if (biomeColormapRaw.hasOwnProperty("grass")) {
+			what[2] = biomeColormapRaw.grass;
+		}
+		if (biomeColormapRaw.hasOwnProperty("water")) {
+			what[8] = what[9] = biomeColormapRaw.water;
+		}
+		if (biomeColormapRaw.hasOwnProperty("leaves")) {
+			what[18] = biomeColormapRaw.leaves;
+		}
+		if (biomeColormapRaw.hasOwnProperty("leaves2")) {
+			what[161] = biomeColormapRaw.leaves2;
 		}
 	}
 	return what;
