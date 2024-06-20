@@ -22,7 +22,7 @@ Minimap.ConfigDescriptor = [__mod__.getInfoProperty("name"), "Leave",
 			// ["keyValue", "slider", "Number of threads", "thread", 1, 12, 1, ""],
 			["keyValue", "slider", "Pixel density to export", "exportDensity", 1, 16, 0.5, "px"],
 			["checkBox", "stylesheetVanillaColormap", "Use vanilla colormap"],
-			["checkBox", "showResearch", "Click to full-screen (unstable)"],
+			["checkBox", "showResearch", "Click to full-screen"],
 			["checkBox", "debug", "Debug various processes"]]],
 		["checkBox", "mapRotation", "Turn behind yourself"],
 	["sectionDivider", "Stylesheet"],
@@ -51,8 +51,8 @@ Minimap.ConfigDescriptor = [__mod__.getInfoProperty("name"), "Leave",
 			["keyValue", "text", "Located in ", new java.io.File(__dir__).getName() + "/"],
 			["keyValue", "text", "<a href=https://t.me/ntInsideChat>t.me</a> development channel", ""],
 			["sectionDivider", "Also I would like to thank"],
-				["keyValue", "text", "Adaptation<br/><i>Chinese</i>", "Sugar Breeze"],
-				["keyValue", "text", "Adaptation<br/><i>Ukrainian</i>", "Foldik UA"]]]];
+				["keyValue", "text", "Localization<br/><i>Chinese</i>", "Sugar Breeze"],
+				["keyValue", "text", "Localization<br/><i>Ukrainian</i>", "Foldik UA"]]]];
 
 (function() {
 	let dialog;
@@ -92,7 +92,7 @@ let mapView = (function() {
 		try {
 			let mScaleFactor = settings.mapZoom / 10.;
 			let mRequiredStandartAction = true;
-			let mScaleGestureDetector = new android.view.ScaleGestureDetector(getContext(), new JavaAdapter(android.view.ScaleGestureDetector.SimpleOnScaleGestureListener, android.view.ScaleGestureDetector.OnScaleGestureListener, {
+			let mScaleGestureDetector = new android.view.ScaleGestureDetector(getContext(), {
 				onScale: function(scaleGestureDetector) {
 					mScaleFactor *= scaleGestureDetector.getScaleFactor();
 					mScaleFactor = Math.max(1., Math.min(mScaleFactor, 10.));
@@ -104,36 +104,34 @@ let mapView = (function() {
 					}
 					return true;
 				},
+				onScaleBegin: function(scaleGestureDetector) {
+					return true;
+				},
 				onScaleEnd: function(scaleGestureDetector) {
 					if (!mRequiredStandartAction) {
 						Minimap.saveConfig();
 					}
 				}
-			}));
+			});
 			let mIgnoredByDoubleTap = false;
-			let mGestureDetector = new android.view.GestureDetector(getContext(), new JavaAdapter(android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener, android.view.GestureDetector.OnDoubleTapListener, {
+			let mGestureDetector = new android.view.GestureDetector(getContext(), {
 				onDown: function(event) {
 					if (!mIgnoredByDoubleTap) {
 						mRequiredStandartAction = true;
 					}
 					mIgnoredByDoubleTap = false;
+					return false;
 				},
-				onDoubleTap: function(event) {
-					mRequiredStandartAction = false;
-					mIgnoredByDoubleTap = true;
-				},
-				onSingleTapConfirmed: function(event) {
-					if (mRequiredStandartAction && settings.showResearch) {
-						Minimap.showResearchInternal();
-						Minimap.dismissInternal();
-					}
-					return mRequiredStandartAction;
+				onSingleTapUp: function(event) {
+					return false;
 				},
 				onLongPress: function(event) {
 					if (mRequiredStandartAction) {
 						Minimap.showConfigDialog();
 					}
-					return mRequiredStandartAction;
+				},
+				onScroll: function(event1, event2, distanceX, distanceY) {
+					return false;
 				},
 				onFling: function(event1, event2, velocityX, velocityY) {
 					if (mRequiredStandartAction) {
@@ -144,10 +142,31 @@ let mapView = (function() {
 					}
 					return mRequiredStandartAction;
 				}
-			}));
-			texture.setOnTouchListener(function(mView, event) {
-				mScaleGestureDetector.onTouchEvent(event);
-				mGestureDetector.onTouchEvent(event);
+			});
+			mGestureDetector.setOnDoubleTapListener({
+				onDoubleTap: function(event) {
+					mRequiredStandartAction = false;
+					mIgnoredByDoubleTap = true;
+					return false;
+				},
+				onDoubleTapEvent: function(event) {
+					return false;
+				},
+				onSingleTapConfirmed: function(event) {
+					if (mRequiredStandartAction && settings.showResearch) {
+						Minimap.showResearchInternal();
+						Minimap.dismissInternal();
+					}
+					return mRequiredStandartAction;
+				}
+			});
+			texture.setOnTouchListener(function(view, event) {
+				try {
+					mScaleGestureDetector.onTouchEvent(event);
+					mGestureDetector.onTouchEvent(event);
+				} catch (e) {
+					Logger.Log("Minimap: Map#whenGestureDetected: " + e);
+				}
 				return true;
 			});
 		} catch (e) {
@@ -298,7 +317,7 @@ let researchView = (function() {
 		try {
 			let mScaleFactor = 1.;
 			let mRequiredStandartAction = true;
-			let mScaleGestureDetector = new android.view.ScaleGestureDetector(getContext(), new JavaAdapter(android.view.ScaleGestureDetector.SimpleOnScaleGestureListener, android.view.ScaleGestureDetector.OnScaleGestureListener, {
+			let mScaleGestureDetector = new android.view.ScaleGestureDetector(getContext(), {
 				onScale: function(scaleGestureDetector) {
 					mScaleFactor *= scaleGestureDetector.getScaleFactor();
 					mScaleFactor = Math.max(1., Math.min(mScaleFactor, 20.));
@@ -306,33 +325,28 @@ let researchView = (function() {
 					research.setScaleY(mScaleFactor);
 					mRequiredStandartAction = false;
 					return true;
+				},
+				onScaleBegin: function(scaleGestureDetector) {
+					return true;
 				}
-			}));
+			});
 			let mIgnoredByDoubleTap = false;
-			let mGestureDetector = new android.view.GestureDetector(getContext(), new JavaAdapter(android.view.GestureDetector.SimpleOnGestureListener, android.view.GestureDetector.OnGestureListener, android.view.GestureDetector.OnDoubleTapListener, {
+			let mGestureDetector = new android.view.GestureDetector(getContext(), {
 				onDown: function(event) {
 					if (!mIgnoredByDoubleTap) {
 						mRequiredStandartAction = true;
 					}
 					mScaleFactor = research.getScaleX();
 					mIgnoredByDoubleTap = false;
+					return false;
 				},
-				onDoubleTap: function(event) {
-					mRequiredStandartAction = false;
-					mIgnoredByDoubleTap = true;
-				},
-				onSingleTapConfirmed: function(event) {
-					if (mRequiredStandartAction) {
-						Minimap.showInternal();
-						Minimap.dismissResearchInternal();
-					}
-					return mRequiredStandartAction;
+				onSingleTapUp: function(event) {
+					return false;
 				},
 				// onLongPress: function(event) {
 					// if (mRequiredStandartAction) {
 						// TODO: Required chunk allocation action
 					// }
-					// return mRequiredStandartAction;
 				// },
 				onScroll: function(event1, event2, distanceX, distanceY) {
 					if (mRequiredStandartAction) {
@@ -342,14 +356,34 @@ let researchView = (function() {
 							.setDuration(0).start();
 					}
 					return mRequiredStandartAction;
+				},
+				onFling: function(event1, event2, velocityX, velocityY) {
+					return false;
 				}
-			}));
-			layout.setOnTouchListener(function(mView, event) {
+			});
+			mGestureDetector.setOnDoubleTapListener({
+				onDoubleTap: function(event) {
+					mRequiredStandartAction = false;
+					mIgnoredByDoubleTap = true;
+					return false;
+				},
+				onDoubleTapEvent: function(event) {
+					return false;
+				},
+				onSingleTapConfirmed: function(event) {
+					if (mRequiredStandartAction) {
+						Minimap.showInternal();
+						Minimap.dismissResearchInternal();
+					}
+					return mRequiredStandartAction;
+				}
+			});
+			layout.setOnTouchListener(function(view, event) {
 				try {
 					mScaleGestureDetector.onTouchEvent(event);
 					mGestureDetector.onTouchEvent(event);
 				} catch (e) {
-					Logger.Log("Minimap: whenGestureDetected: " + e);
+					Logger.Log("Minimap: Research#whenGestureDetected: " + e);
 				}
 				return true;
 			});

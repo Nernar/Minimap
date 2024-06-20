@@ -299,10 +299,10 @@ Translation.addTranslation("Use vanilla colormap", {
 	uk: "Використовуйте ванільну палітру кольорів", // !
 	zh: "使用香草色彩图谱" // !
 });
-Translation.addTranslation("Click to full-screen (unstable)", {
-	ru: "Нажмите для полноэкранного режима (нестабильно)",
-	uk: "Натисніть для повноекранного режиму (нестабільно)", // !
-	zh: "点击进入全屏模式（不稳定）" // !
+Translation.addTranslation("Click to full-screen", {
+	ru: "Нажмите для полноэкранного режима",
+	uk: "Натисніть для повноекранного режиму", // !
+	zh: "点击进入全屏模式" // !
 });
 Translation.addTranslation("Debug various processes", {
 	ru: "Отладка различных процессов",
@@ -515,12 +515,12 @@ Translation.addTranslation("Also I would like to thank", {
 	uk: "А ще хотілось би подякувати",
 	zh: "同时我想感谢"
 });
-Translation.addTranslation("Adaptation<br/><i>Ukrainian</i>", {
+Translation.addTranslation("Localization<br/><i>Ukrainian</i>", {
 	ru: "Переводчик<br/><i>Украинский</i>",
 	uk: "Перекладач<br/><i>Український</i>",
 	zh: "翻译<br/><i>乌克兰语</i>"
 });
-Translation.addTranslation("Adaptation<br/><i>Chinese</i>", {
+Translation.addTranslation("Localization<br/><i>Chinese</i>", {
 	ru: "Переводчик<br/><i>Китайский</i>",
 	uk: "Перекладач<br/><i>Китайська</i>",
 	zh: "翻译<br/><i>中文</i>"
