@@ -41,6 +41,9 @@ Minimap.processChunk = function(xChunk, zChunk, delay) {
 };
 
 Minimap.scheduleChunk = function(xChunk, zChunk, delay) {
+	if (xChunk == null || zChunk == null) {
+		return;
+	}
 	pool.schedule(new java.lang.Runnable(function() {
 		try {
 			if (!mapState) {

@@ -474,6 +474,7 @@ Minimap.changeState = function() {
 	if (mapState) {
 		delayChunksArrLock.acquire();
 		try {
+			redraw = true;
 			while (delayChunksArr.length > 0) {
 				let chunk = delayChunksArr.shift();
 				Minimap.scheduleChunk(chunk[0], chunk[1], 0);
@@ -482,7 +483,6 @@ Minimap.changeState = function() {
 			delayChunksArrLock.release();
 		}
 		scheduledFutureUpdateMap = poolTick.scheduleWithFixedDelay(runnableUpdateMap, 1000, Math.round(1000 / settings.delay), java.util.concurrent.TimeUnit.MILLISECONDS);
-		Minimap.scheduleChunk(Math.floor(X / 16) * 16, Math.floor(Z / 16) * 16, 0);
 	} else {
 		scheduledFutureUpdateMap.cancel(false);
 	}
