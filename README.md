@@ -105,11 +105,11 @@ Now you can control marker how and when you want. Note that you need to unload m
 
 ```js
 Callback.addCallback("ItemUseLocal", function(coords) {
-    Minimap.mark("itemUseLocal", coords.x, coords.y);
+    Minimap.remark("itemUseLocal", coords.x, coords.z);
 });
 ```
 
-In this case, we are adding marker, ignoring one more "force" argument. Before adding a marker, a check will be made and if this marker is already located at these coordinates, then a new one will not be added.
+In this case, we are toggling marker, there also `mark` and `unmark` abilities. Before adding a marker, a check will be made and if this marker is already located at these coordinates, then it will be removed.
 
 However, marker does not unload in other dimensions and generally does not react in any way to player moving away.
 
